@@ -1,18 +1,20 @@
 ---
-title: Project Name
-subtitle: Lorem ipsum dolor sit amet consectetur.
-image: assets/img/portfolio/02-full.jpg
-alt: Keep Exploring
+title: brag.charity
+subtitle: subtitle lorem ipsum dolor sit amet consectetur.
+image: assets/img/portfolio/01-full.jpg
+alt: Shirts on a hanger
 
 caption:
-  title: Explore
-  subtitle: Graphic Design
+  title: Web 3 (Coming soon!)
+  subtitle: Entrepreneurship
   thumbnail: assets/img/portfolio/02-thumbnail.jpg
 ---
-Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!
+Use this area to describe your project. **Markdown** supported. This entry (project1.md) uses links for the image sources. All other projects in the portfolio use local images. Both work just fine! Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
 
 {:.list-inline}
 - Date: January 2017
-- Client: Explore
-- Category: Graphic Design
+- Client: Threads
+- Category: Illustration
+
+
 
