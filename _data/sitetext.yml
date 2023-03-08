@@ -108,6 +108,8 @@ en: &DEFAULT_EN
             icon: fab fa-twitter
           - url: mailto:brett@functions.io
             icon: fas fa-envelope
+          - url: https://calendar.app.google/sxNaaPMiY9YyPabPA
+            icon: fas fa-calendar            
       - name: "Tim"
         role: "Director"
         image: assets/img/team/500x500.jpg
