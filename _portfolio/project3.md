@@ -1,11 +1,11 @@
 ---
-title: Project Name
+title: Minecraft Server
 subtitle: Lorem ipsum dolor sit amet consectetur.
 image: assets/img/portfolio/02-full.jpg
 alt: Keep Exploring
 
 caption:
-  title: Minecraft (Coming soon!)
+  title: Gaming (Coming soon!)
   subtitle: Digital Safety
   thumbnail: assets/img/portfolio/03-thumbnail.jpg
 ---
