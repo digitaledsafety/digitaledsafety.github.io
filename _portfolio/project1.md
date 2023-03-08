@@ -1,18 +1,19 @@
 ---
-title: Scratch
-subtitle: subtitle lorem ipsum dolor sit amet consectetur.
+title: Scratch 3.0 Fork
+subtitle: Scratch is a high-level block-based visual programming language and website aimed primarily at children as an educational tool for programming.
 image: assets/img/portfolio/01-full.jpg
-alt: Shirts on a hanger
+alt: 
 
 caption:
-  title: Block-based Coding
+  title: Programming
   subtitle: Entrepreneurship
   thumbnail: assets/img/portfolio/01-thumbnail.jpg
 ---
-Use this area to describe your project. **Markdown** supported. This entry (project1.md) uses links for the image sources. All other projects in the portfolio use local images. Both work just fine! Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
+
+The Digital Education & Safety Foundation developed a fork of the Scratch 3.0 coding platform which included software extensions for generating NFTs for their fundraising program. The Foundation is working to get the changes merged into the main codebase. The fork is hosted by the foundation and is available free for use here: <a href="https://scratch.digitaleducationsafety.org">https://scratch.digitaleducationsafety.org</a>.
 
 {:.list-inline}
-- Date: January 2017
-- Client: Threads
-- Category: Illustration
+- Date: December 2022
+- Client: Community
+- Category: Entrepreneurship
 

@@ -1,11 +1,11 @@
 ---
 title: Minecraft Server
 subtitle: Lorem ipsum dolor sit amet consectetur.
-image: assets/img/portfolio/02-full.jpg
+image: assets/img/portfolio/03-full.jpg
 alt: Keep Exploring
 
 caption:
-  title: Gaming (Coming soon!)
+  title: Game Development (Coming soon!)
   subtitle: Digital Safety
   thumbnail: assets/img/portfolio/03-thumbnail.jpg
 ---
