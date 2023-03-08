@@ -1,17 +1,17 @@
 ---
 title: Minecraft Server
-subtitle: Lorem ipsum dolor sit amet consectetur.
+subtitle: A Minecraft Server for our community.
 image: assets/img/portfolio/03-full.jpg
-alt: Keep Exploring
+alt: 
 
 caption:
-  title: Game Development (Coming soon!)
+  title: Community Gaming
   subtitle: Digital Safety
   thumbnail: assets/img/portfolio/03-thumbnail.jpg
 ---
-Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!
+The Foundation offers a Minecraft server to our community members! Please contact us for more information.
 
 {:.list-inline}
-- Date: January 2017
-- Client: Explore
-- Category: Graphic Design
+- Date: January 2023
+- Client: Community
+- Category: Digital Safety

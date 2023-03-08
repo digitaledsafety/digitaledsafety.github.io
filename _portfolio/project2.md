@@ -1,20 +1,20 @@
 ---
 title: brag.charity
-subtitle: subtitle lorem ipsum dolor sit amet consectetur.
+subtitle: A curated collection of digital assets for good.
 image: assets/img/portfolio/02-full.jpg
-alt: Shirts on a hanger
+alt: 
 
 caption:
-  title: Web 3 (Coming soon!)
+  title: Web 3
   subtitle: Entrepreneurship
   thumbnail: assets/img/portfolio/02-thumbnail.jpg
 ---
-Use this area to describe your project. **Markdown** supported. This entry (project1.md) uses links for the image sources. All other projects in the portfolio use local images. Both work just fine! Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
+brag.charity is a fundraising program for the Digital Education & Safety foundation. Check out our first collection on <a href="https://opensea.io/digitaledsafety">Opensea</a>.
 
 {:.list-inline}
-- Date: January 2017
-- Client: Threads
-- Category: Illustration
+- Date: February 2023
+- Client: Community
+- Category: Entrepreneurship
 
 
 

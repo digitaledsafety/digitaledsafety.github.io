@@ -12,7 +12,7 @@
 en: &DEFAULT_EN
   header:
     title: "Our Mission:"
-    text: Empowering the underserved with a modern STEM/STEAM education
+    text: Empowering our underserved with a modern STEM/STEAM education
     button: Learn More
     buttonlink: "#services"
 
@@ -46,33 +46,33 @@ en: &DEFAULT_EN
     events:
       - title: "Where it started"
         year: "2022"
-        desc: "Brainstorm and inception"
+        desc: "Working with the community on brainstorming ideas. We collaborated with friends, family, and local students for user feedback and design."
         image: assets/img/timeline/1.jpg
         alt:
-      - title: "An idea is born"
+      - title: "A concept is born"
         year: "September 2022"
-        desc: "Incorporated, 501c3 etc"
+        desc: "Incorporated and gained tax exemption status through the IRS."
         image: assets/img/timeline/2.jpg
         alt:
-      - title: "Fundraising begins"
+      - title: "Beta begins"
         year: "2022-2023"
-        desc: "Your description here, **Markdown** is fully supported."
+        desc: "The Foundation releases an initial product to the public."
         image: assets/img/timeline/4.jpg
         alt:
       - title: "Website live"
-        year: "2023"
-        desc: "Ravi Riley converted Agency, a Bootstrap-based theme, into a Jekyll theme. The Jekyll theme can be installed as a Ruby gem, or remotely. For more information, visit the documentation."
+        year: "March 2023"
+        desc: "The most recent iteration of the Foundation's web presence went live in March of 2023."
         image: assets/img/timeline/3.jpg
         alt: image alt text    
         # you can enforce the alignment
         align: right            
       - title: "Where we're headed"
         year: "2024+"
-        desc: "Keeping current with the latest trends and developments in technology is crucial to stay connected. With new technologies emerging at an unprecedented pace, it is more important than ever to stay informed and adapt quickly. Whether it's staying up-to-date with the latest software and hardware, learning new programming languages, or understanding the latest breakthroughs in AI and machine learning, staying current with technology is essential for success in today's rapidly changing world."
+        desc: "Keeping current with the latest trends and developments in technology is crucial to stay connected and relevant. With new technologies emerging at an unprecedented pace, it is more important than ever to stay informed and adapt quickly. Whether it's staying up-to-date with the latest software and hardware, learning new programming languages, or understanding the latest breakthroughs in AI and machine learning, staying current with technology is essential for success in today's rapidly changing world."
         image: assets/img/timeline/5.jpg
         alt: image alt text    
         # you can enforce the alignment         
-    end: "Join us <br>on our <br> journey!"
+    end: "<a class='js-scroll-trigger' style='color: #eeeeee' href='#contact'>Join us <br>on our <br> journey!</a>"
 
   about:
     title: "About Us"
@@ -85,19 +85,15 @@ en: &DEFAULT_EN
     max-height: 100px
     horizontal-scrolling: "" #"yes/no"
     list:
-      - title: "envato"
-        url: https://github.com/raviriley/agency-jekyll-theme
-        logo: assets/img/clients/envato.jpg
-      - title: "designmodo"
-        url: https://github.com/raviriley/agency-jekyll-theme
-        logo: assets/img/clients/designmodo.jpg
-      - title: "themeforest"
-        url: https://github.com/raviriley/agency-jekyll-theme
-        logo: assets/img/clients/themeforest.jpg
-      - title: "Creative Market"
-        url: https://github.com/raviriley/agency-jekyll-theme
-        logo: assets/img/clients/creative-market.jpg
-
+      - title: "functions.io"
+        url: https://functions.io
+        logo: assets/img/clients/functionsio.png
+      - title: "hey"
+        url: https://www.heyrj.com/
+        logo: assets/img/clients/hey.png            
+      - title: "google"
+        url: https://www.google.com/nonprofits/offerings/workspace/
+        logo: assets/img/clients/google.png
   team:
     title: "Team"
     text: "Current board members"
@@ -133,7 +129,7 @@ en: &DEFAULT_EN
 
   contact:
     title: "Contact Us"
-    text: "<a href='mailto:hello@digitleducationsafety.org'>Email</a> or call <a href='tel:+18336925477'>+1-833-692-5477</a>"
+    text: "<a href='mailto:hello@digitaleducationsafety.org'>Email</a> or call <a href='tel:+18336925477'>+1-833-692-5477</a>"
     section: contact
     name: "Name*"
     name-validation: "Please enter your name."
@@ -155,6 +151,8 @@ en: &DEFAULT_EN
         icon: "fab fa-facebook-f"
       - url: https://github.com/digitaleducationsafety
         icon: "fab fa-github"
+      - url: https://discord.gg/5tc2DfUZVe
+        icon: "fab fa-discord"        
 en-US:
   <<: *DEFAULT_EN
 en-CA:
