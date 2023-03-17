@@ -132,7 +132,7 @@ en: &DEFAULT_EN
         image: assets/img/donations/1.png
         address: "<a href='https://paypal.me/digitaledsafety/5?country.x=US&amp;locale.x=en_US'>Donate on PayPal.me</a>"
       - title: Ethereum
-        subtitle: "_Mainnet ETH and ERC-20 tokens only_&nbsp;<i id='tooltipeth' class='fa fa-question-circle'></i><span class='tooltiptext'>Contact Us for more info</span>"
+        subtitle: "_Crypto and NFT support_&nbsp;<i id='tooltipeth' class='fa fa-question-circle'></i><span class='tooltiptext'>Contact for more info</span>"
         image: assets/img/donations/2.png
         address: "0x161d9eC3a7B060C91135eE95a51542Da897041F4"
       - title: Bitcoin
