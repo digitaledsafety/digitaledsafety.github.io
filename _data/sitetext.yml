@@ -125,9 +125,19 @@ en: &DEFAULT_EN
 
   donations:
     title: "DONATIONS"
-    text: "Why won't you work"
-    subtext: Why won't you work
+    text: "Thank you for your support"
     section: donations
+    list:
+      - title: PayPal
+        image: assets/img/donations/1.png
+        address: "<a href='https://paypal.me/digitaledsafety/5?country.x=US&amp;locale.x=en_US'>Donate on PayPal.me</a>"
+      - title: Ethereum
+        subtitle: "_Mainnet ETH and ERC-20 tokens only_&nbsp;<i id='tooltipeth' class='fa fa-question-circle'></i><span class='tooltiptext'>Contact Us for more info</span>"
+        image: assets/img/donations/2.png
+        address: "0x161d9eC3a7B060C91135eE95a51542Da897041F4"
+      - title: Bitcoin
+        image: assets/img/donations/3.png
+        address: "3C5rx2ZNuGaJbqqY3mFKpjWwytcC7hD3TT"
 
   contact:
     title: "Contact Us"
@@ -285,6 +295,22 @@ es: &DEFAULT_ES
             icon: fab fa-facebook-f
           - url: https://linkedin.com
             icon: fab fa-linkedin-in
+
+  donations:
+    title: "DONATIONS"
+    text: "Thank you for your support"
+    section: donations
+    list:
+      - title: PayPal
+        image: assets/img/donations/1.png
+        address: "<a href='https://paypal.me/digitaledsafety/5?country.x=US&amp;locale.x=en_US'>Donate on PayPal.me</a>"
+      - title: Ethereum
+        subtitle: "(ETH and ERC-20 Mainnet tokens only)"
+        image: assets/img/donations/2.png
+        address: "0x161d9eC3a7B060C91135eE95a51542Da897041F4"
+      - title: Bitcoin
+        image: assets/img/donations/3.png
+        address: "3C5rx2ZNuGaJbqqY3mFKpjWwytcC7hD3TT"
 
   contact:
     title: "Contáctenos"

@@ -42,7 +42,25 @@
     <!-- Custom styles for this theme -->
     <!--<link href="assets/css/agency.min.css" rel="stylesheet">-->
     <link href="assets/css/agency.css" rel="stylesheet" />
-  
+    <style> 
+    .tooltiptext {
+      visibility: hidden;
+      width: 120px;
+      background-color: #343a40;
+      color: #fff;
+      font-size:x-small;
+      border-radius: 5px;
+      padding: 5px;
+    
+      /* Position the tooltip */
+      position: absolute;
+      z-index: 1;
+    }
+    
+    #tooltipeth:hover + .tooltiptext {
+      visibility: visible;
+    }
+    </style>
     <!-- Page container change top padding when nav shrinks -->
     {% if page.layout == "page" %}
     <style>
