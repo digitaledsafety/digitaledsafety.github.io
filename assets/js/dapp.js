@@ -36,7 +36,7 @@ const DApp = {
         window.ethereum.on('accountsChanged', DApp.updateAccounts);
       } catch (error) {
         // User denied account access
-        console.error('User denied web3 access');
+        console.log('User denied web3 access');
         return;
       }
       DApp.web3 = new Web3(window.ethereum);
@@ -48,7 +48,7 @@ const DApp = {
     }
     // No web3 provider
     else {
-      console.error('No web3 provider detected');
+      console.log('No web3 provider detected');
       return;
     }
     //return DApp.initContract();
