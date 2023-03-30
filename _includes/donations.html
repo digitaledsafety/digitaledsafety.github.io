@@ -8,23 +8,14 @@
 		</div>
 	  </div>
 	  <div class="row">
-        <div class="col-md-4 col-sm-6" style="text-align:center;">
-            <h3>PayPal</h3>
-            <img style="width:60%;" src="assets/img/donations/qrcode.png">
-            <p><a href="https://paypal.me/digitaledsafety/5?country.x=US&amp;locale.x=en_US">Donate on PayPal.me</a></p>
-            </div>
-            <div class="col-md-4 col-sm-6" style="text-align:center;">
-            <h3>Coinbase Wallet</h3>
-            <img style="padding:1.2em;width:60%;" src="assets/img/donations/qr-nft.png">
-            <h6>Ethereum Mainnet (Crypto and NFT support)</h6>
-            <p>0xaa6cB57fF6faf36d35dE134b37ABB96c7684063C</p>
-            </div>
-            <div class="col-md-4 col-sm-6" style="text-align:center;">
-            <h3>Coinbase</h3>
-            <img style="padding: 1.2em;" src="assets/img/donations/download%20(1).png">
-            <h4>Bitcoin</h4>
-            <p>3C5rx2ZNuGaJbqqY3mFKpjWwytcC7hD3TT</p>
-            </div>
+      {% for a in site.data.sitetext[site.locale].donations.list %}
+      <div class="col-md-4 col-sm-6" style="text-align:center;">
+        <h3>{{ a.title | markdownify }}</h3>
+        <img src="{{ a.image }}" />
+        <p>{{ a.subtitle | markdownify }}</p>
+        <p>{{ a.address | markdownify }}</p>
+      </div>
+      {% endfor %}          
 	  </div>
 	  <div class="row">
 		<div class="col-lg-8 mx-auto text-center">

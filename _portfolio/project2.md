@@ -11,6 +11,14 @@ caption:
 ---
 brag.charity is a fundraising program for the Digital Education & Safety foundation. Check out our first collection on <a href="https://opensea.io/digitaledsafety">Opensea</a>.
 
+
+<nft-card
+contractAddress="0x495f947276749ce646f68ac8c248420045cb7b5e"
+tokenId="77085256408163406308004197185999916350236004123346139875108147950390832267265">
+</nft-card>
+<script src="https://unpkg.com/embeddable-nfts/dist/nft-card.min.js"></script><br /><br />
+
+
 {:.list-inline}
 - Date: February 2023
 - Client: Community
