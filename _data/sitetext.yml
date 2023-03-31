@@ -112,13 +112,13 @@ en: &DEFAULT_EN
             icon: fas fa-calendar            
       - name: "Tim"
         role: "Director"
-        image: assets/img/team/500x500.jpg
+        image: assets/img/team/2.jpg
         social:
           - url: mailto:tim@digitaleducationsafety.org
             icon: fas fa-envelope
       - name: "Bryan"
         role: "Director"
-        image: assets/img/team/500x500.jpg
+        image: assets/img/team/3.jpg
         social:
           - url: mailto:bryan@digitaleducationsafety.org
             icon: fas fa-envelope
