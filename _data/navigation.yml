@@ -11,6 +11,8 @@
 # -----------------
 en: &DEFAULT_EN
   nav:
+    - title: "+1-833-692-5477"
+      url: "tel:+18336925477"
     - title: "Services"
       section: services
     - title: "Contact"
@@ -30,11 +32,13 @@ en-AU:
 # -------
 es: &DEFAULT_ES
   nav:
+    - title: "+1-833-692-5477"
+      url: "tel:+18336925477"  
     - title: "Servicios"
       section: servicios
     - title: "Contáctenos"
       section: contacto      
-    - title: "Store"
+    - title: "Stôr"
       section: /store
 es-ES:
   <<: *DEFAULT_ES
