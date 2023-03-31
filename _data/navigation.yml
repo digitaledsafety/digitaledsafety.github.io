@@ -13,16 +13,10 @@ en: &DEFAULT_EN
   nav:
     - title: "Services"
       section: services
-    - title: "Team"
-      section: team      
-    - title: "Programs"
-      section: portfolio
-    - title: "Roadmap"
-      section: timeline
-    - title: "Donations"
-      section: donations     
     - title: "Contact"
-      section: contact
+      section: contact      
+    - title: "Store"
+      url: /store           
 en-US:
   <<: *DEFAULT_EN
 en-CA:
@@ -38,18 +32,10 @@ es: &DEFAULT_ES
   nav:
     - title: "Servicios"
       section: servicios
-    - title: "Portafolio"
-      section: portafolio
-    - title: "Sobre Nosotros"
-      section: nosotros
-    - title: "Cronología"
-      section: cronologia
-    - title: "Equipo"
-      section: equipo
     - title: "Contáctenos"
-      section: contacto
-    - title: "Fuente de la plantilla"
-      url: https://github.com/raviriley/agency-jekyll-theme/
+      section: contacto      
+    - title: "Store"
+      section: /store
 es-ES:
   <<: *DEFAULT_ES
 es-CO:
