@@ -97,7 +97,7 @@ en: &DEFAULT_EN
   team:
     title: "Team"
     text: "Current board members"
-    subtext: We share a common interest in technology and a passion for volunteering in their community. From a young age, we've enjoyed tinkering with computers, building robots, and experimenting with new gadgets. As we've grown older, we've realized the power of technology in making a positive impact on the world. We are constantly in search of innovative ways to use our skills and knowledge to help others, and we've decided to volunteer our time and expertise to a non-profit organization.
+    subtext: We share a common interest in technology and a passion for volunteering in our community. From a young age, we've enjoyed tinkering with computers, building robots, and experimenting with new gadgets. As we've grown older, we've realized the power of technology in making a positive impact on the world. We are constantly in search of innovative ways to use our skills and knowledge to help others, and we've decided to volunteer our time and expertise to a non-profit organization.
     section: team
     people:
       - name: "Brett"
