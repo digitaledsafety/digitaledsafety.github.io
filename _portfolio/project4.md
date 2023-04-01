@@ -1,0 +1,32 @@
+---
+title: Social Media
+subtitle: STEM educational topics for the community.
+image: assets/img/portfolio/04-full.jpg
+alt: 
+
+caption:
+  title: Social Media
+  subtitle: Entrepreneurship
+  thumbnail: assets/img/portfolio/04-thumbnail.jpg
+---
+
+Follow our social media accounts for the latest in STEM-related tech, news, education and more!
+
+<div class="row">
+  <div class="col-md-6 col-sm-6">
+    <a class="twitter-timeline" data-tweet-limit="1" href="https://twitter.com/digitaledsafety?ref_src=twsrc%5Etfw">Tweets by digitaledsafety</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+  </div>
+  <div class="col-md-6 col-sm-6">
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v16.0" nonce="02vpGDsh"></script>
+    <div class="fb-page" data-href="https://www.facebook.com/digitaledusafety" data-tabs="timeline" data-width="" data-height="" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/digitaledusafety" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/digitaledusafety">Digital Education &amp; Safety Foundation</a></blockquote></div>
+  </div>
+</div>
+
+
+
+
+{:.list-inline}
+- Date: January 2023
+- Client: Community
+- Category: Entrepreneurship
