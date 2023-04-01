@@ -12,7 +12,7 @@
 en: &DEFAULT_EN
   header:
     title: "Our Mission:"
-    text: Empowering our underserved with a modern STEM/STEAM education
+    text: Empowering the underserved with a modern STEM/STEAM education
     button: Learn More
     buttonlink: "#services"
 
