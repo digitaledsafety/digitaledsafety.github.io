@@ -156,6 +156,7 @@ en: &DEFAULT_EN
 
   footer:
     legal: "Privacy Policy"
+    terms: "Terms"
     social:
       - url: https://twitter.com/digitaledsafety
         icon: "fab fa-twitter"
@@ -329,6 +330,7 @@ es: &DEFAULT_ES
 
   footer:
     legal: "Política de Privacidad"
+    terms: "Términos"
     social:
       - url: https://twitter.com
         icon: "fab fa-twitter"
