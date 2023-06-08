@@ -7,14 +7,14 @@ title: Terms of Use
 </div>
 
 <h4>Agreement between User and https://digitaleducationsafety.org</h4>
-<p>Welcome to https://digitaleducationsafety.org. The https://digitaleducationsafety.org website (the "Site") is comprised of various web pages operated by Digital Education and Safety Foundation Inc. ("DES Foundation"). https://digitaleducationsafety.org is offered to you conditioned on your acceptance without modification of the terms, conditions, and notices contained herein (the "Terms"). Your use of https://digitaleducationsafety.org constitutes your agreement to all such Terms. Please read these terms carefully, and keep a copy of them for your reference.</p>
+Welcome to https://digitaleducationsafety.org. The https://digitaleducationsafety.org website (the "Site") is comprised of various web pages operated by Digital Education and Safety Foundation Inc. ("DES Foundation"). https://digitaleducationsafety.org is offered to you conditioned on your acceptance without modification of the terms, conditions, and notices contained herein (the "Terms"). Your use of https://digitaleducationsafety.org constitutes your agreement to all such Terms. Please read these terms carefully, and keep a copy of them for your reference.
   
 https://digitaleducationsafety.org is a Non-Profit Site. 
   
 This website will be used for informational purposes related to STEM/STEAM education with emphasis on technology subjects. This website will contain promotional merchandise available for sale. All proceeds will be used for furthering the Foundation's education mission. 
   
 <h4>Privacy</h4>
-<p>Your use of https://digitaleducationsafety.org is subject to DES Foundation's Privacy Policy. Please review our Privacy Policy, which also governs the Site and informs users of our data collection practices.</p>
+Your use of https://digitaleducationsafety.org is subject to DES Foundation's Privacy Policy. Please review our Privacy Policy, which also governs the Site and informs users of our data collection practices.
 
   
 <h4>Electronic Communications</h4>
