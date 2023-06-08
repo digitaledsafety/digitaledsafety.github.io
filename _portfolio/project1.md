@@ -16,13 +16,13 @@ The Digital Education & Safety Foundation developed a fork of the Scratch 3.0 co
 <h3>Game Development</h3>
 
 <div class="row">
-  <div class="col-md-12 col-sm-12">
-  <iframe src="https://scratch.mit.edu/projects/863103420/embed" allowtransparency="true" width="485" height="402" frameborder="0" scrolling="no" allowfullscreen></iframe>
+  <div class="embed-responsive embed-responsive-16by9 col-md-12 col-sm-12">
+  <iframe class="embed-responsive-item" src="https://scratch.mit.edu/projects/863103420/embed" allowtransparency="true" width="485" height="402" frameborder="0" scrolling="no" allowfullscreen></iframe>
   </div>
 </div>
 <div class="row">
-  <div class="col-md-12 col-sm-12">
-  <iframe src="https://scratch.mit.edu/projects/863097075/embed" allowtransparency="true" width="485" height="402" frameborder="0" scrolling="no" allowfullscreen></iframe>
+  <div class="embed-responsive embed-responsive-16by9 col-md-12 col-sm-12">
+  <iframe class="embed-responsive-item" src="https://scratch.mit.edu/projects/863097075/embed" allowtransparency="true" width="485" height="402" frameborder="0" scrolling="no" allowfullscreen></iframe>
   </div>
 </div>
 
