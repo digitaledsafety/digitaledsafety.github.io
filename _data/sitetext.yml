@@ -37,6 +37,12 @@ en: &DEFAULT_EN
     section: portfolio
     closebutton: "Close Project"
 
+  resource:
+    title: "Resources"
+    text: ""
+    section: resource
+    closebutton: "Close Resource"    
+
   timeline:
     title: "Roadmap"
     text: "How we got here"
@@ -197,6 +203,14 @@ es: &DEFAULT_ES
     text: "Lorem ipsum dolor sit amet consectetur."
     section: portafolio
     closebutton: "Cerrar Proyecto"
+
+
+  resource:
+    title: "Resource"
+    text: "Lorem ipsum dolor sit amet consectetur."
+    section: portafolio
+    closebutton: "Cerrar Proyecto"
+
 
   timeline:
     title: "Cronología"

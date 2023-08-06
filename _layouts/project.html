@@ -11,19 +11,5 @@ document.getElementById("page-top").className="bg-light";
 
 
 <div class="container" id="pagecontainer">
-
-  {% for project in site.projects %}
-  
-  
-    {{ project.title }}
-
-    {% if project.id == "1" %}
-
-    <br><br><br><br><br><br><br><br><br><br><br><br>
-    
-
-    foudn
-    {% endif %}
-  {% endfor %}
-
+  {{ content }}
 </div>

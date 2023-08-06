@@ -35,6 +35,9 @@ collections:
     output: true
     path: /projects/:path/
   products:
+  resources:
+    output: true
+    path: /resources/:path/
 
 markdown: kramdown
 
