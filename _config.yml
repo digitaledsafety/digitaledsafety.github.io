@@ -31,7 +31,9 @@ analytics:
   google: G-KEP2448L3X #Google Analytics tracking code here
 
 collections:
-  portfolio:
+  projects:
+    output: true
+    path: /projects/:path/
   products:
 
 markdown: kramdown

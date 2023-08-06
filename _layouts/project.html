@@ -1,0 +1,29 @@
+---
+layout: default
+---
+{% include nav.html %}
+
+{% if page.background == "grey" or page.background == "gray" %}
+<script>
+document.getElementById("page-top").className="bg-light";
+</script>
+{% endif %}
+
+
+<div class="container" id="pagecontainer">
+
+  {% for project in site.projects %}
+  
+  
+    {{ project.title }}
+
+    {% if project.id == "1" %}
+
+    <br><br><br><br><br><br><br><br><br><br><br><br>
+    
+
+    foudn
+    {% endif %}
+  {% endfor %}
+
+</div>
