@@ -1,0 +1,15 @@
+
+{%- if page.image -%}
+<header class="masthead" style="background-image: url('{{ page.image }}')">
+{%- endif -%}
+  <div class="container">
+    <div class="intro-text">
+    {%- if page.title -%}
+      <div class="intro-lead-in">{{ page.title | markdownify }}</div>
+    {%- endif -%}
+    {%- if page.subtitle -%}
+      <div class="intro-heading text-uppercase">{{ page.subtitle | markdownify }}</div>
+    {%- endif -%}
+    </div>
+  </div>
+</header>
