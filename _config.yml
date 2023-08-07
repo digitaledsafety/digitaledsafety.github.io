@@ -31,9 +31,9 @@ analytics:
   google: G-KEP2448L3X #Google Analytics tracking code here
 
 collections:
-  projects:
+  programs:
     output: true
-    path: /projects/:path/
+    path: /programs/:path/
   products:
   resources:
     output: true
