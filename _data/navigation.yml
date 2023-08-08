@@ -13,10 +13,8 @@ en: &DEFAULT_EN
   nav:
     - title: "+1-833-692-5477"
       url: "tel:+18336925477"
-    - title: "Services"
-      url: /#services
-    - title: "Resources"
-      url: /#resources      
+    - title: "Our Work"
+      url: /#services    
     - title: "Contact"
       url: /#contact      
     - title: "Store"
@@ -38,8 +36,6 @@ es: &DEFAULT_ES
       url: "tel:+18336925477"  
     - title: "Servicios"
       url: /#servicios
-    - title: "Resources"
-      url: /#resources
     - title: "Contáctenos"
       url: /#contacto      
     - title: "Stôr"
