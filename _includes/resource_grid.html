@@ -1,25 +1,25 @@
-<!-- Portfolio Grid -->
+<!-- resources Grid -->
 {% if site.locale and site.locale != "" and site.locale != nil %}
 <section class="bg-light page-section" id="{{ site.data.sitetext.resources.section | default: "resources" }}">
   <div class="container">
     <div class="row">
       <div class="col-lg-12 text-center">
-        <h2 class="section-heading text-uppercase">{{ site.data.sitetext[site.locale].resource.title | markdownify | default: "Portfolio" }}</h2>
+        <h2 class="section-heading text-uppercase">{{ site.data.sitetext[site.locale].resource.title | markdownify | default: "Resources" }}</h2>
         <h3 class="section-subheading text-muted">{{ site.data.sitetext[site.locale].resource.text | markdownify }}</h3>
       </div>
     </div>
     <div class="row">
 	{% for resource in site.resources %}
-      <div class="col-md-4 col-sm-6 portfolio-item">
-        <a class="portfolio-link" href="{{ resource.id }}">
-          <div class="portfolio-hover">
-            <div class="portfolio-hover-content">
-              <i class="{{ site.data.style.portfolio-icon | default: "fas fa-plus fa-3x" }}"></i>
+      <div class="col-md-4 col-sm-6 resources-item">
+        <a class="resources-link" href="{{ resource.id }}">
+          <div class="resources-hover">
+            <div class="resources-hover-content">
+              <i class="{{ site.data.style.resources-icon | default: "fas fa-plus fa-3x" }}"></i>
             </div>
           </div>
           <img class="img-fluid" src="{{ resource.caption.thumbnail }}" alt="">
         </a>
-        <div class="portfolio-caption">
+        <div class="resources-caption">
           <h4>{{ resource.caption.title }}</h4>
         </div>
       </div>
@@ -32,22 +32,22 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-12 text-center">
-        <h2 class="section-heading text-uppercase">{{ site.data.sitetext.resource.title | markdownify | default: "Portfolio" }}</h2>
+        <h2 class="section-heading text-uppercase">{{ site.data.sitetext.resource.title | markdownify | default: "resources" }}</h2>
         <h3 class="section-subheading text-muted">{{ site.data.sitetext.resource.text | markdownify }}</h3>
       </div>
     </div>
     <div class="row">
 	{% for resource in site.resources %}
-      <div class="col-md-4 col-sm-6 portfolio-item">
-        <a class="portfolio-link" href="{{ resource.id }}">
-          <div class="portfolio-hover">
-            <div class="portfolio-hover-content">
+      <div class="col-md-4 col-sm-6 resources-item">
+        <a class="resources-link" href="{{ resource.id }}">
+          <div class="resources-hover">
+            <div class="resources-hover-content">
               <i class="{{ site.data.style.resource-icon | default: "fas fa-plus fa-3x" }}"></i>
             </div>
           </div>
           <img class="img-fluid" src="{{ resource.caption.thumbnail }}" alt="">
         </a>
-        <div class="portfolio-caption">
+        <div class="resources-caption">
           <h4>{{ resource.caption.title }}</h4>
         </div>
       </div>

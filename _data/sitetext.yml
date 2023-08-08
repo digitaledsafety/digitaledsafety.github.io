@@ -37,7 +37,7 @@ en: &DEFAULT_EN
     section: portfolio
     closebutton: "Close Project"
 
-  resource:
+  resources:
     title: "Resources"
     text: ""
     section: resource
@@ -205,7 +205,7 @@ es: &DEFAULT_ES
     closebutton: "Cerrar Proyecto"
 
 
-  resource:
+  resources:
     title: "Resource"
     text: "Lorem ipsum dolor sit amet consectetur."
     section: portafolio
