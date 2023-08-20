@@ -9,7 +9,7 @@
       </div>
     </div>
     <div class="row">
-	{% for resource in site.resources %}
+	{% for resource in site.categories %}
       <div class="col-md-4 col-sm-6 resources-item">
         <a class="resources-link" href="{{ resource.id }}">
           <div class="resources-hover">
@@ -37,7 +37,7 @@
       </div>
     </div>
     <div class="row">
-	{% for resource in site.resources %}
+	{% for resource in site.categories %}
       <div class="col-md-4 col-sm-6 resources-item">
         <a class="resources-link" href="{{ resource.id }}">
           <div class="resources-hover">
@@ -48,7 +48,7 @@
           <img class="img-fluid" src="{{ resource.caption.thumbnail }}" alt="">
         </a>
         <div class="resources-caption">
-          <h4>{{ resource.caption.title }}</h4>
+          <h4>{{ resource.caption.subtitle }}</h4>
         </div>
       </div>
 	{% endfor %}

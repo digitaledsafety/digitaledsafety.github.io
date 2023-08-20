@@ -35,9 +35,11 @@ collections:
     output: true
     path: /programs/:path/
   products:
-  resources:
+  categories:
     output: true
     path: /resources/:path/
+  resources:
+    output: true
 
 markdown: kramdown
 
