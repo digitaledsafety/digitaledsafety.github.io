@@ -39,7 +39,7 @@ collections:
     output: true
     path: /resources/:path/
   resources:
-    output: true
+    output: false
 
 markdown: kramdown
 

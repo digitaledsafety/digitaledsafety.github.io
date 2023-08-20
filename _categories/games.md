@@ -2,7 +2,7 @@
 layout: project
 id: 1
 title: Games
-subtitle: Resources
+subtitle: Learning Resources
 image: /assets/img/resources/kelly-sikkema-RZamNjYMjU0-unsplash.jpg
 alt: 
 

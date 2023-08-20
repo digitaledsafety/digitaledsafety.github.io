@@ -1,11 +1,14 @@
 
-<div class="container">
-    <div class="row">
+<div class="card-columns">
 
-{% for resource in site.resources %}
-<div class="col-md-4 col-sm-6 resources-item">
+  {% assign filter = page.title | downcase %}
 
-    <div class="card" style="width: 18rem;">
+  {% assign posts = site.resources | where_exp: "resource", "resource.categories contains filter" %}
+ 
+{% for resource in posts %}
+
+
+    <div class="card">
         <img class="img-fluid" src="{{ resource.caption.thumbnail }}" alt="">
         <div class="card-body">
           <h5 class="card-title">{{ resource.title }}</h5>
@@ -13,10 +16,13 @@
           <a href="#" class="btn btn-primary">Go somewhere</a>
         </div>
       </div>
-
-    
-</div>
+      
 {% endfor %}
+</div>
 
-</div>
-</div>
+
+
+
+
+
+
