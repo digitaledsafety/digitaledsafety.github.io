@@ -8,16 +8,8 @@
       <div class="col-md-3">
           <h3>Filters</h3>
           <div class="form-check">
-              <input type="checkbox" class="form-check-input" id="kids">
-              <label class="form-check-label" for="kids">Kids</label>
-          </div>
-          <div class="form-check">
-              <input type="checkbox" class="form-check-input" id="teens">
-              <label class="form-check-label" for="stem">Teens</label>
-          </div>
-          <div class="form-check">
-            <input type="checkbox" class="form-check-input" id="adults">
-            <label class="form-check-label" for="stem">Adults</label>
+            <input type="checkbox" class="form-check-input" id="all">
+            <label class="form-check-label" for="stem">All</label>
           </div>
           <div class="form-check">
             <input type="checkbox" class="form-check-input" id="sandbox">
@@ -59,7 +51,7 @@
                       <div class="card-body">
                           <h5 class="card-title">${cardObj.title}</h5>
                           <p class="card-text">${cardObj.subtitle}</p>
-                          <a href=${cardObj.link} class="btn btn-primary stretched-link">View</a>
+                          <a href=${cardObj.link} target="_blank" class="btn btn-primary stretched-link">View</a>
                       </div>
                   </div>
               </div>
