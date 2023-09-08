@@ -1,24 +1,98 @@
-
-<div class="card-columns">
-
-  {% assign filter = page.title | downcase %}
-
-  {% assign posts = site.resources | where_exp: "resource", "resource.categories contains filter" %}
- 
-{% for resource in posts %}
+{% assign filter = page.title | downcase %}
+{% assign posts = site.resources | where_exp: "resource", "resource.categories contains filter" %}
 
 
-    <div class="card">
-        <img class="img-fluid" src="{{ resource.caption.thumbnail }}" alt="">
-        <div class="card-body">
-          <h5 class="card-title">{{ resource.title }}</h5>
-          <p class="card-text">{{ resource.subtitle }}</p>
-          <a href="#" class="btn btn-primary">Go somewhere</a>
-        </div>
+
+  <div class="row">
+      <!-- Filters -->
+      <div class="col-md-3">
+          <h3>Filters</h3>
+          <div class="form-check">
+              <input type="checkbox" class="form-check-input" id="kids">
+              <label class="form-check-label" for="kids">Kids</label>
+          </div>
+          <div class="form-check">
+              <input type="checkbox" class="form-check-input" id="teens">
+              <label class="form-check-label" for="stem">Teens</label>
+          </div>
+          <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="adults">
+            <label class="form-check-label" for="stem">Adults</label>
+          </div>
+          <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="sandbox">
+            <label class="form-check-label" for="stem">Sandbox</label>
+          </div>
+          <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="web">
+            <label class="form-check-label" for="stem">Web</label>
+          </div>
+          <!-- Add more filters as needed -->
       </div>
-      
-{% endfor %}
-</div>
+      <!-- List of Cards -->
+      <div class="col-md-9">
+          <div class="row" id="card-container">
+              <!-- Cards will be dynamically populated here -->
+          </div>
+      </div>
+  </div>
+
+
+<!-- Add Bootstrap JS and jQuery for checkbox filtering -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+  // Example array of JavaScript objects representing card
+
+  const cardData = {{ posts | jsonify }};
+
+  // Function to populate cards
+  function populateCards() {
+      const cardContainer = document.getElementById('card-container');
+      cardContainer.innerHTML = '';
+
+      cardData.forEach(cardObj => {
+          const cardHtml = `
+              <div class="col-md-4 mb-3 filterable-card" data-filters="${cardObj.tags.join(' ')}">
+                  <div class="card">
+                    <img class="img-fluid" src=${cardObj.caption.thumbnail} alt="">
+                      <div class="card-body">
+                          <h5 class="card-title">${cardObj.title}</h5>
+                          <p class="card-text">${cardObj.subtitle}</p>
+                          <a href=${cardObj.link} class="btn btn-primary stretched-link">View</a>
+                      </div>
+                  </div>
+              </div>
+          `;
+          cardContainer.innerHTML += cardHtml;
+      });
+  }
+
+  // Function to filter cards based on checkboxes
+  function filterCards() {
+      const selectedFilters = [];
+      // Get all selected filters
+      $('input[type="checkbox"]:checked').each(function () {
+          selectedFilters.push($(this).attr('id'));
+      });
+
+      // Show/hide cards based on selected filters
+      $('.filterable-card').each(function () {
+          const card = $(this);
+          const filters = card.data('filters').split(' ');
+          const showCard = filters.some(filter => selectedFilters.includes(filter));
+          card.toggleClass('d-none', !showCard);
+      });
+  }
+
+  // Initialize filtering on page load and when checkboxes change
+  $(document).ready(function () {
+      $('input[type="checkbox"]').change(filterCards);
+      populateCards();
+      filterCards();
+  });
+</script>
+
 
 
 
