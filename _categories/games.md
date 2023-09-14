@@ -8,7 +8,7 @@ alt:
 
 caption:
   title: Games
-  thumbnail: /assets/img/resources/kelly-sikkema-RZamNjYMjU0-unsplash.jpg
+  thumbnail: /assets/img/resources/kelly-sikkema-RZamNjYMjU0-unsplash-thumb.jpg
 
 ---
 

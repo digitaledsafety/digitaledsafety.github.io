@@ -7,7 +7,7 @@ image: /assets/img/resources/priscilla-du-preez-XkKCui44iM0-unsplash.jpg
 
 caption:
   title: Videos
-  thumbnail: /assets/img/resources/priscilla-du-preez-XkKCui44iM0-unsplash.jpg
+  thumbnail: /assets/img/resources/priscilla-du-preez-XkKCui44iM0-unsplash-thumb.jpg
 ---
 
 ## Educational Web Videos: Enhancing STEM/STEAM Skills

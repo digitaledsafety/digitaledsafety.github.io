@@ -8,7 +8,7 @@ alt:
 
 caption:
   title: Apps
-  thumbnail: /assets/img/resources/zhenzhong-liu-02JRb0gOp30-unsplash.jpg
+  thumbnail: /assets/img/resources/zhenzhong-liu-02JRb0gOp30-unsplash-thumb.jpg
 ---
 
 ## Educational STEM/STEAM Apps: Enhancing STEM/STEAM Skills
