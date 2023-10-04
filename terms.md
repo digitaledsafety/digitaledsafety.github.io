@@ -80,7 +80,7 @@ Your use of https://digitaleducationsafety.org is subject to DES Foundation's Pr
 hello@digitaleducationsafety.org 
   
 <h4>Telephone number:</h4>
-<p>3025660067</p> 
+<p>18336925477</p> 
   
 <p>Effective as of April 21, 2023</p> 
   
