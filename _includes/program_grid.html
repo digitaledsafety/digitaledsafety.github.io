@@ -11,7 +11,11 @@
     <div class="row">
 	{% for project in site.programs %}
       <div class="col-md-4 col-sm-6 portfolio-item">
+        {% if project.link %}
+        <a class="portfolio-link" href="{{ project.link }}">
+        {% else %}
         <a class="portfolio-link" href="{{ project.id }}">
+        {% endif %}
           <div class="portfolio-hover">
             <div class="portfolio-hover-content">
               <i class="{{ site.data.style.portfolio-icon | default: "fas fa-plus fa-3x" }}"></i>
