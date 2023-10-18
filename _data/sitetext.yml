@@ -157,10 +157,10 @@ en: &DEFAULT_EN
     legal: "Privacy Policy"
     terms: "Terms"
     social:
-      - url: https://twitter.com/digitaledsafety
-        icon: "fab fa-twitter"
       - url: https://facebook.com/digitaledusafety
         icon: "fab fa-facebook-f"
+      - url: https://twitter.com/digitaledsafety
+        icon: "fab fa-twitter"        
       - url: https://github.com/digitaleducationsafety
         icon: "fab fa-github"
       - url: https://discord.gg/5tc2DfUZVe
@@ -332,10 +332,10 @@ es: &DEFAULT_ES
     legal: "Política de Privacidad"
     terms: "Términos"
     social:
-      - url: https://twitter.com
-        icon: "fab fa-twitter"
       - url: https://facebook.com
         icon: "fab fa-facebook-f"
+      - url: https://twitter.com
+        icon: "fab fa-twitter"        
       - url: https://linkedin.com
         icon: "fab fa-linkedin-in"
       - url: https://github.com/raviriley/agency-jekyll-theme
