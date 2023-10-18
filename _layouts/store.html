@@ -1,7 +1,17 @@
 ---
 layout: default
 ---
+
 {% include nav.html %}
+
+<header class="masthead" style="background-image: url('/assets/img/store/rupixen-com-Q59HmzK38eQ-unsplash-bg.jpg')">
+    <div class="container">
+      <div class="intro-text">
+      <div class="intro-lead-in">Store</div>
+      <div class="intro-heading text-uppercase">Ecommerce</div>
+      </div>
+    </div>
+  </header>
 
 {% if page.background == "grey" or page.background == "gray" %}
 <script>
@@ -10,9 +20,14 @@ document.getElementById("page-top").className="bg-light";
 {% endif %}
 
 
-<div class="container" id="pagecontainer">
+<div class="container py-5" id="pagecontainer">
 
-{{ content }}
+  <h2>Welcome!</h2>
+  <p>Welcome to The Digital Education & Safety Foundation Store – Where Every Purchase Creates a World of Difference!</p>
+
+  </p>
+    We are more than just an online store; we are a gateway to positive change. We invite you to step into a world where your every purchase becomes an opportunity to make a meaningful impact in STEM/STEAM. Here, you'll find a carefully curated collection of products that are not only beautifully crafted but are also a testament to our shared commitment to creating a better world. With every item you choose, you are actively contributing to our mission, and together, we are building a brighter, more compassionate future. Thank you for being a part of our community of change-makers, and welcome to a store with a purpose!
+  </p>
 
 <!-- Product Grid -->
 {% if site.locale and site.locale != "" and site.locale != nil %}
@@ -39,3 +54,5 @@ document.getElementById("page-top").className="bg-light";
 {% endif %}
 
 </div>
+
+{% include contact.html %}
