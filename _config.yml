@@ -19,8 +19,9 @@ baseurl: "/" # the subpath of your site, e.g. /blog
 
 title      : Digital Education & Safety Foundation Inc.
 email      : hello@digitaleducationsafety.org #this is also the email contact forms will go to
-description: ""
-author     : Brett Donohoo
+tagline    : "STEM for the masses"
+description: "Empowering the underserved with a modern STEM/STEAM education"
+author     : Digital Education & Safety Foundation
 # logo:     #optional, defaults to site title
   # path: assets\img\clients\creative-market.jpg
   # height: 60 #height in px, defaults to 52px
@@ -49,6 +50,19 @@ formspree_form_path: "f/mnqyzadl"
 
 plugins:
   - jekyll-remote-theme
+  - jekyll-seo-tag
 
 
 ein: "88-3764028"
+
+feed:
+  tags: true
+
+author:
+  twitter: digitaledsafety
+  name: digitaledsafety
+  email: hello@digitaleducationsafety.org
+
+twitter:
+  username: digitaledsafety
+  card: summary
