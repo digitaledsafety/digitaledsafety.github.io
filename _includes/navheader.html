@@ -39,13 +39,7 @@
         </li>
         {% endfor %}
         {% endif %}
-        <li class="nav-item" style="margin: auto;">
-          <form action="https://www.paypal.com/donate" method="post" target="_top">
-            <input type="hidden" name="hosted_button_id" value="EYCLH7HV8NEGA" />
-            <input style="width:120px;" class="btn btn-primary text-uppercase" value="donate" border="0" type="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
-            <img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1" />
-            </form>
-          </li>          
+        {% include donate_button.html %}           
         </ul>
       </div>
     </div>
