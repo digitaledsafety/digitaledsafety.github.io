@@ -110,8 +110,6 @@ en: &DEFAULT_EN
         role: "Director"
         image: assets/img/team/1.jpg
         social:
-          - url: https://twitter.com/brettfxio
-            icon: fab fa-twitter
           - url: mailto:brett@functions.io
             icon: fas fa-envelope
           - url: https://calendar.app.google/sxNaaPMiY9YyPabPA
