@@ -55,7 +55,7 @@
       cardContainer.innerHTML = '';
       cardData.forEach(cardObj => {
           const cardHtml = `
-              <div class="col-md-4 mb-3 filterable-card" data-filters="${cardObj.tags.join(' ')}">
+              <div class="col-md-4 mb-3 filterable-card" data-filters="${cardObj.tags.join(',')}">
                   <div class="card">
                     <img class="img-fluid" src=${cardObj.caption.thumbnail} alt="">
                       <div class="card-body">
@@ -81,7 +81,7 @@
       // Show/hide cards based on selected filters
       $('.filterable-card').each(function () {
           const card = $(this);
-          const filters = card.data('filters').split(' ');
+          const filters = card.data('filters').split(',');
           const showCard = filters.some(filter => selectedFilters.includes(filter));
           card.toggleClass('d-none', !showCard);
       });

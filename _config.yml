@@ -19,7 +19,7 @@ baseurl: "/" # the subpath of your site, e.g. /blog
 
 title      : Digital Education & Safety Foundation Inc.
 email      : hello@digitaleducationsafety.org #this is also the email contact forms will go to
-tagline    : "STEM for the masses"
+tagline    : "STEM/STEAM for the masses"
 description: "Empowering the underserved with a modern STEM/STEAM education"
 author     : Digital Education & Safety Foundation
 # logo:     #optional, defaults to site title
@@ -41,6 +41,9 @@ collections:
     path: /resources/:path/
   resources:
     output: false
+  definitions:
+    output: true
+    path: /definitions/:path/
 
 markdown: kramdown
 
@@ -66,3 +69,11 @@ author:
 twitter:
   username: digitaledsafety
   card: summary
+
+defaults:
+  -
+    scope:
+      path: "" # an empty string here means all files in the project
+      type: "definitions"
+    values:
+      layout: "definition"

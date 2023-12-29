@@ -1,0 +1,154 @@
+---
+layout: default
+---
+
+{% assign filter = page.title | downcase %}
+{% assign posts = site.definitions  %}
+
+{% include nav.html %}
+
+<header class="masthead" style="background-image: url('/assets/img/glossaries/mast.jpg')">
+    <div class="container">
+      <div class="intro-text">
+      <div class="intro-lead-in">Glossaries</div>
+      </div>
+    </div>
+  </header>
+
+
+{% if page.background == "grey" or page.background == "gray" %}
+<script>
+document.getElementById("page-top").className="bg-light";
+</script>
+{% endif %}
+
+
+
+<div class="container py-4" id="pagecontainer">
+
+    <h1>Glossaries</h1>
+
+    <p>Glossaries (or cheatsheets) are an effective method for studying new STEM/STEAM technology concepts. View our collection below.</p>
+
+    <script>
+        // Example array of JavaScript objects representing card
+        const cardData = 
+        [{% for card in posts %}
+        {
+            "title": {{card.title | jsonify}}, 
+            "tags": {{card.tags | jsonify}}, 
+            "path": {{card.id | jsonify}}, 
+            "abbreviations": {{card.abbreviations | jsonify}}, 
+            "description": {{card.excerpt | jsonify}}
+        },
+        {% endfor %}]
+        
+      </script>
+    
+      <div class="row">
+          <!-- Filters -->
+          <div class="col-md-3">
+              <div style="text-decoration: underline;"><span><i class="fa fa-filter"></i>&nbsp;Filter by: </span></div>
+              <div id="card-filters">
+    
+                </div>
+              <!-- Add more filters as needed -->
+          </div>
+          <!-- List of Cards -->
+          <div class="col-md-9">
+              <div class="row" id="card-container">
+                  <!-- Cards will be dynamically populated here -->
+              </div>
+          </div>
+      </div>
+    
+    <!-- Add Bootstrap JS and jQuery for checkbox filtering -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <script>
+      // Function to populate cards
+      function populateCards() {
+        const cardFiltersContainer = document.getElementById('card-filters');
+        cardFiltersContainer.innerHTML = '';
+        const fs = [];
+          cardData.forEach(cardObj => {
+            cardObj.tags.forEach(cardTag => {
+                if(!fs.includes(cardTag)) {
+                    fs.push(cardTag);
+                }
+            })
+          });
+    
+          fs.forEach(f => {
+            const isChecked = (f == 'Web 3' ? 'checked' : '');
+            const filterHtml = `
+            <div class="form-check">
+                <input type="checkbox" ${isChecked} class="form-check-input" id="${f}">
+                <label class="form-check-label" for="stem">${f}</label>
+            </div>
+              `;
+              cardFiltersContainer.innerHTML += filterHtml;
+          });
+    
+        const cardContainer = document.getElementById('card-container');
+          cardContainer.innerHTML = '';
+          cardData.forEach(cardObj => {
+              const abbrev = (cardObj.abbreviations ? cardObj.abbreviations : '');
+              const cardHtml = `
+                  <div class="col-md-4 mb-3 filterable-card" data-filters="${cardObj.tags.join(',')}">
+                      <div class="card">
+
+                          <div class="card-body">
+                              <h5 class="card-title">${cardObj.title}</h5>
+                              <p class="card-subtitle">${abbrev}</h>
+                              <p class="card-text">${cardObj.description}</p>
+                              <a href=${cardObj.path} class="btn btn-primary stretched-link">View</a>
+                          </div>
+                      </div>
+                  </div>
+              `;
+              cardContainer.innerHTML += cardHtml;
+          });
+      }
+    
+      // Function to filter cards based on checkboxes
+      function filterCards() {
+          const selectedFilters = [];
+          // Get all selected filters
+          $('input[type="checkbox"]:checked').each(function () {
+              selectedFilters.push($(this).attr('id'));
+          });
+    
+          // Show/hide cards based on selected filters
+          $('.filterable-card').each(function () {
+              const card = $(this);
+              const filters = card.data('filters').split(',');
+              const showCard = filters.some(filter => selectedFilters.includes(filter));
+              card.toggleClass('d-none', !showCard);
+          });
+      }
+    
+      // Initialize filtering on page load and when checkboxes change
+      $(document).ready(function () {   
+          populateCards();
+    
+          $('input[type="checkbox"]').change(filterCards);      
+    
+          filterCards();
+      });
+    </script>
+    
+    
+    
+    
+    
+</div>
+
+{% include contact.html %}
+
+
+
+
+
+
+
