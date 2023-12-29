@@ -1,7 +1,7 @@
 ---
 title: Ethereum
 tags: [Web 3]
-abbreviations: [ETH, Ξ]
+abbreviations: ["ETH", "Ξ"]
 links:
   - https://wikipedia.org/wiki/Ethereum
 ---

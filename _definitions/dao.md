@@ -1,7 +1,7 @@
 ---
 title: Decentralized Autonomous Organization
 tags: [Web 3]
-abbreviations: [DAO]
+abbreviations: [DAO, DAC]
 links:
   - https://wikipedia.org/wiki/Decentralized_autonomous_organization
 ---
