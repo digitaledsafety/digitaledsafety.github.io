@@ -5,4 +5,4 @@ links:
   - https://wikipedia.org/wiki/Web3
 ---
 
-Web3 is a new iteration of the World Wide Web which incorporates concepts such as decentralization, blockchain technologies, and token-based economics.
+Web3 is a new iteration of the World Wide Web which incorporates concepts such as decentralization, blockchain technologies, and token-based economics. [<sup>[1]</sup>]({{page.links[0]}})
