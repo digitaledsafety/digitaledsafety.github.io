@@ -44,6 +44,9 @@ collections:
   definitions:
     output: true
     path: /definitions/:path/
+  opensource:
+    output: true
+    path: /open-source/:path/
 
 markdown: kramdown
 
