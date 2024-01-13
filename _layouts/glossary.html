@@ -47,15 +47,23 @@ document.getElementById("page-top").className="bg-light";
     
       <div class="row">
           <!-- Filters -->
-          <div class="col-md-3">
-              <div style="text-decoration: underline;"><span><i class="fa fa-filter"></i>&nbsp;Filter by: </span></div>
-              <div id="card-filters">
+          <div class="col-md-12">
+            <div class="btn-group">
+                <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="fa fa-filter"></i> Filter by:
+                  <span class="caret"></span>
+                </a>
+                <ul id="card-filters" class="dropdown-menu">
     
-                </div>
+                  <!-- dropdown menu links -->
+                </ul>
+              </div>
               <!-- Add more filters as needed -->
           </div>
+ 
+    </div class="row">
           <!-- List of Cards -->
-          <div class="col-md-9">
+          <div class="col-md-12">
               <div class="row" id="card-container">
                   <!-- Cards will be dynamically populated here -->
               </div>
@@ -82,10 +90,10 @@ document.getElementById("page-top").className="bg-light";
           fs.forEach(f => {
             const isChecked = (f == 'Web 3' ? 'checked' : '');
             const filterHtml = `
-            <div class="form-check">
+            <li class="pl-2"><div class="form-check">
                 <input type="checkbox" ${isChecked} class="form-check-input" id="${f}">
                 <label class="form-check-label" for="stem">${f}</label>
-            </div>
+            </div></li>
               `;
               cardFiltersContainer.innerHTML += filterHtml;
           });
@@ -102,7 +110,7 @@ document.getElementById("page-top").className="bg-light";
                               <h5 class="card-title">${cardObj.title}</h5>
                               <p class="card-subtitle">${abbrev}</p>
                               <p class="card-text">${cardObj.description}</p>
-                              <a href=${cardObj.path} class="btn btn-primary stretched-link">Explore</a>
+                              <a href=${cardObj.path} class="btn btn-primary stretched-link">View</a>
                           </div>
                       </div>
                   </div>

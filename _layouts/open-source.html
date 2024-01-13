@@ -59,15 +59,27 @@ Open source communities also expose individuals to a diverse range of technologi
     
       <div class="row">
           <!-- Filters -->
-          <div class="col-md-2">
-              <div style="text-decoration: underline;"><span><i class="fa fa-filter"></i>&nbsp;Filter by: </span></div>
-              <div id="card-filters">
+          <div class="col-md-12">
+
+            <div class="btn-group">
+                <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="fa fa-filter"></i> Filter by:
+                  <span class="caret"></span>
+                </a>
+                <ul id="card-filters" class="dropdown-menu">
     
-                </div>
+                  <!-- dropdown menu links -->
+                </ul>
+              </div>
+
+   
+
               <!-- Add more filters as needed -->
           </div>
+        </div>
+        <div class="row">
           <!-- List of Cards -->
-          <div class="col-md-10">
+          <div class="col-md-12">
               <div class="row" id="card-container">
                   <!-- Cards will be dynamically populated here -->
               </div>
@@ -92,12 +104,12 @@ Open source communities also expose individuals to a diverse range of technologi
           });
     
           fs.forEach(f => {
-            const isChecked = (f == 'Apple' ? 'checked' : '');
+            const isChecked = (f != '' ? 'checked' : '');
             const filterHtml = `
-            <div class="form-check form-check-inline">
+            <li class="pl-2"><div class="form-check">
                 <input type="checkbox" ${isChecked} class="form-check-input" id="${f}">
-                <label class="form-check-label" for="stem">${f}</label>
-            </div>
+                <label class="form-check-label" for="${f}">${f}</label>
+            </div></li>
               `;
               cardFiltersContainer.innerHTML += filterHtml;
           });

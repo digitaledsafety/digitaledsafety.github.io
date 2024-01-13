@@ -8,20 +8,29 @@
 
   <div class="row">
       <!-- Filters -->
-      <div class="col-md-3">
-          <div style="text-decoration: underline;"><span><i class="fa fa-filter"></i>&nbsp;Filter by: </span></div>
-          <div id="card-filters">
+      <div class="col-md-12">
+        <div class="btn-group">
+            <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+                <i class="fa fa-filter"></i> Filter by:
+              <span class="caret"></span>
+            </a>
+            <ul id="card-filters" class="dropdown-menu">
 
-            </div>
+              <!-- dropdown menu links -->
+            </ul>
+          </div>
           <!-- Add more filters as needed -->
       </div>
+    </div>
+<div class="row">
       <!-- List of Cards -->
-      <div class="col-md-9">
+      <div class="col-md-12">
           <div class="row" id="card-container">
               <!-- Cards will be dynamically populated here -->
           </div>
       </div>
-  </div>
+    </div>
+
 
 <!-- Add Bootstrap JS and jQuery for checkbox filtering -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -43,10 +52,10 @@
       fs.forEach(f => {
         const isChecked = (f == 'all' ? 'checked' : '');
         const filterHtml = `
-        <div class="form-check">
+        <li class="pl-2"><div class="form-check">
             <input type="checkbox" ${isChecked} class="form-check-input" id="${f}">
-            <label class="form-check-label" for="stem">${f}</label>
-        </div>
+            <label class="form-check-label" for="${f}">${f}</label>
+        </div></li>
           `;
           cardFiltersContainer.innerHTML += filterHtml;
       });
@@ -57,11 +66,11 @@
           const cardHtml = `
               <div class="col-md-4 mb-3 filterable-card" data-filters="${cardObj.tags.join(',')}">
                   <div class="card">
-                    <img class="card-img-top img-fluid" src=${cardObj.caption.thumbnail} alt="">
+                    <img class="card-img-top img-fluid" src=${cardObj.image} alt="">
                       <div class="card-body">
                           <h5 class="card-title">${cardObj.title}</h5>
                           <p class="card-text">${cardObj.subtitle}</p>
-                          <a href=${cardObj.link} target="_blank" class="btn btn-primary stretched-link">Explore</a>
+                          <a href=${cardObj.link} target="_blank" class="btn btn-primary stretched-link">View</a>
                       </div>
                   </div>
               </div>
