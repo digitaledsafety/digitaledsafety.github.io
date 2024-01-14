@@ -80,3 +80,8 @@ defaults:
       type: "definitions"
     values:
       layout: "definition"
+
+
+twitter:
+  username: digitaledsafety
+  card: summary_large_image

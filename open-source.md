@@ -1,6 +1,7 @@
 ---
 layout: open-source
 title: Open Source Projects
+image: /assets/img/opensource/mast.jpg
 ---
 
 <div class="col-lg-12 text-center">

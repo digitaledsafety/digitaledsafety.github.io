@@ -1,6 +1,7 @@
 ---
 layout: glossary
 title: Glossaries
+image: /assets/img/glossaries/mast.jpg
 ---
 
 <div class="col-lg-12 text-center">
