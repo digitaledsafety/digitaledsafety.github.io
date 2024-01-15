@@ -1,6 +1,7 @@
 ---
 title: Altcoin
 tags: [Web 3]
+
 links:
   - https://wikipedia.org/wiki/Cryptocurrency#:~:text=.%5B39%5D-,Altcoins,-Further%20information%3A
 ---
