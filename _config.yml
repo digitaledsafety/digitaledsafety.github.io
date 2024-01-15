@@ -80,6 +80,7 @@ defaults:
       type: "definitions"
     values:
       layout: "definition"
+      image: /assets/img/glossaries/mast.jpg
 
 
 twitter:
