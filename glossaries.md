@@ -2,6 +2,7 @@
 layout: glossary
 title: Glossaries
 image: /assets/img/glossaries/mast.jpg
+description: "Glossaries (or cheatsheets) are an effective method for studying new STEM/STEAM technologies."
 ---
 
 <div class="col-lg-12 text-center">
