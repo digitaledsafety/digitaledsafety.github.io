@@ -1,6 +1,6 @@
 ---
 layout: open-source
-title: Open Source Projects
+title: Open Source
 image: /assets/img/opensource/mast.jpg
 description: "We've compiled a list of popular open source projects in industry. The Contribute button will redirect you to a contribution page with best practices on how to get started!"
 ---
