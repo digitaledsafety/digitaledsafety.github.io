@@ -1,5 +1,6 @@
 ---
 title: MySQL
+homepage: https://www.mysql.com/
 contribute: https://dev.mysql.com/blog-archive/contributing-to-mysql-server/
 image: https://labs.mysql.com/common/logos/mysql-logo.svg?v2
 tags: [Oracle]

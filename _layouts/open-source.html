@@ -55,7 +55,8 @@ We've compiled a list of popular open source projects in industry below. The Con
             "path": {{card.id | jsonify}},
             "contribute": {{card.contribute | jsonify}}, 
             "caption": {{card.caption | jsonify}}, 
-            "abbreviations": {{card.abbreviations | jsonify}}, 
+            "abbreviations": {{card.abbreviations | jsonify}},
+            "homepage": {{card.homepage | jsonify}}, 
             "description": {{card.excerpt | jsonify}}
         },
         {% endfor %}]
@@ -126,12 +127,12 @@ We've compiled a list of popular open source projects in industry below. The Con
               const cardHtml = `
                   <div class="col-md-4 mb-3 filterable-card" data-filters="${cardObj.tags.join(',')}">
                       <div class="card">
-                        <img class="card-img-top img-fluid" src=${cardObj.caption.thumbnail} alt="">
+                        <a href="${cardObj.homepage}"><img class="card-img-top img-fluid" src=${cardObj.caption.thumbnail} alt=""></a>
                           <div class="card-body">
-                              <h5 class="card-title">${cardObj.title}</h5>
+                              <h5 class="card-title"><a href="${cardObj.homepage}">${cardObj.title}</a></h5>
                               <p class="card-subtitle">${cardObj.tags}</h>
                               <p class="card-text">${cardObj.description}</p>
-                              <a href=${cardObj.contribute} class="btn btn-primary stretched-link">Contribute</a>
+                              <a href="${cardObj.contribute}"" class="btn btn-primary">Contribute</a>
                           </div>
                       </div>
                   </div>

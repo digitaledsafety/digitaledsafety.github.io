@@ -1,5 +1,6 @@
 ---
 title: TensorFlow
+homepage: https://www.tensorflow.org/
 contribute: https://www.tensorflow.org/community/contribute
 image: https://opensource.google/static/images/projects/os-projects-tensorflow.svg
 tags: [Alphabet]

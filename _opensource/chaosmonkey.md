@@ -1,5 +1,6 @@
 ---
 title: Chaos Monkey
+homepage: https://netflix.github.io/chaosmonkey/
 contribute: https://netflix.github.io/chaosmonkey/How-to-deploy/
 image: https://netflix.github.io/chaosmonkey/logo.png
 tags: [Netflix]

@@ -1,5 +1,6 @@
 ---
 title: Chromium
+homepage: https://www.chromium.org/Home/
 contribute: https://chromium.googlesource.com/chromium/src/+/main/docs/contributing.md
 image: https://opensource.google/static/images/projects/os-projects-chromium.svg
 tags: [Alphabet]

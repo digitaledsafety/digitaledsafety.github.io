@@ -1,5 +1,6 @@
 ---
 title: Codeflare
+homepage: https://codeflare.dev/
 contribute: https://github.com/project-codeflare/codeflare/blob/develop/CONTRIBUTING.md
 image: https://github.com/project-codeflare/codeflare/raw/develop/images/codeflare_square.svg
 tags: [IBM]

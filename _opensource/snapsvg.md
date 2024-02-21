@@ -1,5 +1,6 @@
 ---
 title: Snap.svg
+homepage: http://snapsvg.io/
 contribute: http://snapsvg.io/start/
 image: https://opensource.adobe.com/img/snapsvg.svg
 tags: [Adobe]

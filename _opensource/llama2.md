@@ -1,5 +1,6 @@
 ---
 title: Llama 2
+homepage: https://llama.meta.com/llama2
 contribute: https://github.com/facebookresearch/llama/blob/main/CONTRIBUTING.md
 tags: [Meta]
 image: https://about.fb.com/wp-content/uploads/2023/07/Next-generation-of-Llama-2-AI_header.jpg?fit=1920%2C1080
