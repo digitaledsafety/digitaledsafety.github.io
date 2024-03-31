@@ -71,9 +71,16 @@ en: &DEFAULT_EN
         image: assets/img/timeline/3.jpg
         alt: image alt text    
         # you can enforce the alignment
-        align: right            
-      - title: "Where we're headed"
-        year: "2024+"
+        align: right
+      - title: "Promotion"
+        year: "2024"
+        desc: "Establshing our portfolio and collaboration with industry."
+        image: assets/img/timeline/promotion.png
+        alt: image alt text    
+        # you can enforce the alignment
+        align: right    
+      - title: "Into the future"
+        year: "2025 and beyond"
         desc: "Keeping current with the latest trends and developments in technology is crucial to stay connected and relevant. With new technologies emerging at an unprecedented pace, it is more important than ever to stay informed and adapt quickly. Whether it's staying up-to-date with the latest software and hardware, learning new programming languages, or understanding the latest breakthroughs in AI and machine learning, staying current with technology is essential for success in today's rapidly changing world."
         image: assets/img/timeline/5.jpg
         alt: image alt text    
