@@ -6,7 +6,7 @@ image: https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Grok_logo.svg/5
 tags: [X]
 
 caption:
-  thumbnail: https://x.ai/_next/static/media/grok-os-teaser.b49bf551.png
+  thumbnail: https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Grok_logo.svg/512px-Grok_logo.svg.png
 ---
 
 Grok-1 is a 314 billion parameter Mixture-of-Experts model trained from scratch by xAI.
