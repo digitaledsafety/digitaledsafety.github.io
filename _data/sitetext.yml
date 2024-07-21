@@ -163,7 +163,7 @@ en: &DEFAULT_EN
         icon: "fab fa-facebook-f"
       - url: https://twitter.com/digitaledsafety
         icon: "fab fa-twitter"        
-      - url: https://github.com/digitaleducationsafety
+      - url: https://github.com/digitaledsafety
         icon: "fab fa-github"
       - url: https://discord.gg/5tc2DfUZVe
         icon: "fab fa-discord"        
