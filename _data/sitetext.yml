@@ -165,6 +165,8 @@ en: &DEFAULT_EN
         icon: "fab fa-twitter"        
       - url: https://github.com/digitaledsafety
         icon: "fab fa-github"
+      - url: https://www.youtube.com/@digitaledsafety
+        icon: "fab fa-youtube"        
       - url: https://discord.gg/5tc2DfUZVe
         icon: "fab fa-discord"        
 en-US:
