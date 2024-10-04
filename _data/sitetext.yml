@@ -125,12 +125,6 @@ en: &DEFAULT_EN
         social:
           - url: mailto:bryan@digitaleducationsafety.org
             icon: fas fa-envelope
-      - name: "Tim"
-        role: "Director"
-        image: assets/img/team/2.jpg
-        social:
-          - url: mailto:tim@digitaleducationsafety.org
-            icon: fas fa-envelope
   donations:
     title: "DONATIONS"
     text: "Thank you for your support"
