@@ -1,7 +1,7 @@
 ---
 title: Steam Audio
 homepage: https://valvesoftware.github.io/steam-audio/
-contribute: https://github.com/ValveSoftware/steam-audio/blob/master/CONTRIBUTING.md
+contribute: https://vscode.dev/github/ValveSoftware/steam-audio/blob/master/CONTRIBUTING.md
 tags: [Valve]
 image: https://clan.akamai.steamstatic.com/images/27920370/ec66062558060998ca1eb3e1d9b91c91b4c95fc0.png
 

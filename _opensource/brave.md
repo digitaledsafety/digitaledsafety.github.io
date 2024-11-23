@@ -1,7 +1,7 @@
 ---
 title: Brave Browser
 homepage: https://brave.com/
-contribute: https://github.com/brave/brave-browser/blob/master/CONTRIBUTING.md
+contribute: https://vscode.dev/github/brave/brave-browser/blob/master/CONTRIBUTING.md
 image: https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Brave_Browser_logotype.svg/512px-Brave_Browser_logotype.svg.png
 tags: [Brave]
 

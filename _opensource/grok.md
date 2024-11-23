@@ -1,7 +1,7 @@
 ---
 title: Grok
 homepage: https://x.ai/blog/grok-os
-contribute: https://github.com/xai-org/grok-1
+contribute: https://vscode.dev/github/xai-org/grok-1
 image: https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Grok_logo.svg/512px-Grok_logo.svg.png
 tags: [X]
 

@@ -1,7 +1,7 @@
 ---
 title: FoundationDB
 homepage: https://www.foundationdb.org/
-contribute: https://github.com/apple/foundationdb/blob/main/CONTRIBUTING.md
+contribute: https://vscode.dev/github/apple/foundationdb/blob/main/CONTRIBUTING.md
 image: https://avatars.githubusercontent.com/u/2393912?s=280&v=4
 tags: [Apple]
 

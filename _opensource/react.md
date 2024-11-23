@@ -1,7 +1,7 @@
 ---
 title: React
 homepage: https://react.dev/
-contribute: https://github.com/reactjs/react.dev/blob/main/CONTRIBUTING.md
+contribute: https://vscode.dev/github/reactjs/react.dev/blob/main/CONTRIBUTING.md
 image: https://opensource.fb.com/img/projects/react.jpg
 tags: [Meta]
 
