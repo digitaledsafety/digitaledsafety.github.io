@@ -107,24 +107,6 @@ en: &DEFAULT_EN
       - title: "google"
         url: https://www.google.com/nonprofits/offerings/workspace/
         logo: assets/img/clients/google.png
-  team:
-    title: "Team"
-    text: "Current board members"
-    subtext: We share a common interest in technology and a passion for volunteering in our community. From a young age, we've enjoyed tinkering with computers, building robots, and experimenting with new gadgets. As we've grown older, we've realized the power of technology in making a positive impact on the world. We are constantly in search of innovative ways to use our skills and knowledge to help others, and we've decided to volunteer our time and expertise to a non-profit organization.
-    section: team
-    people:
-      - name: "Brett"
-        role: "Director"
-        image: assets/img/team/1.jpg
-        social:
-          - url: mailto:brett@functions.io
-            icon: fas fa-envelope
-      - name: "Bryan"
-        role: "Director"
-        image: assets/img/team/3.jpg
-        social:
-          - url: mailto:bryan@digitaleducationsafety.org
-            icon: fas fa-envelope
   donations:
     title: "DONATIONS"
     text: "Thank you for your support"
@@ -264,43 +246,6 @@ es: &DEFAULT_ES
       - title: "Creative Market"
         url: https://github.com/raviriley/agency-jekyll-theme
         logo: assets/img/clients/creative-market.jpg
-
-  team:
-    title: "NUESTRO INCREÍBLE EQUIPO"
-    text: "Lorem ipsum dolor sit amet consectetur."
-    subtext: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut eaque, laboriosam veritatis, quos non quis ad perspiciatis, totam corporis ea, alias ut unde. **Markdown** supported.
-    section: equipo
-    people:
-      - name: "Kay Garland"
-        role: "Lead Designer"
-        image: assets/img/team/500x500.jpg
-        social:
-          - url: https://twitter.com
-            icon: fab fa-twitter
-          - url: https://facebook.com
-            icon: fab fa-facebook-f
-          - url: https://linkedin.com
-            icon: fab fa-linkedin-in
-      - name: "Larry Parker"
-        role: "Lead Marketer"
-        image: assets/img/team/2.jpg
-        social:
-          - url: https://twitter.com
-            icon: fab fa-twitter
-          - url: https://facebook.com
-            icon: fab fa-facebook-f
-          - url: https://linkedin.com
-            icon: fab fa-linkedin-in
-      - name: "Diana Perterson"
-        role: "Lead Developer"
-        image: assets/img/team/500x500.jpg
-        social:
-          - url: https://twitter.com
-            icon: fab fa-twitter
-          - url: https://facebook.com
-            icon: fab fa-facebook-f
-          - url: https://linkedin.com
-            icon: fab fa-linkedin-in
 
   donations:
     title: "DONATIONS"
