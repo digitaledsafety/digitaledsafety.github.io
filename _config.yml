@@ -17,7 +17,7 @@ remote_theme: raviriley/agency-jekyll-theme
 url    : "https://digitaleducationsafety.org" # the base hostname & protocol for your site, e.g. http://example.com
 baseurl: "/" # the subpath of your site, e.g. /blog
 
-title      : Digital Education & Safety Foundation Inc.
+title      : Digital Education & Safety Foundation
 email      : hello@digitaleducationsafety.org #this is also the email contact forms will go to
 tagline    : "Empowering the under-served with a modern STEM/STEAM education"
 description: "Empowering the under-served with a modern STEM/STEAM education"
