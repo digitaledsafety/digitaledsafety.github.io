@@ -85,9 +85,6 @@ defaults:
       layout: "definition"
       image: /assets/img/glossaries/mast.jpg
 
-feed:
-  tags: true
-
 twitter:
   username: digitaledsafety
   card: summary_large_image
