@@ -64,6 +64,8 @@ ein: "88-3764028"
 
 feed:
   tags: true
+  categories:
+    - definitions
 
 author:
   twitter: digitaledsafety
