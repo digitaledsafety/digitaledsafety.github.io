@@ -64,7 +64,7 @@ ein: "88-3764028"
 
 feed:
   tags: true
-  categories:
+  collections:
     - definitions
 
 author:
