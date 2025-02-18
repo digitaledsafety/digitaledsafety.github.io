@@ -1,5 +1,6 @@
 ---
 title: Gamification
+date: 2025-12-18 13:21:22
 links:
   - https://en.wikipedia.org/wiki/Gamification
 ---
