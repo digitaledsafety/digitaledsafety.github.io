@@ -44,6 +44,7 @@ collections:
   definitions:
     output: true
     path: /definitions/:path/
+    date: 2025-02-18 12:21:22
   opensource:
     output: true
     path: /open-source/:path/
