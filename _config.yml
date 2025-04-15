@@ -47,7 +47,7 @@ collections:
     date: 2025-02-17
   opensource:
     output: true
-    path: /open-source/:path/
+    path: /open-source/:path/ 
 
 markdown: kramdown
 
