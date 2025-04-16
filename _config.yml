@@ -38,9 +38,9 @@ collections:
   products:
   categories:
     output: true
-    path: /resources/:path/
   resources:
-    output: false
+    output: true
+    path: /resources/:path/
   definitions:
     output: true
     path: /definitions/:path/
@@ -48,6 +48,9 @@ collections:
   opensource:
     output: true
     path: /open-source/:path/ 
+  marketplace:
+    output: true
+    path: /marketplace/:path/   
 
 markdown: kramdown
 
@@ -86,6 +89,13 @@ defaults:
     values:
       layout: "definition"
       image: /assets/img/glossaries/mast.jpg
+  -
+    scope:
+      path: "" # an empty string here means all files in the project
+      type: "resources"
+    values:
+      layout: "resource"
+      image: /assets/img/glossaries/mast.jpg      
 
 twitter:
   username: digitaledsafety
