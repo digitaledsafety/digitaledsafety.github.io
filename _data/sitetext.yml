@@ -138,7 +138,7 @@ en: &DEFAULT_EN
       - url: https://www.youtube.com/@digitaledsafety
         icon: "fab fa-youtube"       
       - url: https://x.com/digitaledsafety
-        icon: "fab fa-x"    
+        icon: "fab fa-twitter"    
       - url: https://github.com/digitaledsafety
         icon: "fab fa-github"        
       - url: https://facebook.com/digitaledsafety
