@@ -25,5 +25,12 @@
 	  <!-- Custom scripts for this template -->
 	  <script src="/assets/js/agency.min.js"></script> 
 
+      <!-- Event snippet for Submit lead form conversion page --> 
+      <script>
+	  document.getElementById('sendMessageButton').addEventListener('click', function() {
+	    gtag('event', 'conversion', {'send_to': "{{ site.ads.google }}/oNtiCNf78sAaEJfMq48_"});
+	  });
+	  </script>
+
   </body>
 </html>
