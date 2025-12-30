@@ -19,8 +19,8 @@ baseurl: "/" # the subpath of your site, e.g. /blog
 
 title      : Digital Education & Safety Foundation
 email      : hello@digitaleducationsafety.org #this is also the email contact forms will go to
-tagline    : "Empowering the under-served with a modern STEM/STEAM education"
-description: "Empowering the under-served with a modern STEM/STEAM education"
+tagline    : "Empowering the under-served with a modern STE(A)M education!"
+description: "Empowering the under-served with a modern STE(A)M education!"
 author     : Digital Education & Safety Foundation
 # logo:     #optional, defaults to site title
   # path: assets\img\clients\creative-market.jpg
