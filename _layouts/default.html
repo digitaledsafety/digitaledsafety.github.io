@@ -23,8 +23,13 @@
 
       <!-- Event snippet for Submit lead form conversion page --> 
       <script>
-	  document.getElementById('sendMessageButton').addEventListener('click', function() {
-	    gtag('event', 'conversion', {'send_to': "{{ site.ads.google }}/oNtiCNf78sAaEJfMq48_"});
+	  ['sendMessageButtonFoot', 'sendMessageButtonMc'].forEach(function(id) {
+	    const btn = document.getElementById(id);
+	    if (btn) {
+	      btn.addEventListener('click', function() {
+	        gtag('event', 'conversion', {'send_to': "{{ site.ads.google }}/oNtiCNf78sAaEJfMq48_"});
+	      });
+	    }
 	  });
 	  document.getElementById('paypalDonate').addEventListener('click', function() {
 	    gtag('event', 'conversion', {'send_to': "{{ site.ads.google }}/oNtiCNf78sAaEJfMq48_"});
@@ -33,19 +38,29 @@
 
 	
 	<script>
+		if (document.getElementById("turnstile-container")) {
+			const footButton = document.getElementById("sendMessageButtonFoot");
+			if (footButton) footButton.disabled = true;
+			const widgetId = turnstile.render("#turnstile-container", {
+				sitekey: "0x4AAAAAAADF-VDrlBmuOtjT",
+				callback: function (token) {
+					console.log("Success:", token);
+					if (footButton) footButton.disabled = false;
+				},
+			});
+		}
 
-		const widgetId = turnstile.render("#turnstile-container", {
-		sitekey: "0x4AAAAAAADF-VDrlBmuOtjT",
-		callback: function (token) {
-			console.log("Success:", token);
-		},
-		});
-		const widgetIdMc = turnstile.render("#turnstile-container-mc", {
-		sitekey: "0x4AAAAAACNF-Oav6RmaR0-r",
-		callback: function (token) {
-			console.log("Success:", token);
-		},
-		});				
+		if (document.getElementById("turnstile-container-mc")) {
+			const mcButton = document.getElementById("sendMessageButtonMc");
+			if (mcButton) mcButton.disabled = true;
+			const widgetIdMc = turnstile.render("#turnstile-container-mc", {
+				sitekey: "0x4AAAAAACNF-Oav6RmaR0-r",
+				callback: function (token) {
+					console.log("Success:", token);
+					if (mcButton) mcButton.disabled = false;
+				},
+			});
+		}
 	</script>
 
   </body>
