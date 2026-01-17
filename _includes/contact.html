@@ -51,7 +51,7 @@
             <div class="clearfix"></div>
             <div class="col-lg-12 text-center">
               <div id="success"></div>
-              <button id="sendMessageButton" class="btn btn-primary btn-xl text-uppercase"
+              <button id="sendMessageButtonFoot" class="btn btn-primary btn-xl text-uppercase"
                 type="submit">{{ site.data.sitetext[site.locale].contact.submit | default: "Send Message" }}</button>
             </div>
             <div class="col-lg-12 text-center">
@@ -115,8 +115,11 @@
             <div class="clearfix"></div>
             <div class="col-lg-12 text-center">
               <div id="success"></div>
-              <button id="sendMessageButton" class="btn btn-primary btn-xl text-uppercase"
+              <button id="sendMessageButtonFoot" class="btn btn-primary btn-xl text-uppercase"
                 type="submit">{{ site.data.sitetext.contact.submit | default: "Send Message" }}</button>
+            </div>
+            <div class="col-lg-12 text-center">
+              <div id="turnstile-container"></div>
             </div>
           </div>
         </form>
