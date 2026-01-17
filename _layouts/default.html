@@ -30,5 +30,23 @@
 	    gtag('event', 'conversion', {'send_to': "{{ site.ads.google }}/oNtiCNf78sAaEJfMq48_"});
 	  });
 	  </script>
+
+	
+	<script>
+
+		const widgetId = turnstile.render("#turnstile-container", {
+		sitekey: "0x4AAAAAAADF-VDrlBmuOtjT",
+		callback: function (token) {
+			console.log("Success:", token);
+		},
+		});
+		const widgetIdMc = turnstile.render("#turnstile-container-mc", {
+		sitekey: "0x4AAAAAACNF-Oav6RmaR0-r",
+		callback: function (token) {
+			console.log("Success:", token);
+		},
+		});				
+	</script>
+
   </body>
 </html>
