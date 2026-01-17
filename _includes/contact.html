@@ -11,9 +11,13 @@
     </div>
     <div class="row">
       <div class="col-lg-12">
-        <form id="contactForm"
-          action="https://formspree.io/{% if site.formspree_form_path %}{{ site.formspree_form_path }}{% else %}{{ site.email }}{% endif %}"
-          novalidate="novalidate" method="POST">
+        <script type="text/javascript">var submitted_contact=false;</script>
+        <iframe name="hidden_iframe_contact" id="hidden_iframe_contact" style="display:none;"
+          onload="if(submitted_contact) { document.getElementById('success').innerHTML = '<div class=\'alert alert-success\'><strong>Your message has been sent. </strong></div>'; document.getElementById('googleContactForm').reset(); }"></iframe>
+        <form id="googleContactForm"
+          action="https://docs.google.com/forms/d/e/1FAIpQLSfVrEX0Fiy6xGPQ9xxJD0sFsygD8k7laf8GjrHDjcXNVhgcaA/formResponse"
+          target="hidden_iframe_contact" onsubmit="submitted_contact=true;"
+          method="POST">
           <!--name="sentMessage"-->
           <div class="row">
             <div class="col-md-6">
@@ -72,9 +76,13 @@
     </div>
     <div class="row">
       <div class="col-lg-12">
-        <form id="contactForm"
-          action="https://formspree.io/{% if site.formspree_form_path %}{{ site.formspree_form_path }}{% else %}{{ site.email }}{% endif %}"
-          novalidate="novalidate" method="POST">
+        <script type="text/javascript">var submitted_contact_default=false;</script>
+        <iframe name="hidden_iframe_contact_default" id="hidden_iframe_contact_default" style="display:none;"
+          onload="if(submitted_contact_default) { document.getElementById('success').innerHTML = '<div class=\'alert alert-success\'><strong>Your message has been sent. </strong></div>'; document.getElementById('googleContactForm').reset(); }"></iframe>
+        <form id="googleContactForm"
+          action="https://docs.google.com/forms/d/e/1FAIpQLSfVrEX0Fiy6xGPQ9xxJD0sFsygD8k7laf8GjrHDjcXNVhgcaA/formResponse"
+          target="hidden_iframe_contact_default" onsubmit="submitted_contact_default=true;"
+          method="POST">
           <!--name="sentMessage"-->
           <div class="row">
             <div class="col-md-6">
