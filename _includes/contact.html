@@ -12,7 +12,7 @@
     <div class="row">
       <div class="col-lg-12">
         <script type="text/javascript">var submitted_contact=false;</script>
-        <iframe name="hidden_iframe_contact" id="hidden_iframe_contact" style="display:none;"
+        <iframe name="hidden_iframe_contact" id="hidden_iframe_contact" title="Contact form submission handler" style="display:none;"
           onload="if(submitted_contact) { document.getElementById('success').innerHTML = '<div class=\'alert alert-success\'><strong>Your message has been sent. </strong></div>'; document.getElementById('contactFormFoot').reset(); }"></iframe>
         <form id="contactFormFoot"
           action="https://docs.google.com/forms/d/e/1FAIpQLSfVrEX0Fiy6xGPQ9xxJD0sFsygD8k7laf8GjrHDjcXNVhgcaA/formResponse"
@@ -22,18 +22,21 @@
           <div class="row">
             <div class="col-md-6">
               <div class="form-group">
+                <label for="name" class="sr-only">{{ site.data.sitetext[site.locale].contact.name | default: "Name*" }}</label>
                 <input name="entry.339900415" class="form-control" id="name" type="text"
                   placeholder="{{ site.data.sitetext[site.locale].contact.name | default: "Name*" }}"
                   required="required" data-validation-required-message="{{ site.data.sitetext[site.locale].contact.name-validation | default: "Please enter your name." }}">
                 <p class="help-block text-danger"></p>
               </div>
               <div class="form-group">
+                <label for="email" class="sr-only">{{ site.data.sitetext[site.locale].contact.email | default: "Email*" }}</label>
                 <input name="entry.265507318" class="form-control" id="email" type="email"
                   placeholder="{{ site.data.sitetext[site.locale].contact.email | default: "Email*" }}"
                   required="required" data-validation-required-message="{{ site.data.sitetext[site.locale].contact.email-validation | default: "Please enter your email address." }}">
                 <p class="help-block text-danger"></p>
               </div>
               <div class="form-group">
+                <label for="phone" class="sr-only">{{ site.data.sitetext[site.locale].contact.phone | default: "Phone Number*" }}</label>
                 <input name="entry.1146594570" class="form-control" id="phone" type="tel"
                   placeholder="{{ site.data.sitetext[site.locale].contact.phone | default: "Phone Number*" }}"
                   required="required" data-validation-required-message="{{ site.data.sitetext[site.locale].contact.phone-validation | default: "Please enter your phone number." }}">
@@ -42,6 +45,7 @@
             </div>
             <div class="col-md-6">
               <div class="form-group">
+                <label for="message" class="sr-only">{{ site.data.sitetext[site.locale].contact.message | default: "Message*" }}</label>
                 <textarea name="entry.1150177072" class="form-control" id="message"
                   placeholder="{{ site.data.sitetext[site.locale].contact.message | default: "Message*" }}"
                   required="required" data-validation-required-message="{{ site.data.sitetext[site.locale].contact.message-validation | default: "Please enter a message." }}"></textarea>
@@ -76,7 +80,7 @@
     <div class="row">
       <div class="col-lg-12">
         <script type="text/javascript">var submitted_contact_default=false;</script>
-        <iframe name="hidden_iframe_contact_default" id="hidden_iframe_contact_default" style="display:none;"
+        <iframe name="hidden_iframe_contact_default" id="hidden_iframe_contact_default" title="Contact form submission handler" style="display:none;"
           onload="if(submitted_contact_default) { document.getElementById('success').innerHTML = '<div class=\'alert alert-success\'><strong>Your message has been sent. </strong></div>'; document.getElementById('contactFormFoot').reset(); }"></iframe>
         <form id="contactFormFoot"
           action="https://docs.google.com/forms/d/e/1FAIpQLSfVrEX0Fiy6xGPQ9xxJD0sFsygD8k7laf8GjrHDjcXNVhgcaA/formResponse"
@@ -86,18 +90,21 @@
           <div class="row">
             <div class="col-md-6">
               <div class="form-group">
+                <label for="name" class="sr-only">{{ site.data.sitetext.contact.name | default: "Name*" }}</label>
                 <input name="entry.339900415" class="form-control" id="name" type="text"
                   placeholder="{{ site.data.sitetext.contact.name | default: "Name*" }}"
                   required="required" data-validation-required-message="{{ site.data.sitetext.contact.name-validation | default: "Please enter your name." }}">
                 <p class="help-block text-danger"></p>
               </div>
               <div class="form-group">
+                <label for="email" class="sr-only">{{ site.data.sitetext.contact.email | default: "Email*" }}</label>
                 <input name="entry.265507318" class="form-control" id="email" type="email"
                   placeholder="{{ site.data.sitetext.contact.email | default: "Email*" }}"
                   required="required" data-validation-required-message="{{ site.data.sitetext.contact.email-validation | default: "Please enter your email address." }}">
                 <p class="help-block text-danger"></p>
               </div>
               <div class="form-group">
+                <label for="phone" class="sr-only">{{ site.data.sitetext.contact.phone | default: "Phone Number*" }}</label>
                 <input name="entry.1146594570" class="form-control" id="phone" type="tel"
                   placeholder="{{ site.data.sitetext.contact.phone | default: "Phone Number*" }}"
                   required="required" data-validation-required-message="{{ site.data.sitetext.contact.phone-validation | default: "Please enter your phone number." }}">
@@ -106,6 +113,7 @@
             </div>
             <div class="col-md-6">
               <div class="form-group">
+                <label for="message" class="sr-only">{{ site.data.sitetext.contact.message | default: "Message*" }}</label>
                 <textarea name="entry.1150177072" class="form-control" id="message"
                   placeholder="{{ site.data.sitetext.contact.message | default: "Message*" }}"
                   required="required" data-validation-required-message="{{ site.data.sitetext.contact.message-validation | default: "Please enter a message." }}"></textarea>
