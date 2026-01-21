@@ -10,7 +10,7 @@ layout: default
 <header class="masthead" style="background-image: url('/assets/img/glossaries/mast.jpg')">
     <div class="container">
       <div class="intro-text">
-      <div class="intro-heading">Glossaries</div>
+      <h1 class="intro-heading">Glossaries</h1>
       </div>
     </div>
   </header>
@@ -51,11 +51,11 @@ document.getElementById("page-top").className="bg-light";
           <!-- Filters -->
           <div class="col-md-12">
             <div class="btn-group">
-                <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-                    <i class="fa fa-filter"></i> Filter by:
+                <button class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fa fa-filter" aria-hidden="true"></i> Filter by:
                   <span class="caret"></span>
-                </a>
-                <ul id="card-filters" class="dropdown-menu">
+                </button>
+                <ul id="card-filters" class="dropdown-menu" role="menu">
     
                   <!-- dropdown menu links -->
                 </ul>
@@ -91,10 +91,11 @@ document.getElementById("page-top").className="bg-light";
     
           fs.forEach(f => {
             const isChecked = (f == 'Web 3' ? 'checked' : '');
+            const safeId = "filter-" + f.replace(/\s+/g, '-').toLowerCase();
             const filterHtml = `
-            <li class="pl-2"><div class="form-check">
-                <input type="checkbox" ${isChecked} class="form-check-input" id="${f}">
-                <label class="form-check-label" for="stem">${f}</label>
+            <li class="pl-2" role="none"><div class="form-check">
+                <input type="checkbox" ${isChecked} class="form-check-input" id="${safeId}" data-filter="${f}">
+                <label class="form-check-label" for="${safeId}">${f}</label>
             </div></li>
               `;
               cardFiltersContainer.innerHTML += filterHtml;
@@ -109,10 +110,10 @@ document.getElementById("page-top").className="bg-light";
                       <div class="card">
 
                           <div class="card-body">
-                              <h5 class="card-title">${cardObj.title}</h5>
+                              <h3 class="h5 card-title">${cardObj.title}</h3>
                               <p class="card-subtitle">${abbrev}</p>
                               <p class="card-text">${cardObj.description}</p>
-                              <a target="_blank" href=${cardObj.path} class="btn btn-primary stretched-link">View</a>
+                              <a target="_blank" href=${cardObj.path} class="btn btn-primary stretched-link" aria-label="View ${cardObj.title}">View</a>
                           </div>
                       </div>
                   </div>
@@ -126,7 +127,7 @@ document.getElementById("page-top").className="bg-light";
           const selectedFilters = [];
           // Get all selected filters
           $('input[type="checkbox"]:checked').each(function () {
-              selectedFilters.push($(this).attr('id'));
+              selectedFilters.push($(this).data('filter'));
           });
     
           // Show/hide cards based on selected filters

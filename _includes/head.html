@@ -56,6 +56,31 @@
     <!--<link href="assets/css/agency.min.css" rel="stylesheet">-->
     <link href="/assets/css/agency.css" rel="stylesheet" />
     <style> 
+    /* Accessibility Overrides */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+    .text-muted {
+      color: #686868 !important; /* Darker muted text for AA compliance */
+    }
+    footer.footer a {
+      color: #0056b3 !important; /* Darker blue for footer links */
+    }
+    .btn-primary {
+      color: #000 !important; /* Black text on primary buttons for better contrast */
+    }
+    .btn-primary:hover {
+      color: #000 !important;
+    }
+
     .tooltiptext {
       visibility: hidden;
       background-color: #343a40;
