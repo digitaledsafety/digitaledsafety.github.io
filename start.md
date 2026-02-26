@@ -10,8 +10,8 @@ youtube:
   title: "See Our Impact"
   subtitle: "Watch how we're empowering the next generation of engineers and entrepreneurs."
   video_ids:
-    - "dQw4w9WgXcQ" # Placeholder: Replace with actual YouTube video IDs
-    - "dQw4w9WgXcQ" # Placeholder: Replace with actual YouTube video IDs
+    - "6sjGTbKeMOo" # Placeholder: Replace with actual YouTube video IDs
+    - "BWXAXTTp_b4" # Placeholder: Replace with actual YouTube video IDs
 ---
 
 <header class="masthead">
