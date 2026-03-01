@@ -80,21 +80,30 @@ document.getElementById("page-top").className="bg-light";
       function populateCards() {
         const cardFiltersContainer = document.getElementById('card-filters');
         cardFiltersContainer.innerHTML = '';
+
+        // Determine initial filter from URL hash or page front matter
+        let initialFilter = '{{ page.filter | default: "Web 3" }}';
+        if (window.location.hash) {
+            initialFilter = decodeURIComponent(window.location.hash.substring(1));
+        }
+
         const fs = [];
           cardData.forEach(cardObj => {
-            cardObj.tags.forEach(cardTag => {
-                if(!fs.includes(cardTag)) {
-                    fs.push(cardTag);
-                }
-            })
+            if (cardObj.tags) {
+                cardObj.tags.forEach(cardTag => {
+                    if(cardTag && !fs.includes(cardTag)) {
+                        fs.push(cardTag);
+                    }
+                })
+            }
           });
     
           fs.forEach(f => {
-            const isChecked = (f == 'Web 3' ? 'checked' : '');
+            const isChecked = (f == initialFilter ? 'checked' : '');
             const filterHtml = `
             <li class="pl-2"><div class="form-check">
                 <input type="checkbox" ${isChecked} class="form-check-input" id="${f}">
-                <label class="form-check-label" for="stem">${f}</label>
+                <label class="form-check-label" for="${f}">${f}</label>
             </div></li>
               `;
               cardFiltersContainer.innerHTML += filterHtml;
@@ -104,8 +113,9 @@ document.getElementById("page-top").className="bg-light";
           cardContainer.innerHTML = '';
           cardData.forEach(cardObj => {
               const abbrev = (cardObj.abbreviations ? cardObj.abbreviations : '');
+              const tags = cardObj.tags || [];
               const cardHtml = `
-                  <div class="col-md-4 mb-3 filterable-card" data-filters="${cardObj.tags.join(',')}">
+                  <div class="col-md-4 mb-3 filterable-card" data-filters='${JSON.stringify(tags)}'>
                       <div class="card">
 
                           <div class="card-body">
@@ -132,8 +142,16 @@ document.getElementById("page-top").className="bg-light";
           // Show/hide cards based on selected filters
           $('.filterable-card').each(function () {
               const card = $(this);
-              const filters = card.data('filters').split(',');
-              const showCard = filters.some(filter => selectedFilters.includes(filter));
+              const filters = card.data('filters') || [];
+              const cleanFilters = filters.filter(f => f && f !== "");
+
+              let showCard = false;
+              if (selectedFilters.length === 0) {
+                  showCard = true; // Show all if no filter is selected
+              } else {
+                  showCard = cleanFilters.some(filter => selectedFilters.includes(filter));
+              }
+
               card.toggleClass('d-none', !showCard);
           });
       }
@@ -145,6 +163,19 @@ document.getElementById("page-top").className="bg-light";
           $('input[type="checkbox"]').change(filterCards);      
     
           filterCards();
+      });
+
+      // Handle hash change for dynamic filtering without reload
+      window.addEventListener('hashchange', function() {
+          const newHash = decodeURIComponent(window.location.hash.substring(1));
+          if (newHash) {
+              $('input[type="checkbox"]').prop('checked', false);
+              const checkbox = document.getElementById(newHash);
+              if (checkbox) {
+                  checkbox.checked = true;
+                  filterCards();
+              }
+          }
       });
     </script>
     
