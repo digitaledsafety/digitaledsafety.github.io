@@ -134,6 +134,7 @@ en: &DEFAULT_EN
   footer:
     legal: "Privacy Policy"
     terms: "Terms"
+    financials: "Financials"
     social:
       - url: https://www.youtube.com/@digitaledsafety
         icon: "fab fa-youtube"       

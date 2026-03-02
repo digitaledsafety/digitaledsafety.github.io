@@ -40,7 +40,7 @@
             </li>
             <li class="list-inline-item">
               <a href="/terms"
-                >{{ site.data.sitetext.footer.terms | default:
+                >{{ site.data.sitetext[site.locale].footer.terms | default:
                 "Terms" }}</a
               >
             </li>             
@@ -79,19 +79,19 @@
           <ul class="list-inline quicklinks">
             <li class="list-inline-item">
               <a href="/legal"
-                >{{ site.data.sitetext.footer.legal | default:
+                >{{ site.data.sitetext.en.footer.legal | default:
                 "Privacy Policy" }}</a
               >
             </li>
             <li class="list-inline-item">
               <a href="/terms"
-                >{{ site.data.sitetext.footer.terms | default:
+                >{{ site.data.sitetext.en.footer.terms | default:
                 "Terms" }}</a
               >
             </li>              
             <li class="list-inline-item">
               <a href="/financials"
-                >{{ site.data.sitetext[site.locale].footer.financials | default:
+                >{{ site.data.sitetext.en.footer.financials | default:
                 "Financials" }}</a
               >
             </li>                       
