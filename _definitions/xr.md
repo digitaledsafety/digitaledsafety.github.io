@@ -1,6 +1,6 @@
 ---
 title: Extended Reality
-tags: [Web 3, metaverse]
+tags: []
 abbreviations: [XR]
 links:
   - https://en.wikipedia.org/wiki/Extended_reality
