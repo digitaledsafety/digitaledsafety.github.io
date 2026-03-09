@@ -48,7 +48,7 @@
 			const footButton = document.getElementById("sendMessageButtonFoot");
 			if (footButton) footButton.disabled = true;
 			const widgetId = turnstile.render("#turnstile-container", {
-				sitekey: "0x4AAAAAAADF-VDrlBmuOtjT",
+				sitekey: "{{ site.turnstile_sitekey }}",
 				callback: function (token) {
 					console.log("Success:", token);
 					if (footButton) footButton.disabled = false;
@@ -60,7 +60,7 @@
 			const mcButton = document.getElementById("sendMessageButtonMc");
 			if (mcButton) mcButton.disabled = true;
 			const widgetIdMc = turnstile.render("#turnstile-container-mc", {
-				sitekey: "0x4AAAAAACNF-Oav6RmaR0-r",
+				sitekey: "{{ site.turnstile_sitekey_mc }}",
 				callback: function (token) {
 					console.log("Success:", token);
 					if (mcButton) mcButton.disabled = false;
