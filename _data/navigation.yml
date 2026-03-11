@@ -17,6 +17,8 @@ en: &DEFAULT_EN
       url: /#services    
     - title: "Contact"
       url: /#contact      
+    - title: "Organizations"
+      url: /organizations/
     - title: "Store"
       url: /store           
 en-US:
@@ -38,6 +40,8 @@ es: &DEFAULT_ES
       url: /#servicios
     - title: "Contáctenos"
       url: /#contacto      
+    - title: "Organizaciones"
+      url: /organizations/
     - title: "Stôr"
       section: /store
 es-ES:
