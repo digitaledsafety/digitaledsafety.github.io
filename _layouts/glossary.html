@@ -7,7 +7,7 @@ layout: default
 
 {% include nav.html %}
 
-<header class="masthead" style="background-image: url('/assets/img/glossaries/mast.jpg')">
+<header class="masthead" style="background-image: url('{{ page.image | default: "/assets/img/glossaries/mast.jpg" | relative_url }}')">
     <div class="container">
       <div class="intro-text">
       <div class="intro-heading">Glossaries</div>

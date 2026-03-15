@@ -54,36 +54,36 @@ en: &DEFAULT_EN
         year: "2022"
         desc: "Working with the community on brainstorming ideas. We collaborated with friends, family, and local students for user feedback and design."
         image: assets/img/timeline/1.jpg
-        alt:
+        alt: "Community members collaborating on STEM education ideas"
       - title: "A concept is born"
         year: "September 2022"
         desc: "Incorporated and gained tax exemption status through the IRS."
         image: assets/img/timeline/2.jpg
-        alt:
+        alt: "The official incorporation documents for the foundation"
       - title: "Beta begins"
         year: "2022-2023"
         desc: "The Foundation releases an initial product to the public."
         image: assets/img/timeline/4.jpg
-        alt:
+        alt: "A group of students testing our first educational module"
       - title: "Website live"
         year: "March 2023"
         desc: "The most recent iteration of the Foundation's web presence went live in March of 2023."
         image: assets/img/timeline/3.jpg
-        alt: image alt text    
+        alt: "Screenshot of the Foundation's newly launched website"
         # you can enforce the alignment
         align: right
       - title: "Promotion"
         year: "2024"
         desc: "Establshing our portfolio and collaboration with industry."
         image: assets/img/timeline/promotion.png
-        alt: image alt text    
+        alt: "Foundation's promotional materials and industry partnerships"
         # you can enforce the alignment
         align: right    
       - title: "Into the future"
         year: "2025 and beyond"
         desc: "Keeping current with the latest trends and developments in technology is crucial to stay connected and relevant. With new technologies emerging at an unprecedented pace, it is more important than ever to stay informed and adapt quickly. Whether it's staying up-to-date with the latest software and hardware, learning new programming languages, or understanding the latest breakthroughs in AI and machine learning, staying current with technology is essential for success in today's rapidly changing world."
         image: assets/img/timeline/5.jpg
-        alt: image alt text    
+        alt: "Abstract representation of future technological growth"
         # you can enforce the alignment         
     end: "<a class='js-scroll-trigger' style='color: #eeeeee' href='#contact'>Join us <br>on our <br> journey!</a>"
 
@@ -135,15 +135,20 @@ en: &DEFAULT_EN
     legal: "Privacy Policy"
     terms: "Terms"
     social:
-      - url: https://www.youtube.com/@digitaledsafety
+      - title: "YouTube"
+        url: https://www.youtube.com/@digitaledsafety
         icon: "fab fa-youtube"       
-      - url: https://x.com/digitaledsafety
+      - title: "Twitter/X"
+        url: https://x.com/digitaledsafety
         icon: "fab fa-twitter"    
-      - url: https://github.com/digitaledsafety
+      - title: "GitHub"
+        url: https://github.com/digitaledsafety
         icon: "fab fa-github"        
-      - url: https://facebook.com/digitaledsafety
+      - title: "Facebook"
+        url: https://facebook.com/digitaledsafety
         icon: "fab fa-facebook-f"
-      - url: https://discord.gg/5tc2DfUZVe
+      - title: "Discord"
+        url: https://discord.gg/5tc2DfUZVe
         icon: "fab fa-discord"        
 en-US:
   <<: *DEFAULT_EN
