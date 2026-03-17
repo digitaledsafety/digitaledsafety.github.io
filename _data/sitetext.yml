@@ -63,7 +63,7 @@ en: &DEFAULT_EN
       - title: "Beta begins"
         year: "2022-2023"
         desc: "The Foundation releases an initial product to the public."
-        image: assets/img/timeline/4.jpg
+        image: assets/img/timeline/6.jpg
         alt:
       - title: "Website live"
         year: "March 2023"
