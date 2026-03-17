@@ -42,11 +42,13 @@
     cardFiltersContainer.innerHTML = '';
     const fs = [];
       cardData.forEach(cardObj => {
-        cardObj.tags.forEach(cardTag => {
-            if(!fs.includes(cardTag)) {
-                fs.push(cardTag);
-            }
-        })
+        if (cardObj.tags && Array.isArray(cardObj.tags)) {
+          cardObj.tags.forEach(cardTag => {
+              if(!fs.includes(cardTag)) {
+                  fs.push(cardTag);
+              }
+          })
+        }
       });
 
       fs.forEach(f => {
@@ -63,8 +65,9 @@
     const cardContainer = document.getElementById('card-container');
       cardContainer.innerHTML = '';
       cardData.forEach(cardObj => {
+          const tags = (cardObj.tags && Array.isArray(cardObj.tags)) ? cardObj.tags.join(',') : '';
           const cardHtml = `
-              <div class="col-md-4 mb-3 filterable-card" data-filters="${cardObj.tags.join(',')}">
+              <div class="col-md-4 mb-3 filterable-card" data-filters="${tags}">
                   <div class="card">
                     <img class="card-img-top img-fluid" src=${cardObj.image} alt="">
                       <div class="card-body">
@@ -90,8 +93,15 @@
       // Show/hide cards based on selected filters
       $('.filterable-card').each(function () {
           const card = $(this);
-          const filters = card.data('filters').split(',');
-          const showCard = filters.some(filter => selectedFilters.includes(filter));
+          const filtersAttr = card.attr('data-filters');
+          const filters = filtersAttr ? filtersAttr.split(',') : [];
+
+          let showCard = false;
+          if (selectedFilters.length === 0) {
+              showCard = true;
+          } else {
+              showCard = filters.some(filter => selectedFilters.includes(filter));
+          }
           card.toggleClass('d-none', !showCard);
       });
   }
