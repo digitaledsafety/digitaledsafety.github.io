@@ -38,8 +38,8 @@ en: &DEFAULT_EN
     closebutton: "Close Project"
 
   resources:
-    title: "Resources"
-    text: ""
+    title: "Learning Resources"
+    text: "A collection of STEM/STEAM Learning Resources"
     section: resource
     closebutton: "Close Resource"    
 

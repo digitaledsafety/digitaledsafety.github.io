@@ -18,7 +18,7 @@ en: &DEFAULT_EN
     - title: "Contact"
       url: /#contact      
     - title: "Store"
-      url: /store           
+      url: /store/
 en-US:
   <<: *DEFAULT_EN
 en-CA:
@@ -38,7 +38,7 @@ es: &DEFAULT_ES
       url: /#servicios
     - title: "Contáctenos"
       url: /#contacto      
-    - title: "Stôr"
+    - title: "Tienda"
       url: /store
 es-ES:
   <<: *DEFAULT_ES
