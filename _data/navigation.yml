@@ -18,7 +18,7 @@ en: &DEFAULT_EN
     - title: "Contact"
       url: /#contact      
     - title: "Store"
-      url: /store/
+      url: /store
 en-US:
   <<: *DEFAULT_EN
 en-CA:
