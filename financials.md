@@ -1,9 +1,9 @@
 ---
 layout: page
-title: Financials (Available On Request)
+title: Financials
 ---
 <div class="col-lg-12 text-center">
-	<h2 class="section-heading text-uppercase">Financials</h2>
+	<h2 class="section-heading text-uppercase">Financials (Available On Request)</h2>
 </div>
 
 **2022**
