@@ -46,7 +46,7 @@ en: &DEFAULT_EN
   partners:
     title: "Community Partners"
     text: "Collaborating with world-class organizations to empower the next generation."
-    section: partners
+    section: portfolio
 
   about:
     title: "About Us"
