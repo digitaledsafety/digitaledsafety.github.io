@@ -5,6 +5,8 @@ donation_url: https://www.aaas.org/support
 image: https://www.aaas.org/sites/default/files/AAAS_Logo_Blue_RGB.png
 tags: ["Science", "Research", "Professional"]
 
+popularity: 50
+
 caption:
   thumbnail: https://www.aaas.org/sites/default/files/AAAS_Logo_Blue_RGB.png
 ---

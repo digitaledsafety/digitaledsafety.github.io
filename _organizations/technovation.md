@@ -5,6 +5,8 @@ donation_url: https://www.technovation.org/donate/
 image: https://www.technovation.org/wp-content/uploads/2019/10/technovation-logo.png
 tags: ["Girls in Tech", "Entrepreneurship", "Education"]
 
+popularity: 50
+
 caption:
   thumbnail: https://www.technovation.org/wp-content/uploads/2019/10/technovation-logo.png
 ---

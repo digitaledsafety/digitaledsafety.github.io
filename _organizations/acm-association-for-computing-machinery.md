@@ -5,6 +5,8 @@ donation_url: https://www.acm.org/about-acm/donate
 image: https://www.acm.org/images/acm_logo_tablet.png
 tags: ["Computing", "Professional", "Education"]
 
+popularity: 50
+
 caption:
   thumbnail: https://www.acm.org/images/acm_logo_tablet.png
 ---

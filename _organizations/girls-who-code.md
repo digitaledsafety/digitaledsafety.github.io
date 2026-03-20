@@ -5,6 +5,8 @@ donation_url: https://girlswhocode.com/donate
 image: https://girlswhocode.com/wp-content/uploads/2020/01/GWC_Logo_Black.png
 tags: ["Diversity", "Coding", "Education"]
 
+popularity: 50
+
 caption:
   thumbnail: https://girlswhocode.com/wp-content/uploads/2020/01/GWC_Logo_Black.png
 ---

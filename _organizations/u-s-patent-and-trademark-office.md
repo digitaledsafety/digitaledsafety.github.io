@@ -5,6 +5,8 @@ donation_url: https://www.uspto.gov/learning-and-resources/access-our-free-servi
 image: https://www.uspto.gov/themes/custom/uspto_ds/images/uspto-print-logo.png
 tags: ["Government", "Innovation", "Intellectual Property"]
 
+popularity: 50
+
 caption:
   thumbnail: https://www.uspto.gov/themes/custom/uspto_ds/images/uspto-print-logo.png
 ---

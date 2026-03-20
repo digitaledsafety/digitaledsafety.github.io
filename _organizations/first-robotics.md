@@ -5,6 +5,8 @@ donation_url: https://www.firstinspires.org/donate
 image: https://www.firstinspires.org/sites/all/themes/first/logo.png
 tags: ["Robotics", "STEM", "K-12"]
 
+popularity: 50
+
 caption:
   thumbnail: https://www.firstinspires.org/sites/all/themes/first/logo.png
 ---

@@ -5,6 +5,8 @@ donation_url: https://supporters.eff.org/donate/join-eff-today
 image: https://www.eff.org/sites/all/modules/custom/eff_library/images/eff-logo-stack-black.svg
 tags: ["Privacy", "Digital Rights", "Legal"]
 
+popularity: 50
+
 caption:
   thumbnail: https://www.eff.org/sites/all/modules/custom/eff_library/images/eff-logo-stack-black.svg
 ---
