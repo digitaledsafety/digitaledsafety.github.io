@@ -5,6 +5,8 @@ donation_url: https://techbridgegirls.org/donate/
 image: https://techbridgegirls.org/wp-content/uploads/2020/04/TBG-Logo-Horizontal-RGB-Small.png
 tags: ["Diversity", "STEM", "Girls"]
 
+popularity: 50
+
 caption:
   thumbnail: https://techbridgegirls.org/wp-content/uploads/2020/04/TBG-Logo-Horizontal-RGB-Small.png
 ---

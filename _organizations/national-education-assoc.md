@@ -5,6 +5,8 @@ donation_url: https://www.nea.org/join-our-movement/donate
 image: https://www.nea.org/themes/custom/locker/storybook/images/sample/NEA_logo.svg
 tags: ["Education", "Union", "Professional"]
 
+popularity: 50
+
 caption:
   thumbnail: https://www.nea.org/themes/custom/locker/storybook/images/sample/NEA_logo.svg
 ---

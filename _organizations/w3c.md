@@ -5,6 +5,8 @@ donation_url: https://www.w3.org/support-us/
 image: https://www.w3.org/assets/logos/w3c-2025/svg/w3c.svg
 tags: ["Web Standards", "Accessibility", "Privacy"]
 
+popularity: 50
+
 caption:
   thumbnail: https://www.w3.org/assets/logos/w3c-2025/svg/w3c.svg
 ---

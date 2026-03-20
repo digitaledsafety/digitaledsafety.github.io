@@ -1,0 +1,62 @@
+<!-- Community Partners Grid -->
+{% if site.locale and site.locale != "" and site.locale != nil %}
+<section class="bg-light page-section" id="{{ site.data.sitetext[site.locale].partners.section | default: "partners" }}">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <h2 class="section-heading text-uppercase">{{ site.data.sitetext[site.locale].partners.title | default: "Community Partners" }}</h2>
+        <h3 class="section-subheading text-muted">{{ site.data.sitetext[site.locale].partners.text }}</h3>
+      </div>
+    </div>
+    <div class="row">
+    {% assign partners = site.organizations | sort: "popularity" | reverse %}
+	{% for partner in partners limit:6 %}
+      <div class="col-md-4 col-sm-6 portfolio-item">
+        <a class="portfolio-link" target="_blank" href="{{ partner.homepage }}">
+          <div class="portfolio-hover">
+            <div class="portfolio-hover-content">
+              <i class="fas fa-external-link-alt fa-3x"></i>
+            </div>
+          </div>
+          <img class="img-fluid" src="{{ partner.caption.thumbnail }}" alt="{{ partner.title }}">
+        </a>
+        <div class="portfolio-caption">
+          <h4>{{ partner.title }}</h4>
+          <p class="text-muted">{{ partner.content | strip_html | truncate: 120 }}</p>
+        </div>
+      </div>
+	{% endfor %}
+    </div>
+  </div>
+</section>
+{% else %}
+<section class="bg-light page-section" id="{{ site.data.sitetext.partners.section | default: "partners" }}">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <h2 class="section-heading text-uppercase">{{ site.data.sitetext.partners.title | default: "Community Partners" }}</h2>
+        <h3 class="section-subheading text-muted">{{ site.data.sitetext.partners.text }}</h3>
+      </div>
+    </div>
+    <div class="row">
+    {% assign partners = site.organizations | sort: "popularity" | reverse %}
+	{% for partner in partners limit:6 %}
+      <div class="col-md-4 col-sm-6 portfolio-item">
+        <a class="portfolio-link" target="_blank" href="{{ partner.homepage }}">
+          <div class="portfolio-hover">
+            <div class="portfolio-hover-content">
+              <i class="fas fa-external-link-alt fa-3x"></i>
+            </div>
+          </div>
+          <img class="img-fluid" src="{{ partner.caption.thumbnail }}" alt="{{ partner.title }}">
+        </a>
+        <div class="portfolio-caption">
+          <h4>{{ partner.title }}</h4>
+          <p class="text-muted">{{ partner.content | strip_html | truncate: 120 }}</p>
+        </div>
+      </div>
+	{% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}

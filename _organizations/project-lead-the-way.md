@@ -5,6 +5,8 @@ donation_url: https://www.pltw.org/get-started
 image: https://www.pltw.org/hubfs/mjtw-assets/logos/logo-full-color.svg
 tags: ["K-12", "STEM", "Curriculum"]
 
+popularity: 50
+
 caption:
   thumbnail: https://www.pltw.org/hubfs/mjtw-assets/logos/logo-full-color.svg
 ---

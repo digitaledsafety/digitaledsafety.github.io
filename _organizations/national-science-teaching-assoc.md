@@ -5,6 +5,8 @@ donation_url: https://www.nsta.org/membership
 image: https://www.nsta.org/themes/custom/nstabuild/images/logo-nsta.svg
 tags: ["Science", "Education", "Teachers"]
 
+popularity: 50
+
 caption:
   thumbnail: https://www.nsta.org/themes/custom/nstabuild/images/logo-nsta.svg
 ---

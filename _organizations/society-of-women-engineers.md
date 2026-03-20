@@ -5,6 +5,8 @@ donation_url: https://swe.org/donate/
 image: https://swe.org/wp-content/uploads/2023/12/society-of-women-engineers-logo.svg
 tags: ["Diversity", "Engineering", "Women in STEM"]
 
+popularity: 50
+
 caption:
   thumbnail: https://swe.org/wp-content/uploads/2023/12/society-of-women-engineers-logo.svg
 ---
