@@ -130,9 +130,9 @@ We've compiled a list of popular open source projects in industry below. The Don
                         <a target="_blank" href="${cardObj.homepage}"><img class="card-img-top img-fluid" src=${cardObj.caption.thumbnail} alt=""></a>
                           <div class="card-body">
                               <h5 class="card-title"><a href="${cardObj.homepage}">${cardObj.title}</a></h5>
-                              <p class="card-subtitle">${cardObj.tags}</h>
+                              <p class="card-subtitle">${cardObj.tags.join(', ')}</p>
                               <p class="card-text">${cardObj.description}</p>
-                              <a target="_blank" href="${cardObj.contribute}"" class="btn btn-primary">Donate</a>
+                              <a target="_blank" href="${cardObj.contribute}" class="btn btn-primary">Donate</a>
                           </div>
                       </div>
                   </div>

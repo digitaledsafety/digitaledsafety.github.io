@@ -54,36 +54,36 @@ en: &DEFAULT_EN
         year: "2022"
         desc: "Working with the community on brainstorming ideas. We collaborated with friends, family, and local students for user feedback and design."
         image: assets/img/timeline/1.jpg
-        alt:
+        alt: "Community brainstorming session"
       - title: "A concept is born"
         year: "September 2022"
         desc: "Incorporated and gained tax exemption status through the IRS."
         image: assets/img/timeline/2.jpg
-        alt:
+        alt: "Foundation incorporation documents"
       - title: "Beta begins"
         year: "2022-2023"
         desc: "The Foundation releases an initial product to the public."
         image: assets/img/timeline/6.jpg
-        alt:
+        alt: "Initial product release announcement"
       - title: "Website live"
         year: "March 2023"
         desc: "The most recent iteration of the Foundation's web presence went live in March of 2023."
         image: assets/img/timeline/3.jpg
-        alt: image alt text    
+        alt: "Screenshot of the new foundation website"
         # you can enforce the alignment
         align: right
       - title: "Promotion"
         year: "2024"
         desc: "Establshing our portfolio and collaboration with industry."
         image: assets/img/timeline/promotion.png
-        alt: image alt text    
+        alt: "Industry collaboration and portfolio showcase"
         # you can enforce the alignment
         align: right    
       - title: "Into the future"
         year: "2025 and beyond"
         desc: "Keeping current with the latest trends and developments in technology is crucial to stay connected and relevant. With new technologies emerging at an unprecedented pace, it is more important than ever to stay informed and adapt quickly. Whether it's staying up-to-date with the latest software and hardware, learning new programming languages, or understanding the latest breakthroughs in AI and machine learning, staying current with technology is essential for success in today's rapidly changing world."
         image: assets/img/timeline/5.jpg
-        alt: image alt text    
+        alt: "Abstract representation of future technology trends"
         # you can enforce the alignment         
     end: "<a class='js-scroll-trigger' style='color: #eeeeee' href='#contact'>Join us <br>on our <br> journey!</a>"
 
