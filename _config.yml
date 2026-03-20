@@ -21,7 +21,10 @@ title      : Digital Education & Safety Foundation
 email      : hello@digitaleducationsafety.org #this is also the email contact forms will go to
 tagline    : "Empowering the under-served with a modern STE(A)M education!"
 description: "Empowering the under-served with a modern STE(A)M education!"
-author     : Digital Education & Safety Foundation
+author:
+  twitter: digitaledsafety
+  name: Digital Education & Safety Foundation
+  email: hello@digitaleducationsafety.org
 # logo:     #optional, defaults to site title
   # path: assets\img\clients\creative-market.jpg
   # height: 60 #height in px, defaults to 52px
@@ -80,14 +83,6 @@ feed:
   collections:
     - definitions
 
-author:
-  twitter: digitaledsafety
-  name: digitaledsafety
-  email: hello@digitaleducationsafety.org
-
-twitter:
-  username: digitaledsafety
-  card: summary
 
 defaults:
   -
