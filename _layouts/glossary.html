@@ -82,7 +82,7 @@ document.getElementById("page-top").className="bg-light";
         cardFiltersContainer.innerHTML = '';
 
         // Determine initial filter from URL hash or page front matter
-        let initialFilter = '{{ page.filter | default: "Web 3" }}';
+        let initialFilter = '{{ page.filter }}';
         if (window.location.hash) {
             initialFilter = decodeURIComponent(window.location.hash.substring(1));
         }
@@ -99,7 +99,7 @@ document.getElementById("page-top").className="bg-light";
           });
     
           fs.forEach(f => {
-            const isChecked = (f == initialFilter ? 'checked' : '');
+            const isChecked = (f == initialFilter || initialFilter == 'all' ? 'checked' : '');
             const filterHtml = `
             <li class="pl-2"><div class="form-check">
                 <input type="checkbox" ${isChecked} class="form-check-input" id="${f}">

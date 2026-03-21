@@ -34,7 +34,8 @@
     {% endcapture %}
     <link rel="manifest" href='data:application/manifest+json,{{ manifestObj | strip_newlines }}' />
     
-    <title>{{ page.title }}</title>
+    {%- seo -%}
+    <link rel="icon" type="image/x-icon" href="/assets/img/favicon.ico">
 
     <!-- Bootstrap core CSS -->
     <link href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -50,7 +51,7 @@
         <div class="inner">
           <h3 class="masthead-brand">{{ page.title }}</h3>
           <nav class="nav nav-masthead justify-content-center">
-            <a class="nav-link active" href="#">Home</a>
+            <a class="nav-link active" href="{{ site.baseurl }}/">Home</a>
           </nav>
         </div>
       </header>
