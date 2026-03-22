@@ -89,7 +89,7 @@ document.getElementById("page-top").className="bg-light";
 
         const fs = [];
           cardData.forEach(cardObj => {
-            if (cardObj.tags) {
+            if (cardObj.tags && Array.isArray(cardObj.tags)) {
                 cardObj.tags.forEach(cardTag => {
                     if(cardTag && !fs.includes(cardTag)) {
                         fs.push(cardTag);

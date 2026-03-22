@@ -102,11 +102,13 @@ We've compiled a list of popular open source projects in industry below. The Con
         cardFiltersContainer.innerHTML = '';
         const fs = [];
           cardData.forEach(cardObj => {
-            cardObj.tags.forEach(cardTag => {
-                if(!fs.includes(cardTag)) {
-                    fs.push(cardTag);
-                }
-            })
+            if (cardObj.tags && Array.isArray(cardObj.tags)) {
+                cardObj.tags.forEach(cardTag => {
+                    if(cardTag && !fs.includes(cardTag)) {
+                        fs.push(cardTag);
+                    }
+                })
+            }
           });
     
           fs.forEach(f => {
@@ -124,8 +126,9 @@ We've compiled a list of popular open source projects in industry below. The Con
           cardContainer.innerHTML = '';
           cardData.forEach(cardObj => {
               const abbrev = (cardObj.abbreviations ? cardObj.abbreviations : '');
+              const tags = cardObj.tags || [];
               const cardHtml = `
-                  <div class="col-md-4 mb-3 filterable-card" data-filters="${cardObj.tags.join(',')}">
+                  <div class="col-md-4 mb-3 filterable-card" data-filters="${tags.join(',')}">
                       <div class="card">
                         <a target="_blank" href="${cardObj.homepage}"><img class="card-img-top img-fluid" src=${cardObj.caption.thumbnail} alt=""></a>
                           <div class="card-body">
@@ -152,8 +155,17 @@ We've compiled a list of popular open source projects in industry below. The Con
           // Show/hide cards based on selected filters
           $('.filterable-card').each(function () {
               const card = $(this);
-              const filters = card.data('filters').split(',');
-              const showCard = filters.some(filter => selectedFilters.includes(filter));
+              const filterData = card.data('filters');
+              const filters = filterData ? filterData.toString().split(',') : [];
+              const cleanFilters = filters.filter(f => f && f !== "");
+
+              let showCard = false;
+              if (selectedFilters.length === 0) {
+                  showCard = true; // Show all if no filter is selected
+              } else {
+                  showCard = cleanFilters.some(filter => selectedFilters.includes(filter));
+              }
+
               card.toggleClass('d-none', !showCard);
           });
       }
