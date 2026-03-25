@@ -11,9 +11,9 @@
     {% endcomment %}
     {% capture manifestObj %}
     { 
-      "name": "{{page.title}}",
-      "short_name": "{{page.subtitle}}", 
-      "description": "{{page.description}}",
+      "name": {{ page.title | jsonify }},
+      "short_name": {{ page.subtitle | jsonify }},
+      "description": {{ page.description | jsonify }},
       "icons": [
         {
           "src": "/assets/img/favicon.ico",
@@ -26,7 +26,8 @@
           "type": "image/png"
         }
       ],
-      "start_url": "./{{page.url}}",
+      "start_url": "/",
+      "scope": "/",
       "display": "standalone",
       "theme_color": "{{'#000000' | url_encode}}",
       "background_color": "{{'#ffffff' | url_encode}}" 
