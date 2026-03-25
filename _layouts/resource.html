@@ -26,8 +26,8 @@
           "type": "image/png"
         }
       ],
-      "start_url": "/",
-      "scope": "/",
+      "start_url": {{ page.pwa_start_url | default: "/" | jsonify }},
+      "scope": {{ page.pwa_scope | default: "/" | jsonify }},
       "display": "standalone",
       "theme_color": "{{'#000000' | url_encode}}",
       "background_color": "{{'#ffffff' | url_encode}}" 
