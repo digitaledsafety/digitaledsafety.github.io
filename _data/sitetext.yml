@@ -40,7 +40,7 @@ en: &DEFAULT_EN
   resources:
     title: "Learning Resources"
     text: "A collection of STEM/STEAM Learning Resources"
-    section: resource
+    section: resources
     closebutton: "Close Resource"    
 
   timeline:
