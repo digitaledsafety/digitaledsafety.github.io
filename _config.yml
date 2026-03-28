@@ -80,14 +80,9 @@ feed:
   collections:
     - definitions
 
-author:
-  twitter: digitaledsafety
-  name: digitaledsafety
-  email: hello@digitaleducationsafety.org
-
 twitter:
   username: digitaledsafety
-  card: summary
+  card: summary_large_image
 
 defaults:
   -
@@ -104,7 +99,3 @@ defaults:
     values:
       layout: "resource"
       image: /assets/img/glossaries/mast.jpg      
-
-twitter:
-  username: digitaledsafety
-  card: summary_large_image
