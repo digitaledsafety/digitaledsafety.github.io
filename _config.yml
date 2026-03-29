@@ -81,13 +81,8 @@ feed:
     - definitions
 
 author:
-  twitter: digitaledsafety
   name: digitaledsafety
   email: hello@digitaleducationsafety.org
-
-twitter:
-  username: digitaledsafety
-  card: summary
 
 defaults:
   -

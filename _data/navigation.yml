@@ -35,9 +35,9 @@ es: &DEFAULT_ES
     - title: "+1-833-692-5477"
       url: "tel:+18336925477"  
     - title: "Servicios"
-      url: /#servicios
+      url: /#services
     - title: "Contáctenos"
-      url: /#contacto      
+      url: /#contact
     - title: "Stôr"
       section: /store
 es-ES:
