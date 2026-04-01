@@ -282,3 +282,28 @@
       }
     }
   }
+// Marketplace specific styles
+#marketplace {
+  padding: 100px 0;
+  .section-heading {
+    margin-bottom: 50px;
+  }
+  .input-group-text {
+    background-color: $white;
+    border-right: none;
+    border-radius: 20px 0 0 20px;
+    color: $gray-600;
+  }
+  #marketplace-search {
+    border-left: none;
+    border-radius: 0 20px 20px 0;
+    &:focus {
+      box-shadow: none;
+      border-color: #ced4da;
+    }
+  }
+  .form-control {
+    height: 45px;
+    border-radius: 10px;
+  }
+}
