@@ -39,7 +39,7 @@ document.getElementById("page-top").className="bg-light";
         {
             "title": {{card.title | jsonify}}, 
             "tags": {{card.tags | jsonify}}, 
-            "path": {{card.id | jsonify}}, 
+            "path": {{card.url | jsonify}},
             "abbreviations": {{card.abbreviations | jsonify}}, 
             "description": {{card.excerpt | jsonify}}
         },
