@@ -27,25 +27,11 @@
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav text-uppercase ml-auto">
       {% if site.locale and site.locale != "" and site.locale != nil %}
-        {%- for link in site.data.navigation[site.locale].nav -%}
-        <li class="nav-item">
-          {%- if link.url -%}
-          <a class="nav-link js-scroll-trigger" href="{{ link.url }}"
-            >{{ link.title }}</a
-          >
-          {%- elsif link.section -%}
-          <a
-            class="nav-link js-scroll-trigger"
-            href="{{ site.baseurl }}/#{{ link.section }}"
-            >{{ link.title }}</a
-          >
-          {%- else -%}
-          <a class="nav-link js-scroll-trigger" href="#">{{ link.title }}</a>
-          {%- endif -%}
-        </li>
-        {%- endfor -%}
+        {% assign navigation_data = site.data.navigation[site.locale].nav %}
       {% else %}
-        {%- for link in site.data.navigation.nav -%}
+        {% assign navigation_data = site.data.navigation.nav %}
+      {% endif %}
+      {% for link in navigation_data %}
         <li class="nav-item">
           {%- if link.url -%}
           <a class="nav-link js-scroll-trigger" href="{{ link.url }}"
@@ -61,8 +47,7 @@
           <a class="nav-link js-scroll-trigger" href="#">{{ link.title }}</a>
           {%- endif -%}
         </li>
-        {%- endfor -%}
-      {% endif %}
+      {% endfor %}
       {% include donate_button.html %}       
       </ul>
     </div>

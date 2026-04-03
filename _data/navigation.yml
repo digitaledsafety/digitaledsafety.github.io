@@ -39,7 +39,7 @@ es: &DEFAULT_ES
     - title: "Contáctenos"
       url: /#contacto      
     - title: "Stôr"
-      section: /store
+      url: /store
 es-ES:
   <<: *DEFAULT_ES
 es-CO:
