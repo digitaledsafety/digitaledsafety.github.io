@@ -12,7 +12,7 @@
 en: &DEFAULT_EN
   header:
     title: "Our Mission:"
-    text: Empowering the underserved with a modern STEM/STEAM education
+    text: Empowering the underserved with a modern STEM education
     button: Learn More
     buttonlink: "#services"
 
@@ -39,7 +39,7 @@ en: &DEFAULT_EN
 
   resources:
     title: "Learning Resources"
-    text: "A collection of STEM/STEAM Learning Resources"
+    text: "A collection of STEM Learning Resources"
     section: resource
     closebutton: "Close Resource"    
 
