@@ -30,28 +30,13 @@ document.getElementById("page-top").className="bg-light";
   </p>
 
 <!-- Product Grid -->
-{% if site.locale and site.locale != "" and site.locale != nil %}
-  
-    <div class="row">
-	{% for product in site.products %}
-      <div class="col-md-4 col-sm-6 portfolio-item">
-        {{ product.content }}
-      </div>
-	{% endfor %}
+<div class="row">
+  {% for product in site.products %}
+    <div class="col-md-4 col-sm-6 portfolio-item">
+      {{ product.content }}
     </div>
-  
-
-{% else %}
-  
-    <div class="row">
-	{% for product in site.products %}
-      <div class="col-md-4 col-sm-6 portfolio-item">
-        {{ product.content }}
-      </div>
-	{% endfor %}
-    </div>
-  
-{% endif %}
+  {% endfor %}
+</div>
 
 </div>
 
