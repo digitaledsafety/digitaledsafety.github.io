@@ -10,9 +10,11 @@
                 >Copyright &copy; {{ site.title }} {{ 'now' | date: "%Y" }}</p
               >
             </li>
+            {% if site.ein %}
             <li>
               <p class="ein">EIN: {{ site.ein }}</p>
             </li>
+            {% endif %}
           </ul>
         </div>
         <!-- Social Media -->
@@ -56,9 +58,18 @@
       {% else %}
       <div class="row align-items-center">
         <div class="col-md-4">
-          <span class="copyright"
-            >Copyright &copy; {{ site.title }} {{ 'now' | date: "%Y" }}</span
-          >
+          <ul class="list-unstyled quicklinks">
+            <li>
+              <p
+                >Copyright &copy; {{ site.title }} {{ 'now' | date: "%Y" }}</p
+              >
+            </li>
+            {% if site.ein %}
+            <li>
+              <p class="ein">EIN: {{ site.ein }}</p>
+            </li>
+            {% endif %}
+          </ul>
         </div>
         <!-- Social Media -->
         <div class="col-md-4">
