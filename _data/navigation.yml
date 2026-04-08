@@ -15,6 +15,10 @@ en: &DEFAULT_EN
       url: "tel:+18336925477"
     - title: "Our Work"
       url: /#services    
+    - title: "Organizations"
+      url: /organizations
+    - title: "Open Source"
+      url: /open-source
     - title: "Contact"
       url: /#contact      
     - title: "Store"
@@ -36,6 +40,10 @@ es: &DEFAULT_ES
       url: "tel:+18336925477"  
     - title: "Servicios"
       url: /#servicios
+    - title: "Organizaciones"
+      url: /organizations
+    - title: "Código Abierto"
+      url: /open-source
     - title: "Contáctenos"
       url: /#contacto      
     - title: "Stôr"
