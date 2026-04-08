@@ -95,78 +95,7 @@ We've compiled a list of popular open source projects in industry below. The Don
     <!-- Add Bootstrap JS and jQuery for checkbox filtering -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-    <script>
-      // Function to populate cards
-      function populateCards() {
-        const cardFiltersContainer = document.getElementById('card-filters');
-        cardFiltersContainer.innerHTML = '';
-        const fs = [];
-          cardData.forEach(cardObj => {
-            cardObj.tags.forEach(cardTag => {
-                if(!fs.includes(cardTag)) {
-                    fs.push(cardTag);
-                }
-            })
-          });
-
-          fs.forEach(f => {
-            const isChecked = (f != '' ? 'checked' : '');
-            const filterHtml = `
-            <li class="pl-2"><div class="form-check">
-                <input type="checkbox" ${isChecked} class="form-check-input" id="${f}">
-                <label class="form-check-label" for="${f}">${f}</label>
-            </div></li>
-              `;
-              cardFiltersContainer.innerHTML += filterHtml;
-          });
-
-        const cardContainer = document.getElementById('card-container');
-          cardContainer.innerHTML = '';
-          cardData.forEach(cardObj => {
-              const abbrev = (cardObj.abbreviations ? cardObj.abbreviations : '');
-              const cardHtml = `
-                  <div class="col-md-4 mb-3 filterable-card" data-filters="${cardObj.tags.join(',')}">
-                      <div class="card">
-                        <a target="_blank" href="${cardObj.homepage}"><img class="card-img-top img-fluid" src=${cardObj.caption.thumbnail} alt=""></a>
-                          <div class="card-body">
-                              <h5 class="card-title"><a href="${cardObj.homepage}">${cardObj.title}</a></h5>
-                              <p class="card-subtitle">${cardObj.tags}</h>
-                              <p class="card-text">${cardObj.description}</p>
-                              <a target="_blank" href="${cardObj.contribute}"" class="btn btn-primary">Donate</a>
-                          </div>
-                      </div>
-                  </div>
-              `;
-              cardContainer.innerHTML += cardHtml;
-          });
-      }
-
-      // Function to filter cards based on checkboxes
-      function filterCards() {
-          const selectedFilters = [];
-          // Get all selected filters
-          $('input[type="checkbox"]:checked').each(function () {
-              selectedFilters.push($(this).attr('id'));
-          });
-
-          // Show/hide cards based on selected filters
-          $('.filterable-card').each(function () {
-              const card = $(this);
-              const filters = card.data('filters').split(',');
-              const showCard = filters.some(filter => selectedFilters.includes(filter));
-              card.toggleClass('d-none', !showCard);
-          });
-      }
-
-      // Initialize filtering on page load and when checkboxes change
-      $(document).ready(function () {
-          populateCards();
-
-          $('input[type="checkbox"]').change(filterCards);
-
-          filterCards();
-      });
-    </script>
+    {% include card_filter_script.html button_text="Donate" %}
 
 
 
