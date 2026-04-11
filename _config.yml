@@ -104,6 +104,13 @@ defaults:
     values:
       layout: "resource"
       image: /assets/img/glossaries/mast.jpg      
+  -
+    scope:
+      path: "" # an empty string here means all files in the project
+      type: "organizations"
+    values:
+      layout: "organization"
+      image: /assets/img/header-bg.jpg
 
 twitter:
   username: digitaledsafety
