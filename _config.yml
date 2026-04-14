@@ -87,7 +87,7 @@ author:
 
 twitter:
   username: digitaledsafety
-  card: summary
+  card: summary_large_image
 
 defaults:
   -
@@ -112,6 +112,3 @@ defaults:
       layout: "organization"
       image: /assets/img/header-bg.jpg
 
-twitter:
-  username: digitaledsafety
-  card: summary_large_image
