@@ -1,0 +1,75 @@
+<script>
+  /**
+   * Shared card filtering and population logic.
+   * Expects a global `cardData` array and a `getCardHtml(cardObj)` function.
+   */
+
+  function generateFilters(data) {
+    const cardFiltersContainer = document.getElementById('card-filters');
+    if (!cardFiltersContainer) return;
+
+    cardFiltersContainer.innerHTML = '';
+    const fs = [];
+    data.forEach(cardObj => {
+      if (cardObj.tags && Array.isArray(cardObj.tags)) {
+        cardObj.tags.forEach(cardTag => {
+          if (cardTag && !fs.includes(cardTag)) {
+            fs.push(cardTag);
+          }
+        });
+      }
+    });
+
+    const filtersHtml = fs.sort().map(f => {
+      const isChecked = (f != '' ? 'checked' : '');
+      return `
+        <li class="pl-2">
+          <div class="form-check">
+            <input type="checkbox" ${isChecked} class="form-check-input" id="${f}">
+            <label class="form-check-label" for="${f}">${f}</label>
+          </div>
+        </li>
+      `;
+    }).join('');
+    cardFiltersContainer.innerHTML = filtersHtml;
+  }
+
+  function populateCards() {
+    const cardContainer = document.getElementById('card-container');
+    if (!cardContainer) return;
+
+    if (typeof generateFilters === 'function') {
+      generateFilters(cardData);
+    }
+
+    const cardsHtml = cardData.map(cardObj => {
+      if (typeof getCardHtml === 'function') {
+        return getCardHtml(cardObj);
+      }
+      return '';
+    }).join('');
+    cardContainer.innerHTML = cardsHtml;
+
+    // Re-bind change event to newly created checkboxes
+    $('#card-filters input[type="checkbox"]').change(filterCards);
+  }
+
+  function filterCards() {
+    const selectedFilters = [];
+    $('#card-filters input[type="checkbox"]:checked').each(function () {
+      selectedFilters.push($(this).attr('id'));
+    });
+
+    $('.filterable-card').each(function () {
+      const card = $(this);
+      const cardFilters = card.data('filters') ? card.data('filters').toString().split(',') : [];
+      const showCard = cardFilters.some(filter => selectedFilters.includes(filter));
+      card.toggleClass('d-none', !showCard);
+    });
+  }
+
+  $(document).ready(function () {
+    populateCards();
+    filterCards();
+  });
+</script>
