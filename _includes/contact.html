@@ -24,7 +24,7 @@
         <iframe name="{{ iframe_id }}" id="{{ iframe_id }}" style="display:none;"
           onload="if({{ submitted_var }}) { document.getElementById('success').innerHTML = '<div class=\'alert alert-success\'><strong>Your message has been sent. </strong></div>'; document.getElementById('contactFormFoot').reset(); }"></iframe>
         <form id="contactFormFoot"
-          action="https://docs.google.com/forms/d/e/1FAIpQLSfVrEX0Fiy6xGPQ9xxJD0sFsygD8k7laf8GjrHDjcXNVhgcaA/formResponse"
+          action="{{ site.contact_form_action }}"
           target="{{ iframe_id }}" onsubmit="{{ submitted_var }}=true;"
           novalidate="novalidate" method="POST">
           <div class="row">
