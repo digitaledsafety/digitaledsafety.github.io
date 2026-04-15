@@ -64,6 +64,8 @@ markdown: kramdown
 # Details: https://help.formspree.io/hc/en-us/articles/360017735154-How-to-prevent-spam
 formspree_form_path: "f/xkgoddyo"
 
+contact_form_action: "https://docs.google.com/forms/d/e/1FAIpQLSfVrEX0Fiy6xGPQ9xxJD0sFsygD8k7laf8GjrHDjcXNVhgcaA/formResponse"
+
 turnstile_sitekey: "0x4AAAAAAADF-VDrlBmuOtjT"
 turnstile_sitekey_mc: "0x4AAAAAACNF-Oav6RmaR0-r"
 

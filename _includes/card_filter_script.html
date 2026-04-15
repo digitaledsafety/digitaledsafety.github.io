@@ -2,9 +2,10 @@
   /**
    * Shared card filtering and population logic.
    * Expects a global `cardData` array and a `getCardHtml(cardObj)` function.
+   * Optional global `window.defaultFilter` for initial selection if no hash is present.
    */
 
-  function generateFilters(data) {
+  function generateFilters(data, initialFilter) {
     const cardFiltersContainer = document.getElementById('card-filters');
     if (!cardFiltersContainer) return;
 
@@ -21,7 +22,7 @@
     });
 
     const filtersHtml = fs.sort().map(f => {
-      const isChecked = (f != '' ? 'checked' : '');
+      const isChecked = (f === initialFilter) ? 'checked' : '';
       return `
         <li class="pl-2">
           <div class="form-check">
@@ -32,14 +33,21 @@
       `;
     }).join('');
     cardFiltersContainer.innerHTML = filtersHtml;
+
+    // Add event listeners to checkboxes
+    cardFiltersContainer.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+      cb.addEventListener('change', filterCards);
+    });
   }
 
   function populateCards() {
     const cardContainer = document.getElementById('card-container');
     if (!cardContainer) return;
 
+    let initialFilter = window.location.hash ? decodeURIComponent(window.location.hash.substring(1)) : (window.defaultFilter || null);
+
     if (typeof generateFilters === 'function') {
-      generateFilters(cardData);
+      generateFilters(cardData, initialFilter);
     }
 
     const cardsHtml = cardData.map(cardObj => {
@@ -49,27 +57,60 @@
       return '';
     }).join('');
     cardContainer.innerHTML = cardsHtml;
-
-    // Re-bind change event to newly created checkboxes
-    $('#card-filters input[type="checkbox"]').change(filterCards);
   }
 
   function filterCards() {
     const selectedFilters = [];
-    $('#card-filters input[type="checkbox"]:checked').each(function () {
-      selectedFilters.push($(this).attr('id'));
+    document.querySelectorAll('#card-filters input[type="checkbox"]:checked').forEach(cb => {
+      selectedFilters.push(cb.id);
     });
 
-    $('.filterable-card').each(function () {
-      const card = $(this);
-      const cardFilters = card.data('filters') ? card.data('filters').toString().split(',') : [];
-      const showCard = cardFilters.some(filter => selectedFilters.includes(filter));
-      card.toggleClass('d-none', !showCard);
+    document.querySelectorAll('.filterable-card').forEach(card => {
+      let filters = card.getAttribute('data-filters');
+      try {
+        // Try to parse as JSON if it looks like an array
+        if (filters && (filters.startsWith('[') || filters.startsWith('{'))) {
+          filters = JSON.parse(filters);
+        } else if (filters) {
+          filters = filters.split(',');
+        }
+      } catch (e) {
+        if (filters) {
+          filters = filters.split(',');
+        }
+      }
+      filters = filters || [];
+
+      let showCard = false;
+      if (selectedFilters.length === 0) {
+        showCard = true;
+      } else {
+        showCard = filters.some(filter => selectedFilters.includes(filter));
+      }
+      if (showCard) {
+        card.classList.remove('d-none');
+      } else {
+        card.classList.add('d-none');
+      }
     });
   }
 
-  $(document).ready(function () {
+  window.addEventListener('load', function () {
     populateCards();
     filterCards();
+  });
+
+  window.addEventListener('hashchange', function() {
+    const newHash = decodeURIComponent(window.location.hash.substring(1));
+    if (newHash) {
+      document.querySelectorAll('#card-filters input[type="checkbox"]').forEach(cb => {
+        cb.checked = false;
+      });
+      const checkbox = document.getElementById(newHash);
+      if (checkbox) {
+        checkbox.checked = true;
+        filterCards();
+      }
+    }
   });
 </script>
