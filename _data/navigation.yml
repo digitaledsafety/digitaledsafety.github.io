@@ -33,11 +33,11 @@ en-AU:
 es: &DEFAULT_ES
   nav:
     - title: "+1-833-692-5477"
-      url: "tel:+18336925477"
+      url: "tel:+18336925477"  
     - title: "Servicios"
-      url: /#services
+      url: /#servicios
     - title: "Contáctenos"
-      url: /#contact
+      url: /#contacto      
     - title: "Stôr"
       url: /store
 es-ES:
