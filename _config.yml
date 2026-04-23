@@ -21,7 +21,7 @@ title      : Digital Education & Safety Foundation
 email      : hello@digitaleducationsafety.org #this is also the email contact forms will go to
 tagline    : "Empowering the under-served with a modern STEM education!"
 description: "Empowering the under-served with a modern STEM education!"
-author     : Digital Education & Safety Foundation
+# author     : Digital Education & Safety Foundation
 # logo:     #optional, defaults to site title
   # path: assets\img\clients\creative-market.jpg
   # height: 60 #height in px, defaults to 52px
@@ -33,6 +33,9 @@ analytics:
 
 ads:
   google: AW-16943605271 #Google Ads code here
+  conversions:
+    page_view: clQVCNr78sAaEJfMq48_
+    lead_capture: oNtiCNf78sAaEJfMq48_
 
 collections:
   programs:
@@ -84,7 +87,7 @@ feed:
 
 author:
   twitter: digitaledsafety
-  name: digitaledsafety
+  name: Digital Education & Safety Foundation
   email: hello@digitaleducationsafety.org
 
 twitter:

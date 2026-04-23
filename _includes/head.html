@@ -55,7 +55,44 @@
     <!-- Custom styles for this theme -->
     <!--<link href="assets/css/agency.min.css" rel="stylesheet">-->
     <link href="/assets/css/agency.css" rel="stylesheet" />
-    <style> 
+    <style>
+    /* Accessibility Classes */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    /* Color Contrast Fixes */
+    .text-muted {
+      color: #6c757d !important; /* Ensuring readable contrast */
+    }
+
+    footer a {
+      color: #004a99; /* Darker blue for footer links for contrast */
+    }
+
+    footer a:hover {
+      color: #003366;
+      text-decoration: underline;
+    }
+
+    .btn-primary {
+      background-color: #0056b3;
+      border-color: #004a99;
+    }
+
+    .btn-primary:hover {
+      background-color: #004a99;
+      border-color: #003366;
+    }
+
     .tooltiptext {
       visibility: hidden;
       background-color: #343a40;
