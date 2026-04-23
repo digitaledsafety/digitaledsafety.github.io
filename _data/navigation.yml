@@ -14,7 +14,9 @@ en: &DEFAULT_EN
     - title: "+1-833-692-5477"
       url: "tel:+18336925477"
     - title: "Our Work"
-      url: /#services    
+      url: /#marketplace
+    - title: "Programs"
+      url: /#programs
     - title: "Contact"
       url: /#contact      
     - title: "Store"
@@ -35,7 +37,9 @@ es: &DEFAULT_ES
     - title: "+1-833-692-5477"
       url: "tel:+18336925477"  
     - title: "Servicios"
-      url: /#servicios
+      url: /#marketplace
+    - title: "Programas"
+      url: /#programs
     - title: "Contáctenos"
       url: /#contacto      
     - title: "Stôr"

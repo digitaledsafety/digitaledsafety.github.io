@@ -12,6 +12,6 @@ caption:
   title: Sample Android App
   thumbnail: https://digitaleducationsafety.org/assets/img/logo.jpg
 
-tags: [all, education]
+tags: [all, education, entrepreneurship]
 categories: apps
 ---

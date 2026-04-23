@@ -73,12 +73,12 @@
 </style>
 
 <div class="row mb-4">
-  <div class="col-md-6">
+  <div class="col-md-3">
     <div class="input-group">
       <div class="input-group-prepend">
         <span class="input-group-text"><i class="fa fa-search"></i></span>
       </div>
-      <input type="text" id="marketplace-search" class="form-control" placeholder="Search apps and games...">
+      <input type="text" id="marketplace-search" class="form-control" placeholder="Search...">
     </div>
   </div>
   <div class="col-md-3">
@@ -86,6 +86,14 @@
       <option value="all">All Platforms</option>
       <option value="pwa">PWA</option>
       <option value="android">Android</option>
+    </select>
+  </div>
+  <div class="col-md-3">
+    <select id="service-filter" class="form-control">
+      <option value="all">All Services</option>
+      <option value="entrepreneurship">Entrepreneurship</option>
+      <option value="engineering">Engineering</option>
+      <option value="digital safety">Digital Safety</option>
     </select>
   </div>
   <div class="col-md-3">
@@ -149,13 +157,15 @@
   function filterAndSort() {
     const searchTerm = document.getElementById('marketplace-search').value.toLowerCase();
     const platform = document.getElementById('platform-filter').value;
+    const service = document.getElementById('service-filter').value;
     const sortBy = document.getElementById('sort-by').value;
 
     let filtered = marketplaceData.filter(item => {
       const matchesSearch = item.title.toLowerCase().includes(searchTerm) ||
                            item.subtitle.toLowerCase().includes(searchTerm);
       const matchesPlatform = platform === 'all' || item.platform === platform;
-      return matchesSearch && matchesPlatform;
+      const matchesService = service === 'all' || (item.tags && item.tags.some(tag => tag.toLowerCase() === service));
+      return matchesSearch && matchesPlatform && matchesService;
     });
 
     if (sortBy === 'alpha') {
@@ -169,6 +179,7 @@
 
   document.getElementById('marketplace-search').addEventListener('input', filterAndSort);
   document.getElementById('platform-filter').addEventListener('change', filterAndSort);
+  document.getElementById('service-filter').addEventListener('change', filterAndSort);
   document.getElementById('sort-by').addEventListener('change', filterAndSort);
 
   // Initial render
