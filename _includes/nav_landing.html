@@ -3,10 +3,9 @@
     <div class="container">
 	  <a class="navbar-brand js-scroll-trigger" href="#page-top">
           {%- if site.logo -%}
-            <img height="{{ site.logo.height | default: 52 }}" src="{{ site.logo.path }}"/>
-          {%- else -%}
-            {{ site.title }}
+            <img height="{{ site.logo_height | default: 52 }}" src="{{ site.logo | relative_url }}" alt=""/>
           {%- endif -%}
+          {{ site.title }}
       </a>
       <div class="ml-auto">
         <ul class="navbar-nav text-uppercase">
