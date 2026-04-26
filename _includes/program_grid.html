@@ -19,7 +19,7 @@
         {% if project.link %}
         <a class="portfolio-link" href="{{ project.link }}">
         {% else %}
-        <a class="portfolio-link" href="{{ project.id }}">
+        <a class="portfolio-link" href="{{ project.url | relative_url }}">
         {% endif %}
           <div class="portfolio-hover">
             <div class="portfolio-hover-content">
