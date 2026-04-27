@@ -9,7 +9,7 @@
   <div class="container">
     <a class="navbar-brand js-scroll-trigger" href="{{ '/' | relative_url }}#page-top">
       {%- if site.logo -%}
-        <img height="{{ site.logo.height | default: 52 }}" src="{{ site.logo.path | relative_url }}"/>
+        <img height="{{ site.logo.height | default: 52 }}" src="{{ site.logo.path | relative_url }}" alt="{{ site.title }} Logo"/>
       {%- else -%}
         {{ site.title }}
       {%- endif -%}

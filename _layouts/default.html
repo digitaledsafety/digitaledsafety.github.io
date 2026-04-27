@@ -21,25 +21,30 @@
 
       <!-- Event snippet for Submit lead form conversion page --> 
       <script>
-	  ['sendMessageButtonFoot', 'sendMessageButtonMc'].forEach(function(id) {
-	    const btn = document.getElementById(id);
-	    if (btn) {
-	      btn.addEventListener('click', function() {
+	  if (typeof gtag === 'function') {
+	    ['sendMessageButtonFoot', 'sendMessageButtonMc'].forEach(function(id) {
+	      const btn = document.getElementById(id);
+	      if (btn) {
+	        btn.addEventListener('click', function() {
+	          gtag('event', 'conversion', {'send_to': "{{ site.ads.google }}/oNtiCNf78sAaEJfMq48_"});
+	        });
+	      }
+	    });
+	    const paypalBtn = document.getElementById('paypalDonate');
+	    if (paypalBtn) {
+	      paypalBtn.addEventListener('click', function() {
 	        gtag('event', 'conversion', {'send_to': "{{ site.ads.google }}/oNtiCNf78sAaEJfMq48_"});
 	      });
 	    }
-	  });
-	  document.getElementById('paypalDonate').addEventListener('click', function() {
-	    gtag('event', 'conversion', {'send_to': "{{ site.ads.google }}/oNtiCNf78sAaEJfMq48_"});
-	  });
+	  }
 	  </script>
 
 	
 	<script>
-		if (document.getElementById("turnstile-container")) {
+		if (document.getElementById("turnstile-container") && typeof turnstile !== 'undefined') {
 			const footButton = document.getElementById("sendMessageButtonFoot");
 			if (footButton) footButton.disabled = true;
-			const widgetId = turnstile.render("#turnstile-container", {
+			turnstile.render("#turnstile-container", {
 				sitekey: "{{ site.turnstile_sitekey }}",
 				callback: function (token) {
 					console.log("Success:", token);
@@ -48,10 +53,10 @@
 			});
 		}
 
-		if (document.getElementById("turnstile-container-mc")) {
+		if (document.getElementById("turnstile-container-mc") && typeof turnstile !== 'undefined') {
 			const mcButton = document.getElementById("sendMessageButtonMc");
 			if (mcButton) mcButton.disabled = true;
-			const widgetIdMc = turnstile.render("#turnstile-container-mc", {
+			turnstile.render("#turnstile-container-mc", {
 				sitekey: "{{ site.turnstile_sitekey_mc }}",
 				callback: function (token) {
 					console.log("Success:", token);
