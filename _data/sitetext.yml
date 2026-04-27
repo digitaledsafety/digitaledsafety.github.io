@@ -22,13 +22,13 @@ en: &DEFAULT_EN
     section: services
     list:
       - title: "Entrepreneurship"
-        desc: "Build products using entrepreneurship principals. Gather requirements, develop, and market to the community."
+        desc: "Build products using entrepreneurship principles. Gather requirements, develop, and market to the community."
         icon: fas fa-laptop        
       - title: "Engineering"
-        desc: "Collaborate with trained hobbyists on robotics, microcontrollers, 3d printing, and other projects."
+        desc: "Collaborate with trained hobbyists and professionals on robotics, microcontrollers, 3D printing, and other technical projects."
         icon: fas fa-cogs #find more at https://fontawesome.com/icons
       - title: "Digital Safety"
-        desc: "Over a decade of experienced technology advocates affluent in safe online activites."
+        desc: "Benefit from over a decade of expertise in online safety, privacy protection, and secure technology advocacy."
         icon: fas fa-user-shield
  
   portfolio:
@@ -74,7 +74,7 @@ en: &DEFAULT_EN
         align: right
       - title: "Promotion"
         year: "2024"
-        desc: "Establshing our portfolio and collaboration with industry."
+        desc: "Establishing our portfolio and collaboration with industry."
         image: assets/img/timeline/promotion.png
         alt: "Industry collaboration and portfolio development"
         # you can enforce the alignment
@@ -134,6 +134,7 @@ en: &DEFAULT_EN
   footer:
     legal: "Privacy Policy"
     terms: "Terms"
+    follow: "Follow us on "
     social:
       - url: https://www.youtube.com/@digitaledsafety
         icon: "fab fa-youtube"       
