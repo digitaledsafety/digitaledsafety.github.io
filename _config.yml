@@ -19,8 +19,8 @@ baseurl: "/" # the subpath of your site, e.g. /blog
 
 title      : Digital Education & Safety Foundation
 email      : hello@digitaleducationsafety.org #this is also the email contact forms will go to
-tagline    : "Empowering the under-served with a modern STE(A)M education!"
-description: "Empowering the under-served with a modern STE(A)M education!"
+tagline    : "Empowering the under-served with a modern STEM education!"
+description: "Empowering the under-served with a modern STEM education!"
 author     : Digital Education & Safety Foundation
 # logo:     #optional, defaults to site title
   # path: assets\img\clients\creative-market.jpg
@@ -64,6 +64,8 @@ markdown: kramdown
 # Details: https://help.formspree.io/hc/en-us/articles/360017735154-How-to-prevent-spam
 formspree_form_path: "f/xkgoddyo"
 
+contact_form_action: "https://docs.google.com/forms/d/e/1FAIpQLSfVrEX0Fiy6xGPQ9xxJD0sFsygD8k7laf8GjrHDjcXNVhgcaA/formResponse"
+
 turnstile_sitekey: "0x4AAAAAAADF-VDrlBmuOtjT"
 turnstile_sitekey_mc: "0x4AAAAAACNF-Oav6RmaR0-r"
 
@@ -87,7 +89,7 @@ author:
 
 twitter:
   username: digitaledsafety
-  card: summary
+  card: summary_large_image
 
 defaults:
   -
@@ -104,7 +106,11 @@ defaults:
     values:
       layout: "resource"
       image: /assets/img/glossaries/mast.jpg      
+  -
+    scope:
+      path: "" # an empty string here means all files in the project
+      type: "organizations"
+    values:
+      layout: "organization"
+      image: /assets/img/header-bg.jpg
 
-twitter:
-  username: digitaledsafety
-  card: summary_large_image

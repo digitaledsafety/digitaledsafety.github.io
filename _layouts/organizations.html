@@ -26,23 +26,21 @@ document.getElementById("page-top").className="bg-light";
 
 <div class="container py-5" id="pagecontainer">
 
-    <h2>Code collaboration with industry</h2>
+    <h2>Empowering STEM Education</h2>
 
 <p>
-    Open source projects provide an invaluable platform for individuals to develop and enhance their STEM skills. Participation in open source initiatives offers a practical and collaborative learning environment where enthusiasts can contribute to real-world projects. One of the key aspects is the transparency of the source code, allowing aspiring developers to explore and understand how complex systems function. This hands-on experience fosters a deeper comprehension of programming languages, algorithms, and software architecture.
+    Our foundation is dedicated to supporting organizations that empower the next generation through modern STEM education. We believe that by providing access to quality resources, mentorship, and hands-on learning experiences, we can help bridge the gap for under-served communities and prepare students for the careers of tomorrow.
 </p>
 
     <p>
-
-        Open source projects encourage problem-solving and critical thinking. Contributors often encounter challenges that require creative solutions, honing their analytical skills and ability to troubleshoot issues. The collaborative nature of these projects promotes teamwork, communication, and project management skills, which are crucial in STEM fields where collaboration is common.
+        The organizations listed below share our commitment to fostering innovation, critical thinking, and problem-solving skills. From coding initiatives and robotics programs to digital safety and technology standards, these partners are at the forefront of educational transformation.
 </p>
 <p>
-Open source communities also expose individuals to a diverse range of technologies and tools. Contributors may work on projects related to data science, artificial intelligence, cybersecurity, or any other STEM discipline, providing exposure to a broad spectrum of applications. This exposure not only helps individuals discover their interests within STEM but also prepares them for the interdisciplinary nature of many STEM careers.
-
+We encourage you to explore the work of each organization to learn more about their specific missions and the impact they are making in the STEM ecosystem. Your support, whether through donations, volunteering, or advocacy, plays a vital role in sustaining these essential programs and expanding their reach to those who need them most.
     </p>
 
     <p>
-We've compiled a list of popular open source projects in industry below. The Donate button will redirect you to a contribution page with best practices on how to get started!
+We've compiled a directory of organizations we support below. Click on any organization to view their dedicated profile and find out how you can contribute to their cause!
         </p>
 
     <script>
@@ -52,7 +50,7 @@ We've compiled a list of popular open source projects in industry below. The Don
         {
             "title": {{card.title | jsonify}},
             "tags": {{card.tags | jsonify}},
-            "path": {{card.id | jsonify}},
+            "url": {{card.url | jsonify}},
             "contribute": {{card.donation_url | jsonify}},
             "caption": {{card.caption | jsonify}},
             "abbreviations": {{card.abbreviations | jsonify}},
@@ -96,77 +94,27 @@ We've compiled a list of popular open source projects in industry below. The Don
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <script>
-      // Function to populate cards
-      function populateCards() {
-        const cardFiltersContainer = document.getElementById('card-filters');
-        cardFiltersContainer.innerHTML = '';
-        const fs = [];
-          cardData.forEach(cardObj => {
-            cardObj.tags.forEach(cardTag => {
-                if(!fs.includes(cardTag)) {
-                    fs.push(cardTag);
-                }
-            })
-          });
-
-          fs.forEach(f => {
-            const isChecked = (f != '' ? 'checked' : '');
-            const filterHtml = `
-            <li class="pl-2"><div class="form-check">
-                <input type="checkbox" ${isChecked} class="form-check-input" id="${f}">
-                <label class="form-check-label" for="${f}">${f}</label>
-            </div></li>
-              `;
-              cardFiltersContainer.innerHTML += filterHtml;
-          });
-
-        const cardContainer = document.getElementById('card-container');
-          cardContainer.innerHTML = '';
-          cardData.forEach(cardObj => {
-              const abbrev = (cardObj.abbreviations ? cardObj.abbreviations : '');
-              const cardHtml = `
-                  <div class="col-md-4 mb-3 filterable-card" data-filters="${cardObj.tags.join(',')}">
-                      <div class="card">
-                        <a target="_blank" href="${cardObj.homepage}"><img class="card-img-top img-fluid" src=${cardObj.caption.thumbnail} alt=""></a>
-                          <div class="card-body">
-                              <h5 class="card-title"><a href="${cardObj.homepage}">${cardObj.title}</a></h5>
-                              <p class="card-subtitle">${cardObj.tags}</h>
-                              <p class="card-text">${cardObj.description}</p>
-                              <a target="_blank" href="${cardObj.contribute}"" class="btn btn-primary">Donate</a>
-                          </div>
+      function getCardHtml(cardObj) {
+        return `
+          <div class="col-md-4 mb-3 filterable-card" data-filters="${cardObj.tags.join(',')}">
+              <div class="card h-100">
+                <a href="${cardObj.url}"><img class="card-img-top img-fluid" src=${cardObj.caption.thumbnail} alt=""></a>
+                  <div class="card-body d-flex flex-column">
+                      <h5 class="card-title"><a href="${cardObj.url}">${cardObj.title}</a></h5>
+                      <p class="card-subtitle mb-2 text-muted">${cardObj.tags.join(', ')}</p>
+                      <p class="card-text">${cardObj.description}</p>
+                      <div class="mt-auto">
+                        <a href="${cardObj.url}" class="btn btn-outline-primary btn-sm">View Details</a>
+                        <a target="_blank" href="${cardObj.contribute}" class="btn btn-primary btn-sm">Donate</a>
                       </div>
                   </div>
-              `;
-              cardContainer.innerHTML += cardHtml;
-          });
+              </div>
+          </div>
+        `;
       }
-
-      // Function to filter cards based on checkboxes
-      function filterCards() {
-          const selectedFilters = [];
-          // Get all selected filters
-          $('input[type="checkbox"]:checked').each(function () {
-              selectedFilters.push($(this).attr('id'));
-          });
-
-          // Show/hide cards based on selected filters
-          $('.filterable-card').each(function () {
-              const card = $(this);
-              const filters = card.data('filters').split(',');
-              const showCard = filters.some(filter => selectedFilters.includes(filter));
-              card.toggleClass('d-none', !showCard);
-          });
-      }
-
-      // Initialize filtering on page load and when checkboxes change
-      $(document).ready(function () {
-          populateCards();
-
-          $('input[type="checkbox"]').change(filterCards);
-
-          filterCards();
-      });
     </script>
+
+    {% include card_filter_script.html %}
 
 
 

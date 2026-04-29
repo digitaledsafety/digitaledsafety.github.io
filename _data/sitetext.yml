@@ -12,7 +12,7 @@
 en: &DEFAULT_EN
   header:
     title: "Our Mission:"
-    text: Empowering the underserved with a modern STEM/STEAM education
+    text: Empowering the underserved with a modern STEM education
     button: Learn More
     buttonlink: "#services"
 
@@ -38,8 +38,8 @@ en: &DEFAULT_EN
     closebutton: "Close Project"
 
   resources:
-    title: "Resources"
-    text: ""
+    title: "Learning Resources"
+    text: "A collection of STEM Learning Resources"
     section: resource
     closebutton: "Close Resource"    
 
@@ -54,36 +54,36 @@ en: &DEFAULT_EN
         year: "2022"
         desc: "Working with the community on brainstorming ideas. We collaborated with friends, family, and local students for user feedback and design."
         image: assets/img/timeline/1.jpg
-        alt:
+        alt: "Community brainstorming session"
       - title: "A concept is born"
         year: "September 2022"
         desc: "Incorporated and gained tax exemption status through the IRS."
         image: assets/img/timeline/2.jpg
-        alt:
+        alt: "IRS tax exemption status confirmation"
       - title: "Beta begins"
         year: "2022-2023"
         desc: "The Foundation releases an initial product to the public."
-        image: assets/img/timeline/4.jpg
-        alt:
+        image: assets/img/timeline/6.jpg
+        alt: "Initial product release"
       - title: "Website live"
         year: "March 2023"
         desc: "The most recent iteration of the Foundation's web presence went live in March of 2023."
         image: assets/img/timeline/3.jpg
-        alt: image alt text    
+        alt: "The Digital Education & Safety Foundation website homepage"
         # you can enforce the alignment
         align: right
       - title: "Promotion"
         year: "2024"
         desc: "Establshing our portfolio and collaboration with industry."
         image: assets/img/timeline/promotion.png
-        alt: image alt text    
+        alt: "Industry collaboration and portfolio development"
         # you can enforce the alignment
         align: right    
       - title: "Into the future"
         year: "2025 and beyond"
         desc: "Keeping current with the latest trends and developments in technology is crucial to stay connected and relevant. With new technologies emerging at an unprecedented pace, it is more important than ever to stay informed and adapt quickly. Whether it's staying up-to-date with the latest software and hardware, learning new programming languages, or understanding the latest breakthroughs in AI and machine learning, staying current with technology is essential for success in today's rapidly changing world."
         image: assets/img/timeline/5.jpg
-        alt: image alt text    
+        alt: "Future technology trends"
         # you can enforce the alignment         
     end: "<a class='js-scroll-trigger' style='color: #eeeeee' href='#contact'>Join us <br>on our <br> journey!</a>"
 
@@ -154,7 +154,135 @@ en-GB:
 en-AU:
   <<: *DEFAULT_EN
 es: 
-  <<: *DEFAULT_EN
+  header:
+    title: "Nuestra Misión:"
+    text: Empoderar a los desatendidos con una educación STEM moderna
+    button: Aprende Más
+    buttonlink: "#services"
+
+  services:
+    title: "Servicios"
+    text: ""
+    section: servicios
+    list:
+      - title: "Emprendimiento"
+        desc: "Construye productos utilizando principios de emprendimiento. Recopila requisitos, desarrolla y comercializa para la comunidad."
+        icon: fas fa-laptop
+      - title: "Ingeniería"
+        desc: "Colabora con aficionados capacitados en robótica, microcontroladores, impresión 3D y otros proyectos."
+        icon: fas fa-cogs
+      - title: "Seguridad Digital"
+        desc: "Más de una década de defensores de tecnología experimentados expertos en actividades en línea seguras."
+        icon: fas fa-user-shield
+
+  portfolio:
+    title: "Programas"
+    text: ""
+    section: portfolio
+    closebutton: "Cerrar Proyecto"
+
+  resources:
+    title: "Recursos de Aprendizaje"
+    text: "Una colección de recursos de aprendizaje STEM"
+    section: recurso
+    closebutton: "Cerrar Recurso"
+
+  timeline:
+    title: "Hoja de Ruta"
+    text: "Cómo llegamos aquí"
+    section: timeline
+    events:
+      - title: "Donde comenzó"
+        year: "2022"
+        desc: "Trabajando con la comunidad en la lluvia de ideas. Colaboramos con amigos, familiares y estudiantes locales para obtener comentarios de los usuarios y el diseño."
+        image: assets/img/timeline/1.jpg
+        alt: "Sesión de lluvia de ideas de la comunidad"
+      - title: "Nace un concepto"
+        year: "Septiembre 2022"
+        desc: "Incoporado y obtuvo el estatus de exención de impuestos a través del IRS."
+        image: assets/img/timeline/2.jpg
+        alt: "Confirmación del estatus de exención de impuestos del IRS"
+      - title: "Comienza la Beta"
+        year: "2022-2023"
+        desc: "La Fundación lanza un producto inicial al público."
+        image: assets/img/timeline/6.jpg
+        alt: "Lanzamiento inicial del producto"
+      - title: "Sitio web en vivo"
+        year: "Marzo 2023"
+        desc: "La iteración más reciente de la presencia web de la Fundación se puso en marcha en marzo de 2023."
+        image: assets/img/timeline/3.jpg
+        alt: "La página de inicio del sitio web de Digital Education & Safety Foundation"
+        align: right
+      - title: "Promoción"
+        year: "2024"
+        desc: "Estableciendo nuestro portafolio y colaboración con la industria."
+        image: assets/img/timeline/promotion.png
+        alt: "Colaboración con la industria y desarrollo del portafolio"
+        align: right
+      - title: "Hacia el futuro"
+        year: "2025 y más allá"
+        desc: "Mantenerse al día con las últimas tendencias y desarrollos en tecnología es crucial para mantenerse conectado y relevante. Con nuevas tecnologías emergiendo a un ritmo sin precedentes, es más importante que nunca mantenerse informado y adaptarse rápidamente."
+        image: assets/img/timeline/5.jpg
+        alt: "Tendencias tecnológicas futuras"
+    end: "<a class='js-scroll-trigger' style='color: #eeeeee' href='#contact'>¡Únete <br>a nuestro <br> viaje!</a>"
+
+  about:
+    title: "Sobre Nosotros"
+    text: "nuestra historia"
+    section: about
+
+  clients:
+    section: clientes
+    list:
+      - title: "functions.io"
+        url: https://functions.io
+        logo: assets/img/clients/functionsio.png
+      - title: "hey"
+        url: https://www.heyrj.com/
+        logo: assets/img/clients/hey.png
+      - title: "google"
+        url: https://www.google.com/nonprofits/offerings/workspace/
+        logo: assets/img/clients/google.png
+  donations:
+    title: "DONACIONES"
+    text: "Gracias por tu apoyo"
+    section: donaciones
+    list:
+      - title: PayPal
+        image: assets/img/donations/1.png
+        address: "<a href='https://paypal.me/digitaledsafety/5?country.x=US&amp;locale.x=en_US'>Donar en PayPal.me</a>"
+
+  contact:
+    title: "Contáctenos"
+    text: "<a href='mailto:hello@digitaleducationsafety.org'>Correo electrónico</a> o llame al <a href='tel:+18336925477'>+1-833-692-5477</a>"
+    section: contacto
+    name: "Nombre*"
+    name-validation: "Por favor, introduzca su nombre."
+    email: "Correo electrónico*"
+    email-validation: "Por favor, introduzca su dirección de correo electrónico."
+    phone: "Número de teléfono"
+    phone-validation: "Por favor, introduzca su número de teléfono."
+    message: "Mensaje*"
+    message-validation: "Por favor, introduzca un mensaje."
+    subject: "Envío del formulario de contacto"
+    submit: "Enviar mensaje"
+
+  footer:
+    legal: "Política de Privacidad"
+    terms: "Términos"
+    financials: "Finanzas"
+    social:
+      - url: https://www.youtube.com/@digitaledsafety
+        icon: "fab fa-youtube"
+      - url: https://x.com/digitaledsafety
+        icon: "fab fa-twitter"
+      - url: https://github.com/digitaledsafety
+        icon: "fab fa-github"
+      - url: https://facebook.com/digitaledsafety
+        icon: "fab fa-facebook-f"
+      - url: https://discord.gg/5tc2DfUZVe
+        icon: "fab fa-discord"
+
 es-ES:
   <<: *DEFAULT_EN
 es-CO:
