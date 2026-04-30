@@ -1,0 +1,13 @@
+127.0.0.1 - - [30/Apr/2026 16:39:07] "GET /store.html HTTP/1.1" 200 -
+127.0.0.1 - - [30/Apr/2026 16:39:07] "GET /assets/css/bootstrap.min.css HTTP/1.1" 200 -
+127.0.0.1 - - [30/Apr/2026 16:39:07] "GET /assets/css/all.min.css HTTP/1.1" 200 -
+127.0.0.1 - - [30/Apr/2026 16:39:07] "GET /assets/css/agency.css HTTP/1.1" 200 -
+127.0.0.1 - - [30/Apr/2026 16:39:07] "GET /assets/img/store/stickers.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [30/Apr/2026 16:39:07] "GET /assets/img/store/buttons.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [30/Apr/2026 16:39:07] "GET /assets/js/jquery.min.js HTTP/1.1" 200 -
+127.0.0.1 - - [30/Apr/2026 16:39:07] "GET /assets/js/bootstrap.bundle.min.js HTTP/1.1" 200 -
+127.0.0.1 - - [30/Apr/2026 16:39:08] "GET /assets/js/jquery.easing.min.js HTTP/1.1" 200 -
+127.0.0.1 - - [30/Apr/2026 16:39:08] "GET /assets/js/agency.min.js HTTP/1.1" 200 -
+127.0.0.1 - - [30/Apr/2026 16:39:08] "GET /assets/img/store/rupixen-com-Q59HmzK38eQ-unsplash-bg.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [30/Apr/2026 16:39:09] "GET /assets/img/map-image.png HTTP/1.1" 200 -
+127.0.0.1 - - [30/Apr/2026 16:39:09] "GET /assets/css/webfonts/fa-brands-400.woff2 HTTP/1.1" 200 -
