@@ -5,7 +5,7 @@ test.describe('Store Page', () => {
     await page.goto('/store.html');
 
     // Check if the main heading is present
-    const heading = page.locator('.text-center h2.section-heading');
+    const heading = page.locator('.container h2');
     await expect(heading.first()).toContainText('Store');
 
     // Check if there are product cards
