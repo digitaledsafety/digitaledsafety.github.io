@@ -1,0 +1,10 @@
+I have introduced Playwright tests to verify critical store functionality and established a CI/CD pipeline using GitHub Actions.
+
+Key changes:
+1. Created `playwright.config.js` and updated `package.json` with a test script.
+2. Implemented `tests/store.spec.js` to verify page loading, product display, and PayPal button initialization.
+3. Fixed a bug in `_layouts/store.html` where `{{ content }}` was missing, preventing any content from the Markdown file from rendering.
+4. Added `.github/workflows/playwright.yml` to run tests on every push/PR and deploy to GitHub Pages on successful main branch updates.
+5. Updated `.gitignore` to exclude Playwright artifacts and local dependencies.
+
+Please review for correctness and adherence to repository standards.
