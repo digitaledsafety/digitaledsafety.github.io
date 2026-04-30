@@ -1,0 +1,8 @@
+Summary of changes:
+1. Replaced Shopify Buy Button integration with PayPal Smart Payment Buttons.
+2. Added 'paypal_client_id' and 'paypal_currency' to _config.yml.
+3. Updated _products/product1.md and _products/product2.md with relevant metadata (title, price, description, image) for stickers and buttons.
+4. Created _includes/embed/paypal_sdk.html and _includes/embed/paypal_button.html for modularized PayPal integration.
+5. Revamped _layouts/store.html to use a Bootstrap card grid for products and the new PayPal includes.
+6. Removed the legacy _includes/embed/product.html (Shopify).
+7. Verified that the PayPal buttons render correctly on the store page.

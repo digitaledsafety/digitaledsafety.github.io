@@ -68,6 +68,8 @@ contact_form_action: "https://docs.google.com/forms/d/e/1FAIpQLSfVrEX0Fiy6xGPQ9x
 
 turnstile_sitekey: "0x4AAAAAAADF-VDrlBmuOtjT"
 turnstile_sitekey_mc: "0x4AAAAAACNF-Oav6RmaR0-r"
+paypal_client_id: "AS6SHvzpq2yfxtT4bKPJxK_EyXUiYDdtzePeY3t7RLHjavm9vlyMCzybiULu6a_tl6GdbpHekuqy49sr" # Default sandbox ID
+paypal_currency: "USD"
 
 plugins:
   - jekyll-remote-theme
