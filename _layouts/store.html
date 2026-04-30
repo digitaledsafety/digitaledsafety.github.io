@@ -69,10 +69,10 @@ document.getElementById("page-top").className="bg-light";
       {% if product.image %}
       <img class="card-img-top" src="{{ product.image }}" alt="{{ product.title }}">
       {% endif %}
-      <div class="card-body text-center">
+      <div class="card-body">
         <h4 class="card-title">{{ product.title }}</h4>
         <h5 class="text-muted mb-3">{{ site.paypal_currency | default: 'USD' }} {{ product.price }}</h5>
-        <p class="card-text text-muted">{{ product.description }}</p>
+        <p class="card-text">{{ product.description }}</p>
       </div>
       <div class="card-footer bg-transparent border-top-0 pb-4">
         {% include embed/paypal_button.html dom_id=forloop.index title=product.title price=product.price %}
