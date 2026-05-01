@@ -73,29 +73,13 @@
 </style>
 
 <div class="row mb-4">
-  <div class="col-md-3">
+  <div class="col-md-6">
     <div class="input-group">
       <div class="input-group-prepend">
         <span class="input-group-text"><i class="fa fa-search"></i></span>
       </div>
       <input type="text" id="marketplace-search" class="form-control" placeholder="Search...">
     </div>
-  </div>
-  <div class="col-md-2">
-    <select id="platform-filter" class="form-control">
-      <option value="all">All Platforms</option>
-      <option value="pwa">PWA</option>
-      <option value="android">Android</option>
-      <option value="github">GitHub</option>
-    </select>
-  </div>
-  <div class="col-md-2">
-    <select id="category-filter" class="form-control">
-      <option value="all">All Categories</option>
-      <option value="apps">Apps</option>
-      <option value="games">Games</option>
-      <option value="tools">Tools</option>
-    </select>
   </div>
   <div class="col-md-3">
     <select id="program-filter" class="form-control">
@@ -106,7 +90,7 @@
       {% endfor %}
     </select>
   </div>
-  <div class="col-md-2">
+  <div class="col-md-3">
     <select id="sort-by" class="form-control">
       <option value="recent">Recently Added</option>
       <option value="alpha">Alphabetical</option>
@@ -119,6 +103,11 @@
 </div>
 
 <script>
+  const programsMap = {
+    {% for p in site.programs %}
+    "{{ p.id | default: p.url | split: "/" | last | replace: ".html", "" }}": {{ p.title | jsonify }}{% unless forloop.last %},{% endunless %}
+    {% endfor %}
+  };
   const marketplaceData = [
     {% for item in site.marketplace %}
     {
@@ -163,6 +152,11 @@
                 <span class="platform-badge"><i class="fa ${icon}"></i> ${item.platform}</span>
               </div>
               <p class="marketplace-subtitle">${item.subtitle}</p>
+              <div class="mb-3">
+                <small class="text-muted d-block"><strong>Platform:</strong> ${item.platform.toUpperCase()}</small>
+                <small class="text-muted d-block"><strong>Category:</strong> ${Array.isArray(item.categories) ? item.categories.join(", ") : (item.categories || "N/A")}</small>
+                <small class="text-muted d-block"><strong>Program:</strong> ${programsMap[item.program] || "N/A"}</small>
+              </div>
               <div class="marketplace-footer">
                 <a href="${item.link}" target="_blank" class="btn btn-primary btn-install">${btnText}</a>
               </div>
@@ -176,18 +170,14 @@
 
   function filterAndSort() {
     const searchTerm = document.getElementById('marketplace-search').value.toLowerCase();
-    const platform = document.getElementById('platform-filter').value;
-    const category = document.getElementById('category-filter').value;
     const program = document.getElementById('program-filter').value;
     const sortBy = document.getElementById('sort-by').value;
 
     let filtered = marketplaceData.filter(item => {
       const matchesSearch = item.title.toLowerCase().includes(searchTerm) ||
-                           item.subtitle.toLowerCase().includes(searchTerm);
-      const matchesPlatform = platform === 'all' || item.platform === platform;
-      const matchesCategory = category === 'all' || (item.categories && item.categories.includes(category));
+                           item.subtitle.toLowerCase().includes(searchTerm) || (item.platform && item.platform.toLowerCase().includes(searchTerm)) || (Array.isArray(item.categories) && item.categories.some(c => c.toLowerCase().includes(searchTerm)));
       const matchesProgram = program === 'all' || String(item.program) === program || (item.program && String(item.program.id) === program);
-      return matchesSearch && matchesPlatform && matchesCategory && matchesProgram;
+      return matchesSearch && matchesProgram;
     });
 
     if (sortBy === 'alpha') {
@@ -200,8 +190,6 @@
   }
 
   document.getElementById('marketplace-search').addEventListener('input', filterAndSort);
-  document.getElementById('platform-filter').addEventListener('change', filterAndSort);
-  document.getElementById('category-filter').addEventListener('change', filterAndSort);
   document.getElementById('program-filter').addEventListener('change', filterAndSort);
   document.getElementById('sort-by').addEventListener('change', filterAndSort);
 
