@@ -47,6 +47,33 @@
     margin-bottom: 1rem;
     flex-grow: 1;
   }
+  .marketplace-meta {
+    background: #f8f9fa;
+    border-radius: 10px;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+  }
+  .meta-item {
+    display: flex;
+    align-items: center;
+    font-size: 0.8rem;
+    color: #555;
+    margin-bottom: 0.25rem;
+  }
+  .meta-item:last-child {
+    margin-bottom: 0;
+  }
+  .meta-item i {
+    width: 18px;
+    margin-right: 8px;
+    color: #fed136; /* Agency Theme Primary */
+    text-align: center;
+  }
+  .meta-label {
+    font-weight: 600;
+    margin-right: 4px;
+    color: #333;
+  }
   .marketplace-footer {
     display: flex;
     justify-content: space-between;
@@ -152,11 +179,22 @@
                 <span class="platform-badge"><i class="fa ${icon}"></i> ${item.platform}</span>
               </div>
               <p class="marketplace-subtitle">${item.subtitle}</p>
-              <div class="mb-3">
-                <small class="text-muted d-block"><strong>Platform:</strong> ${item.platform.toUpperCase()}</small>
-                <small class="text-muted d-block"><strong>Category:</strong> ${Array.isArray(item.categories) ? item.categories.join(", ") : (item.categories || "N/A")}</small>
-                <small class="text-muted d-block"><strong>Program:</strong> ${programsMap[item.program] || "N/A"}</small>
+
+              <div class="marketplace-meta">
+                <div class="meta-item">
+                  <i class="fa fa-laptop"></i>
+                  <span class="meta-label">Platform:</span> ${item.platform.toUpperCase()}
+                </div>
+                <div class="meta-item">
+                  <i class="fa fa-tag"></i>
+                  <span class="meta-label">Category:</span> ${Array.isArray(item.categories) ? item.categories.join(", ") : (item.categories || "N/A")}
+                </div>
+                <div class="meta-item">
+                  <i class="fa fa-graduation-cap"></i>
+                  <span class="meta-label">Program:</span> ${programsMap[item.program] || "N/A"}
+                </div>
               </div>
+
               <div class="marketplace-footer">
                 <a href="${item.link}" target="_blank" class="btn btn-primary btn-install">${btnText}</a>
               </div>
