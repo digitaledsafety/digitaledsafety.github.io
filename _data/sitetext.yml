@@ -34,7 +34,7 @@ en: &DEFAULT_EN
   portfolio:
     title: "Programs"
     text: ""
-    section: portfolio
+    section: programs
     closebutton: "Close Project"
 
   resources:
@@ -134,6 +134,7 @@ en: &DEFAULT_EN
   footer:
     legal: "Privacy Policy"
     terms: "Terms"
+    financials: "Financials"
     social:
       - url: https://www.youtube.com/@digitaledsafety
         icon: "fab fa-youtube"       
@@ -178,7 +179,7 @@ es:
   portfolio:
     title: "Programas"
     text: ""
-    section: portfolio
+    section: programs
     closebutton: "Cerrar Proyecto"
 
   resources:
