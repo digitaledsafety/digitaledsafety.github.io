@@ -76,3 +76,5 @@ OSError: [Errno 98] Address already in use
 127.0.0.1 - - [01/May/2026 19:19:00] "GET /assets/img/map-image.png HTTP/1.1" 200 -
 127.0.0.1 - - [01/May/2026 19:19:00] "GET /assets/css/webfonts/fa-solid-900.woff2 HTTP/1.1" 200 -
 127.0.0.1 - - [01/May/2026 19:19:00] "GET /assets/css/webfonts/fa-brands-400.woff2 HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:40:49] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [01/May/2026 19:40:49] "GET / HTTP/1.1" 200 -
