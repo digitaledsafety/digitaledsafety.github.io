@@ -73,12 +73,12 @@
 </style>
 
 <div class="row mb-4">
-  <div class="col-md-6">
+  <div class="col-md-4">
     <div class="input-group">
       <div class="input-group-prepend">
         <span class="input-group-text"><i class="fa fa-search"></i></span>
       </div>
-      <input type="text" id="marketplace-search" class="form-control" placeholder="Search apps and games...">
+      <input type="text" id="marketplace-search" class="form-control" placeholder="Search...">
     </div>
   </div>
   <div class="col-md-3">
@@ -86,9 +86,18 @@
       <option value="all">All Platforms</option>
       <option value="pwa">PWA</option>
       <option value="android">Android</option>
+      <option value="github">GitHub</option>
     </select>
   </div>
   <div class="col-md-3">
+    <select id="category-filter" class="form-control">
+      <option value="all">All Categories</option>
+      <option value="apps">Apps</option>
+      <option value="games">Games</option>
+      <option value="tools">Tools</option>
+    </select>
+  </div>
+  <div class="col-md-2">
     <select id="sort-by" class="form-control">
       <option value="recent">Recently Added</option>
       <option value="alpha">Alphabetical</option>
@@ -109,6 +118,7 @@
       "image": {{ item.image | jsonify }},
       "link": {{ item.link | jsonify }},
       "platform": {{ item.platform | default: "pwa" | jsonify }},
+      "categories": {{ item.categories | jsonify }},
       "date": {{ item.date | jsonify }},
       "tags": {{ item.tags | jsonify }}
     }{% unless forloop.last %},{% endunless %}
@@ -120,8 +130,16 @@
     container.innerHTML = '';
 
     data.forEach(item => {
-      const btnText = item.platform === 'android' ? 'Download' : 'Open';
-      const icon = item.platform === 'android' ? 'fa-android' : 'fa-globe';
+      let btnText = 'Open';
+      let icon = 'fa-globe';
+
+      if (item.platform === 'android') {
+        btnText = 'Download';
+        icon = 'fa-android';
+      } else if (item.platform === 'github') {
+        btnText = 'Build';
+        icon = 'fa-github';
+      }
 
       const html = `
         <div class="col-lg-4 col-md-6 mb-4 marketplace-item-wrapper">
@@ -149,13 +167,15 @@
   function filterAndSort() {
     const searchTerm = document.getElementById('marketplace-search').value.toLowerCase();
     const platform = document.getElementById('platform-filter').value;
+    const category = document.getElementById('category-filter').value;
     const sortBy = document.getElementById('sort-by').value;
 
     let filtered = marketplaceData.filter(item => {
       const matchesSearch = item.title.toLowerCase().includes(searchTerm) ||
                            item.subtitle.toLowerCase().includes(searchTerm);
       const matchesPlatform = platform === 'all' || item.platform === platform;
-      return matchesSearch && matchesPlatform;
+      const matchesCategory = category === 'all' || (item.categories && item.categories.includes(category));
+      return matchesSearch && matchesPlatform && matchesCategory;
     });
 
     if (sortBy === 'alpha') {
@@ -169,6 +189,7 @@
 
   document.getElementById('marketplace-search').addEventListener('input', filterAndSort);
   document.getElementById('platform-filter').addEventListener('change', filterAndSort);
+  document.getElementById('category-filter').addEventListener('change', filterAndSort);
   document.getElementById('sort-by').addEventListener('change', filterAndSort);
 
   // Initial render
