@@ -73,7 +73,7 @@
 </style>
 
 <div class="row mb-4">
-  <div class="col-md-4">
+  <div class="col-md-3">
     <div class="input-group">
       <div class="input-group-prepend">
         <span class="input-group-text"><i class="fa fa-search"></i></span>
@@ -81,7 +81,7 @@
       <input type="text" id="marketplace-search" class="form-control" placeholder="Search...">
     </div>
   </div>
-  <div class="col-md-3">
+  <div class="col-md-2">
     <select id="platform-filter" class="form-control">
       <option value="all">All Platforms</option>
       <option value="pwa">PWA</option>
@@ -89,12 +89,21 @@
       <option value="github">GitHub</option>
     </select>
   </div>
-  <div class="col-md-3">
+  <div class="col-md-2">
     <select id="category-filter" class="form-control">
       <option value="all">All Categories</option>
       <option value="apps">Apps</option>
       <option value="games">Games</option>
       <option value="tools">Tools</option>
+    </select>
+  </div>
+  <div class="col-md-3">
+    <select id="program-filter" class="form-control">
+      <option value="all">All Programs</option>
+      {% assign programs = site.programs | sort: "id" %}
+      {% for p in programs %}
+      <option value="{{ p.id | default: p.url | split: '/' | last | replace: '.html', '' }}">{{ p.title }}</option>
+      {% endfor %}
     </select>
   </div>
   <div class="col-md-2">
@@ -119,6 +128,7 @@
       "link": {{ item.link | jsonify }},
       "platform": {{ item.platform | default: "pwa" | jsonify }},
       "categories": {{ item.categories | jsonify }},
+      "program": {{ item.program | jsonify }},
       "date": {{ item.date | jsonify }},
       "tags": {{ item.tags | jsonify }}
     }{% unless forloop.last %},{% endunless %}
@@ -168,6 +178,7 @@
     const searchTerm = document.getElementById('marketplace-search').value.toLowerCase();
     const platform = document.getElementById('platform-filter').value;
     const category = document.getElementById('category-filter').value;
+    const program = document.getElementById('program-filter').value;
     const sortBy = document.getElementById('sort-by').value;
 
     let filtered = marketplaceData.filter(item => {
@@ -175,7 +186,8 @@
                            item.subtitle.toLowerCase().includes(searchTerm);
       const matchesPlatform = platform === 'all' || item.platform === platform;
       const matchesCategory = category === 'all' || (item.categories && item.categories.includes(category));
-      return matchesSearch && matchesPlatform && matchesCategory;
+      const matchesProgram = program === 'all' || String(item.program) === program || (item.program && String(item.program.id) === program);
+      return matchesSearch && matchesPlatform && matchesCategory && matchesProgram;
     });
 
     if (sortBy === 'alpha') {
@@ -190,6 +202,7 @@
   document.getElementById('marketplace-search').addEventListener('input', filterAndSort);
   document.getElementById('platform-filter').addEventListener('change', filterAndSort);
   document.getElementById('category-filter').addEventListener('change', filterAndSort);
+  document.getElementById('program-filter').addEventListener('change', filterAndSort);
   document.getElementById('sort-by').addEventListener('change', filterAndSort);
 
   // Initial render
