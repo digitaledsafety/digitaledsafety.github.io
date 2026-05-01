@@ -8,14 +8,18 @@
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav" {% if include.background %}style="background-color: {{ include.background }}"{% endif %}>
   <div class="container">
     <a class="navbar-brand js-scroll-trigger" href="{{ '/' | relative_url }}#page-top">
-      {%- if site.logo -%}
-        <img height="{{ site.logo.height | default: 52 }}" src="{{ site.logo.path | relative_url }}"/>
-      {%- else -%}
-        {{ site.title }}
-      {%- endif -%}
+      <span class="d-none d-lg-block">
+        {%- if site.logo -%}
+          <img height="{{ site.logo.height | default: 52 }}" src="{{ site.logo.path | relative_url }}"/>
+        {%- else -%}
+          {{ site.title }}
+        {%- endif -%}
+      </span>
+      <span class="d-block d-lg-none">
+        <img height="40" src="{{ '/assets/img/logo-mobile.png' | relative_url }}"/>
+      </span>
     </a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-      Menu
       <i class="fas fa-bars"></i>
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
