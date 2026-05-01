@@ -17,17 +17,17 @@
 	{% for project in site.programs %}
       <div class="col-md-4 col-sm-6 portfolio-item">
         {% if project.link %}
-        <a class="portfolio-link" href="{{ project.link }}">
+        <a class="portfolio-link" href="{{ project.link | relative_url }}">
         {% else %}
-        <a class="portfolio-link" href="{{ project.id }}">
+        <a class="portfolio-link" href="{{ project.url | relative_url }}">
         {% endif %}
+          <div class="portfolio-img-container">
+            <img class="img-fluid" src="{{ project.caption.thumbnail | relative_url }}" alt="{{ project.caption.title }}">
+          </div>
           <div class="portfolio-hover">
             <div class="portfolio-hover-content">
               <i class="{{ site.data.style.portfolio-icon | default: "fas fa-plus fa-3x" }}"></i>
             </div>
-          </div>
-          <div class="portfolio-img-container">
-            <img class="img-fluid" src="{{ project.caption.thumbnail }}" alt="{{ project.caption.title }}">
           </div>
         </a>
         <div class="portfolio-caption">
