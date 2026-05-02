@@ -20,7 +20,7 @@
         <p class="lead">{{ page.subtitle }}</p>
         <p class="lead">
           <a href="{{ page.link }}" target="_blank" class="btn btn-lg btn-primary">
-            {% if page.platform == 'android' %}Download APK{% else %}Open PWA{% endif %}
+            {% if page.platform == 'android' %}Download APK{% elsif page.platform == 'github' %}Build on GitHub{% else %}Launch Web App{% endif %}
           </a>
         </p>
       </main>
