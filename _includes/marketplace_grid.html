@@ -209,15 +209,15 @@
               <div class="marketplace-meta">
                 <div class="meta-item">
                   <i class="fa fa-laptop"></i>
-                  <span class="meta-label title-case">Platform:</span> ${item.platform}
+                  <span class="meta-label">Platform:</span><span class="title-case"> ${item.platform} <span>
                 </div>
                 <div class="meta-item">
                   <i class="fa fa-tag"></i>
-                  <span class="meta-label title-case">Category:</span> ${Array.isArray(item.categories) ? item.categories.join(", ") : (item.categories || "N/A")}
+                  <span class="meta-label">Category:</span><span class="title-case">  ${Array.isArray(item.categories) ? item.categories.join(", ") : (item.categories || "N/A")} </span>
                 </div>
                 <div class="meta-item">
                   <i class="fa ${serviceIcon}"></i>
-                  <span class="meta-label title-case">Service:</span> ${item.service}
+                  <span class="meta-label">Service:</span><span class="title-case">  ${item.service.toLowerCase()} <span>
                 </div>
               </div>
 
