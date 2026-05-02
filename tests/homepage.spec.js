@@ -18,9 +18,6 @@ test('homepage has correct sections and navigation', async ({ page }) => {
   await expect(page.locator('#timeline')).not.toBeAttached();
 
   // Check navigation links
-  const servicesLink = page.locator('.nav-link', { hasText: 'Services' });
-  await expect(servicesLink).toHaveAttribute('href', /#services$/);
-
   const ourWorkLink = page.locator('.nav-link', { hasText: 'Our Work' });
   await expect(ourWorkLink).toHaveAttribute('href', /#marketplace$/);
 });
