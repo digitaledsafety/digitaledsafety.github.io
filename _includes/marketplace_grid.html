@@ -97,6 +97,15 @@
     font-weight: 600;
     text-transform: uppercase;
   }
+  .service-badge {
+    font-size: 0.7rem;
+    padding: 0.3rem 0.6rem;
+    border-radius: 10px;
+    background: #fed136;
+    color: #fff;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
 </style>
 
 <div class="row mb-4">
@@ -109,12 +118,11 @@
     </div>
   </div>
   <div class="col-md-3">
-    <select id="program-filter" class="form-control">
-      <option value="all">All Programs</option>
-      {% assign programs = site.programs | sort: "id" %}
-      {% for p in programs %}
-      <option value="{{ p.id | default: p.url | split: '/' | last | replace: '.html', '' }}">{{ p.title }}</option>
-      {% endfor %}
+    <select id="service-filter" class="form-control">
+      <option value="all">All Services</option>
+      <option value="Entrepreneurship">Entrepreneurship</option>
+      <option value="Engineering">Engineering</option>
+      <option value="Digital Safety">Digital Safety</option>
     </select>
   </div>
   <div class="col-md-3">
@@ -132,7 +140,10 @@
 <script>
   const programsMap = {
     {% for p in site.programs %}
-    "{{ p.id | default: p.url | split: "/" | last | replace: ".html", "" }}": {{ p.title | jsonify }}{% unless forloop.last %},{% endunless %}
+    "{{ p.id | default: p.url | split: "/" | last | replace: ".html", "" }}": {
+      "title": {{ p.title | jsonify }},
+      "service": {{ p.caption.subtitle | jsonify }}
+    }{% unless forloop.last %},{% endunless %}
     {% endfor %}
   };
   const marketplaceData = [
@@ -145,6 +156,7 @@
       "platform": {{ item.platform | default: "pwa" | jsonify }},
       "categories": {{ item.categories | jsonify }},
       "program": {{ item.program | jsonify }},
+      "service": (programsMap[{{ item.program | jsonify }}] || {}).service || "N/A",
       "date": {{ item.date | jsonify }},
       "tags": {{ item.tags | jsonify }}
     }{% unless forloop.last %},{% endunless %}
@@ -167,6 +179,15 @@
         icon = 'fa-github';
       }
 
+      let serviceIcon = 'fa-laptop';
+      if (item.service === 'Entrepreneurship') {
+        serviceIcon = 'fa-laptop';
+      } else if (item.service === 'Engineering') {
+        serviceIcon = 'fa-cogs';
+      } else if (item.service === 'Digital Safety') {
+        serviceIcon = 'fa-user-shield';
+      }
+
       const html = `
         <div class="col-lg-4 col-md-6 mb-4 marketplace-item-wrapper">
           <div class="card marketplace-card">
@@ -174,9 +195,12 @@
               <img src="${item.image}" alt="${item.title}">
             </div>
             <div class="marketplace-body">
-              <div class="d-flex justify-content-between align-items-start">
+              <div class="d-flex justify-content-between align-items-start flex-wrap">
                 <h5 class="marketplace-title">${item.title}</h5>
-                <span class="platform-badge"><i class="fa ${icon}"></i> ${item.platform}</span>
+                <div class="d-flex flex-column align-items-end">
+                  <span class="platform-badge mb-1"><i class="fa ${icon}"></i> ${item.platform}</span>
+                  <span class="service-badge">${item.service}</span>
+                </div>
               </div>
               <p class="marketplace-subtitle">${item.subtitle}</p>
 
@@ -190,8 +214,8 @@
                   <span class="meta-label">Category:</span> ${Array.isArray(item.categories) ? item.categories.join(", ") : (item.categories || "N/A")}
                 </div>
                 <div class="meta-item">
-                  <i class="fa fa-graduation-cap"></i>
-                  <span class="meta-label">Program:</span> ${programsMap[item.program] || "N/A"}
+                  <i class="fa ${serviceIcon}"></i>
+                  <span class="meta-label">Service:</span> ${item.service}
                 </div>
               </div>
 
@@ -208,14 +232,14 @@
 
   function filterAndSort() {
     const searchTerm = document.getElementById('marketplace-search').value.toLowerCase();
-    const program = document.getElementById('program-filter').value;
+    const service = document.getElementById('service-filter').value;
     const sortBy = document.getElementById('sort-by').value;
 
     let filtered = marketplaceData.filter(item => {
       const matchesSearch = item.title.toLowerCase().includes(searchTerm) ||
                            item.subtitle.toLowerCase().includes(searchTerm) || (item.platform && item.platform.toLowerCase().includes(searchTerm)) || (Array.isArray(item.categories) && item.categories.some(c => c.toLowerCase().includes(searchTerm)));
-      const matchesProgram = program === 'all' || String(item.program) === program || (item.program && String(item.program.id) === program);
-      return matchesSearch && matchesProgram;
+      const matchesService = service === 'all' || item.service === service;
+      return matchesSearch && matchesService;
     });
 
     if (sortBy === 'alpha') {
@@ -228,7 +252,7 @@
   }
 
   document.getElementById('marketplace-search').addEventListener('input', filterAndSort);
-  document.getElementById('program-filter').addEventListener('change', filterAndSort);
+  document.getElementById('service-filter').addEventListener('change', filterAndSort);
   document.getElementById('sort-by').addEventListener('change', filterAndSort);
 
   // Initial render
