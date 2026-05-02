@@ -22,13 +22,13 @@ en: &DEFAULT_EN
     section: services
     list:
       - title: "Entrepreneurship"
-        desc: "Build products using entrepreneurship principals. Gather requirements, develop, and market to the community."
+        desc: "Build products using entrepreneurship principles. Gather requirements, develop, and market to the community."
         icon: fas fa-laptop        
       - title: "Engineering"
         desc: "Collaborate with trained hobbyists on robotics, microcontrollers, 3d printing, and other projects."
         icon: fas fa-cogs #find more at https://fontawesome.com/icons
       - title: "Digital Safety"
-        desc: "Over a decade of experienced technology advocates affluent in safe online activites."
+        desc: "Over a decade of experienced technology advocates fluent in safe online activities."
         icon: fas fa-user-shield
  
   portfolio:
@@ -74,7 +74,7 @@ en: &DEFAULT_EN
         align: right
       - title: "Promotion"
         year: "2024"
-        desc: "Establshing our portfolio and collaboration with industry."
+        desc: "Establishing our portfolio and collaboration with industry."
         image: assets/img/timeline/promotion.png
         alt: "Industry collaboration and portfolio development"
         # you can enforce the alignment
@@ -199,7 +199,7 @@ es:
         alt: "Sesión de lluvia de ideas de la comunidad"
       - title: "Nace un concepto"
         year: "Septiembre 2022"
-        desc: "Incoporado y obtuvo el estatus de exención de impuestos a través del IRS."
+        desc: "Incorporado y obtuvo el estatus de exención de impuestos a través del IRS."
         image: assets/img/timeline/2.jpg
         alt: "Confirmación del estatus de exención de impuestos del IRS"
       - title: "Comienza la Beta"
