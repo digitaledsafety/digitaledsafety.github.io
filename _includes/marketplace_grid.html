@@ -228,8 +228,11 @@
     const sortBy = document.getElementById('sort-by').value;
 
     let filtered = marketplaceData.filter(item => {
-      const matchesSearch = item.title.toLowerCase().includes(searchTerm) ||
-                           item.subtitle.toLowerCase().includes(searchTerm) || (item.platform && item.platform.toLowerCase().includes(searchTerm)) || (Array.isArray(item.categories) && item.categories.some(c => c.toLowerCase().includes(searchTerm)));
+      const matchesSearch = (item.title && item.title.toLowerCase().includes(searchTerm)) ||
+                           (item.subtitle && item.subtitle.toLowerCase().includes(searchTerm)) ||
+                           (item.platform && item.platform.toLowerCase().includes(searchTerm)) ||
+                           (Array.isArray(item.categories) && item.categories.some(c => c && c.toLowerCase().includes(searchTerm))) ||
+                           (Array.isArray(item.tags) && item.tags.some(t => t && t.toLowerCase().includes(searchTerm)));
       const matchesService = service === 'all' || item.service === service;
       return matchesSearch && matchesService;
     });
