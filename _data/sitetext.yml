@@ -93,20 +93,6 @@ en: &DEFAULT_EN
     body: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut eaque, laboriosam veritatis, quos non quis ad perspiciatis, totam corporis ea, alias ut unde. **Markdown** supported."
     section: about
 
-  clients:
-    section: clients
-    max-height: 100px
-    horizontal-scrolling: "" #"yes/no"
-    list:
-      - title: "functions.io"
-        url: https://functions.io
-        logo: assets/img/clients/functionsio.png
-      - title: "hey"
-        url: https://www.heyrj.com/
-        logo: assets/img/clients/hey.png            
-      - title: "google"
-        url: https://www.google.com/nonprofits/offerings/workspace/
-        logo: assets/img/clients/google.png
   donations:
     title: "DONATIONS"
     text: "Thank you for your support"
@@ -142,7 +128,7 @@ en: &DEFAULT_EN
         icon: "fab fa-facebook-f"
       - url: https://github.com/digitaledsafety
         icon: "fab fa-github"    
-      - url: https://discord.gg/5tc2DfUZVe
+      - url: https://discord.gg/aHaYjHbXBJ
         icon: "fab fa-discord"  
         
 en-US:
@@ -231,18 +217,6 @@ es:
     text: "nuestra historia"
     section: about
 
-  clients:
-    section: clientes
-    list:
-      - title: "functions.io"
-        url: https://functions.io
-        logo: assets/img/clients/functionsio.png
-      - title: "hey"
-        url: https://www.heyrj.com/
-        logo: assets/img/clients/hey.png
-      - title: "google"
-        url: https://www.google.com/nonprofits/offerings/workspace/
-        logo: assets/img/clients/google.png
   donations:
     title: "DONACIONES"
     text: "Gracias por tu apoyo"
@@ -280,7 +254,7 @@ es:
         icon: "fab fa-github"
       - url: https://facebook.com/digitaledsafety
         icon: "fab fa-facebook-f"
-      - url: https://discord.gg/5tc2DfUZVe
+      - url: https://discord.gg/aHaYjHbXBJ
         icon: "fab fa-discord"
 
 es-ES:
