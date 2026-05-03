@@ -123,9 +123,9 @@
   <div class="col-md-3 mt-3">
     <select id="service-filter" class="form-control">
       <option value="all">All Services</option>
-      <option value="Entrepreneurship">Entrepreneurship</option>
-      <option value="Engineering">Engineering</option>
-      <option value="Digital Safety">Digital Safety</option>
+      {% for service in site.services %}
+      <option value="{{ service.title }}">{{ service.title }}</option>
+      {% endfor %}
     </select>
   </div>
   <div class="col-md-3 mt-3">
@@ -141,12 +141,9 @@
 </div>
 
 <script>
-  const programsMap = {
-    {% for p in site.programs %}
-    "{{ p.id | default: p.url | split: "/" | last | replace: ".html", "" }}": {
-      "title": {{ p.title | jsonify }},
-      "service": {{ p.caption.subtitle | jsonify }}
-    }{% unless forloop.last %},{% endunless %}
+  const serviceIcons = {
+    {% for service in site.services %}
+    {{ service.title | jsonify }}: {{ service.icon | jsonify }}{% unless forloop.last %},{% endunless %}
     {% endfor %}
   };
   const marketplaceData = [
@@ -159,7 +156,7 @@
       "platform": {{ item.platform | default: "pwa" | jsonify }},
       "categories": {{ item.categories | jsonify }},
       "program": {{ item.program | jsonify }},
-      "service": (programsMap[{{ item.program | jsonify }}] || {}).service || "N/A",
+      "service": {{ item.service | default: "N/A" | jsonify }},
       "date": {{ item.date | jsonify }},
       "tags": {{ item.tags | jsonify }}
     }{% unless forloop.last %},{% endunless %}
@@ -182,14 +179,7 @@
         icon = 'fa-github';
       }
 
-      let serviceIcon = 'fa-laptop';
-      if (item.service === 'Entrepreneurship') {
-        serviceIcon = 'fa-laptop';
-      } else if (item.service === 'Engineering') {
-        serviceIcon = 'fa-cogs';
-      } else if (item.service === 'Digital Safety') {
-        serviceIcon = 'fa-user-shield';
-      }
+      let serviceIcon = serviceIcons[item.service] || 'fa-laptop';
 
       const html = `
         <div class="col-lg-4 col-md-6 mb-4 marketplace-item-wrapper">
