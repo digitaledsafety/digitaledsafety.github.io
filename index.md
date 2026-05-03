@@ -1,4 +1,23 @@
 ---
-layout: home
-image: /assets/img/header-bg.jpg
+layout: default
 ---
+{% include navheader.html %}
+
+{% assign marketplace_data = site.data.sitetext[site.locale].marketplace %}
+<section class="bg-light" id="{{ marketplace_data.section | default: 'marketplace' }}">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <h2 class="section-heading text-uppercase">{{ marketplace_data.title | default: 'Marketplace' }}</h2>
+        <h3 class="section-subheading text-muted">{{ marketplace_data.text | default: 'Apps and Games for a Modern Education' }}</h3>
+      </div>
+    </div>
+    {% include marketplace_grid.html %}
+  </div>
+</section>
+
+{% include services.html %}
+
+{% include program_grid.html %}
+
+{% include contact.html %}

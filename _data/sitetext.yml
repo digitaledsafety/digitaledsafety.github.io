@@ -10,6 +10,11 @@
 # English (default)
 # -----------------
 en: &DEFAULT_EN
+  marketplace:
+    title: "Marketplace"
+    text: "Apps and Games for a Modern Education"
+    section: marketplace
+
   header:
     title: "Our Mission:"
     text: Empowering the underserved with a modern STEM education
@@ -154,6 +159,11 @@ en-GB:
 en-AU:
   <<: *DEFAULT_EN
 es: 
+  marketplace:
+    title: "Mercado"
+    text: "Aplicaciones y Juegos para una Educación Moderna"
+    section: mercado
+
   header:
     title: "Nuestra Misión:"
     text: Empoderar a los desatendidos con una educación STEM moderna
