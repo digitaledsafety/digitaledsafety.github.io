@@ -8,8 +8,12 @@ test('homepage has correct sections and navigation', async ({ page }) => {
   await expect(marketplace).toBeAttached();
   await expect(marketplace.locator('h2')).toHaveText('Marketplace');
 
-  // Check that legacy sections are removed
-  await expect(page.locator('#services')).not.toBeAttached();
+  // Check for Services section
+  const services = page.locator('#services');
+  await expect(services).toBeAttached();
+  await expect(services.locator('h2')).toHaveText('Services');
+
+  // Check that legacy sections are removed (except services)
   await expect(page.locator('#resource')).not.toBeAttached();
   await expect(page.locator('#timeline')).not.toBeAttached();
 

@@ -6,33 +6,7 @@
     <meta name="description" content="{{ page.description | escape }}">
     <meta name="author" content="{{ site.author.name | escape }}">
     
-    {% comment %}
-    This section below is for defining manifest file for PWAs
-    {% endcomment %}
-    {% capture manifestObj %}
-    { 
-      "name": {{ page.title | jsonify }},
-      "short_name": {{ page.subtitle | jsonify }},
-      "description": {{ page.description | jsonify }},
-      "icons": [
-        {
-          "src": {{ "/assets/img/favicon.ico" | relative_url | jsonify }},
-          "sizes": "192x192",
-          "type": "image/png"
-        },
-        {
-          "src": {{ "/assets/img/favicon.ico" | relative_url | jsonify }},
-          "sizes": "512x512",
-          "type": "image/png"
-        }
-      ],
-      "start_url": {{ page.url | relative_url | jsonify }},
-      "display": "standalone",
-      "theme_color": "#000000",
-      "background_color": "#ffffff"
-    }     
-    {% endcapture %}
-    <link rel="manifest" href='data:application/manifest+json,{{ manifestObj | strip_newlines }}' />
+    {% include pwa_manifest.html %}
     
     <title>{{ page.title }}</title>
 

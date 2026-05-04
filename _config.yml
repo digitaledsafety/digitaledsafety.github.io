@@ -57,6 +57,8 @@ collections:
   marketplace:
     output: true
     path: /marketplace/:path/   
+  services:
+    output: true
 
 markdown: kramdown
 
