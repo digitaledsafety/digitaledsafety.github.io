@@ -212,7 +212,7 @@
               </div>
 
               <div class="marketplace-footer">
-                <a href="${item.link}" target="_blank" class="btn btn-primary btn-install">${btnText}</a>
+                <a href="${item.link}" target="_blank" class="btn btn-primary btn-install" aria-label="${btnText} ${item.title}">${btnText}</a>
               </div>
             </div>
           </div>
@@ -231,6 +231,7 @@
       const matchesSearch = (item.title && item.title.toLowerCase().includes(searchTerm)) ||
                            (item.subtitle && item.subtitle.toLowerCase().includes(searchTerm)) ||
                            (item.platform && item.platform.toLowerCase().includes(searchTerm)) ||
+                           (item.service && item.service.toLowerCase().includes(searchTerm)) ||
                            (Array.isArray(item.categories) && item.categories.some(c => c && c.toLowerCase().includes(searchTerm))) ||
                            (Array.isArray(item.tags) && item.tags.some(t => t && t.toLowerCase().includes(searchTerm)));
       const matchesService = service === 'all' || item.service === service;
