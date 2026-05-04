@@ -1,5 +1,5 @@
 ---
 title: Entrepreneurship
-icon: fa-laptop
+icon: fas fa-laptop
 desc: Fostering innovation and business skills through digital platforms and creative projects.
 ---
