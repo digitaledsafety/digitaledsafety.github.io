@@ -169,14 +169,19 @@
 
     data.forEach(item => {
       let btnText = 'Launch';
-      let icon = 'fa-globe';
+      let platformIcon = 'fa-globe';
+      let platformDisplay = item.platform;
 
-      if (item.platform === 'android') {
+      if (item.platform.toLowerCase() === 'pwa' || item.platform.toLowerCase() === 'web app') {
+        platformDisplay = 'Web App';
+        platformIcon = 'fa-globe';
+        btnText = 'Launch';
+      } else if (item.platform === 'android') {
         btnText = 'Download';
-        icon = 'fa-android';
+        platformIcon = 'fa-android';
       } else if (item.platform === 'github') {
         btnText = 'Build';
-        icon = 'fa-github';
+        platformIcon = 'fa-github';
       }
 
       let serviceIcon = serviceIcons[item.service] || 'fa-laptop';
@@ -198,8 +203,8 @@
 
               <div class="marketplace-meta">
                 <div class="meta-item">
-                  <i class="fa fa-laptop"></i>
-                  <span class="meta-label">Platform:</span><span class="title-case"> ${item.platform} <span>
+                  <i class="fa ${platformIcon}"></i>
+                  <span class="meta-label">Platform:</span><span class="title-case"> ${platformDisplay} </span>
                 </div>
                 <div class="meta-item">
                   <i class="fa fa-tag"></i>
@@ -207,7 +212,7 @@
                 </div>
                 <div class="meta-item">
                   <i class="fa ${serviceIcon}"></i>
-                  <span class="meta-label">Service:</span><span class="title-case">  ${item.service.toLowerCase()} <span>
+                  <span class="meta-label">Service:</span><span class="title-case">  ${item.service.toLowerCase()} </span>
                 </div>
               </div>
 
