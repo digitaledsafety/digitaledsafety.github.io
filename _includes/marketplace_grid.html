@@ -115,7 +115,7 @@
   <div class="col-md-6 mt-3">
     <div class="input-group">
       <div class="input-group-prepend">
-        <span class="input-group-text"><i class="fa fa-search"></i></span>
+        <span class="input-group-text"><i class="fas fa-search"></i></span>
       </div>
       <input type="text" id="marketplace-search" class="form-control" placeholder="Search...">
     </div>
@@ -169,22 +169,22 @@
 
     data.forEach(item => {
       let btnText = 'Launch';
-      let platformIcon = 'fa-globe';
+      let platformIcon = 'fas fa-globe';
       let platformDisplay = item.platform;
 
       if (item.platform.toLowerCase() === 'pwa' || item.platform.toLowerCase() === 'web app') {
         platformDisplay = 'Web App';
-        platformIcon = 'fa-globe';
+        platformIcon = 'fas fa-globe';
         btnText = 'Launch';
       } else if (item.platform === 'android') {
         btnText = 'Download';
-        platformIcon = 'fa-android';
+        platformIcon = 'fab fa-android';
       } else if (item.platform === 'github') {
         btnText = 'Build';
-        platformIcon = 'fa-github';
+        platformIcon = 'fab fa-github';
       }
 
-      let serviceIcon = serviceIcons[item.service] || 'fa-laptop';
+      let serviceIcon = serviceIcons[item.service] || 'fas fa-laptop';
 
       const html = `
         <div class="col-lg-4 col-md-6 mb-4 marketplace-item-wrapper">
@@ -203,15 +203,15 @@
 
               <div class="marketplace-meta">
                 <div class="meta-item">
-                  <i class="fa ${platformIcon}"></i>
+                  <i class="${platformIcon}"></i>
                   <span class="meta-label">Platform:</span><span class="title-case"> ${platformDisplay} </span>
                 </div>
                 <div class="meta-item">
-                  <i class="fa fa-tag"></i>
+                  <i class="fas fa-tag"></i>
                   <span class="meta-label">Category:</span><span class="title-case">  ${Array.isArray(item.categories) ? item.categories.join(", ") : (item.categories || "N/A")} </span>
                 </div>
                 <div class="meta-item">
-                  <i class="fa ${serviceIcon}"></i>
+                  <i class="${serviceIcon}"></i>
                   <span class="meta-label">Service:</span><span class="title-case">  ${item.service.toLowerCase()} </span>
                 </div>
               </div>
