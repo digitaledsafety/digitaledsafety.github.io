@@ -111,6 +111,12 @@
   }
 </style>
 
+{% if site.locale and site.locale != "" and site.locale != nil %}
+  {% assign services_data = site.data.sitetext[site.locale].services %}
+{% else %}
+  {% assign services_data = site.data.sitetext.services %}
+{% endif %}
+
 <div class="row mb-4">
   <div class="col-md-6 mt-3">
     <div class="input-group">
@@ -122,7 +128,7 @@
   </div>
   <div class="col-md-3 mt-3">
     <select id="service-filter" class="form-control">
-      <option value="all">All Services</option>
+      <option value="all">All {{ services_data.title | default: "Services" }}</option>
       {% for service in site.services %}
       <option value="{{ service.title }}">{{ service.title }}</option>
       {% endfor %}
@@ -170,36 +176,41 @@
     data.forEach(item => {
       let btnText = 'Launch';
       let platformIcon = 'fas fa-globe';
-      let platformDisplay = item.platform;
+      let platformDisplay = item.platform || 'Web App';
+      let itemTitle = item.title || 'Untitled';
+      let itemSubtitle = item.subtitle || '';
+      let itemImage = item.image || '/assets/img/logo-mobile.png';
+      let itemLink = item.link || '#';
+      let itemService = item.service || 'N/A';
 
-      if (item.platform.toLowerCase() === 'pwa' || item.platform.toLowerCase() === 'web app') {
+      if (platformDisplay.toLowerCase() === 'pwa' || platformDisplay.toLowerCase() === 'web app') {
         platformDisplay = 'Web App';
         platformIcon = 'fas fa-globe';
         btnText = 'Launch';
-      } else if (item.platform === 'android') {
+      } else if (platformDisplay.toLowerCase() === 'android') {
         btnText = 'Download';
         platformIcon = 'fab fa-android';
-      } else if (item.platform === 'github') {
+      } else if (platformDisplay.toLowerCase() === 'github') {
         btnText = 'Build';
         platformIcon = 'fab fa-github';
       }
 
-      let serviceIcon = serviceIcons[item.service] || 'fas fa-laptop';
+      let serviceIcon = serviceIcons[itemService] || 'fas fa-laptop';
 
       const html = `
         <div class="col-lg-4 col-md-6 mb-4 marketplace-item-wrapper">
           <div class="card marketplace-card">
             <div class="marketplace-img-container">
-              <img src="${item.image}" alt="${item.title}">
+              <img src="${itemImage}" alt="${itemTitle}">
             </div>
             <div class="marketplace-body">
               <div class="d-flex justify-content-between align-items-start">
-                <h5 class="marketplace-title mr-2">${item.title}</h5>
+                <h5 class="marketplace-title mr-2">${itemTitle}</h5>
                 <div class="d-flex flex-column align-items-end flex-shrink-0">
-                  <span class="service-badge">${item.service}</span>
+                  <span class="service-badge">${itemService}</span>
                 </div>
               </div>
-              <p class="marketplace-subtitle">${item.subtitle}</p>
+              <p class="marketplace-subtitle">${itemSubtitle}</p>
 
               <div class="marketplace-meta">
                 <div class="meta-item">
@@ -212,12 +223,12 @@
                 </div>
                 <div class="meta-item">
                   <i class="${serviceIcon}"></i>
-                  <span class="meta-label">Service:</span><span class="title-case">  ${item.service.toLowerCase()} </span>
+                  <span class="meta-label">Service:</span><span class="title-case">  ${itemService.toLowerCase()} </span>
                 </div>
               </div>
 
               <div class="marketplace-footer">
-                <a href="${item.link}" target="_blank" class="btn btn-primary btn-install" aria-label="${btnText} ${item.title}">${btnText}</a>
+                <a href="${itemLink}" target="_blank" class="btn btn-primary btn-install" aria-label="${btnText} ${itemTitle}">${btnText}</a>
               </div>
             </div>
           </div>
