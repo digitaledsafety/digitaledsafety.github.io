@@ -49,15 +49,15 @@ We've compiled a directory of organizations we support below. Click on any organ
         [{% for card in posts %}
         {
             "title": {{card.title | jsonify}},
-            "tags": {{card.tags | jsonify}},
+            "tags": {{card.tags | default: "" | jsonify}},
             "url": {{card.url | jsonify}},
             "contribute": {{card.donation_url | jsonify}},
             "caption": {{card.caption | jsonify}},
             "abbreviations": {{card.abbreviations | jsonify}},
             "homepage": {{card.homepage | jsonify}},
             "description": {{card.excerpt | jsonify}}
-        },
-        {% endfor %}]
+        }{% unless forloop.last %},{% endunless %}
+        {% endfor %}];
 
       </script>
 
@@ -95,14 +95,17 @@ We've compiled a directory of organizations we support below. Click on any organ
 
     <script>
       function getCardHtml(cardObj) {
+        const tags = Array.isArray(cardObj.tags) ? cardObj.tags : (cardObj.tags ? cardObj.tags.split(',') : []);
+        const tagsString = tags.join(', ');
+        const thumbnail = (cardObj.caption && cardObj.caption.thumbnail) ? cardObj.caption.thumbnail : '';
         return `
-          <div class="col-md-4 mb-3 filterable-card" data-filters="${cardObj.tags.join(',')}">
+          <div class="col-md-4 mb-3 filterable-card" data-filters="${tags.join(',')}">
               <div class="card h-100">
-                <a href="${cardObj.url}"><img class="card-img-top img-fluid" src=${cardObj.caption.thumbnail} alt=""></a>
+                <a href="${cardObj.url}"><img class="card-img-top img-fluid" src="${thumbnail}" alt=""></a>
                   <div class="card-body d-flex flex-column">
                       <h5 class="card-title"><a href="${cardObj.url}">${cardObj.title}</a></h5>
-                      <p class="card-subtitle mb-2 text-muted">${cardObj.tags.join(', ')}</p>
-                      <p class="card-text">${cardObj.description}</p>
+                      <p class="card-subtitle mb-2 text-muted">${tagsString}</p>
+                      <p class="card-text">${cardObj.description || ''}</p>
                       <div class="mt-auto">
                         <a href="${cardObj.url}" class="btn btn-outline-primary btn-sm">View Details</a>
                         <a target="_blank" href="${cardObj.contribute}" class="btn btn-primary btn-sm">Donate</a>
