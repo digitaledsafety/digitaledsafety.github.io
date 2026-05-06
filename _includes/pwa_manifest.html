@@ -1,8 +1,8 @@
 {% capture manifestObj %}
 {
-  "name": {{ page.title | jsonify }},
-  "short_name": {{ page.subtitle | jsonify }},
-  "description": {{ page.description | jsonify }},
+  "name": {{ page.title | default: site.title | jsonify }},
+  "short_name": {{ page.subtitle | default: page.title | default: site.title | jsonify }},
+  "description": {{ page.description | default: site.description | jsonify }},
   "icons": [
     {
       "src": {{ "/assets/img/favicon.ico" | relative_url | jsonify }},
