@@ -1,0 +1,294 @@
+<style>
+  .marketplace-card {
+    border: none;
+    border-radius: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+  }
+  .marketplace-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+  }
+  .marketplace-img-container {
+    position: relative;
+    width: 100%;
+    padding-top: 60%; /* 5:3 Aspect Ratio */
+    overflow: hidden;
+    background: #f8f9fa;
+  }
+  .marketplace-img-container img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .marketplace-body {
+    padding: 1.5rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  .marketplace-title {
+    font-weight: 700;
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+    color: #333;
+  }
+  .marketplace-subtitle {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 1rem;
+    flex-grow: 1;
+  }
+  .marketplace-meta {
+    background: #f8f9fa;
+    border-radius: 10px;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+  }
+  .meta-item {
+    display: flex;
+    align-items: center;
+    font-size: 0.8rem;
+    color: #555;
+    margin-bottom: 0.25rem;
+  }
+  .meta-item:last-child {
+    margin-bottom: 0;
+  }
+  .meta-item i {
+    width: 18px;
+    margin-right: 8px;
+    color: #fed136; /* Agency Theme Primary */
+    text-align: center;
+  }
+  .meta-label {
+    font-weight: 600;
+    margin-right: 4px;
+    color: #333;
+  }
+  .marketplace-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+  }
+  .btn-install {
+    border-radius: 50px;
+    padding: 0.5rem 1.5rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    transition: all 0.2s;
+  }
+  .platform-badge {
+    font-size: 0.7rem;
+    padding: 0.3rem 0.6rem;
+    border-radius: 10px;
+    background: #e9ecef;
+    color: #495057;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+  .service-badge {
+    font-size: 0.7rem;
+    padding: 0.3rem 0.6rem;
+    border-radius: 10px;
+    background: #fed136;
+    color: #fff;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+  .title-case {
+    text-transform: capitalize;
+  }
+  #no-results-message {
+    width: 100%;
+    padding: 2rem;
+    text-align: center;
+    background: #f8f9fa;
+    border-radius: 10px;
+    margin: 1rem 0;
+  }
+</style>
+
+{% assign ui_data = site.data.sitetext[site.locale].marketplace_ui %}
+
+<div class="row mb-4">
+  <div class="col-md-6 mt-3">
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text"><i class="fas fa-search"></i></span>
+      </div>
+      <input type="text" id="marketplace-search" class="form-control" placeholder="{{ ui_data.search_placeholder | default: "Search..." }}" aria-label="{{ ui_data.search_placeholder | default: "Search" }}">
+    </div>
+  </div>
+  <div class="col-md-3 mt-3">
+    <select id="service-filter" class="form-control" aria-label="{{ ui_data.service_label | default: "Service Filter" }}">
+      <option value="all">{{ ui_data.all_services | default: "All Services" }}</option>
+      {% for service in site.services %}
+      <option value="{{ service.title }}">{{ service.title }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div class="col-md-3 mt-3">
+    <select id="sort-by" class="form-control" aria-label="Sort options">
+      <option value="recent">{{ ui_data.sort_recent | default: "Recently Added" }}</option>
+      <option value="alpha">{{ ui_data.sort_alpha | default: "Alphabetical" }}</option>
+    </select>
+  </div>
+</div>
+
+<div id="no-results-message" role="status" style="display: none;">
+  <p class="text-muted">{{ ui_data.no_results | default: "No results found matching your search." }}</p>
+</div>
+
+<div class="row" id="marketplace-container">
+  <!-- Marketplace items will be injected here -->
+</div>
+
+<script>
+  const uiStrings = {
+    platform: {{ ui_data.platform_label | default: "Platform:" | jsonify }},
+    category: {{ ui_data.category_label | default: "Category:" | jsonify }},
+    service: {{ ui_data.service_label | default: "Service:" | jsonify }},
+    launch: {{ ui_data.launch_btn | default: "Launch" | jsonify }},
+    download: {{ ui_data.download_btn | default: "Download" | jsonify }},
+    build: {{ ui_data.build_btn | default: "Build" | jsonify }},
+    webapp: {{ ui_data.webapp | default: "Web App" | jsonify }},
+    fallback: {{ ui_data.fallback | default: "N/A" | jsonify }}
+  };
+  const serviceIcons = {
+    {% for service in site.services %}
+    {{ service.title | jsonify }}: {{ service.icon | jsonify }}{% unless forloop.last %},{% endunless %}
+    {% endfor %}
+  };
+  const marketplaceData = [
+    {% for item in site.marketplace %}
+    {
+      "title": {{ item.title | jsonify }},
+      "subtitle": {{ item.subtitle | jsonify }},
+      "image": {{ item.image | jsonify }},
+      "link": {{ item.link | jsonify }},
+      "platform": {{ item.platform | default: "pwa" | jsonify }},
+      "categories": {{ item.categories | jsonify }},
+      "program": {{ item.program | jsonify }},
+      "service": {{ item.service | default: "N/A" | jsonify }},
+      "date": {{ item.date | jsonify }},
+      "tags": {{ item.tags | jsonify }}
+    }{% unless forloop.last %},{% endunless %}
+    {% endfor %}
+  ];
+
+  function renderMarketplace(data) {
+    const container = document.getElementById('marketplace-container');
+    container.innerHTML = '';
+
+    data.forEach(item => {
+      let btnText = uiStrings.launch;
+      let platformIcon = 'fas fa-globe';
+      let platformDisplay = item.platform || uiStrings.fallback;
+
+      if (item.platform && (item.platform.toLowerCase() === 'pwa' || item.platform.toLowerCase() === 'web app')) {
+        platformDisplay = uiStrings.webapp;
+        platformIcon = 'fas fa-globe';
+        btnText = uiStrings.launch;
+      } else if (item.platform === 'android') {
+        btnText = uiStrings.download;
+        platformIcon = 'fab fa-android';
+      } else if (item.platform === 'github') {
+        btnText = uiStrings.build;
+        platformIcon = 'fab fa-github';
+      }
+
+      let serviceIcon = serviceIcons[item.service] || 'fas fa-laptop';
+      let displayService = item.service || uiStrings.fallback;
+      let displayCategories = Array.isArray(item.categories) ? item.categories.join(", ") : (item.categories || uiStrings.fallback);
+
+      const html = `
+        <div class="col-lg-4 col-md-6 mb-4 marketplace-item-wrapper">
+          <div class="card marketplace-card">
+            <div class="marketplace-img-container">
+              <img src="${item.image}" alt="${item.title}">
+            </div>
+            <div class="marketplace-body">
+              <div class="d-flex justify-content-between align-items-start">
+                <h5 class="marketplace-title mr-2">${item.title}</h5>
+                <div class="d-flex flex-column align-items-end flex-shrink-0">
+                  <span class="service-badge">${displayService}</span>
+                </div>
+              </div>
+              <p class="marketplace-subtitle">${item.subtitle}</p>
+
+              <div class="marketplace-meta">
+                <div class="meta-item">
+                  <i class="${platformIcon}"></i>
+                  <span class="meta-label">${uiStrings.platform}</span><span class="title-case"> ${platformDisplay} </span>
+                </div>
+                <div class="meta-item">
+                  <i class="fas fa-tag"></i>
+                  <span class="meta-label">${uiStrings.category}</span><span class="title-case">  ${displayCategories} </span>
+                </div>
+                <div class="meta-item">
+                  <i class="${serviceIcon}"></i>
+                  <span class="meta-label">${uiStrings.service}</span><span class="title-case">  ${displayService.toLowerCase()} </span>
+                </div>
+              </div>
+
+              <div class="marketplace-footer">
+                <a href="${item.link}" target="_blank" class="btn btn-primary btn-install" aria-label="${btnText} ${item.title}">${btnText}</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+      container.innerHTML += html;
+    });
+  }
+
+  function filterAndSort() {
+    const searchTerm = document.getElementById('marketplace-search').value.toLowerCase();
+    const service = document.getElementById('service-filter').value;
+    const sortBy = document.getElementById('sort-by').value;
+
+    let filtered = marketplaceData.filter(item => {
+      const matchesSearch = (item.title && item.title.toLowerCase().includes(searchTerm)) ||
+                           (item.subtitle && item.subtitle.toLowerCase().includes(searchTerm)) ||
+                           (item.platform && item.platform.toLowerCase().includes(searchTerm)) ||
+                           (item.service && item.service.toLowerCase().includes(searchTerm)) ||
+                           (Array.isArray(item.categories) && item.categories.some(c => c && c.toLowerCase().includes(searchTerm))) ||
+                           (Array.isArray(item.tags) && item.tags.some(t => t && t.toLowerCase().includes(searchTerm)));
+      const matchesService = service === 'all' || item.service === service;
+      return matchesSearch && matchesService;
+    });
+
+    if (sortBy === 'alpha') {
+      filtered.sort((a, b) => a.title.localeCompare(b.title));
+    } else {
+      filtered.sort((a, b) => new Date(b.date) - new Date(a.date));
+    }
+
+    const noResultsMsg = document.getElementById('no-results-message');
+    if (filtered.length === 0) {
+      noResultsMsg.style.display = 'block';
+    } else {
+      noResultsMsg.style.display = 'none';
+    }
+
+    renderMarketplace(filtered);
+  }
+
+  document.getElementById('marketplace-search').addEventListener('input', filterAndSort);
+  document.getElementById('service-filter').addEventListener('change', filterAndSort);
+  document.getElementById('sort-by').addEventListener('change', filterAndSort);
+
+  // Initial render
+  filterAndSort();
+</script>
