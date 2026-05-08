@@ -109,7 +109,17 @@
   .title-case {
     text-transform: capitalize;
   }
+  #no-results-message {
+    width: 100%;
+    padding: 2rem;
+    text-align: center;
+    background: #f8f9fa;
+    border-radius: 10px;
+    margin: 1rem 0;
+  }
 </style>
+
+{% assign ui_data = site.data.sitetext[site.locale].marketplace_ui %}
 
 <div class="row mb-4">
   <div class="col-md-6 mt-3">
@@ -117,23 +127,27 @@
       <div class="input-group-prepend">
         <span class="input-group-text"><i class="fas fa-search"></i></span>
       </div>
-      <input type="text" id="marketplace-search" class="form-control" placeholder="Search...">
+      <input type="text" id="marketplace-search" class="form-control" placeholder="{{ ui_data.search_placeholder | default: "Search..." }}" aria-label="{{ ui_data.search_placeholder | default: "Search" }}">
     </div>
   </div>
   <div class="col-md-3 mt-3">
-    <select id="service-filter" class="form-control">
-      <option value="all">All Services</option>
+    <select id="service-filter" class="form-control" aria-label="{{ ui_data.service_label | default: "Service Filter" }}">
+      <option value="all">{{ ui_data.all_services | default: "All Services" }}</option>
       {% for service in site.services %}
       <option value="{{ service.title }}">{{ service.title }}</option>
       {% endfor %}
     </select>
   </div>
   <div class="col-md-3 mt-3">
-    <select id="sort-by" class="form-control">
-      <option value="recent">Recently Added</option>
-      <option value="alpha">Alphabetical</option>
+    <select id="sort-by" class="form-control" aria-label="Sort options">
+      <option value="recent">{{ ui_data.sort_recent | default: "Recently Added" }}</option>
+      <option value="alpha">{{ ui_data.sort_alpha | default: "Alphabetical" }}</option>
     </select>
   </div>
+</div>
+
+<div id="no-results-message" role="status" style="display: none;">
+  <p class="text-muted">{{ ui_data.no_results | default: "No results found matching your search." }}</p>
 </div>
 
 <div class="row" id="marketplace-container">
@@ -141,6 +155,16 @@
 </div>
 
 <script>
+  const uiStrings = {
+    platform: {{ ui_data.platform_label | default: "Platform:" | jsonify }},
+    category: {{ ui_data.category_label | default: "Category:" | jsonify }},
+    service: {{ ui_data.service_label | default: "Service:" | jsonify }},
+    launch: {{ ui_data.launch_btn | default: "Launch" | jsonify }},
+    download: {{ ui_data.download_btn | default: "Download" | jsonify }},
+    build: {{ ui_data.build_btn | default: "Build" | jsonify }},
+    webapp: {{ ui_data.webapp | default: "Web App" | jsonify }},
+    fallback: {{ ui_data.fallback | default: "N/A" | jsonify }}
+  };
   const serviceIcons = {
     {% for service in site.services %}
     {{ service.title | jsonify }}: {{ service.icon | jsonify }}{% unless forloop.last %},{% endunless %}
@@ -168,23 +192,25 @@
     container.innerHTML = '';
 
     data.forEach(item => {
-      let btnText = 'Launch';
+      let btnText = uiStrings.launch;
       let platformIcon = 'fas fa-globe';
-      let platformDisplay = item.platform;
+      let platformDisplay = item.platform || uiStrings.fallback;
 
-      if (item.platform.toLowerCase() === 'pwa' || item.platform.toLowerCase() === 'web app') {
-        platformDisplay = 'Web App';
+      if (item.platform && (item.platform.toLowerCase() === 'pwa' || item.platform.toLowerCase() === 'web app')) {
+        platformDisplay = uiStrings.webapp;
         platformIcon = 'fas fa-globe';
-        btnText = 'Launch';
+        btnText = uiStrings.launch;
       } else if (item.platform === 'android') {
-        btnText = 'Download';
+        btnText = uiStrings.download;
         platformIcon = 'fab fa-android';
       } else if (item.platform === 'github') {
-        btnText = 'Build';
+        btnText = uiStrings.build;
         platformIcon = 'fab fa-github';
       }
 
       let serviceIcon = serviceIcons[item.service] || 'fas fa-laptop';
+      let displayService = item.service || uiStrings.fallback;
+      let displayCategories = Array.isArray(item.categories) ? item.categories.join(", ") : (item.categories || uiStrings.fallback);
 
       const html = `
         <div class="col-lg-4 col-md-6 mb-4 marketplace-item-wrapper">
@@ -196,7 +222,7 @@
               <div class="d-flex justify-content-between align-items-start">
                 <h5 class="marketplace-title mr-2">${item.title}</h5>
                 <div class="d-flex flex-column align-items-end flex-shrink-0">
-                  <span class="service-badge">${item.service}</span>
+                  <span class="service-badge">${displayService}</span>
                 </div>
               </div>
               <p class="marketplace-subtitle">${item.subtitle}</p>
@@ -204,15 +230,15 @@
               <div class="marketplace-meta">
                 <div class="meta-item">
                   <i class="${platformIcon}"></i>
-                  <span class="meta-label">Platform:</span><span class="title-case"> ${platformDisplay} </span>
+                  <span class="meta-label">${uiStrings.platform}</span><span class="title-case"> ${platformDisplay} </span>
                 </div>
                 <div class="meta-item">
                   <i class="fas fa-tag"></i>
-                  <span class="meta-label">Category:</span><span class="title-case">  ${Array.isArray(item.categories) ? item.categories.join(", ") : (item.categories || "N/A")} </span>
+                  <span class="meta-label">${uiStrings.category}</span><span class="title-case">  ${displayCategories} </span>
                 </div>
                 <div class="meta-item">
                   <i class="${serviceIcon}"></i>
-                  <span class="meta-label">Service:</span><span class="title-case">  ${item.service.toLowerCase()} </span>
+                  <span class="meta-label">${uiStrings.service}</span><span class="title-case">  ${displayService.toLowerCase()} </span>
                 </div>
               </div>
 
@@ -247,6 +273,13 @@
       filtered.sort((a, b) => a.title.localeCompare(b.title));
     } else {
       filtered.sort((a, b) => new Date(b.date) - new Date(a.date));
+    }
+
+    const noResultsMsg = document.getElementById('no-results-message');
+    if (filtered.length === 0) {
+      noResultsMsg.style.display = 'block';
+    } else {
+      noResultsMsg.style.display = 'none';
     }
 
     renderMarketplace(filtered);
