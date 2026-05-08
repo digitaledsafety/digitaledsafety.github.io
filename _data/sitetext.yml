@@ -15,6 +15,21 @@ en: &DEFAULT_EN
     text: "Apps and Games for a Modern Education"
     section: marketplace
 
+  marketplace_ui:
+    search_placeholder: "Search..."
+    all_services: "All Services"
+    sort_recent: "Recently Added"
+    sort_alpha: "Alphabetical"
+    platform_label: "Platform:"
+    category_label: "Category:"
+    service_label: "Service:"
+    launch_btn: "Launch"
+    download_btn: "Download"
+    build_btn: "Build"
+    webapp: "Web App"
+    no_results: "No results found matching your search."
+    fallback: "N/A"
+
   header:
     title: "Our Mission:"
     text: Empowering the underserved with a modern STEM education
@@ -149,6 +164,21 @@ es:
     title: "Mercado"
     text: "Aplicaciones y Juegos para una Educación Moderna"
     section: mercado
+
+  marketplace_ui:
+    search_placeholder: "Buscar..."
+    all_services: "Todos los Servicios"
+    sort_recent: "Recientemente Añadido"
+    sort_alpha: "Alfabético"
+    platform_label: "Plataforma:"
+    category_label: "Categoría:"
+    service_label: "Servicio:"
+    launch_btn: "Lanzar"
+    download_btn: "Descargar"
+    build_btn: "Construir"
+    webapp: "Aplicación Web"
+    no_results: "No se encontraron resultados que coincidan con su búsqueda."
+    fallback: "N/A"
 
   header:
     title: "Nuestra Misión:"
