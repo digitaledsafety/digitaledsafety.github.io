@@ -121,9 +121,6 @@
 
 {% assign ui_data = site.data.sitetext[site.locale].marketplace_ui %}
 
-{% include embed/paypal_sdk.html %}
-{% include donation_modal.html %}
-
 <div class="row mb-4">
   <div class="col-md-6 mt-3">
     <div class="input-group">
@@ -246,10 +243,7 @@
               </div>
 
               <div class="marketplace-footer">
-                ${item.platform === 'pwa' || item.platform === 'web app' || !item.platform ?
-                  `<a href="javascript:void(0)" class="btn btn-primary btn-install launch-trigger" data-link="${item.link}" aria-label="${btnText} ${item.title}">${btnText}</a>` :
-                  `<a href="${item.link}" target="_blank" class="btn btn-primary btn-install" aria-label="${btnText} ${item.title}">${btnText}</a>`
-                }
+                <a href="${item.link}" target="_blank" class="btn btn-primary btn-install" aria-label="${btnText} ${item.title}">${btnText}</a>
               </div>
             </div>
           </div>
@@ -294,12 +288,6 @@
   document.getElementById('marketplace-search').addEventListener('input', filterAndSort);
   document.getElementById('service-filter').addEventListener('change', filterAndSort);
   document.getElementById('sort-by').addEventListener('change', filterAndSort);
-
-  document.getElementById('marketplace-container').addEventListener('click', function(e) {
-    if (e.target.classList.contains('launch-trigger')) {
-      handleLaunch(e.target.getAttribute('data-link'));
-    }
-  });
 
   // Initial render
   filterAndSort();

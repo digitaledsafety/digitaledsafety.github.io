@@ -2,8 +2,6 @@
 <html lang="en">
   {% include head.html %}
   <body class="text-center">
-    {% include embed/paypal_sdk.html %}
-    {% include donation_modal.html %}
 
     <div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
       <header class="masthead mb-auto">
@@ -21,13 +19,9 @@
         <h1 class="cover-heading">{{ page.title }}</h1>
         <p class="lead">{{ page.subtitle }}</p>
         <p class="lead">
-          {% if page.platform == 'android' %}
-            <a href="{{ page.link }}" target="_blank" class="btn btn-lg btn-primary">Download APK</a>
-          {% elsif page.platform == 'github' %}
-            <a href="{{ page.link }}" target="_blank" class="btn btn-lg btn-primary">Build on GitHub</a>
-          {% else %}
-            <a href="javascript:void(0)" onclick="handleLaunch('{{ page.link }}')" class="btn btn-lg btn-primary">Launch Web App</a>
-          {% endif %}
+          <a href="{{ page.link }}" target="_blank" class="btn btn-lg btn-primary">
+            {% if page.platform == 'android' %}Download APK{% elsif page.platform == 'github' %}Build on GitHub{% else %}Launch Web App{% endif %}
+          </a>
         </p>
       </main>
 

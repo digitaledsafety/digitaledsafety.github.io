@@ -30,15 +30,6 @@ en: &DEFAULT_EN
     no_results: "No results found matching your search."
     fallback: "N/A"
 
-  donation_modal:
-    title: "Support Our Mission"
-    text: "We hope you find this tool useful! As a nonprofit, we rely on donations to keep our resources free and accessible for everyone. Would you consider a small $1 donation before you launch?"
-    donate_btn: "Donate $1"
-    launch_anyway: "No thanks, just launch"
-    thank_you_title: "Thank You!"
-    thank_you_text: "Your support makes a huge difference in empowering students with STEM education."
-    continue_btn: "Continue to App"
-
   header:
     title: "Our Mission:"
     text: Empowering the underserved with a modern STEM education
@@ -188,15 +179,6 @@ es:
     webapp: "Aplicación Web"
     no_results: "No se encontraron resultados que coincidan con su búsqueda."
     fallback: "N/A"
-
-  donation_modal:
-    title: "Apoye Nuestra Misión"
-    text: "¡Esperamos que esta herramienta le sea útil! Como organización sin fines de lucro, dependemos de las donaciones para mantener nuestros recursos gratuitos y accesibles para todos. ¿Consideraría una pequeña donación de $1 antes de comenzar?"
-    donate_btn: "Donar $1"
-    launch_anyway: "No gracias, solo lanzar"
-    thank_you_title: "¡Gracias!"
-    thank_you_text: "Su apoyo marca una gran diferencia en el empoderamiento de los estudiantes con educación STEM."
-    continue_btn: "Continuar a la aplicación"
 
   header:
     title: "Nuestra Misión:"
