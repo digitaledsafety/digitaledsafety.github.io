@@ -35,7 +35,7 @@ es: &DEFAULT_ES
     - title: "+1-833-692-5477"
       url: "tel:+18336925477"  
     - title: "Nuestro Trabajo"
-      url: /#marketplace
+      url: /#mercado
     - title: "Contáctenos"
       url: /#contacto
     - title: "Tienda"
