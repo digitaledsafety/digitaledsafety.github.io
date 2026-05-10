@@ -7,18 +7,43 @@
 
     function getCardHtml(cardObj) {
         const tags = (cardObj.tags && Array.isArray(cardObj.tags)) ? cardObj.tags.join(',') : '';
-        return `
-            <div class="col-md-4 mb-3 filterable-card" data-filters="${tags}">
-                <div class="card h-100">
-                  <img class="card-img-top img-fluid" src="${cardObj.image}" alt="">
-                    <div class="card-body">
-                        <h5 class="card-title">${cardObj.title}</h5>
-                        <p class="card-text">${cardObj.subtitle}</p>
-                        <a href="${cardObj.link}" target="_blank" class="btn btn-primary stretched-link">View</a>
-                    </div>
-                </div>
-            </div>
-        `;
+
+        const wrapper = document.createElement('div');
+        wrapper.className = 'col-md-4 mb-3 filterable-card';
+        wrapper.setAttribute('data-filters', tags);
+
+        const card = document.createElement('div');
+        card.className = 'card h-100';
+        wrapper.appendChild(card);
+
+        const img = document.createElement('img');
+        img.className = 'card-img-top img-fluid';
+        img.src = cardObj.image;
+        img.alt = '';
+        card.appendChild(img);
+
+        const body = document.createElement('div');
+        body.className = 'card-body';
+        card.appendChild(body);
+
+        const title = document.createElement('h5');
+        title.className = 'card-title';
+        title.textContent = cardObj.title;
+        body.appendChild(title);
+
+        const text = document.createElement('p');
+        text.className = 'card-text';
+        text.textContent = cardObj.subtitle;
+        body.appendChild(text);
+
+        const link = document.createElement('a');
+        link.href = cardObj.link;
+        link.target = '_blank';
+        link.className = 'btn btn-primary stretched-link';
+        link.textContent = 'View';
+        body.appendChild(link);
+
+        return wrapper;
     }
 </script>
 

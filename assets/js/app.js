@@ -38,9 +38,13 @@ auth0.createAuth0Client({
       loginButton.hidden = true;
       logoutButton.hidden = false;
       profileElement.style.display = "block";
-      profileElement.innerHTML = `
-              <img src="${userProfile.picture}" />
-            `;
+
+      while (profileElement.firstChild) {
+        profileElement.removeChild(profileElement.firstChild);
+      }
+      const img = document.createElement('img');
+      img.src = userProfile.picture;
+      profileElement.appendChild(img);
     } else {
       loginButton.hidden = false;
       logoutButton.hidden = true;

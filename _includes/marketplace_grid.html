@@ -192,70 +192,124 @@
 
   function renderMarketplace(data) {
     const container = document.getElementById('marketplace-container');
-    container.innerHTML = '';
+    while (container.firstChild) {
+      container.removeChild(container.firstChild);
+    }
 
     data.forEach(item => {
       let btnText = uiStrings.launch;
-      let platformIcon = 'fas fa-globe';
+      let platformIconClasses = ['fas', 'fa-globe'];
       let platformDisplay = item.platform || uiStrings.fallback;
 
       if (item.platform && (item.platform.toLowerCase() === 'pwa' || item.platform.toLowerCase() === 'web app')) {
         platformDisplay = uiStrings.webapp;
-        platformIcon = 'fas fa-globe';
+        platformIconClasses = ['fas', 'fa-globe'];
         btnText = uiStrings.launch;
       } else if (item.platform === 'android') {
         btnText = uiStrings.download;
-        platformIcon = 'fab fa-android';
+        platformIconClasses = ['fab', 'fa-android'];
       } else if (item.platform === 'github') {
         btnText = uiStrings.build;
-        platformIcon = 'fab fa-github';
+        platformIconClasses = ['fab', 'fa-github'];
       }
 
-      let serviceIcon = serviceIcons[item.service] || 'fas fa-laptop';
+      let serviceIconClasses = (serviceIcons[item.service] || 'fas fa-laptop').split(' ');
       let displayService = item.service || uiStrings.fallback;
       let displayCategories = Array.isArray(item.categories) ? item.categories.join(", ") : (item.categories || uiStrings.fallback);
 
-      const html = `
-        <div class="col-lg-4 col-md-6 mb-4 marketplace-item-wrapper">
-          <div class="card marketplace-card">
-            <div class="marketplace-img-container">
-              <img src="${item.image}" alt="${item.title}">
-            </div>
-            <div class="marketplace-body">
-              <div class="d-flex justify-content-between align-items-start">
-                <h5 class="marketplace-title mr-2">${item.title}</h5>
-                <div class="d-flex flex-column align-items-end flex-shrink-0">
-                  <span class="service-badge">${displayService}</span>
-                </div>
-              </div>
-              <p class="marketplace-subtitle">${item.subtitle}</p>
+      const wrapper = document.createElement('div');
+      wrapper.className = 'col-lg-4 col-md-6 mb-4 marketplace-item-wrapper';
 
-              <div class="marketplace-meta">
-                <div class="meta-item">
-                  <i class="${platformIcon}"></i>
-                  <span class="meta-label">${uiStrings.platform}</span><span class="title-case"> ${platformDisplay} </span>
-                </div>
-                <div class="meta-item">
-                  <i class="fas fa-tag"></i>
-                  <span class="meta-label">${uiStrings.category}</span><span class="title-case">  ${displayCategories} </span>
-                </div>
-                <div class="meta-item">
-                  <i class="${serviceIcon}"></i>
-                  <span class="meta-label">${uiStrings.service}</span><span class="title-case">  ${displayService.toLowerCase()} </span>
-                </div>
-              </div>
+      const card = document.createElement('div');
+      card.className = 'card marketplace-card';
+      wrapper.appendChild(card);
 
-              <div class="marketplace-footer">
-                ${!item.platform || item.platform.toLowerCase() === 'pwa' || item.platform.toLowerCase() === 'web app' ?
-                  `<a href="javascript:void(0)" class="btn btn-primary btn-install launch-trigger" data-link="${item.link}" aria-label="${btnText} ${item.title}">${btnText}</a>` :
-                  `<a href="${item.link}" target="_blank" class="btn btn-primary btn-install" aria-label="${btnText} ${item.title}">${btnText}</a>`
-                }
-              </div>
-            </div>
-          </div>
-        </div>
-      `;
-      container.innerHTML += html;
+      const imgContainer = document.createElement('div');
+      imgContainer.className = 'marketplace-img-container';
+      card.appendChild(imgContainer);
+
+      const img = document.createElement('img');
+      img.src = item.image;
+      img.alt = item.title;
+      imgContainer.appendChild(img);
+
+      const body = document.createElement('div');
+      body.className = 'marketplace-body';
+      card.appendChild(body);
+
+      const headerDiv = document.createElement('div');
+      headerDiv.className = 'd-flex justify-content-between align-items-start';
+      body.appendChild(headerDiv);
+
+      const title = document.createElement('h5');
+      title.className = 'marketplace-title mr-2';
+      title.textContent = item.title;
+      headerDiv.appendChild(title);
+
+      const badgeDiv = document.createElement('div');
+      badgeDiv.className = 'd-flex flex-column align-items-end flex-shrink-0';
+      headerDiv.appendChild(badgeDiv);
+
+      const serviceBadge = document.createElement('span');
+      serviceBadge.className = 'service-badge';
+      serviceBadge.textContent = displayService;
+      badgeDiv.appendChild(serviceBadge);
+
+      const subtitle = document.createElement('p');
+      subtitle.className = 'marketplace-subtitle';
+      subtitle.textContent = item.subtitle;
+      body.appendChild(subtitle);
+
+      const meta = document.createElement('div');
+      meta.className = 'marketplace-meta';
+      body.appendChild(meta);
+
+      // Helper to create meta items
+      const createMetaItem = (iconClasses, label, value, valueClass) => {
+        const metaItem = document.createElement('div');
+        metaItem.className = 'meta-item';
+
+        const icon = document.createElement('i');
+        iconClasses.forEach(c => icon.classList.add(c));
+        metaItem.appendChild(icon);
+
+        const labelSpan = document.createElement('span');
+        labelSpan.className = 'meta-label';
+        labelSpan.textContent = label;
+        metaItem.appendChild(labelSpan);
+
+        const valueSpan = document.createElement('span');
+        if (valueClass) valueSpan.className = valueClass;
+        valueSpan.textContent = ' ' + value + ' ';
+        metaItem.appendChild(valueSpan);
+
+        return metaItem;
+      };
+
+      meta.appendChild(createMetaItem(platformIconClasses, uiStrings.platform, platformDisplay, 'title-case'));
+      meta.appendChild(createMetaItem(['fas', 'fa-tag'], uiStrings.category, displayCategories, 'title-case'));
+      meta.appendChild(createMetaItem(serviceIconClasses, uiStrings.service, displayService.toLowerCase(), 'title-case'));
+
+      const footer = document.createElement('div');
+      footer.className = 'marketplace-footer';
+      body.appendChild(footer);
+
+      const actionBtn = document.createElement('a');
+      actionBtn.className = 'btn btn-primary btn-install';
+      actionBtn.setAttribute('aria-label', `${btnText} ${item.title}`);
+      actionBtn.textContent = btnText;
+
+      if (!item.platform || item.platform.toLowerCase() === 'pwa' || item.platform.toLowerCase() === 'web app') {
+        actionBtn.href = 'javascript:void(0)';
+        actionBtn.classList.add('launch-trigger');
+        actionBtn.setAttribute('data-link', item.link);
+      } else {
+        actionBtn.href = item.link;
+        actionBtn.target = '_blank';
+      }
+      footer.appendChild(actionBtn);
+
+      container.appendChild(wrapper);
     });
   }
 
