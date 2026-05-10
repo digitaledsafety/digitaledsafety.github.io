@@ -49,18 +49,42 @@ document.getElementById("page-top").className="bg-light";
         function getCardHtml(cardObj) {
             const abbrev = (cardObj.abbreviations ? cardObj.abbreviations : '');
             const tags = cardObj.tags || [];
-            return `
-                <div class="col-md-4 mb-3 filterable-card" data-filters='${JSON.stringify(tags)}'>
-                    <div class="card h-100">
-                        <div class="card-body">
-                            <h5 class="card-title">${cardObj.title}</h5>
-                            <p class="card-subtitle">${abbrev}</p>
-                            <p class="card-text">${cardObj.description}</p>
-                            <a target="_blank" href="${cardObj.path}" class="btn btn-primary stretched-link">View</a>
-                        </div>
-                    </div>
-                </div>
-            `;
+
+            const wrapper = document.createElement('div');
+            wrapper.className = 'col-md-4 mb-3 filterable-card';
+            wrapper.setAttribute('data-filters', JSON.stringify(tags));
+
+            const card = document.createElement('div');
+            card.className = 'card h-100';
+            wrapper.appendChild(card);
+
+            const body = document.createElement('div');
+            body.className = 'card-body';
+            card.appendChild(body);
+
+            const title = document.createElement('h5');
+            title.className = 'card-title';
+            title.textContent = cardObj.title;
+            body.appendChild(title);
+
+            const subtitle = document.createElement('p');
+            subtitle.className = 'card-subtitle';
+            subtitle.textContent = abbrev;
+            body.appendChild(subtitle);
+
+            const text = document.createElement('p');
+            text.className = 'card-text';
+            text.textContent = cardObj.description;
+            body.appendChild(text);
+
+            const link = document.createElement('a');
+            link.target = '_blank';
+            link.href = cardObj.path;
+            link.className = 'btn btn-primary stretched-link';
+            link.textContent = 'View';
+            body.appendChild(link);
+
+            return wrapper;
         }
       </script>
     

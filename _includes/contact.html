@@ -22,7 +22,17 @@
       <div class="col-lg-12">
         <script type="text/javascript">var {{ submitted_var }}=false;</script>
         <iframe name="{{ iframe_id }}" id="{{ iframe_id }}" style="display:none;"
-          onload="if({{ submitted_var }}) { document.getElementById('success').innerHTML = '<div class=\'alert alert-success\'><strong>Your message has been sent. </strong></div>'; document.getElementById('contactFormFoot').reset(); }"></iframe>
+          onload="if({{ submitted_var }}) {
+            const successDiv = document.getElementById('success');
+            successDiv.textContent = '';
+            const alertDiv = document.createElement('div');
+            alertDiv.className = 'alert alert-success';
+            const strong = document.createElement('strong');
+            strong.textContent = 'Your message has been sent. ';
+            alertDiv.appendChild(strong);
+            successDiv.appendChild(alertDiv);
+            document.getElementById('contactFormFoot').reset();
+          }"></iframe>
         <form id="contactFormFoot"
           action="{{ site.contact_form_action }}"
           target="{{ iframe_id }}" onsubmit="{{ submitted_var }}=true;"
