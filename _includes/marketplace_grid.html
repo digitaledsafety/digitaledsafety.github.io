@@ -131,6 +131,11 @@
         <span class="input-group-text"><i class="fas fa-search"></i></span>
       </div>
       <input type="text" id="marketplace-search" class="form-control" placeholder="{{ ui_data.search_placeholder | default: "Search..." }}" aria-label="{{ ui_data.search_placeholder | default: "Search" }}">
+      <div class="input-group-append">
+        <button class="btn btn-outline-secondary" type="button" id="clear-search" aria-label="Clear Search">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
     </div>
   </div>
   <div class="col-md-3 mt-3">
@@ -176,16 +181,16 @@
   const marketplaceData = [
     {% for item in site.marketplace %}
     {
-      "title": {{ item.title | jsonify }},
-      "subtitle": {{ item.subtitle | jsonify }},
-      "image": {{ item.image | jsonify }},
-      "link": {{ item.link | jsonify }},
+      "title": {{ item.title | default: "" | jsonify }},
+      "subtitle": {{ item.subtitle | default: "" | jsonify }},
+      "image": {{ item.image | default: "" | jsonify }},
+      "link": {{ item.link | default: "" | jsonify }},
       "platform": {{ item.platform | default: "pwa" | jsonify }},
-      "categories": {{ item.categories | jsonify }},
-      "program": {{ item.program | jsonify }},
+      "categories": {{ item.categories | default: "" | jsonify }},
+      "program": {{ item.program | default: "" | jsonify }},
       "service": {{ item.service | default: "N/A" | jsonify }},
-      "date": {{ item.date | jsonify }},
-      "tags": {{ item.tags | jsonify }}
+      "date": {{ item.date | default: "" | jsonify }},
+      "tags": {{ item.tags | default: "" | jsonify }}
     }{% unless forloop.last %},{% endunless %}
     {% endfor %}
   ];
@@ -276,9 +281,13 @@
     });
 
     if (sortBy === 'alpha') {
-      filtered.sort((a, b) => a.title.localeCompare(b.title));
+      filtered.sort((a, b) => (a.title || "").localeCompare(b.title || ""));
     } else {
-      filtered.sort((a, b) => new Date(b.date) - new Date(a.date));
+      filtered.sort((a, b) => {
+        const dateA = a.date ? new Date(a.date) : new Date('1900-01-01');
+        const dateB = b.date ? new Date(b.date) : new Date('1900-01-01');
+        return dateB - dateA;
+      });
     }
 
     const noResultsMsg = document.getElementById('no-results-message');
@@ -294,6 +303,11 @@
   document.getElementById('marketplace-search').addEventListener('input', filterAndSort);
   document.getElementById('service-filter').addEventListener('change', filterAndSort);
   document.getElementById('sort-by').addEventListener('change', filterAndSort);
+
+  document.getElementById('clear-search').addEventListener('click', function() {
+    document.getElementById('marketplace-search').value = '';
+    filterAndSort();
+  });
 
   document.getElementById('marketplace-container').addEventListener('click', function(e) {
     if (e.target.classList.contains('launch-trigger')) {
