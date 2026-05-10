@@ -93,7 +93,7 @@
 
     function renderPaypalButton() {
       const container = document.getElementById('paypal-button-container-marketplace');
-      if (!container || container.children.length > 1) return; // Keep fallback if it's the only child
+      if (!container || container.innerHTML !== '') return;
 
       if (window.paypal) {
         paypal.Buttons({
