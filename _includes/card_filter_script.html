@@ -9,9 +9,7 @@
     const cardFiltersContainer = document.getElementById('card-filters');
     if (!cardFiltersContainer) return;
 
-    while (cardFiltersContainer.firstChild) {
-      cardFiltersContainer.removeChild(cardFiltersContainer.firstChild);
-    }
+    cardFiltersContainer.innerHTML = '';
     const fs = [];
     data.forEach(cardObj => {
       if (cardObj.tags && Array.isArray(cardObj.tags)) {
@@ -23,30 +21,22 @@
       }
     });
 
-    fs.sort().forEach(f => {
-      const isChecked = (f === initialFilter);
-      const li = document.createElement('li');
-      li.className = 'pl-2';
+    const filtersHtml = fs.sort().map(f => {
+      const isChecked = (f === initialFilter) ? 'checked' : '';
+      return `
+        <li class="pl-2">
+          <div class="form-check">
+            <input type="checkbox" ${isChecked} class="form-check-input" id="${f}">
+            <label class="form-check-label" for="${f}">${f}</label>
+          </div>
+        </li>
+      `;
+    }).join('');
+    cardFiltersContainer.innerHTML = filtersHtml;
 
-      const div = document.createElement('div');
-      div.className = 'form-check';
-      li.appendChild(div);
-
-      const input = document.createElement('input');
-      input.type = 'checkbox';
-      input.className = 'form-check-input';
-      input.id = f;
-      if (isChecked) input.checked = true;
-      input.addEventListener('change', filterCards);
-      div.appendChild(input);
-
-      const label = document.createElement('label');
-      label.className = 'form-check-label';
-      label.setAttribute('for', f);
-      label.textContent = f;
-      div.appendChild(label);
-
-      cardFiltersContainer.appendChild(li);
+    // Add event listeners to checkboxes
+    cardFiltersContainer.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+      cb.addEventListener('change', filterCards);
     });
   }
 
@@ -60,18 +50,13 @@
       generateFilters(cardData, initialFilter);
     }
 
-    while (cardContainer.firstChild) {
-      cardContainer.removeChild(cardContainer.firstChild);
-    }
-
-    cardData.forEach(cardObj => {
+    const cardsHtml = cardData.map(cardObj => {
       if (typeof getCardHtml === 'function') {
-        const result = getCardHtml(cardObj);
-        if (result instanceof HTMLElement) {
-          cardContainer.appendChild(result);
-        }
+        return getCardHtml(cardObj);
       }
-    });
+      return '';
+    }).join('');
+    cardContainer.innerHTML = cardsHtml;
   }
 
   function filterCards() {
