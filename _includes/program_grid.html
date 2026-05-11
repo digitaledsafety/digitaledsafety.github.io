@@ -1,9 +1,5 @@
 <!-- Portfolio Grid -->
-{% if site.locale and site.locale != "" and site.locale != nil %}
-  {% assign portfolio_data = site.data.sitetext[site.locale].portfolio %}
-{% else %}
-  {% assign portfolio_data = site.data.sitetext.portfolio %}
-{% endif %}
+{% assign portfolio_data = site.data.sitetext[site.locale].portfolio | default: site.data.sitetext.en.portfolio %}
 
 <section class="bg-light page-section" id="{{ portfolio_data.section | default: "portfolio" }}">
   <div class="container">

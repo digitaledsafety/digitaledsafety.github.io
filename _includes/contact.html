@@ -1,10 +1,9 @@
 <!-- Contact -->
+{% assign contact_data = site.data.sitetext[site.locale].contact | default: site.data.sitetext.en.contact %}
 {% if site.locale and site.locale != "" and site.locale != nil %}
-  {% assign contact_data = site.data.sitetext[site.locale].contact %}
   {% assign iframe_id = "hidden_iframe_contact" %}
   {% assign submitted_var = "submitted_contact" %}
 {% else %}
-  {% assign contact_data = site.data.sitetext.contact %}
   {% assign iframe_id = "hidden_iframe_contact_default" %}
   {% assign submitted_var = "submitted_contact_default" %}
 {% endif %}

@@ -1,9 +1,5 @@
 <!-- Footer -->
-{% if site.locale and site.locale != "" and site.locale != nil %}
-  {% assign footer_data = site.data.sitetext[site.locale].footer %}
-{% else %}
-  {% assign footer_data = site.data.sitetext.footer %}
-{% endif %}
+{% assign footer_data = site.data.sitetext[site.locale].footer | default: site.data.sitetext.en.footer %}
 
 <footer class="footer" id="footer" style="background-color: white">
     <div class="container">
