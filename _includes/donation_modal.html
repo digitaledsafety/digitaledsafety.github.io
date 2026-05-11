@@ -152,13 +152,10 @@
       }
     });
 
-    // Reset modal state when closed using Vanilla JS
-    const donationModal = document.getElementById('donationModal');
-    if (donationModal) {
-      donationModal.addEventListener('hidden.bs.modal', function () {
-        document.getElementById('donation-prompt').style.display = 'block';
-        document.getElementById('thank-you-message').style.display = 'none';
-      });
-    }
+    // Reset modal state when closed using jQuery (Bootstrap 4)
+    $('#donationModal').on('hidden.bs.modal', function () {
+      document.getElementById('donation-prompt').style.display = 'block';
+      document.getElementById('thank-you-message').style.display = 'none';
+    });
   })();
 </script>
