@@ -14,6 +14,8 @@ en: &DEFAULT_EN
     title: "Marketplace"
     text: "Apps and Games for a Modern Education"
     section: marketplace
+    explore_title: "Explore"
+    explore_text: "A collection of resources to empower your learning."
 
   marketplace_ui:
     search_placeholder: "Search..."
@@ -49,16 +51,6 @@ en: &DEFAULT_EN
     title: "Services"
     text: ""
     section: services
-    list:
-      - title: "Entrepreneurship"
-        desc: "Build products using entrepreneurship principals. Gather requirements, develop, and market to the community."
-        icon: fas fa-laptop        
-      - title: "Engineering"
-        desc: "Collaborate with trained hobbyists on robotics, microcontrollers, 3d printing, and other projects."
-        icon: fas fa-cogs #find more at https://fontawesome.com/icons
-      - title: "Digital Safety"
-        desc: "Over a decade of experienced technology advocates affluent in safe online activites."
-        icon: fas fa-user-shield
  
   portfolio:
     title: "Programs"
@@ -173,6 +165,8 @@ es:
     title: "Mercado"
     text: "Aplicaciones y Juegos para una Educación Moderna"
     section: mercado
+    explore_title: "Explorar"
+    explore_text: "Una colección de recursos para potenciar tu aprendizaje."
 
   marketplace_ui:
     search_placeholder: "Buscar..."
@@ -208,16 +202,6 @@ es:
     title: "Servicios"
     text: ""
     section: servicios
-    list:
-      - title: "Emprendimiento"
-        desc: "Construye productos utilizando principios de emprendimiento. Recopila requisitos, desarrolla y comercializa para la comunidad."
-        icon: fas fa-laptop
-      - title: "Ingeniería"
-        desc: "Colabora con aficionados capacitados en robótica, microcontroladores, impresión 3D y otros proyectos."
-        icon: fas fa-cogs
-      - title: "Seguridad Digital"
-        desc: "Más de una década de defensores de tecnología experimentados expertos en actividades en línea seguras."
-        icon: fas fa-user-shield
 
   portfolio:
     title: "Programas"
