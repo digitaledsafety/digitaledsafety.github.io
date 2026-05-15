@@ -29,3 +29,33 @@ test('marketplace items display localized labels', async ({ page }) => {
   const categoryLabel = page.locator('.meta-label', { hasText: /Category:/i }).first();
   await expect(categoryLabel).toBeVisible();
 });
+
+test('marketplace clear search button resets filters', async ({ page }) => {
+  await page.goto('/');
+
+  const searchInput = page.locator('#marketplace-search');
+  const serviceFilter = page.locator('#service-filter');
+  const clearButton = page.locator('#clear-search');
+
+  // Initial state
+  await expect(searchInput).toHaveValue('');
+  await expect(serviceFilter).toHaveValue('all');
+
+  // Apply filters
+  await searchInput.fill('Shark');
+  await serviceFilter.selectOption({ label: 'Engineering' });
+
+  await expect(searchInput).toHaveValue('Shark');
+  await expect(serviceFilter).toHaveValue('Engineering');
+
+  // Click clear
+  await clearButton.click();
+
+  // Verify reset
+  await expect(searchInput).toHaveValue('');
+  await expect(serviceFilter).toHaveValue('all');
+
+  // Verify results are re-rendered (at least one item should be visible)
+  const items = page.locator('.marketplace-item-wrapper');
+  await expect(items.first()).toBeVisible();
+});

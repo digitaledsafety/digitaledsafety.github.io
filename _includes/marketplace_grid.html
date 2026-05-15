@@ -131,6 +131,11 @@
         <span class="input-group-text"><i class="fas fa-search"></i></span>
       </div>
       <input type="text" id="marketplace-search" class="form-control" placeholder="{{ ui_data.search_placeholder | default: "Search..." }}" aria-label="{{ ui_data.search_placeholder | default: "Search" }}">
+      <div class="input-group-append">
+        <button class="btn btn-outline-secondary" type="button" id="clear-search" aria-label="{{ ui_data.clear_search | default: "Clear Search" }}">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
     </div>
   </div>
   <div class="col-md-3 mt-3">
@@ -184,7 +189,7 @@
       "categories": {{ item.categories | jsonify }},
       "program": {{ item.program | jsonify }},
       "service": {{ item.service | default: "N/A" | jsonify }},
-      "date": {{ item.date | jsonify }},
+      "date": {{ item.date | default: "1900-01-01" | jsonify }},
       "tags": {{ item.tags | jsonify }}
     }{% unless forloop.last %},{% endunless %}
     {% endfor %}
@@ -294,6 +299,12 @@
   document.getElementById('marketplace-search').addEventListener('input', filterAndSort);
   document.getElementById('service-filter').addEventListener('change', filterAndSort);
   document.getElementById('sort-by').addEventListener('change', filterAndSort);
+
+  document.getElementById('clear-search').addEventListener('click', function() {
+    document.getElementById('marketplace-search').value = '';
+    document.getElementById('service-filter').value = 'all';
+    filterAndSort();
+  });
 
   document.getElementById('marketplace-container').addEventListener('click', function(e) {
     if (e.target.classList.contains('launch-trigger')) {
