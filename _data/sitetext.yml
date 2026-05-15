@@ -28,6 +28,7 @@ en: &DEFAULT_EN
     build_btn: "Build"
     webapp: "Web App"
     no_results: "No results found matching your search."
+    clear_search: "Clear"
     fallback: "N/A"
 
   donation_modal:
@@ -168,7 +169,7 @@ en-GB:
   <<: *DEFAULT_EN
 en-AU:
   <<: *DEFAULT_EN
-es: 
+es: &DEFAULT_ES
   marketplace:
     title: "Mercado"
     text: "Aplicaciones y Juegos para una Educación Moderna"
@@ -187,6 +188,7 @@ es:
     build_btn: "Construir"
     webapp: "Aplicación Web"
     no_results: "No se encontraron resultados que coincidan con su búsqueda."
+    clear_search: "Limpiar"
     fallback: "N/A"
 
   donation_modal:
@@ -316,6 +318,6 @@ es:
         icon: "fab fa-discord"
 
 es-ES:
-  <<: *DEFAULT_EN
+  <<: *DEFAULT_ES
 es-CO:
-  <<: *DEFAULT_EN
+  <<: *DEFAULT_ES
