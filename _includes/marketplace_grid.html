@@ -137,7 +137,7 @@
     <select id="service-filter" class="form-control" aria-label="{{ ui_data.service_label | default: "Service Filter" }}">
       <option value="all">{{ ui_data.all_services | default: "All Services" }}</option>
       {% for service in site.services %}
-      <option value="{{ service.title }}">{{ service.title }}</option>
+      <option value="{{ service.title | escape }}">{{ service.title | escape }}</option>
       {% endfor %}
     </select>
   </div>
@@ -154,141 +154,123 @@
 </div>
 
 <div class="row" id="marketplace-container">
-  <!-- Marketplace items will be injected here -->
+  {% for item in site.marketplace %}
+    {% assign platform = item.platform | default: "pwa" | downcase %}
+    {% assign service = item.service | default: "N/A" %}
+
+    {% assign btnText = ui_data.launch_btn | default: "Launch" %}
+    {% assign platformIcon = 'fas fa-globe' %}
+    {% assign platformDisplay = item.platform | default: ui_data.fallback | default: "N/A" %}
+
+    {% if platform == 'pwa' or platform == 'web app' %}
+      {% assign platformDisplay = ui_data.webapp | default: "Web App" %}
+      {% assign platformIcon = 'fas fa-globe' %}
+      {% assign btnText = ui_data.launch_btn | default: "Launch" %}
+    {% elsif platform == 'android' %}
+      {% assign btnText = ui_data.download_btn | default: "Download" %}
+      {% assign platformIcon = 'fab fa-android' %}
+    {% elsif platform == 'github' %}
+      {% assign btnText = ui_data.build_btn | default: "Build" %}
+      {% assign platformIcon = 'fab fa-github' %}
+    {% endif %}
+
+    {% assign service_obj = site.services | where: "title", service | first %}
+    {% assign serviceIcon = service_obj.icon | default: 'fas fa-laptop' %}
+
+    <div class="col-lg-4 col-md-6 mb-4 marketplace-item-wrapper"
+         data-title="{{ item.title | escape }}"
+         data-subtitle="{{ item.subtitle | escape }}"
+         data-service="{{ service | escape }}"
+         data-platform="{{ platform | escape }}"
+         data-date="{{ item.date | date: '%Y-%m-%d' }}"
+         data-categories="{{ item.categories | join: ',' | escape }}"
+         data-tags="{{ item.tags | join: ',' | escape }}">
+      <div class="card marketplace-card">
+        <div class="marketplace-img-container">
+          <img src="{{ item.image | relative_url }}" alt="{{ item.title | escape }}">
+        </div>
+        <div class="marketplace-body">
+          <div class="d-flex justify-content-between align-items-start">
+            <h5 class="marketplace-title mr-2">{{ item.title | escape }}</h5>
+            <div class="d-flex flex-column align-items-end flex-shrink-0">
+              <span class="service-badge">{{ service | escape }}</span>
+            </div>
+          </div>
+          <p class="marketplace-subtitle">{{ item.subtitle | escape }}</p>
+
+          <div class="marketplace-meta">
+            <div class="meta-item">
+              <i class="{{ platformIcon }}"></i>
+              <span class="meta-label">{{ ui_data.platform_label | default: "Platform:" | escape }}</span><span class="title-case"> {{ platformDisplay | escape }} </span>
+            </div>
+            <div class="meta-item">
+              <i class="fas fa-tag"></i>
+              <span class="meta-label">{{ ui_data.category_label | default: "Category:" | escape }}</span><span class="title-case"> {{ item.categories | join: ", " | escape }} </span>
+            </div>
+            <div class="meta-item">
+              <i class="{{ serviceIcon }}"></i>
+              <span class="meta-label">{{ ui_data.service_label | default: "Service:" | escape }}</span><span class="title-case"> {{ service | downcase | escape }} </span>
+            </div>
+          </div>
+
+          <div class="marketplace-footer">
+            {% if platform == 'pwa' or platform == 'web app' %}
+              <a href="javascript:void(0)" class="btn btn-primary btn-install launch-trigger" data-link="{{ item.link | escape }}" aria-label="{{ btnText }} {{ item.title | escape }}">{{ btnText }}</a>
+            {% else %}
+              <a href="{{ item.link | escape }}" target="_blank" class="btn btn-primary btn-install" aria-label="{{ btnText }} {{ item.title | escape }}">{{ btnText }}</a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
 </div>
 
 <script>
-  const uiStrings = {
-    platform: {{ ui_data.platform_label | default: "Platform:" | jsonify }},
-    category: {{ ui_data.category_label | default: "Category:" | jsonify }},
-    service: {{ ui_data.service_label | default: "Service:" | jsonify }},
-    launch: {{ ui_data.launch_btn | default: "Launch" | jsonify }},
-    download: {{ ui_data.download_btn | default: "Download" | jsonify }},
-    build: {{ ui_data.build_btn | default: "Build" | jsonify }},
-    webapp: {{ ui_data.webapp | default: "Web App" | jsonify }},
-    fallback: {{ ui_data.fallback | default: "N/A" | jsonify }}
-  };
-  const serviceIcons = {
-    {% for service in site.services %}
-    {{ service.title | jsonify }}: {{ service.icon | jsonify }}{% unless forloop.last %},{% endunless %}
-    {% endfor %}
-  };
-  const marketplaceData = [
-    {% for item in site.marketplace %}
-    {
-      "title": {{ item.title | jsonify }},
-      "subtitle": {{ item.subtitle | jsonify }},
-      "image": {{ item.image | jsonify }},
-      "link": {{ item.link | jsonify }},
-      "platform": {{ item.platform | default: "pwa" | jsonify }},
-      "categories": {{ item.categories | jsonify }},
-      "program": {{ item.program | jsonify }},
-      "service": {{ item.service | default: "N/A" | jsonify }},
-      "date": {{ item.date | jsonify }},
-      "tags": {{ item.tags | jsonify }}
-    }{% unless forloop.last %},{% endunless %}
-    {% endfor %}
-  ];
-
-  function renderMarketplace(data) {
-    const container = document.getElementById('marketplace-container');
-    container.innerHTML = '';
-
-    data.forEach(item => {
-      let btnText = uiStrings.launch;
-      let platformIcon = 'fas fa-globe';
-      let platformDisplay = item.platform || uiStrings.fallback;
-
-      if (item.platform && (item.platform.toLowerCase() === 'pwa' || item.platform.toLowerCase() === 'web app')) {
-        platformDisplay = uiStrings.webapp;
-        platformIcon = 'fas fa-globe';
-        btnText = uiStrings.launch;
-      } else if (item.platform === 'android') {
-        btnText = uiStrings.download;
-        platformIcon = 'fab fa-android';
-      } else if (item.platform === 'github') {
-        btnText = uiStrings.build;
-        platformIcon = 'fab fa-github';
-      }
-
-      let serviceIcon = serviceIcons[item.service] || 'fas fa-laptop';
-      let displayService = item.service || uiStrings.fallback;
-      let displayCategories = Array.isArray(item.categories) ? item.categories.join(", ") : (item.categories || uiStrings.fallback);
-
-      const html = `
-        <div class="col-lg-4 col-md-6 mb-4 marketplace-item-wrapper">
-          <div class="card marketplace-card">
-            <div class="marketplace-img-container">
-              <img src="${item.image}" alt="${item.title}">
-            </div>
-            <div class="marketplace-body">
-              <div class="d-flex justify-content-between align-items-start">
-                <h5 class="marketplace-title mr-2">${item.title}</h5>
-                <div class="d-flex flex-column align-items-end flex-shrink-0">
-                  <span class="service-badge">${displayService}</span>
-                </div>
-              </div>
-              <p class="marketplace-subtitle">${item.subtitle}</p>
-
-              <div class="marketplace-meta">
-                <div class="meta-item">
-                  <i class="${platformIcon}"></i>
-                  <span class="meta-label">${uiStrings.platform}</span><span class="title-case"> ${platformDisplay} </span>
-                </div>
-                <div class="meta-item">
-                  <i class="fas fa-tag"></i>
-                  <span class="meta-label">${uiStrings.category}</span><span class="title-case">  ${displayCategories} </span>
-                </div>
-                <div class="meta-item">
-                  <i class="${serviceIcon}"></i>
-                  <span class="meta-label">${uiStrings.service}</span><span class="title-case">  ${displayService.toLowerCase()} </span>
-                </div>
-              </div>
-
-              <div class="marketplace-footer">
-                ${!item.platform || item.platform.toLowerCase() === 'pwa' || item.platform.toLowerCase() === 'web app' ?
-                  `<a href="javascript:void(0)" class="btn btn-primary btn-install launch-trigger" data-link="${item.link}" aria-label="${btnText} ${item.title}">${btnText}</a>` :
-                  `<a href="${item.link}" target="_blank" class="btn btn-primary btn-install" aria-label="${btnText} ${item.title}">${btnText}</a>`
-                }
-              </div>
-            </div>
-          </div>
-        </div>
-      `;
-      container.innerHTML += html;
-    });
-  }
-
   function filterAndSort() {
     const searchTerm = document.getElementById('marketplace-search').value.toLowerCase();
-    const service = document.getElementById('service-filter').value;
+    const serviceFilter = document.getElementById('service-filter').value;
     const sortBy = document.getElementById('sort-by').value;
+    const items = Array.from(document.querySelectorAll('.marketplace-item-wrapper'));
 
-    let filtered = marketplaceData.filter(item => {
-      const matchesSearch = (item.title && item.title.toLowerCase().includes(searchTerm)) ||
-                           (item.subtitle && item.subtitle.toLowerCase().includes(searchTerm)) ||
-                           (item.platform && item.platform.toLowerCase().includes(searchTerm)) ||
-                           (item.service && item.service.toLowerCase().includes(searchTerm)) ||
-                           (Array.isArray(item.categories) && item.categories.some(c => c && c.toLowerCase().includes(searchTerm))) ||
-                           (Array.isArray(item.tags) && item.tags.some(t => t && t.toLowerCase().includes(searchTerm)));
-      const matchesService = service === 'all' || item.service === service;
-      return matchesSearch && matchesService;
+    let visibleCount = 0;
+    items.forEach(item => {
+      const title = item.getAttribute('data-title').toLowerCase();
+      const subtitle = item.getAttribute('data-subtitle').toLowerCase();
+      const service = item.getAttribute('data-service');
+      const platform = item.getAttribute('data-platform').toLowerCase();
+      const categories = item.getAttribute('data-categories').toLowerCase();
+      const tags = item.getAttribute('data-tags').toLowerCase();
+
+      const matchesSearch = title.includes(searchTerm) ||
+                           subtitle.includes(searchTerm) ||
+                           platform.includes(searchTerm) ||
+                           service.toLowerCase().includes(searchTerm) ||
+                           categories.includes(searchTerm) ||
+                           tags.includes(searchTerm);
+
+      const matchesService = serviceFilter === 'all' || service === serviceFilter;
+
+      if (matchesSearch && matchesService) {
+        item.style.display = '';
+        visibleCount++;
+      } else {
+        item.style.display = 'none';
+      }
     });
 
+    const container = document.getElementById('marketplace-container');
+    const sortedItems = items.filter(item => item.style.display !== 'none');
+
     if (sortBy === 'alpha') {
-      filtered.sort((a, b) => a.title.localeCompare(b.title));
+      sortedItems.sort((a, b) => a.getAttribute('data-title').localeCompare(b.getAttribute('data-title')));
     } else {
-      filtered.sort((a, b) => new Date(b.date) - new Date(a.date));
+      sortedItems.sort((a, b) => new Date(b.getAttribute('data-date')) - new Date(a.getAttribute('data-date')));
     }
 
-    const noResultsMsg = document.getElementById('no-results-message');
-    if (filtered.length === 0) {
-      noResultsMsg.style.display = 'block';
-    } else {
-      noResultsMsg.style.display = 'none';
-    }
+    sortedItems.forEach(item => container.appendChild(item));
 
-    renderMarketplace(filtered);
+    document.getElementById('no-results-message').style.display = visibleCount === 0 ? 'block' : 'none';
   }
 
   document.getElementById('marketplace-search').addEventListener('input', filterAndSort);
@@ -296,11 +278,16 @@
   document.getElementById('sort-by').addEventListener('change', filterAndSort);
 
   document.getElementById('marketplace-container').addEventListener('click', function(e) {
-    if (e.target.classList.contains('launch-trigger')) {
-      handleLaunch(e.target.getAttribute('data-link'));
+    const trigger = e.target.closest('.launch-trigger');
+    if (trigger) {
+      if (typeof handleLaunch === 'function') {
+        handleLaunch(trigger.getAttribute('data-link'));
+      } else {
+        window.location.href = trigger.getAttribute('data-link');
+      }
     }
   });
 
-  // Initial render
+  // Initial sort
   filterAndSort();
 </script>
