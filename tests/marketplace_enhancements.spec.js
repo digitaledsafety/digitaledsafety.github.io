@@ -22,12 +22,13 @@ test('marketplace search includes service-based matches', async ({ page }) => {
 
   // Verify that only items with 'Engineering' in their metadata are shown
   // We check the service badge or title
-  const marketplaceItems = page.locator('#marketplace-container .marketplace-item-wrapper');
+  const marketplaceItems = page.locator('#marketplace-container .marketplace-item-wrapper:visible');
 
   // Wait for the UI to update (client-side filtering)
-  await page.waitForTimeout(500);
+  await page.waitForTimeout(1000);
 
   const count = await marketplaceItems.count();
+  expect(count).toBeGreaterThan(0);
   for (let i = 0; i < count; i++) {
     const text = await marketplaceItems.nth(i).textContent();
     // It should contain 'Engineering' either in title, subtitle, or service badge
