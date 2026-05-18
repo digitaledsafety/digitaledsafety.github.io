@@ -149,6 +149,14 @@
   </div>
 </div>
 
+<div class="row mb-4">
+  <div class="col-12 text-right">
+    <button id="clear-filters" class="btn btn-sm btn-outline-secondary" style="border-radius: 20px; font-size: 0.75rem;">
+      <i class="fas fa-times-circle mr-1"></i> Clear Filters
+    </button>
+  </div>
+</div>
+
 <div id="no-results-message" role="status" style="display: none;">
   <p class="text-muted">{{ ui_data.no_results | default: "No results found matching your search." }}</p>
 </div>
@@ -183,6 +191,7 @@
       "platform": {{ item.platform | default: "pwa" | jsonify }},
       "categories": {{ item.categories | jsonify }},
       "program": {{ item.program | jsonify }},
+      "programTitle": {% assign program_title = "" %}{% for p in site.programs %}{% assign pid = p.id | split: "/" | last | split: "." | first | plus: 0 %}{% if pid == item.program %}{% assign program_title = p.title %}{% break %}{% endif %}{% endfor %}{{ program_title | jsonify }},
       "service": {{ item.service | default: "N/A" | jsonify }},
       "date": {{ item.date | jsonify }},
       "tags": {{ item.tags | jsonify }}
@@ -269,6 +278,7 @@
                            (item.subtitle && item.subtitle.toLowerCase().includes(searchTerm)) ||
                            (item.platform && item.platform.toLowerCase().includes(searchTerm)) ||
                            (item.service && item.service.toLowerCase().includes(searchTerm)) ||
+                           (item.programTitle && item.programTitle.toLowerCase().includes(searchTerm)) ||
                            (Array.isArray(item.categories) && item.categories.some(c => c && c.toLowerCase().includes(searchTerm))) ||
                            (Array.isArray(item.tags) && item.tags.some(t => t && t.toLowerCase().includes(searchTerm)));
       const matchesService = service === 'all' || item.service === service;
@@ -294,6 +304,13 @@
   document.getElementById('marketplace-search').addEventListener('input', filterAndSort);
   document.getElementById('service-filter').addEventListener('change', filterAndSort);
   document.getElementById('sort-by').addEventListener('change', filterAndSort);
+
+  document.getElementById('clear-filters').addEventListener('click', function() {
+    document.getElementById('marketplace-search').value = '';
+    document.getElementById('service-filter').value = 'all';
+    document.getElementById('sort-by').value = 'recent';
+    filterAndSort();
+  });
 
   document.getElementById('marketplace-container').addEventListener('click', function(e) {
     if (e.target.classList.contains('launch-trigger')) {
