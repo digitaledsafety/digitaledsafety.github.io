@@ -128,9 +128,9 @@
   <div class="col-md-6 mt-3">
     <div class="input-group">
       <div class="input-group-prepend">
-        <span class="input-group-text"><i class="fas fa-search"></i></span>
+        <span class="input-group-text"><i class="fas fa-search" aria-hidden="true"></i></span>
       </div>
-      <input type="text" id="marketplace-search" class="form-control" placeholder="{{ ui_data.search_placeholder | default: "Search..." }}" aria-label="{{ ui_data.search_placeholder | default: "Search" }}">
+      <input type="text" id="marketplace-search" class="form-control" placeholder="{{ ui_data.search_placeholder | default: "Search..." }}" aria-label="{{ ui_data.search_placeholder | default: "Search marketplace items" }}">
     </div>
   </div>
   <div class="col-md-3 mt-3">
@@ -142,7 +142,7 @@
     </select>
   </div>
   <div class="col-md-3 mt-3">
-    <select id="sort-by" class="form-control" aria-label="Sort options">
+    <select id="sort-by" class="form-control" aria-label="{{ ui_data.sort_label | default: 'Sort items' }}">
       <option value="recent">{{ ui_data.sort_recent | default: "Recently Added" }}</option>
       <option value="alpha">{{ ui_data.sort_alpha | default: "Alphabetical" }}</option>
     </select>
@@ -230,17 +230,17 @@
               </div>
               <p class="marketplace-subtitle">${item.subtitle}</p>
 
-              <div class="marketplace-meta">
-                <div class="meta-item">
-                  <i class="${platformIcon}"></i>
+              <div class="marketplace-meta" role="list">
+                <div class="meta-item" role="listitem">
+                  <i class="${platformIcon}" aria-hidden="true"></i>
                   <span class="meta-label">${uiStrings.platform}</span><span class="title-case"> ${platformDisplay} </span>
                 </div>
-                <div class="meta-item">
-                  <i class="fas fa-tag"></i>
+                <div class="meta-item" role="listitem">
+                  <i class="fas fa-tag" aria-hidden="true"></i>
                   <span class="meta-label">${uiStrings.category}</span><span class="title-case">  ${displayCategories} </span>
                 </div>
-                <div class="meta-item">
-                  <i class="${serviceIcon}"></i>
+                <div class="meta-item" role="listitem">
+                  <i class="${serviceIcon}" aria-hidden="true"></i>
                   <span class="meta-label">${uiStrings.service}</span><span class="title-case">  ${displayService.toLowerCase()} </span>
                 </div>
               </div>
