@@ -4,6 +4,7 @@ layout: default
 
 {% assign filter = page.title | downcase %}
 {% assign posts = site.opensource  %}
+{% assign ui_data = site.data.sitetext[site.locale].collection_ui %}
 
 {% include nav.html %}
 
@@ -63,24 +64,25 @@ We've compiled a list of popular open source projects in industry below. The Con
         
       </script>
     
-      <div class="row">
-          <!-- Filters -->
-          <div class="col-md-12">
-
-            <div class="btn-group">
-                <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-                    <i class="fa fa-filter"></i> Filter by:
-                  <span class="caret"></span>
-                </a>
-                <ul id="card-filters" class="dropdown-menu">
-    
+      <div class="row mb-4">
+          <!-- Search and Filters -->
+          <div class="col-md-8">
+              <div class="input-group">
+                  <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="fas fa-search"></i></span>
+                  </div>
+                  <input type="text" id="card-search" class="form-control" placeholder="{{ ui_data.search_placeholder | default: "Search..." }}" aria-label="{{ ui_data.search_placeholder | default: "Search" }}">
+              </div>
+          </div>
+          <div class="col-md-4">
+            <div class="btn-group w-100">
+                <button class="btn btn-outline-secondary dropdown-toggle w-100" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fa fa-filter"></i> {{ ui_data.filter_by | default: "Filter by:" }}
+                </button>
+                <ul id="card-filters" class="dropdown-menu w-100">
                   <!-- dropdown menu links -->
                 </ul>
               </div>
-
-   
-
-              <!-- Add more filters as needed -->
           </div>
         </div>
         <div class="row">
@@ -91,9 +93,6 @@ We've compiled a list of popular open source projects in industry below. The Con
               </div>
           </div>
       </div>
-    
-    <!-- Add Bootstrap JS and jQuery for checkbox filtering -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     
     <script>
       function getCardHtml(cardObj) {
@@ -107,9 +106,9 @@ We've compiled a list of popular open source projects in industry below. The Con
                   <div class="card-body d-flex flex-column">
                       <h5 class="card-title"><a href="${cardObj.homepage}">${cardObj.title}</a></h5>
                       <p class="card-subtitle mb-2 text-muted">${tagsString}</p>
-                      <p class="card-text">${cardObj.description || ''}</p>
+                      <div class="card-text text-muted mb-3">${cardObj.description || ''}</div>
                       <div class="mt-auto">
-                        <a target="_blank" href="${cardObj.contribute}" class="btn btn-primary">Contribute</a>
+                        <a target="_blank" href="${cardObj.contribute}" class="btn btn-primary">{{ ui_data.contribute | default: "Contribute" }}</a>
                       </div>
                   </div>
               </div>

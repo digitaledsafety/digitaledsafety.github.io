@@ -201,9 +201,8 @@
 
   function renderMarketplace(data) {
     const container = document.getElementById('marketplace-container');
-    container.innerHTML = '';
 
-    data.forEach(item => {
+    const htmlBatch = data.map(item => {
       let btnText = uiStrings.launch;
       let platformIcon = 'fas fa-globe';
       let platformDisplay = item.platform || uiStrings.fallback;
@@ -224,7 +223,7 @@
       let displayService = item.service || uiStrings.fallback;
       let displayCategories = Array.isArray(item.categories) ? item.categories.join(", ") : (item.categories || uiStrings.fallback);
 
-      const html = `
+      return `
         <div class="col-lg-4 col-md-6 mb-4 marketplace-item-wrapper">
           <div class="card marketplace-card">
             <div class="marketplace-img-container">
@@ -264,8 +263,9 @@
           </div>
         </div>
       `;
-      container.innerHTML += html;
-    });
+    }).join('');
+
+    container.innerHTML = htmlBatch;
   }
 
   function filterAndSort() {

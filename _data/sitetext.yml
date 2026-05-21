@@ -18,6 +18,13 @@ en: &DEFAULT_EN
   marketplace_ui:
     search_placeholder: "Search..."
     all_services: "All Services"
+
+  collection_ui:
+    filter_by: "Filter by:"
+    contribute: "Contribute"
+    view_details: "View Details"
+    donate: "Donate"
+    search_placeholder: "Search..."
     sort_recent: "Recently Added"
     sort_alpha: "Alphabetical"
     platform_label: "Platform:"
@@ -177,6 +184,13 @@ es:
   marketplace_ui:
     search_placeholder: "Buscar..."
     all_services: "Todos los Servicios"
+
+  collection_ui:
+    filter_by: "Filtrar por:"
+    contribute: "Contribuir"
+    view_details: "Ver Detalles"
+    donate: "Donar"
+    search_placeholder: "Buscar..."
     sort_recent: "Recientemente Añadido"
     sort_alpha: "Alfabético"
     platform_label: "Plataforma:"

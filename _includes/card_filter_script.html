@@ -65,7 +65,11 @@
       selectedFilters.push(cb.id);
     });
 
-    document.querySelectorAll('.filterable-card').forEach(card => {
+    const searchInput = document.getElementById('card-search');
+    const searchTerm = searchInput ? searchInput.value.toLowerCase() : '';
+
+    document.querySelectorAll('.filterable-card').forEach((card, index) => {
+      const cardObj = cardData[index];
       let filters = card.getAttribute('data-filters');
       try {
         // Try to parse as JSON if it looks like an array
@@ -81,13 +85,22 @@
       }
       filters = filters || [];
 
-      let showCard = false;
+      let matchesFilter = false;
       if (selectedFilters.length === 0) {
-        showCard = true;
+        matchesFilter = true;
       } else {
-        showCard = filters.some(filter => selectedFilters.includes(filter));
+        matchesFilter = filters.some(filter => selectedFilters.includes(filter));
       }
-      if (showCard) {
+
+      let matchesSearch = true;
+      if (searchTerm && cardObj) {
+        const title = (cardObj.title || '').toLowerCase();
+        const description = (cardObj.description || '').toLowerCase();
+        const tags = Array.isArray(cardObj.tags) ? cardObj.tags.join(' ').toLowerCase() : (cardObj.tags || '').toLowerCase();
+        matchesSearch = title.includes(searchTerm) || description.includes(searchTerm) || tags.includes(searchTerm);
+      }
+
+      if (matchesFilter && matchesSearch) {
         card.classList.remove('d-none');
       } else {
         card.classList.add('d-none');
@@ -97,6 +110,12 @@
 
   window.addEventListener('load', function () {
     populateCards();
+
+    const searchInput = document.getElementById('card-search');
+    if (searchInput) {
+      searchInput.addEventListener('input', filterCards);
+    }
+
     filterCards();
   });
 
