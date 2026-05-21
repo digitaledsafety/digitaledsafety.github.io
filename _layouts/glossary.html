@@ -44,7 +44,7 @@ document.getElementById("page-top").className="bg-light";
         },
         {% endfor %}];
         
-        window.defaultFilter = '{{ page.filter | default: "Web 3" }}';
+        window.defaultFilter = '{{ page.filter | default: "AI" }}';
 
         function getCardHtml(cardObj) {
             const abbrev = (cardObj.abbreviations ? cardObj.abbreviations : '');
