@@ -1,7 +1,5 @@
 ---
-tags: []
 title: Factory
-abbreviations: []
 links:
   - https://en.wikipedia.org/wiki/Factory_(object-oriented_programming)
 ---
