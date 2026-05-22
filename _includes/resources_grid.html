@@ -1,20 +1,33 @@
 {% assign filter = page.title | downcase %}
 {% assign posts = site.resources | where_exp: "resource", "resource.categories contains filter" %}
+{% assign ui_data = site.data.sitetext[site.locale].collection_ui %}
 
 <script>
-    const cardData = {{ posts | jsonify }};
+    const cardData = [
+      {% for card in posts %}
+      {
+        "title": {{ card.title | jsonify }},
+        "subtitle": {{ card.subtitle | jsonify }},
+        "image": {{ card.image | relative_url | jsonify }},
+        "link": {{ card.link | jsonify }},
+        "tags": {{ card.tags | default: "" | jsonify }}
+      }{% unless forloop.last %},{% endunless %}
+      {% endfor %}
+    ];
     window.defaultFilter = 'all';
 
     function getCardHtml(cardObj) {
-        const tags = (cardObj.tags && Array.isArray(cardObj.tags)) ? cardObj.tags.join(',') : '';
+        const tags = (cardObj.tags && Array.isArray(cardObj.tags)) ? cardObj.tags.join(',') : cardObj.tags;
         return `
-            <div class="col-md-4 mb-3 filterable-card" data-filters="${tags}">
-                <div class="card h-100">
-                  <img class="card-img-top img-fluid" src="${cardObj.image}" alt="">
-                    <div class="card-body">
+            <div class="col-md-4 mb-4 filterable-card">
+                <div class="card h-100 d-flex flex-column">
+                  <img class="card-img-top img-fluid" src="${cardObj.image}" alt="${cardObj.title}">
+                    <div class="card-body d-flex flex-column">
                         <h5 class="card-title">${cardObj.title}</h5>
-                        <p class="card-text">${cardObj.subtitle}</p>
-                        <a href="${cardObj.link}" target="_blank" class="btn btn-primary stretched-link">View</a>
+                        <p class="card-text mb-3">${cardObj.subtitle}</p>
+                        <div class="mt-auto">
+                          <a href="${cardObj.link}" target="_blank" class="btn btn-primary btn-sm stretched-link">View</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -22,12 +35,20 @@
     }
 </script>
 
-<div class="row">
+<div class="row mb-4 align-items-center">
     <!-- Filters -->
-    <div class="col-md-12">
+    <div class="col-md-6 mb-3 mb-md-0">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text"><i class="fas fa-search"></i></span>
+        </div>
+        <input type="text" id="card-search" class="form-control" placeholder="{{ ui_data.search_placeholder | default: 'Search...' }}" aria-label="{{ ui_data.search_placeholder | default: 'Search' }}">
+      </div>
+    </div>
+    <div class="col-md-6">
       <div class="btn-group">
-          <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-              <i class="fa fa-filter"></i> Filter by:
+          <a class="btn dropdown-toggle" data-toggle="dropdown" href="#" aria-haspopup="true" aria-expanded="false">
+              <i class="fa fa-filter"></i> {{ ui_data.filter_by | default: "Filter by:" }}
             <span class="caret"></span>
           </a>
           <ul id="card-filters" class="dropdown-menu">
@@ -36,13 +57,13 @@
         </div>
     </div>
 </div>
-<div class="row">
-    <!-- List of Cards -->
-    <div class="col-md-12">
-        <div class="row" id="card-container">
-            <!-- Cards will be dynamically populated here -->
-        </div>
-    </div>
+
+<div id="no-results-message" role="status" style="display: none;" class="alert alert-info">
+  {{ ui_data.no_results | default: "No results found matching your criteria." }}
+</div>
+
+<div class="row" id="card-container">
+    <!-- Cards will be dynamically populated here -->
 </div>
 
 {% include card_filter_script.html %}

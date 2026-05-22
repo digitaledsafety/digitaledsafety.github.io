@@ -2,127 +2,102 @@
 layout: default
 ---
 
-{% assign filter = page.title | downcase %}
-{% assign posts = site.organizations  %}
+{% assign contact_data = site.data.sitetext[site.locale].organizations %}
+{% assign ui_data = site.data.sitetext[site.locale].collection_ui %}
+{% assign posts = site.organizations %}
 
 {% include nav.html %}
 
-<header class="masthead" style="background-image: url('{{ page.image }}')">
-    <div class="container">
-      <div class="intro-text">
-      <h1 class="intro-heading">Organizations</h1>
-      </div>
+<header class="masthead" style="background-image: url('{{ page.image | relative_url }}')">
+  <div class="container">
+    <div class="intro-text">
+      <h1 class="intro-heading">{{ contact_data.title | default: "Organizations" }}</h1>
     </div>
-  </header>
-
+  </div>
+</header>
 
 {% if page.background == "grey" or page.background == "gray" %}
 <script>
-document.getElementById("page-top").className="bg-light";
+  document.getElementById("page-top").className = "bg-light";
 </script>
 {% endif %}
 
-
-
 <div class="container py-5" id="pagecontainer">
+  <h2>{{ contact_data.heading }}</h2>
+  <div class="mb-4">
+    {{ contact_data.description | markdownify }}
+  </div>
 
-    <h2>Empowering STEM Education</h2>
+  <div class="row mb-4 align-items-center">
+    <div class="col-md-6 mb-3 mb-md-0">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text"><i class="fas fa-search"></i></span>
+        </div>
+        <input type="text" id="card-search" class="form-control" placeholder="{{ ui_data.search_placeholder | default: 'Search...' }}" aria-label="{{ ui_data.search_placeholder | default: 'Search' }}">
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="btn-group">
+        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#" aria-haspopup="true" aria-expanded="false">
+          <i class="fa fa-filter"></i> {{ ui_data.filter_by | default: "Filter by:" }}
+          <span class="caret"></span>
+        </a>
+        <ul id="card-filters" class="dropdown-menu">
+          <!-- dropdown menu links -->
+        </ul>
+      </div>
+    </div>
+  </div>
 
-<p>
-    Our foundation is dedicated to supporting organizations that empower the next generation through modern STEM education. We believe that by providing access to quality resources, mentorship, and hands-on learning experiences, we can help bridge the gap for under-served communities and prepare students for the careers of tomorrow.
-</p>
+  <div id="no-results-message" role="status" style="display: none;" class="alert alert-info">
+    {{ ui_data.no_results | default: "No results found matching your criteria." }}
+  </div>
 
-    <p>
-        The organizations listed below share our commitment to fostering innovation, critical thinking, and problem-solving skills. From coding initiatives and robotics programs to digital safety and technology standards, these partners are at the forefront of educational transformation.
-</p>
-<p>
-We encourage you to explore the work of each organization to learn more about their specific missions and the impact they are making in the STEM ecosystem. Your support, whether through donations, volunteering, or advocacy, plays a vital role in sustaining these essential programs and expanding their reach to those who need them most.
-    </p>
+  <div class="row" id="card-container">
+    <!-- Cards will be dynamically populated here -->
+  </div>
 
-    <p>
-We've compiled a directory of organizations we support below. Click on any organization to view their dedicated profile and find out how you can contribute to their cause!
-        </p>
+  <script>
+    const cardData = [
+      {% for card in posts %}
+      {
+        "title": {{ card.title | jsonify }},
+        "tags": {{ card.tags | default: "" | jsonify }},
+        "url": {{ card.url | relative_url | jsonify }},
+        "contribute": {{ card.donation_url | jsonify }},
+        "caption": {{ card.caption | jsonify }},
+        "abbreviations": {{ card.abbreviations | jsonify }},
+        "homepage": {{ card.homepage | jsonify }},
+        "description": {{ card.excerpt | strip_newlines | jsonify }}
+      }{% unless forloop.last %},{% endunless %}
+      {% endfor %}
+    ];
 
-    <script>
-        // Example array of JavaScript objects representing card
-        const cardData =
-        [{% for card in posts %}
-        {
-            "title": {{card.title | jsonify}},
-            "tags": {{card.tags | default: "" | jsonify}},
-            "url": {{card.url | jsonify}},
-            "contribute": {{card.donation_url | jsonify}},
-            "caption": {{card.caption | jsonify}},
-            "abbreviations": {{card.abbreviations | jsonify}},
-            "homepage": {{card.homepage | jsonify}},
-            "description": {{card.excerpt | jsonify}}
-        }{% unless forloop.last %},{% endunless %}
-        {% endfor %}];
-
-      </script>
-
-      <div class="row">
-          <!-- Filters -->
-          <div class="col-md-12">
-
-            <div class="btn-group">
-                <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-                    <i class="fa fa-filter"></i> Filter by:
-                  <span class="caret"></span>
-                </a>
-                <ul id="card-filters" class="dropdown-menu">
-
-                  <!-- dropdown menu links -->
-                </ul>
+    function getCardHtml(cardObj) {
+      const tags = Array.isArray(cardObj.tags) ? cardObj.tags : (cardObj.tags ? cardObj.tags.split(',') : []);
+      const tagsString = tags.join(', ');
+      const thumbnail = (cardObj.caption && cardObj.caption.thumbnail) ? cardObj.caption.thumbnail : '';
+      return `
+        <div class="col-md-4 mb-4 filterable-card">
+          <div class="card h-100 d-flex flex-column">
+            <a href="${cardObj.url}"><img class="card-img-top img-fluid" src="${thumbnail}" alt="${cardObj.title}"></a>
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title"><a href="${cardObj.url}">${cardObj.title}</a></h5>
+              <p class="card-subtitle mb-2 text-muted small">${tagsString}</p>
+              <div class="card-text mb-3">${cardObj.description || ''}</div>
+              <div class="mt-auto">
+                <a href="${cardObj.url}" class="btn btn-outline-primary btn-sm">View Details</a>
+                ${cardObj.contribute ? `<a target="_blank" href="${cardObj.contribute}" class="btn btn-primary btn-sm">Donate</a>` : ''}
               </div>
-
-
-
-              <!-- Add more filters as needed -->
+            </div>
           </div>
         </div>
-        <div class="row">
-          <!-- List of Cards -->
-          <div class="col-md-12">
-              <div class="row" id="card-container">
-                  <!-- Cards will be dynamically populated here -->
-              </div>
-          </div>
-      </div>
+      `;
+    }
+  </script>
 
-    <!-- Add Bootstrap JS and jQuery for checkbox filtering -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-    <script>
-      function getCardHtml(cardObj) {
-        const tags = Array.isArray(cardObj.tags) ? cardObj.tags : (cardObj.tags ? cardObj.tags.split(',') : []);
-        const tagsString = tags.join(', ');
-        const thumbnail = (cardObj.caption && cardObj.caption.thumbnail) ? cardObj.caption.thumbnail : '';
-        return `
-          <div class="col-md-4 mb-3 filterable-card" data-filters="${tags.join(',')}">
-              <div class="card h-100">
-                <a href="${cardObj.url}"><img class="card-img-top img-fluid" src="${thumbnail}" alt=""></a>
-                  <div class="card-body d-flex flex-column">
-                      <h5 class="card-title"><a href="${cardObj.url}">${cardObj.title}</a></h5>
-                      <p class="card-subtitle mb-2 text-muted">${tagsString}</p>
-                      <p class="card-text">${cardObj.description || ''}</p>
-                      <div class="mt-auto">
-                        <a href="${cardObj.url}" class="btn btn-outline-primary btn-sm">View Details</a>
-                        <a target="_blank" href="${cardObj.contribute}" class="btn btn-primary btn-sm">Donate</a>
-                      </div>
-                  </div>
-              </div>
-          </div>
-        `;
-      }
-    </script>
-
-    {% include card_filter_script.html %}
-
-
-
-
-
+  {% include card_filter_script.html %}
 </div>
 
 {% include contact.html %}
