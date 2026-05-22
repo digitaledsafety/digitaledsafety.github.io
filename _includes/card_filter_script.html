@@ -18,6 +18,13 @@
             fs.push(cardTag);
           }
         });
+      } else if (cardObj.tags && typeof cardObj.tags === 'string') {
+        cardObj.tags.split(',').forEach(tag => {
+          const trimmed = tag.trim();
+          if (trimmed && !fs.includes(trimmed)) {
+            fs.push(trimmed);
+          }
+        });
       }
     });
 
@@ -40,17 +47,11 @@
     });
   }
 
-  function populateCards() {
+  function populateCards(data) {
     const cardContainer = document.getElementById('card-container');
     if (!cardContainer) return;
 
-    let initialFilter = window.location.hash ? decodeURIComponent(window.location.hash.substring(1)) : (window.defaultFilter || null);
-
-    if (typeof generateFilters === 'function') {
-      generateFilters(cardData, initialFilter);
-    }
-
-    const cardsHtml = cardData.map(cardObj => {
+    const cardsHtml = data.map(cardObj => {
       if (typeof getCardHtml === 'function') {
         return getCardHtml(cardObj);
       }
@@ -60,43 +61,53 @@
   }
 
   function filterCards() {
+    const searchTerm = document.getElementById('card-search') ? document.getElementById('card-search').value.toLowerCase() : '';
     const selectedFilters = [];
     document.querySelectorAll('#card-filters input[type="checkbox"]:checked').forEach(cb => {
       selectedFilters.push(cb.id);
     });
 
-    document.querySelectorAll('.filterable-card').forEach(card => {
-      let filters = card.getAttribute('data-filters');
-      try {
-        // Try to parse as JSON if it looks like an array
-        if (filters && (filters.startsWith('[') || filters.startsWith('{'))) {
-          filters = JSON.parse(filters);
-        } else if (filters) {
-          filters = filters.split(',');
-        }
-      } catch (e) {
-        if (filters) {
-          filters = filters.split(',');
-        }
+    const filteredData = cardData.filter(cardObj => {
+      // Filter by tags
+      let cardTags = [];
+      if (Array.isArray(cardObj.tags)) {
+        cardTags = cardObj.tags;
+      } else if (typeof cardObj.tags === 'string') {
+        cardTags = cardObj.tags.split(',').map(t => t.trim());
       }
-      filters = filters || [];
 
-      let showCard = false;
-      if (selectedFilters.length === 0) {
-        showCard = true;
-      } else {
-        showCard = filters.some(filter => selectedFilters.includes(filter));
-      }
-      if (showCard) {
-        card.classList.remove('d-none');
-      } else {
-        card.classList.add('d-none');
-      }
+      const matchesFilter = selectedFilters.length === 0 || cardTags.some(tag => selectedFilters.includes(tag));
+
+      // Filter by search term
+      const matchesSearch = !searchTerm ||
+        (cardObj.title && cardObj.title.toLowerCase().includes(searchTerm)) ||
+        (cardObj.description && cardObj.description.toLowerCase().includes(searchTerm)) ||
+        (cardObj.subtitle && cardObj.subtitle.toLowerCase().includes(searchTerm)) ||
+        cardTags.some(tag => tag.toLowerCase().includes(searchTerm));
+
+      return matchesFilter && matchesSearch;
     });
+
+    populateCards(filteredData);
+
+    const noResultsMsg = document.getElementById('no-results-message');
+    if (noResultsMsg) {
+      noResultsMsg.style.display = filteredData.length === 0 ? 'block' : 'none';
+    }
   }
 
   window.addEventListener('load', function () {
-    populateCards();
+    let initialFilter = window.location.hash ? decodeURIComponent(window.location.hash.substring(1)) : (window.defaultFilter || null);
+
+    if (typeof generateFilters === 'function') {
+      generateFilters(cardData, initialFilter);
+    }
+
+    const searchInput = document.getElementById('card-search');
+    if (searchInput) {
+      searchInput.addEventListener('input', filterCards);
+    }
+
     filterCards();
   });
 

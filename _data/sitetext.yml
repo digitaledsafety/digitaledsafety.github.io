@@ -70,7 +70,22 @@ en: &DEFAULT_EN
     title: "Learning Resources"
     text: "A collection of STEM Learning Resources"
     section: resource
-    closebutton: "Close Resource"    
+    closebutton: "Close Resource"
+
+  organizations:
+    title: "Organizations"
+    heading: "Empowering STEM Education"
+    description: "Our foundation is dedicated to supporting organizations that empower the next generation through modern STEM education. We believe that by providing access to quality resources, mentorship, and hands-on learning experiences, we can help bridge the gap for under-served communities and prepare students for the careers of tomorrow.\n\nThe organizations listed below share our commitment to fostering innovation, critical thinking, and problem-solving skills. From coding initiatives and robotics programs to digital safety and technology standards, these partners are at the forefront of educational transformation.\n\nWe encourage you to explore the work of each organization to learn more about their specific missions and the impact they are making in the STEM ecosystem. Your support, whether through donations, volunteering, or advocacy, plays a vital role in sustaining these essential programs and expanding their reach to those who need them most.\n\nWe've compiled a directory of organizations we support below. Click on any organization to view their dedicated profile and find out how you can contribute to their cause!"
+
+  opensource:
+    title: "Open Source"
+    heading: "Code collaboration with industry"
+    description: "Open source projects provide an invaluable platform for individuals to develop and enhance their STEM skills. Participation in open source initiatives offers a practical and collaborative learning environment where enthusiasts can contribute to real-world projects. One of the key aspects is the transparency of the source code, allowing aspiring developers to explore and understand how complex systems function. This hands-on experience fosters a deeper comprehension of programming languages, algorithms, and software architecture.\n\nOpen source projects encourage problem-solving and critical thinking. Contributors often encounter challenges that require creative solutions, honing their analytical skills and ability to troubleshoot issues. The collaborative nature of these projects promotes teamwork, communication, and project management skills, which are crucial in STEM fields where collaboration is common.\n\nOpen source communities also expose individuals to a diverse range of technologies and tools. Contributors may work on projects related to data science, artificial intelligence, cybersecurity, or any other STEM discipline, providing exposure to a broad spectrum of applications. This exposure not only helps individuals discover their interests within STEM but also prepares them for the interdisciplinary nature of many STEM careers.\n\nWe've compiled a list of popular open source projects in industry below. The Contribute button will redirect you to a contribution page with best practices on how to get started!"
+
+  collection_ui:
+    search_placeholder: "Search..."
+    filter_by: "Filter by:"
+    no_results: "No results found matching your criteria."
 
   timeline:
     title: "Roadmap"
@@ -230,6 +245,21 @@ es:
     text: "Una colección de recursos de aprendizaje STEM"
     section: recurso
     closebutton: "Cerrar Recurso"
+
+  organizations:
+    title: "Organizaciones"
+    heading: "Empoderando la Educación STEM"
+    description: "Nuestra fundación se dedica a apoyar a organizaciones que empoderan a la próxima generación a través de una educación STEM moderna. Creemos que al proporcionar acceso a recursos de calidad, tutoría y experiencias de aprendizaje práctico, podemos ayudar a cerrar la brecha para las comunidades desatendidas y preparar a los estudiantes para las carreras del mañana.\n\nLas organizaciones que figuran a continuación comparten nuestro compromiso de fomentar la innovación, el pensamiento crítico y las habilidades de resolución de problemas. Desde iniciativas de codificación y programas de robótica hasta seguridad digital y estándares tecnológicos, estos socios están a la vanguardia de la transformación educativa.\n\nLe animamos a explorar el trabajo de cada organización para obtener más información sobre sus misiones específicas y el impacto que están teniendo en el ecosistema STEM. Su apoyo, ya sea a través de donaciones, voluntariado o defensa, juega un papel vital en el mantenimiento de estos programas esenciales y en la ampliación de su alcance a quienes más los necesitan.\n\nHemos compilado un directorio de organizaciones que apoyamos a continuación. ¡Haga clic en cualquier organización para ver su perfil dedicado y descubrir cómo puede contribuir a su causa!"
+
+  opensource:
+    title: "Código Abierto"
+    heading: "Colaboración de código con la industria"
+    description: "Los proyectos de código abierto proporcionan una plataforma invaluable para que las personas desarrollen y mejoren sus habilidades STEM. La participación en iniciativas de código abierto ofrece un entorno de aprendizaje práctico y colaborativo donde los entusiastas pueden contribuir a proyectos del mundo real. Uno de los aspectos clave es la transparencia del código fuente, lo que permite a los aspirantes a desarrolladores explorar y comprender cómo funcionan los sistemas complejos. Esta experiencia práctica fomenta una comprensión más profunda de los lenguajes de programación, algoritmos y arquitectura de software.\n\nLos proyectos de código abierto fomentan la resolución de problemas y el pensamiento crítico. Los colaboradores a menudo encuentran desafíos que requieren soluciones creativas, perfeccionando sus habilidades analíticas y su capacidad para solucionar problemas. La naturaleza colaborativa de estos proyectos promueve el trabajo en equipo, la comunicación y las habilidades de gestión de proyectos, que son cruciales en los campos STEM donde la colaboración es común.\n\nLas comunidades de código abierto también exponen a las personas a una amplia gama de tecnologías y herramientas. Los colaboradores pueden trabajar en proyectos relacionados con la ciencia de datos, la inteligencia artificial, la ciberseguridad o cualquier otra disciplina STEM, proporcionando exposición a un amplio espectro de aplicaciones. Esta exposición no solo ayuda a las personas a descubrir sus intereses dentro de STEM, sino que también las prepara para la naturaleza interdisciplinaria de muchas carreras STEM.\n\nHemos compilado una lista de proyectos populares de código abierto en la industria a continuación. ¡El botón Contribuir lo redirigirá a una página de contribución con las mejores prácticas sobre cómo comenzar!"
+
+  collection_ui:
+    search_placeholder: "Buscar..."
+    filter_by: "Filtrar por:"
+    no_results: "No se encontraron resultados que coincidan con sus criterios."
 
   timeline:
     title: "Hoja de Ruta"
