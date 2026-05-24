@@ -142,7 +142,7 @@
     </select>
   </div>
   <div class="col-md-3 mt-3">
-    <select id="sort-by" class="form-control" aria-label="Sort options">
+    <select id="sort-by" class="form-control" aria-label="{{ ui_data.sort_label | default: "Sort options" }}">
       <option value="recent">{{ ui_data.sort_recent | default: "Recently Added" }}</option>
       <option value="alpha">{{ ui_data.sort_alpha | default: "Alphabetical" }}</option>
     </select>
@@ -152,13 +152,17 @@
 <div class="row mb-4">
   <div class="col-12 text-right">
     <button id="clear-filters" class="btn btn-sm btn-outline-secondary" style="border-radius: 20px; font-size: 0.75rem;">
-      <i class="fas fa-times-circle mr-1"></i> Clear Filters
+      <i class="fas fa-times-circle mr-1"></i> {{ ui_data.clear_filters | default: "Clear Filters" }}
     </button>
   </div>
 </div>
 
 <div id="no-results-message" role="status" style="display: none;">
   <p class="text-muted">{{ ui_data.no_results | default: "No results found matching your search." }}</p>
+</div>
+
+<div id="results-count" class="mb-3" role="status">
+  <!-- Results count will be injected here -->
 </div>
 
 <div class="row" id="marketplace-container">
@@ -174,7 +178,9 @@
     download: {{ ui_data.download_btn | default: "Download" | jsonify }},
     build: {{ ui_data.build_btn | default: "Build" | jsonify }},
     webapp: {{ ui_data.webapp | default: "Web App" | jsonify }},
-    fallback: {{ ui_data.fallback | default: "N/A" | jsonify }}
+    fallback: {{ ui_data.fallback | default: "N/A" | jsonify }},
+    resultsSingular: {{ ui_data.results_count_singular | default: "Showing 1 item" | jsonify }},
+    resultsPlural: {{ ui_data.results_count_plural | default: "Showing %count% items" | jsonify }}
   };
   const serviceIcons = {
     {% for service in site.services %}
@@ -292,10 +298,19 @@
     }
 
     const noResultsMsg = document.getElementById('no-results-message');
+    const resultsCount = document.getElementById('results-count');
+
     if (filtered.length === 0) {
       noResultsMsg.style.display = 'block';
+      resultsCount.style.display = 'none';
     } else {
       noResultsMsg.style.display = 'none';
+      resultsCount.style.display = 'block';
+      if (filtered.length === 1) {
+        resultsCount.innerHTML = `<p class="text-muted small">${uiStrings.resultsSingular}</p>`;
+      } else {
+        resultsCount.innerHTML = `<p class="text-muted small">${uiStrings.resultsPlural.replace('%count%', filtered.length)}</p>`;
+      }
     }
 
     renderMarketplace(filtered);

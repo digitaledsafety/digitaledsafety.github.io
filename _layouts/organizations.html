@@ -7,6 +7,8 @@ layout: default
 
 {% include nav.html %}
 
+{% assign ui = site.data.sitetext[site.locale].collection_ui %}
+
 <header class="masthead" style="background-image: url('{{ page.image }}')">
     <div class="container">
       <div class="intro-text">
@@ -44,6 +46,10 @@ We've compiled a directory of organizations we support below. Click on any organ
         </p>
 
     <script>
+        window.collectionUIStrings = {
+            resultsSingular: {{ ui.results_count_singular | default: "Showing 1 item" | jsonify }},
+            resultsPlural: {{ ui.results_count_plural | default: "Showing %count% items" | jsonify }}
+        };
         // Example array of JavaScript objects representing card
         const cardData =
         [{% for card in posts %}
@@ -61,13 +67,21 @@ We've compiled a directory of organizations we support below. Click on any organ
 
       </script>
 
-      <div class="row">
+      <div class="row mb-4">
+          <div class="col-md-8">
+              <div class="input-group">
+                  <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="fas fa-search"></i></span>
+                  </div>
+                  <input type="text" id="card-search" class="form-control" placeholder="{{ ui.search_placeholder | default: 'Search...' }}" aria-label="{{ ui.search_placeholder | default: 'Search' }}">
+              </div>
+          </div>
           <!-- Filters -->
-          <div class="col-md-12">
+          <div class="col-md-4">
 
             <div class="btn-group">
                 <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-                    <i class="fa fa-filter"></i> Filter by:
+                    <i class="fa fa-filter"></i> {{ ui.filter_by | default: "Filter by:" }}
                   <span class="caret"></span>
                 </a>
                 <ul id="card-filters" class="dropdown-menu">
@@ -75,12 +89,17 @@ We've compiled a directory of organizations we support below. Click on any organ
                   <!-- dropdown menu links -->
                 </ul>
               </div>
-
-
-
-              <!-- Add more filters as needed -->
           </div>
         </div>
+
+        <div id="no-results-message" role="status" style="display: none;">
+            <p class="text-muted">{{ ui.no_results | default: "No results found matching your search." }}</p>
+        </div>
+
+        <div id="results-count" class="mb-3" role="status">
+            <!-- Results count will be injected here -->
+        </div>
+
         <div class="row">
           <!-- List of Cards -->
           <div class="col-md-12">
@@ -99,16 +118,18 @@ We've compiled a directory of organizations we support below. Click on any organ
         const tagsString = tags.join(', ');
         const thumbnail = (cardObj.caption && cardObj.caption.thumbnail) ? cardObj.caption.thumbnail : '';
         return `
-          <div class="col-md-4 mb-3 filterable-card" data-filters="${tags.join(',')}">
-              <div class="card h-100">
-                <a href="${cardObj.url}"><img class="card-img-top img-fluid" src="${thumbnail}" alt=""></a>
+          <div class="col-md-4 mb-4 filterable-card">
+              <div class="card h-100 shadow-sm border-0" style="border-radius: 15px; overflow: hidden;">
+                <div style="height: 200px; overflow: hidden; background: #f8f9fa;">
+                  <a href="${cardObj.url}"><img class="card-img-top img-fluid" src="${thumbnail}" alt="${cardObj.title}" style="height: 100%; object-fit: cover;"></a>
+                </div>
                   <div class="card-body d-flex flex-column">
-                      <h5 class="card-title"><a href="${cardObj.url}">${cardObj.title}</a></h5>
-                      <p class="card-subtitle mb-2 text-muted">${tagsString}</p>
-                      <p class="card-text">${cardObj.description || ''}</p>
-                      <div class="mt-auto">
-                        <a href="${cardObj.url}" class="btn btn-outline-primary btn-sm">View Details</a>
-                        <a target="_blank" href="${cardObj.contribute}" class="btn btn-primary btn-sm">Donate</a>
+                      <h5 class="card-title font-weight-bold"><a href="${cardObj.url}" class="text-dark">${cardObj.title}</a></h5>
+                      <p class="card-subtitle mb-2 text-muted small">${tagsString}</p>
+                      <p class="card-text text-muted" style="font-size: 0.9rem;">${cardObj.description || ''}</p>
+                      <div class="mt-auto pt-3">
+                        <a href="${cardObj.url}" class="btn btn-outline-primary btn-sm px-3" style="border-radius: 20px;">{{ ui.view_details | default: "View Details" }}</a>
+                        <a target="_blank" href="${cardObj.contribute}" class="btn btn-primary btn-sm px-3" style="border-radius: 20px;">{{ ui.donate | default: "Donate" }}</a>
                       </div>
                   </div>
               </div>

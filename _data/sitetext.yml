@@ -28,6 +28,13 @@ en: &DEFAULT_EN
     build_btn: "Build"
     webapp: "Web App"
     no_results: "No results found matching your search."
+    results_count_singular: "Showing 1 item"
+    results_count_plural: "Showing %count% items"
+    view_details: "View Details"
+    donate: "Donate"
+    contribute: "Contribute"
+    sort_label: "Sort by"
+    clear_filters: "Clear Filters"
     fallback: "N/A"
 
   donation_modal:
@@ -146,6 +153,16 @@ en: &DEFAULT_EN
     subject: "Contact Form Submission"
     submit: "Send Message"
 
+  collection_ui:
+    search_placeholder: "Search..."
+    filter_by: "Filter by:"
+    no_results: "No results found matching your search."
+    results_count_singular: "Showing 1 item"
+    results_count_plural: "Showing %count% items"
+    view_details: "View Details"
+    donate: "Donate"
+    contribute: "Contribute"
+
   footer:
     legal: "Privacy Policy"
     terms: "Terms"
@@ -187,6 +204,13 @@ es:
     build_btn: "Construir"
     webapp: "Aplicación Web"
     no_results: "No se encontraron resultados que coincidan con su búsqueda."
+    results_count_singular: "Mostrando 1 artículo"
+    results_count_plural: "Mostrando %count% artículos"
+    view_details: "Ver Detalles"
+    donate: "Donar"
+    contribute: "Contribuir"
+    sort_label: "Ordenar por"
+    clear_filters: "Limpiar filtros"
     fallback: "N/A"
 
   donation_modal:
@@ -298,6 +322,16 @@ es:
     message-validation: "Por favor, introduzca un mensaje."
     subject: "Envío del formulario de contacto"
     submit: "Enviar mensaje"
+
+  collection_ui:
+    search_placeholder: "Buscar..."
+    filter_by: "Filtrar por:"
+    no_results: "No se encontraron resultados que coincidan con su búsqueda."
+    results_count_singular: "Mostrando 1 artículo"
+    results_count_plural: "Mostrando %count% artículos"
+    view_details: "Ver Detalles"
+    donate: "Donar"
+    contribute: "Contribuir"
 
   footer:
     legal: "Política de Privacidad"

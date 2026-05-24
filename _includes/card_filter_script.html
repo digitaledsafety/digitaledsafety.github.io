@@ -26,7 +26,7 @@
       return `
         <li class="pl-2">
           <div class="form-check">
-            <input type="checkbox" ${isChecked} class="form-check-input" id="${f}">
+            <input type="checkbox" ${isChecked} class="form-check-input filter-checkbox" id="${f}">
             <label class="form-check-label" for="${f}">${f}</label>
           </div>
         </li>
@@ -35,75 +35,99 @@
     cardFiltersContainer.innerHTML = filtersHtml;
 
     // Add event listeners to checkboxes
-    cardFiltersContainer.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+    cardFiltersContainer.querySelectorAll('.filter-checkbox').forEach(cb => {
       cb.addEventListener('change', filterCards);
     });
   }
 
-  function populateCards() {
+  function populateCards(data) {
     const cardContainer = document.getElementById('card-container');
     if (!cardContainer) return;
 
-    let initialFilter = window.location.hash ? decodeURIComponent(window.location.hash.substring(1)) : (window.defaultFilter || null);
-
-    if (typeof generateFilters === 'function') {
-      generateFilters(cardData, initialFilter);
-    }
-
-    const cardsHtml = cardData.map(cardObj => {
+    const cardsHtml = data.map(cardObj => {
       if (typeof getCardHtml === 'function') {
         return getCardHtml(cardObj);
       }
       return '';
     }).join('');
     cardContainer.innerHTML = cardsHtml;
+
+    updateResultsCount(data.length);
+  }
+
+  function updateResultsCount(count) {
+    const resultsCount = document.getElementById('results-count');
+    if (!resultsCount) return;
+
+    const uiStrings = window.collectionUIStrings || {
+      resultsSingular: "Showing 1 item",
+      resultsPlural: "Showing %count% items"
+    };
+
+    if (count === 0) {
+      resultsCount.style.display = 'none';
+      const noResultsMsg = document.getElementById('no-results-message');
+      if (noResultsMsg) noResultsMsg.style.display = 'block';
+    } else {
+      resultsCount.style.display = 'block';
+      const noResultsMsg = document.getElementById('no-results-message');
+      if (noResultsMsg) noResultsMsg.style.display = 'none';
+
+      if (count === 1) {
+        resultsCount.innerHTML = `<p class="text-muted small">${uiStrings.resultsSingular}</p>`;
+      } else {
+        resultsCount.innerHTML = `<p class="text-muted small">${uiStrings.resultsPlural.replace('%count%', count)}</p>`;
+      }
+    }
   }
 
   function filterCards() {
+    const searchTerm = document.getElementById('card-search') ? document.getElementById('card-search').value.toLowerCase() : '';
     const selectedFilters = [];
-    document.querySelectorAll('#card-filters input[type="checkbox"]:checked').forEach(cb => {
+    document.querySelectorAll('#card-filters .filter-checkbox:checked').forEach(cb => {
       selectedFilters.push(cb.id);
     });
 
-    document.querySelectorAll('.filterable-card').forEach(card => {
-      let filters = card.getAttribute('data-filters');
-      try {
-        // Try to parse as JSON if it looks like an array
-        if (filters && (filters.startsWith('[') || filters.startsWith('{'))) {
-          filters = JSON.parse(filters);
-        } else if (filters) {
-          filters = filters.split(',');
-        }
-      } catch (e) {
-        if (filters) {
-          filters = filters.split(',');
-        }
+    const filteredData = cardData.filter(cardObj => {
+      // Filter by tags
+      let filters = cardObj.tags;
+      if (typeof filters === 'string') {
+        filters = filters.split(',').map(t => t.trim());
       }
       filters = filters || [];
 
-      let showCard = false;
-      if (selectedFilters.length === 0) {
-        showCard = true;
-      } else {
-        showCard = filters.some(filter => selectedFilters.includes(filter));
-      }
-      if (showCard) {
-        card.classList.remove('d-none');
-      } else {
-        card.classList.add('d-none');
-      }
+      const matchesFilter = selectedFilters.length === 0 || filters.some(filter => selectedFilters.includes(filter));
+
+      // Filter by search
+      const matchesSearch = !searchTerm ||
+        (cardObj.title && cardObj.title.toLowerCase().includes(searchTerm)) ||
+        (cardObj.description && cardObj.description.toLowerCase().includes(searchTerm)) ||
+        (filters.some(t => t.toLowerCase().includes(searchTerm)));
+
+      return matchesFilter && matchesSearch;
     });
+
+    populateCards(filteredData);
   }
 
   window.addEventListener('load', function () {
-    populateCards();
+    let initialFilter = window.location.hash ? decodeURIComponent(window.location.hash.substring(1)) : (window.defaultFilter || null);
+    if (typeof generateFilters === 'function') {
+      generateFilters(cardData, initialFilter);
+    }
+
+    const cardSearch = document.getElementById('card-search');
+    if (cardSearch) {
+      cardSearch.addEventListener('input', filterCards);
+    }
+
     filterCards();
   });
 
   window.addEventListener('hashchange', function() {
     const newHash = decodeURIComponent(window.location.hash.substring(1));
     if (newHash) {
-      document.querySelectorAll('#card-filters input[type="checkbox"]').forEach(cb => {
+      document.querySelectorAll('#card-filters .filter-checkbox').forEach(cb => {
         cb.checked = false;
       });
       const checkbox = document.getElementById(newHash);
