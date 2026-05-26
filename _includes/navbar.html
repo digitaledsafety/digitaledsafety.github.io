@@ -10,13 +10,13 @@
     <a class="navbar-brand js-scroll-trigger" href="{{ '/' | relative_url }}#page-top">
       <span class="d-none d-lg-block">
         {%- if site.logo -%}
-          <img height="{{ site.logo.height | default: 52 }}" src="{{ site.logo.path | relative_url }}"/>
+          <img height="{{ site.logo.height | default: 52 }}" src="{{ site.logo.path | relative_url }}" alt="{{ site.title }}"/>
         {%- else -%}
           {{ site.title }}
         {%- endif -%}
       </span>
       <span class="d-block d-lg-none">
-        <img height="40" src="{{ '/assets/img/logo-mobile.png' | relative_url }}"/>
+        <img height="40" src="{{ '/assets/img/logo-mobile.png' | relative_url }}" alt="{{ site.title }}"/>
       </span>
     </a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">

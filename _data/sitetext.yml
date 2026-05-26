@@ -30,6 +30,12 @@ en: &DEFAULT_EN
     no_results: "No results found matching your search."
     fallback: "N/A"
 
+  collection_ui:
+    filter_by: "Filter by:"
+    view_details: "View Details"
+    donate: "Donate"
+    contribute: "Contribute"
+
   donation_modal:
     title: "Support Our Mission"
     text: "We hope you find this tool useful! As a nonprofit, we rely on donations to keep our resources free and accessible for everyone. Would you consider a small $1 donation before you launch?"
@@ -49,16 +55,6 @@ en: &DEFAULT_EN
     title: "Services"
     text: ""
     section: services
-    list:
-      - title: "Entrepreneurship"
-        desc: "Build products using entrepreneurship principals. Gather requirements, develop, and market to the community."
-        icon: fas fa-laptop        
-      - title: "Engineering"
-        desc: "Collaborate with trained hobbyists on robotics, microcontrollers, 3d printing, and other projects."
-        icon: fas fa-cogs #find more at https://fontawesome.com/icons
-      - title: "Digital Safety"
-        desc: "Over a decade of experienced technology advocates affluent in safe online activites."
-        icon: fas fa-user-shield
  
   portfolio:
     title: "Programs"
@@ -168,7 +164,7 @@ en-GB:
   <<: *DEFAULT_EN
 en-AU:
   <<: *DEFAULT_EN
-es: 
+es: &DEFAULT_ES
   marketplace:
     title: "Mercado"
     text: "Aplicaciones y Juegos para una Educación Moderna"
@@ -189,6 +185,12 @@ es:
     no_results: "No se encontraron resultados que coincidan con su búsqueda."
     fallback: "N/A"
 
+  collection_ui:
+    filter_by: "Filtrar por:"
+    view_details: "Ver Detalles"
+    donate: "Donar"
+    contribute: "Contribuir"
+
   donation_modal:
     title: "Apoye Nuestra Misión"
     text: "¡Esperamos que esta herramienta le sea útil! Como organización sin fines de lucro, dependemos de las donaciones para mantener nuestros recursos gratuitos y accesibles para todos. ¿Consideraría una pequeña donación de $1 antes de comenzar?"
@@ -208,16 +210,6 @@ es:
     title: "Servicios"
     text: ""
     section: servicios
-    list:
-      - title: "Emprendimiento"
-        desc: "Construye productos utilizando principios de emprendimiento. Recopila requisitos, desarrolla y comercializa para la comunidad."
-        icon: fas fa-laptop
-      - title: "Ingeniería"
-        desc: "Colabora con aficionados capacitados en robótica, microcontroladores, impresión 3D y otros proyectos."
-        icon: fas fa-cogs
-      - title: "Seguridad Digital"
-        desc: "Más de una década de defensores de tecnología experimentados expertos en actividades en línea seguras."
-        icon: fas fa-user-shield
 
   portfolio:
     title: "Programas"
@@ -316,6 +308,6 @@ es:
         icon: "fab fa-discord"
 
 es-ES:
-  <<: *DEFAULT_EN
+  <<: *DEFAULT_ES
 es-CO:
-  <<: *DEFAULT_EN
+  <<: *DEFAULT_ES
