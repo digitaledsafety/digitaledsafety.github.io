@@ -43,6 +43,8 @@ We encourage you to explore the work of each organization to learn more about th
 We've compiled a directory of organizations we support below. Click on any organization to view their dedicated profile and find out how you can contribute to their cause!
         </p>
 
+    {% assign ui_coll = site.data.sitetext[site.locale].collection_ui %}
+
     <script>
         // Example array of JavaScript objects representing card
         const cardData =
@@ -67,7 +69,7 @@ We've compiled a directory of organizations we support below. Click on any organ
 
             <div class="btn-group">
                 <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-                    <i class="fa fa-filter"></i> Filter by:
+                    <i class="fa fa-filter"></i> {{ ui_coll.filter_by | default: "Filter by:" }}
                   <span class="caret"></span>
                 </a>
                 <ul id="card-filters" class="dropdown-menu">
@@ -107,8 +109,8 @@ We've compiled a directory of organizations we support below. Click on any organ
                       <p class="card-subtitle mb-2 text-muted">${tagsString}</p>
                       <p class="card-text">${cardObj.description || ''}</p>
                       <div class="mt-auto">
-                        <a href="${cardObj.url}" class="btn btn-outline-primary btn-sm">View Details</a>
-                        <a target="_blank" href="${cardObj.contribute}" class="btn btn-primary btn-sm">Donate</a>
+                        <a href="${cardObj.url}" class="btn btn-outline-primary btn-sm">{{ ui_coll.view_details | default: "View Details" }}</a>
+                        <a target="_blank" href="${cardObj.contribute}" class="btn btn-primary btn-sm">{{ ui_coll.donate | default: "Donate" }}</a>
                       </div>
                   </div>
               </div>
