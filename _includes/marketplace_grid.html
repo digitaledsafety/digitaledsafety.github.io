@@ -152,7 +152,7 @@
 <div class="row mb-4">
   <div class="col-12 text-right">
     <button id="clear-filters" class="btn btn-sm btn-outline-secondary" style="border-radius: 20px; font-size: 0.75rem;">
-      <i class="fas fa-times-circle mr-1"></i> Clear Filters
+      <i class="fas fa-times-circle mr-1"></i> {{ ui_data.clear_filters | default: "Clear Filters" }}
     </button>
   </div>
 </div>
@@ -301,7 +301,18 @@
     renderMarketplace(filtered);
   }
 
-  document.getElementById('marketplace-search').addEventListener('input', filterAndSort);
+  // Debounce function to limit the rate of execution
+  function debounce(func, wait) {
+    let timeout;
+    return function(...args) {
+      clearTimeout(timeout);
+      timeout = setTimeout(() => func.apply(this, args), wait);
+    };
+  }
+
+  const debouncedFilterAndSort = debounce(filterAndSort, 300);
+
+  document.getElementById('marketplace-search').addEventListener('input', debouncedFilterAndSort);
   document.getElementById('service-filter').addEventListener('change', filterAndSort);
   document.getElementById('sort-by').addEventListener('change', filterAndSort);
 
