@@ -151,8 +151,8 @@
 
 <div class="row mb-4">
   <div class="col-12 text-right">
-    <button id="clear-filters" class="btn btn-sm btn-outline-secondary" style="border-radius: 20px; font-size: 0.75rem;">
-      <i class="fas fa-times-circle mr-1"></i> Clear Filters
+    <button id="clear-filters" class="btn btn-sm btn-outline-secondary" style="border-radius: 20px; font-size: 0.75rem;" aria-label="{{ ui_data.clear_filters_aria | default: 'Clear all search and filter criteria' }}">
+      <i class="fas fa-times-circle mr-1"></i> {{ ui_data.clear_filters | default: 'Clear Filters' }}
     </button>
   </div>
 </div>
@@ -161,11 +161,23 @@
   <p class="text-muted">{{ ui_data.no_results | default: "No results found matching your search." }}</p>
 </div>
 
-<div class="row" id="marketplace-container">
+<div class="row" id="marketplace-container" role="list">
   <!-- Marketplace items will be injected here -->
 </div>
 
 <script>
+  function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+      const later = () => {
+        clearTimeout(timeout);
+        func(...args);
+      };
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
+    };
+  }
+
   const uiStrings = {
     platform: {{ ui_data.platform_label | default: "Platform:" | jsonify }},
     category: {{ ui_data.category_label | default: "Category:" | jsonify }},
@@ -199,9 +211,32 @@
     {% endfor %}
   ];
 
+  function createMetaItem(iconClass, label, value) {
+    const item = document.createElement('div');
+    item.classList.add('meta-item');
+
+    const icon = document.createElement('i');
+    iconClass.split(' ').forEach(cls => icon.classList.add(cls));
+    icon.setAttribute('aria-hidden', 'true');
+    item.appendChild(icon);
+
+    const labelSpan = document.createElement('span');
+    labelSpan.classList.add('meta-label');
+    labelSpan.textContent = label;
+    item.appendChild(labelSpan);
+
+    const valueSpan = document.createElement('span');
+    valueSpan.classList.add('title-case');
+    valueSpan.textContent = ' ' + value + ' ';
+    item.appendChild(valueSpan);
+
+    return item;
+  }
+
   function renderMarketplace(data) {
     const container = document.getElementById('marketplace-container');
     container.innerHTML = '';
+    const fragment = document.createDocumentFragment();
 
     data.forEach(item => {
       let btnText = uiStrings.launch;
@@ -220,52 +255,85 @@
         platformIcon = 'fab fa-github';
       }
 
-      let serviceIcon = serviceIcons[item.service] || 'fas fa-shopping-cart';
-      let displayService = item.service || uiStrings.fallback;
-      let displayCategories = Array.isArray(item.categories) ? item.categories.join(", ") : (item.categories || uiStrings.fallback);
+      const serviceIcon = serviceIcons[item.service] || 'fas fa-shopping-cart';
+      const displayService = item.service || uiStrings.fallback;
+      const displayCategories = Array.isArray(item.categories) ? item.categories.join(", ") : (item.categories || uiStrings.fallback);
 
-      const html = `
-        <div class="col-lg-4 col-md-6 mb-4 marketplace-item-wrapper">
-          <div class="card marketplace-card">
-            <div class="marketplace-img-container">
-              <img src="${item.image}" alt="${item.title}">
-            </div>
-            <div class="marketplace-body">
-              <div class="d-flex justify-content-between align-items-start">
-                <h5 class="marketplace-title mr-2">${item.title}</h5>
-                <div class="d-flex flex-column align-items-end flex-shrink-0">
-                  <span class="service-badge">${displayService}</span>
-                </div>
-              </div>
-              <p class="marketplace-subtitle">${item.subtitle}</p>
+      const wrapper = document.createElement('div');
+      wrapper.classList.add('col-lg-4', 'col-md-6', 'mb-4', 'marketplace-item-wrapper');
+      wrapper.setAttribute('role', 'listitem');
 
-              <div class="marketplace-meta">
-                <div class="meta-item">
-                  <i class="${platformIcon}"></i>
-                  <span class="meta-label">${uiStrings.platform}</span><span class="title-case"> ${platformDisplay} </span>
-                </div>
-                <div class="meta-item">
-                  <i class="fas fa-tag"></i>
-                  <span class="meta-label">${uiStrings.category}</span><span class="title-case">  ${displayCategories} </span>
-                </div>
-                <div class="meta-item">
-                  <i class="${serviceIcon}"></i>
-                  <span class="meta-label">${uiStrings.service}</span><span class="title-case">  ${displayService.toLowerCase()} </span>
-                </div>
-              </div>
+      const card = document.createElement('div');
+      card.classList.add('card', 'marketplace-card');
+      wrapper.appendChild(card);
 
-              <div class="marketplace-footer">
-                ${!item.platform || item.platform.toLowerCase() === 'pwa' || item.platform.toLowerCase() === 'web app' ?
-                  `<a href="javascript:void(0)" class="btn btn-primary btn-install launch-trigger" data-link="${item.link}" aria-label="${btnText} ${item.title}">${btnText}</a>` :
-                  `<a href="${item.link}" target="_blank" class="btn btn-primary btn-install" aria-label="${btnText} ${item.title}">${btnText}</a>`
-                }
-              </div>
-            </div>
-          </div>
-        </div>
-      `;
-      container.innerHTML += html;
+      const imgContainer = document.createElement('div');
+      imgContainer.classList.add('marketplace-img-container');
+      card.appendChild(imgContainer);
+
+      const img = document.createElement('img');
+      img.src = item.image;
+      img.alt = item.title;
+      imgContainer.appendChild(img);
+
+      const body = document.createElement('div');
+      body.classList.add('marketplace-body');
+      card.appendChild(body);
+
+      const header = document.createElement('div');
+      header.classList.add('d-flex', 'justify-content-between', 'align-items-start');
+      body.appendChild(header);
+
+      const title = document.createElement('h5');
+      title.classList.add('marketplace-title', 'mr-2');
+      title.textContent = item.title;
+      header.appendChild(title);
+
+      const badgeContainer = document.createElement('div');
+      badgeContainer.classList.add('d-flex', 'flex-column', 'align-items-end', 'flex-shrink-0');
+      header.appendChild(badgeContainer);
+
+      const sBadge = document.createElement('span');
+      sBadge.classList.add('service-badge');
+      sBadge.textContent = displayService;
+      badgeContainer.appendChild(sBadge);
+
+      const subtitle = document.createElement('p');
+      subtitle.classList.add('marketplace-subtitle');
+      subtitle.textContent = item.subtitle;
+      body.appendChild(subtitle);
+
+      const meta = document.createElement('div');
+      meta.classList.add('marketplace-meta');
+      body.appendChild(meta);
+
+      meta.appendChild(createMetaItem(platformIcon, uiStrings.platform, platformDisplay));
+      meta.appendChild(createMetaItem('fas fa-tag', uiStrings.category, displayCategories));
+      meta.appendChild(createMetaItem(serviceIcon, uiStrings.service, displayService.toLowerCase()));
+
+      const footer = document.createElement('div');
+      footer.classList.add('marketplace-footer');
+      body.appendChild(footer);
+
+      const actionBtn = document.createElement('a');
+      actionBtn.classList.add('btn', 'btn-primary', 'btn-install');
+      actionBtn.textContent = btnText;
+      actionBtn.setAttribute('aria-label', `${btnText} ${item.title}`);
+
+      if (!item.platform || item.platform.toLowerCase() === 'pwa' || item.platform.toLowerCase() === 'web app') {
+        actionBtn.href = 'javascript:void(0)';
+        actionBtn.classList.add('launch-trigger');
+        actionBtn.setAttribute('data-link', item.link);
+      } else {
+        actionBtn.href = item.link;
+        actionBtn.target = '_blank';
+        actionBtn.rel = 'noopener noreferrer';
+      }
+      footer.appendChild(actionBtn);
+
+      fragment.appendChild(wrapper);
     });
+    container.appendChild(fragment);
   }
 
   function filterAndSort() {
@@ -279,8 +347,8 @@
                            (item.platform && item.platform.toLowerCase().includes(searchTerm)) ||
                            (item.service && item.service.toLowerCase().includes(searchTerm)) ||
                            (item.programTitle && item.programTitle.toLowerCase().includes(searchTerm)) ||
-                           (Array.isArray(item.categories) && item.categories.some(c => c && c.toLowerCase().includes(searchTerm))) ||
-                           (Array.isArray(item.tags) && item.tags.some(t => t && t.toLowerCase().includes(searchTerm)));
+                           (Array.isArray(item.categories) ? item.categories.some(c => c && c.toLowerCase().includes(searchTerm)) : (item.categories && item.categories.toLowerCase().includes(searchTerm))) ||
+                           (Array.isArray(item.tags) ? item.tags.some(t => t && t.toLowerCase().includes(searchTerm)) : (item.tags && item.tags.toLowerCase().includes(searchTerm)));
       const matchesService = service === 'all' || item.service === service;
       return matchesSearch && matchesService;
     });
@@ -301,7 +369,7 @@
     renderMarketplace(filtered);
   }
 
-  document.getElementById('marketplace-search').addEventListener('input', filterAndSort);
+  document.getElementById('marketplace-search').addEventListener('input', debounce(filterAndSort, 300));
   document.getElementById('service-filter').addEventListener('change', filterAndSort);
   document.getElementById('sort-by').addEventListener('change', filterAndSort);
 
