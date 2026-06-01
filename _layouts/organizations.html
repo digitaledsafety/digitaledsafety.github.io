@@ -44,8 +44,12 @@ We've compiled a directory of organizations we support below. Click on any organ
         </p>
 
     {% assign ui_coll = site.data.sitetext[site.locale].collection_ui %}
+    {% assign ui_marketplace = site.data.sitetext[site.locale].marketplace_ui %}
 
     <script>
+        window.uiStrings = {
+            no_results: {{ ui_marketplace.no_results | default: "No results found matching your search." | jsonify }}
+        };
         // Example array of JavaScript objects representing card
         const cardData =
         [{% for card in posts %}
