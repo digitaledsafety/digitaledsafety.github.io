@@ -273,7 +273,7 @@
 
       const img = document.createElement('img');
       img.src = item.image;
-      img.alt = item.title;
+      img.alt = ""; // Decorative if the title link follows, or use descriptive alt if necessary
       imgContainer.appendChild(img);
 
       const body = document.createElement('div');

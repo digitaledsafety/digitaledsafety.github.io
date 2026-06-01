@@ -57,6 +57,15 @@
       return '';
     }).join('');
     cardContainer.innerHTML = cardsHtml;
+
+    // Create no-results message if it doesn't exist
+    if (!document.getElementById('no-results-message')) {
+      const msg = document.createElement('div');
+      msg.id = 'no-results-message';
+      msg.className = 'col-12 text-center py-5 d-none';
+      msg.innerHTML = `<p class="text-muted">${window.uiStrings?.no_results || 'No results found matching your search.'}</p>`;
+      cardContainer.parentNode.insertBefore(msg, cardContainer);
+    }
   }
 
   function filterCards() {
@@ -65,6 +74,7 @@
       selectedFilters.push(cb.id);
     });
 
+    let visibleCount = 0;
     document.querySelectorAll('.filterable-card').forEach(card => {
       let filters = card.getAttribute('data-filters');
       try {
@@ -89,13 +99,23 @@
       }
       if (showCard) {
         card.classList.remove('d-none');
+        visibleCount++;
       } else {
         card.classList.add('d-none');
       }
     });
+
+    const noResultsMsg = document.getElementById('no-results-message');
+    if (noResultsMsg) {
+      if (visibleCount === 0) {
+        noResultsMsg.classList.remove('d-none');
+      } else {
+        noResultsMsg.classList.add('d-none');
+      }
+    }
   }
 
-  window.addEventListener('load', function () {
+  document.addEventListener('DOMContentLoaded', function () {
     populateCards();
     filterCards();
   });
