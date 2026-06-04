@@ -142,7 +142,7 @@
     </select>
   </div>
   <div class="col-md-3 mt-3">
-    <select id="sort-by" class="form-control" aria-label="Sort options">
+    <select id="sort-by" class="form-control" aria-label="{{ ui_data.sort_label | default: "Sort options" }}">
       <option value="recent">{{ ui_data.sort_recent | default: "Recently Added" }}</option>
       <option value="alpha">{{ ui_data.sort_alpha | default: "Alphabetical" }}</option>
     </select>
