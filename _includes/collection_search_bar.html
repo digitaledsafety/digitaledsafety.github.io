@@ -1,0 +1,23 @@
+<div class="row mb-4 justify-content-center">
+    <div class="col-md-6">
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="search-addon">
+                    <i class="fas fa-search"></i>
+                </span>
+            </div>
+            <input type="text" id="collection-search" class="form-control"
+                   placeholder="{{ site.data.sitetext[site.locale].marketplace_ui.search_placeholder | default: 'Search...' }}"
+                   aria-label="Search" aria-describedby="search-addon">
+        </div>
+    </div>
+</div>
+
+<div id="no-results-message" class="col-12 text-center my-5 d-none" role="status">
+    <p class="lead">{{ site.data.sitetext[site.locale].marketplace_ui.no_results | default: "No results found matching your search." }}</p>
+</div>
+
+<script>
+    window.uiStrings = window.uiStrings || {};
+    window.uiStrings.no_results = {{ site.data.sitetext[site.locale].marketplace_ui.no_results | default: "No results found matching your search." | jsonify }};
+</script>
