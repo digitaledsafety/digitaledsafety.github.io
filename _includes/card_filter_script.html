@@ -1,116 +1,77 @@
 <script>
-  /**
-   * Shared card filtering and population logic.
-   * Expects a global `cardData` array and a `getCardHtml(cardObj)` function.
-   * Optional global `window.defaultFilter` for initial selection if no hash is present.
-   */
+    document.addEventListener('DOMContentLoaded', function() {
+        const tagButtons = document.querySelectorAll('.tag-filter');
+        const cards = document.querySelectorAll('.filterable-card');
+        const searchInput = document.getElementById('collection-search');
+        const noResultsMessage = document.getElementById('no-results-message');
+        const cardGrid = document.getElementById('card-grid');
 
-  function generateFilters(data, initialFilter) {
-    const cardFiltersContainer = document.getElementById('card-filters');
-    if (!cardFiltersContainer) return;
+        let activeTag = 'all';
+        let searchQuery = '';
 
-    cardFiltersContainer.innerHTML = '';
-    const fs = [];
-    data.forEach(cardObj => {
-      if (cardObj.tags && Array.isArray(cardObj.tags)) {
-        cardObj.tags.forEach(cardTag => {
-          if (cardTag && !fs.includes(cardTag)) {
-            fs.push(cardTag);
-          }
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+
+        function filterCards() {
+            let visibleCount = 0;
+            const query = searchQuery.toLowerCase();
+
+            // Clear current grid content if we're using dynamic rendering
+            // For now, we'll just toggle visibility on existing cards for better performance
+            // but we use cardData for the source of truth in search.
+
+            cards.forEach((card) => {
+                const index = parseInt(card.getAttribute('data-index'));
+                const data = cardData[index];
+                const tags = data.tags || [];
+
+                const matchesTag = activeTag === 'all' || tags.includes(activeTag);
+
+                const matchesSearch = !query ||
+                    data.title.toLowerCase().includes(query) ||
+                    data.description.toLowerCase().includes(query) ||
+                    tags.some(tag => tag.toLowerCase().includes(query));
+
+                if (matchesTag && matchesSearch) {
+                    card.classList.remove('d-none');
+                    card.classList.add('d-flex');
+                    visibleCount++;
+                } else {
+                    card.classList.remove('d-flex');
+                    card.classList.add('d-none');
+                }
+            });
+
+            if (visibleCount === 0) {
+                noResultsMessage.classList.remove('d-none');
+            } else {
+                noResultsMessage.classList.add('d-none');
+            }
+        }
+
+        tagButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                tagButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                activeTag = button.getAttribute('data-tag');
+                filterCards();
+            });
         });
-      }
-    });
 
-    const filtersHtml = fs.sort().map(f => {
-      const isChecked = (f === initialFilter) ? 'checked' : '';
-      return `
-        <li class="pl-2">
-          <div class="form-check">
-            <input type="checkbox" ${isChecked} class="form-check-input" id="${f}">
-            <label class="form-check-label" for="${f}">${f}</label>
-          </div>
-        </li>
-      `;
-    }).join('');
-    cardFiltersContainer.innerHTML = filtersHtml;
-
-    // Add event listeners to checkboxes
-    cardFiltersContainer.querySelectorAll('input[type="checkbox"]').forEach(cb => {
-      cb.addEventListener('change', filterCards);
-    });
-  }
-
-  function populateCards() {
-    const cardContainer = document.getElementById('card-container');
-    if (!cardContainer) return;
-
-    let initialFilter = window.location.hash ? decodeURIComponent(window.location.hash.substring(1)) : (window.defaultFilter || null);
-
-    if (typeof generateFilters === 'function') {
-      generateFilters(cardData, initialFilter);
-    }
-
-    const cardsHtml = cardData.map(cardObj => {
-      if (typeof getCardHtml === 'function') {
-        return getCardHtml(cardObj);
-      }
-      return '';
-    }).join('');
-    cardContainer.innerHTML = cardsHtml;
-  }
-
-  function filterCards() {
-    const selectedFilters = [];
-    document.querySelectorAll('#card-filters input[type="checkbox"]:checked').forEach(cb => {
-      selectedFilters.push(cb.id);
-    });
-
-    document.querySelectorAll('.filterable-card').forEach(card => {
-      let filters = card.getAttribute('data-filters');
-      try {
-        // Try to parse as JSON if it looks like an array
-        if (filters && (filters.startsWith('[') || filters.startsWith('{'))) {
-          filters = JSON.parse(filters);
-        } else if (filters) {
-          filters = filters.split(',');
+        if (searchInput) {
+            searchInput.addEventListener('input', debounce((e) => {
+                searchQuery = e.target.value;
+                filterCards();
+            }, 300));
         }
-      } catch (e) {
-        if (filters) {
-          filters = filters.split(',');
-        }
-      }
-      filters = filters || [];
-
-      let showCard = false;
-      if (selectedFilters.length === 0) {
-        showCard = true;
-      } else {
-        showCard = filters.some(filter => selectedFilters.includes(filter));
-      }
-      if (showCard) {
-        card.classList.remove('d-none');
-      } else {
-        card.classList.add('d-none');
-      }
     });
-  }
-
-  window.addEventListener('load', function () {
-    populateCards();
-    filterCards();
-  });
-
-  window.addEventListener('hashchange', function() {
-    const newHash = decodeURIComponent(window.location.hash.substring(1));
-    if (newHash) {
-      document.querySelectorAll('#card-filters input[type="checkbox"]').forEach(cb => {
-        cb.checked = false;
-      });
-      const checkbox = document.getElementById(newHash);
-      if (checkbox) {
-        checkbox.checked = true;
-        filterCards();
-      }
-    }
-  });
 </script>
