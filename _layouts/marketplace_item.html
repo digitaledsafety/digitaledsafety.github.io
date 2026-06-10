@@ -10,8 +10,8 @@
         <div class="inner">
           <h3 class="masthead-brand">{{ page.title }}</h3>
           <nav class="nav nav-masthead justify-content-center">
-            <a class="nav-link active" href="/">Home</a>
-            <a class="nav-link" href="/marketplace">Marketplace</a>
+            <a class="nav-link active" href="{{ '/' | relative_url }}">Home</a>
+            <a class="nav-link" href="{{ '/marketplace' | relative_url }}">Marketplace</a>
           </nav>
         </div>
       </header>
@@ -22,9 +22,9 @@
         <p class="lead">{{ page.subtitle }}</p>
         <p class="lead">
           {% if page.platform == 'android' %}
-            <a href="{{ page.link }}" target="_blank" class="btn btn-lg btn-primary">Download APK</a>
+            <a href="{{ page.link }}" target="_blank" rel="noopener noreferrer" class="btn btn-lg btn-primary">Download APK</a>
           {% elsif page.platform == 'github' %}
-            <a href="{{ page.link }}" target="_blank" class="btn btn-lg btn-primary">Build on GitHub</a>
+            <a href="{{ page.link }}" target="_blank" rel="noopener noreferrer" class="btn btn-lg btn-primary">Build on GitHub</a>
           {% else %}
             <a href="javascript:void(0)" onclick="handleLaunch('{{ page.link }}')" class="btn btn-lg btn-primary">Launch Web App</a>
           {% endif %}
