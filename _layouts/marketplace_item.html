@@ -20,13 +20,54 @@
         <img src="{{ page.image }}" class="img-fluid rounded mb-4" style="max-height: 300px;" alt="{{ page.title }}">
         <h1 class="cover-heading">{{ page.title }}</h1>
         <p class="lead">{{ page.subtitle }}</p>
+
+        {% assign ui_data = site.data.sitetext[site.locale].marketplace_ui %}
+        {% assign service_icon = "fas fa-shopping-cart" %}
+        {% for service in site.services %}
+          {% if service.title == page.service %}
+            {% assign service_icon = service.icon %}
+          {% endif %}
+        {% endfor %}
+
+        <div class="row justify-content-center mb-4">
+          <div class="col-auto">
+            <div class="bg-light p-3 rounded shadow-sm text-dark" style="font-size: 0.9rem;">
+              <div class="mb-2">
+                <i class="{% if page.platform == 'android' %}fab fa-android{% elsif page.platform == 'github' %}fab fa-github{% else %}fas fa-globe{% endif %} text-warning mr-2"></i>
+                <strong>{{ ui_data.platform_label | default: "Platform:" }}</strong> {{ page.platform | default: "Web App" | capitalize }}
+              </div>
+              <div class="mb-2">
+                <i class="fas fa-tag text-warning mr-2"></i>
+                <strong>{{ ui_data.category_label | default: "Category:" }}</strong> {{ page.categories | join: ", " | capitalize }}
+              </div>
+              <div>
+                <i class="{{ service_icon }} text-warning mr-2"></i>
+                <strong>{{ ui_data.service_label | default: "Service:" }}</strong> {{ page.service | capitalize }}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {% if page.program %}
+          {% assign program_id = page.program | plus: 0 %}
+          {% for p in site.programs %}
+            {% assign p_id = p.id | split: "/" | last | plus: 0 %}
+            {% if p_id == program_id %}
+              <p class="text-muted mb-4">
+                Part of the <a href="{{ p.url | relative_url }}" class="text-warning font-weight-bold">{{ p.title }}</a> program
+              </p>
+              {% break %}
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+
         <p class="lead">
           {% if page.platform == 'android' %}
             <a href="{{ page.link }}" target="_blank" class="btn btn-lg btn-primary">Download APK</a>
           {% elsif page.platform == 'github' %}
             <a href="{{ page.link }}" target="_blank" class="btn btn-lg btn-primary">Build on GitHub</a>
           {% else %}
-            <a href="javascript:void(0)" onclick="handleLaunch('{{ page.link }}')" class="btn btn-lg btn-primary">Launch Web App</a>
+            <a href="javascript:void(0)" data-link="{{ page.link }}" class="btn btn-lg btn-primary launch-trigger">{{ ui_data.launch_btn | default: "Launch" }} {{ ui_data.webapp | default: "Web App" }}</a>
           {% endif %}
         </p>
       </main>
@@ -41,5 +82,13 @@
     <!-- Bootstrap core JavaScript -->
     <script src="/assets/js/jquery.min.js"></script>
     <script src="/assets/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+      document.addEventListener('click', function(e) {
+        if (e.target.classList.contains('launch-trigger')) {
+          handleLaunch(e.target.getAttribute('data-link'));
+        }
+      });
+    </script>
   </body>
 </html>

@@ -186,7 +186,8 @@
     download: {{ ui_data.download_btn | default: "Download" | jsonify }},
     build: {{ ui_data.build_btn | default: "Build" | jsonify }},
     webapp: {{ ui_data.webapp | default: "Web App" | jsonify }},
-    fallback: {{ ui_data.fallback | default: "N/A" | jsonify }}
+    fallback: {{ ui_data.fallback | default: "N/A" | jsonify }},
+    viewDetails: {{ site.data.sitetext[site.locale].collection_ui.view_details | default: "View Details" | jsonify }}
   };
   const serviceIcons = {
     {% for service in site.services %}
@@ -206,7 +207,8 @@
       "programTitle": {% assign program_title = "" %}{% for p in site.programs %}{% assign pid = p.id | split: "/" | last | split: "." | first | plus: 0 %}{% if pid == item.program %}{% assign program_title = p.title %}{% break %}{% endif %}{% endfor %}{{ program_title | jsonify }},
       "service": {{ item.service | default: "N/A" | jsonify }},
       "date": {{ item.date | jsonify }},
-      "tags": {{ item.tags | jsonify }}
+      "tags": {{ item.tags | jsonify }},
+      "url": {{ item.url | relative_url | jsonify }}
     }{% unless forloop.last %},{% endunless %}
     {% endfor %}
   ];
@@ -330,6 +332,13 @@
         actionBtn.rel = 'noopener noreferrer';
       }
       footer.appendChild(actionBtn);
+
+      const detailsBtn = document.createElement('a');
+      detailsBtn.classList.add('btn', 'btn-outline-secondary', 'btn-install');
+      detailsBtn.textContent = uiStrings.viewDetails;
+      detailsBtn.href = item.url;
+      detailsBtn.setAttribute('aria-label', `${uiStrings.viewDetails} ${item.title}`);
+      footer.appendChild(detailsBtn);
 
       fragment.appendChild(wrapper);
     });
