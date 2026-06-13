@@ -4,14 +4,15 @@
   <body class="text-center">
     {% include embed/paypal_sdk.html %}
     {% include donation_modal.html %}
+    {% assign ui_data = site.data.sitetext[site.locale].marketplace_ui %}
 
     <div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
       <header class="masthead mb-auto">
         <div class="inner">
           <h3 class="masthead-brand">{{ page.title }}</h3>
           <nav class="nav nav-masthead justify-content-center">
-            <a class="nav-link active" href="/">Home</a>
-            <a class="nav-link" href="/marketplace">Marketplace</a>
+            <a class="nav-link active" href="{{ '/' | relative_url }}">Home</a>
+            <a class="nav-link" href="{{ '/marketplace' | relative_url }}">Marketplace</a>
           </nav>
         </div>
       </header>
@@ -22,11 +23,11 @@
         <p class="lead">{{ page.subtitle }}</p>
         <p class="lead">
           {% if page.platform == 'android' %}
-            <a href="{{ page.link }}" target="_blank" class="btn btn-lg btn-primary">Download APK</a>
+            <a href="{{ page.link }}" target="_blank" class="btn btn-lg btn-primary">{{ ui_data.download_btn | default: "Download APK" }}</a>
           {% elsif page.platform == 'github' %}
-            <a href="{{ page.link }}" target="_blank" class="btn btn-lg btn-primary">Build on GitHub</a>
+            <a href="{{ page.link }}" target="_blank" class="btn btn-lg btn-primary">{{ ui_data.build_btn | default: "Build on GitHub" }}</a>
           {% else %}
-            <a href="javascript:void(0)" onclick="handleLaunch('{{ page.link }}')" class="btn btn-lg btn-primary">Launch Web App</a>
+            <a href="javascript:void(0)" onclick="handleLaunch('{{ page.link }}')" class="btn btn-lg btn-primary">{{ ui_data.launch_btn | default: "Launch Web App" }}</a>
           {% endif %}
         </p>
       </main>
@@ -39,7 +40,7 @@
     </div>
 
     <!-- Bootstrap core JavaScript -->
-    <script src="/assets/js/jquery.min.js"></script>
-    <script src="/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ '/assets/js/jquery.min.js' | relative_url }}"></script>
+    <script src="{{ '/assets/js/bootstrap.bundle.min.js' | relative_url }}"></script>
   </body>
 </html>

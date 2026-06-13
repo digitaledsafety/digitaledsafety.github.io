@@ -29,6 +29,10 @@ en: &DEFAULT_EN
     webapp: "Web App"
     no_results: "No results found matching your search."
     fallback: "N/A"
+    back_home: "Home"
+    back_to_program: "Back to Program"
+    view_program: "View Program"
+    related_marketplace_items: "Related Marketplace Items"
 
   collection_ui:
     filter_by: "Filter by:"
@@ -184,6 +188,10 @@ es: &DEFAULT_ES
     webapp: "Aplicación Web"
     no_results: "No se encontraron resultados que coincidan con su búsqueda."
     fallback: "N/A"
+    back_home: "Inicio"
+    back_to_program: "Volver al Programa"
+    view_program: "Ver Programa"
+    related_marketplace_items: "Artículos de Mercado Relacionados"
 
   collection_ui:
     filter_by: "Filtrar por:"
