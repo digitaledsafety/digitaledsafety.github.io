@@ -28,7 +28,7 @@ test.describe('Donation Interceptor', () => {
     // Navigate to a specific marketplace item
     await page.goto('/marketplace/53.html');
 
-    const launchBtn = page.locator('text=Launch Web App');
+    const launchBtn = page.locator('.btn-primary', { hasText: /Launch/i });
     await expect(launchBtn).toBeVisible();
     await launchBtn.click();
 
@@ -44,7 +44,7 @@ test.describe('Donation Interceptor', () => {
     // Reload to apply
     await page.reload();
 
-    const launchBtn = page.locator('text=Launch Web App');
+    const launchBtn = page.locator('.btn-primary', { hasText: /Launch/i });
 
     // If hasDonated is true, clicking launch should NOT show the modal.
     // It would normally navigate away, so we just check the modal status.
@@ -58,7 +58,7 @@ test.describe('Donation Interceptor', () => {
   test('should launch app when clicking "No thanks, just launch"', async ({ page }) => {
     await page.goto('/marketplace/53.html');
 
-    await page.click('text=Launch Web App');
+    await page.click('.btn-primary:has-text("Launch")');
     await page.waitForSelector('#donationModal', { state: 'visible' });
 
     const skipBtn = page.locator('text=No thanks, just launch');
