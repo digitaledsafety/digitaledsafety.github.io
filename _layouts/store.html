@@ -43,7 +43,7 @@ document.getElementById("page-top").className="bg-light";
 <div class="row">
 {% for product in site.products %}
   <div class="col-md-6 col-lg-4 mb-4">
-    <div class="card h-100 shadow-sm border-0">
+    <div class="card h-100 shadow-sm border-0 grid-card-hover">
       {% if product.image %}
       <img class="card-img-top" src="{{ product.image }}" alt="{{ product.title }}">
       {% endif %}

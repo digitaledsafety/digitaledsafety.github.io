@@ -3,16 +3,11 @@
     border: none;
     border-radius: 20px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
     overflow: hidden;
     height: 100%;
     display: flex;
     flex-direction: column;
     background: #fff;
-  }
-  .marketplace-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
   }
   .marketplace-img-container {
     position: relative;
@@ -264,7 +259,7 @@
       wrapper.setAttribute('role', 'listitem');
 
       const card = document.createElement('div');
-      card.classList.add('card', 'marketplace-card');
+      card.classList.add('card', 'marketplace-card', 'grid-card-hover');
       wrapper.appendChild(card);
 
       const imgContainer = document.createElement('div');
