@@ -86,7 +86,7 @@ document.getElementById("page-top").className="bg-light";
 
                 const viewBtn = document.createElement('a');
                 viewBtn.href = cardObj.path;
-                viewBtn.classList.add('btn', 'btn-outline-primary', 'btn-sm', 'btn-block', 'stretched-link');
+                viewBtn.classList.add('btn', 'btn-primary', 'btn-block', 'stretched-link');
                 viewBtn.style.borderRadius = '20px';
                 viewBtn.textContent = {{ site.data.sitetext[site.locale].collection_ui.view_details | default: "View Details" | jsonify }};
                 footer.appendChild(viewBtn);
