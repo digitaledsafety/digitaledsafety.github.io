@@ -2,47 +2,81 @@
 {% assign posts = site.resources | where_exp: "resource", "resource.categories contains filter" %}
 
 <script>
-    const cardData = {{ posts | jsonify }};
+    window.cardData = {{ posts | jsonify }};
     window.defaultFilter = 'all';
 
-    function getCardHtml(cardObj) {
-        const tags = (cardObj.tags && Array.isArray(cardObj.tags)) ? cardObj.tags.join(',') : '';
-        return `
-            <div class="col-md-4 mb-3 filterable-card" data-filters="${tags}">
-                <div class="card h-100">
-                  <img class="card-img-top img-fluid" src="${cardObj.image}" alt="">
-                    <div class="card-body">
-                        <h5 class="card-title">${cardObj.title}</h5>
-                        <p class="card-text">${cardObj.subtitle}</p>
-                        <a href="${cardObj.link}" target="_blank" class="btn btn-primary stretched-link">View</a>
-                    </div>
-                </div>
-            </div>
-        `;
+    function renderGrid(data, container) {
+        container.innerHTML = '';
+        const fragment = document.createDocumentFragment();
+
+        data.forEach(cardObj => {
+            const wrapper = document.createElement('div');
+            wrapper.classList.add('col-md-4', 'mb-4');
+
+            const card = document.createElement('div');
+            card.classList.add('card', 'h-100', 'shadow-sm', 'border-0');
+            card.style.borderRadius = '15px';
+            card.style.overflow = 'hidden';
+
+            const img = document.createElement('img');
+            img.classList.add('card-img-top', 'img-fluid');
+            img.src = cardObj.image;
+            img.alt = cardObj.title;
+            img.style.height = '180px';
+            img.style.objectFit = 'cover';
+            card.appendChild(img);
+
+            const body = document.createElement('div');
+            body.classList.add('card-body', 'd-flex', 'flex-column');
+
+            const title = document.createElement('h5');
+            title.classList.add('card-title', 'font-weight-bold');
+            title.textContent = cardObj.title;
+            body.appendChild(title);
+
+            const text = document.createElement('p');
+            text.classList.add('card-text', 'small', 'text-muted');
+            text.textContent = cardObj.subtitle;
+            body.appendChild(text);
+
+            const footer = document.createElement('div');
+            footer.classList.add('mt-auto');
+
+            const viewBtn = document.createElement('a');
+            viewBtn.href = cardObj.link;
+            viewBtn.target = '_blank';
+            viewBtn.rel = 'noopener noreferrer';
+            viewBtn.classList.add('btn', 'btn-primary', 'btn-sm', 'btn-block', 'stretched-link');
+            viewBtn.style.borderRadius = '20px';
+            viewBtn.textContent = {{ site.data.sitetext[site.locale].collection_ui.view_details | default: "View Details" | jsonify }};
+            footer.appendChild(viewBtn);
+
+            body.appendChild(footer);
+            card.appendChild(body);
+            wrapper.appendChild(card);
+            fragment.appendChild(wrapper);
+        });
+
+        container.appendChild(fragment);
     }
 </script>
 
-<div class="row">
-    <!-- Filters -->
-    <div class="col-md-12">
-      <div class="btn-group">
-          <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-              <i class="fa fa-filter"></i> Filter by:
-            <span class="caret"></span>
-          </a>
-          <ul id="card-filters" class="dropdown-menu">
-            <!-- dropdown menu links -->
-          </ul>
-        </div>
-    </div>
-</div>
-<div class="row">
-    <!-- List of Cards -->
-    <div class="col-md-12">
-        <div class="row" id="card-container">
-            <!-- Cards will be dynamically populated here -->
-        </div>
-    </div>
+{% assign all_tags = "" | split: "," %}
+{% for post in posts %}
+  {% if post.tags %}
+    {% for tag in post.tags %}
+      {% unless all_tags contains tag %}
+        {% assign all_tags = all_tags | push: tag %}
+      {% endunless %}
+    {% endfor %}
+  {% endif %}
+{% endfor %}
+{% assign sorted_tags = all_tags | sort %}
+
+{% include grid_controls.html id="resources" filter_options=sorted_tags %}
+
+<div class="row" id="resources-container" role="list">
+    <!-- Cards will be dynamically populated here -->
 </div>
 
-{% include card_filter_script.html %}
+{% include grid_script.html id="resources" data_var="cardData" %}
