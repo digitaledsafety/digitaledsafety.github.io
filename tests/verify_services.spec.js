@@ -1,7 +1,7 @@
 const { test, expect } = require('@playwright/test');
 
 test('verify services and marketplace filters', async ({ page }) => {
-  await page.goto('http://localhost:8000');
+  await page.goto('/');
 
   // Verify Services section
   const servicesHeading = page.locator('#services .section-heading');
