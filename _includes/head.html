@@ -83,6 +83,35 @@
     object-fit: cover;
     }
 
+    .grid-card-hover {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .grid-card-hover:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.15) !important;
+    }
+
+    @media (max-width: 991px) {
+      .navbar > .container {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .navbar-brand {
+        flex-shrink: 1;
+        margin-right: 0;
+      }
+      .navbar-toggler {
+        flex-shrink: 0;
+      }
+      /* Ensure the collapse still takes full width when expanded */
+      .navbar-collapse {
+        flex-basis: 100%;
+      }
+    }
+
     </style>
     <!-- Page container change top padding when nav shrinks -->
     {% if page.layout == "page" or page.layout == "store" %}

@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  {% include head.html %}
+  <body class="text-center">
+    {% include embed/paypal_sdk.html %}
+    {% include donation_modal.html %}
+
+    <div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
+      <header class="masthead mb-auto">
+        <div class="inner">
+          <h3 class="masthead-brand">{{ page.title }}</h3>
+          <nav class="nav nav-masthead justify-content-center">
+            <a class="nav-link active" href="{{ '/' | relative_url }}">Home</a>
+            <a class="nav-link" href="{{ '/marketplace' | relative_url }}">Marketplace</a>
+          </nav>
+        </div>
+      </header>
+
+      <main role="main" class="inner cover">
+        <img src="{{ page.image }}" class="img-fluid rounded mb-4" style="max-height: 300px;" alt="{{ page.title }}">
+        <h1 class="cover-heading">{{ page.title }}</h1>
+        <p class="lead">{{ page.subtitle }}</p>
+        <p class="lead">
+          {% if page.platform == 'android' %}
+            <a href="{{ page.link }}" target="_blank" class="btn btn-lg btn-primary">Download APK</a>
+          {% elsif page.platform == 'github' %}
+            <a href="{{ page.link }}" target="_blank" class="btn btn-lg btn-primary">Build on GitHub</a>
+          {% else %}
+            <a href="javascript:void(0)" onclick="handleLaunch('{{ page.link }}')" class="btn btn-lg btn-primary launch-trigger" data-link="{{ page.link }}">Launch Web App</a>
+          {% endif %}
+        </p>
+      </main>
+
+      <footer class="mastfoot mt-auto">
+        <div class="inner">
+          <p>Provided by <a href="https://digitaleducationsafety.org">The Digital Education & Safety Foundation</a>.</p>
+        </div>
+      </footer>
+    </div>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

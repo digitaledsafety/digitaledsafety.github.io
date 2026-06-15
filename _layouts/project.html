@@ -15,6 +15,36 @@ document.getElementById("page-top").className="bg-light";
 
 <div class="container py-5" id="pagecontainer">
   {{ content }}
+
+  {% assign current_id = page.id | split: "/" | last | plus: 0 %}
+  {% assign related_items = "" | split: "" %}
+  {% for item in site.marketplace %}
+    {% assign item_program = item.program | plus: 0 %}
+    {% if item_program == current_id and item_program != 0 %}
+      {% assign related_items = related_items | push: item %}
+    {% endif %}
+  {% endfor %}
+
+  {% if related_items.size > 0 %}
+    <div class="related-marketplace mt-5">
+      <hr>
+      <h3 class="mb-4">Related Marketplace Items</h3>
+      <div class="row">
+        {% for item in related_items %}
+          <div class="col-md-4 mb-4">
+            <div class="card h-100 shadow-sm border-0 grid-card-hover" style="border-radius: 15px; overflow: hidden;">
+              <img src="{{ item.image }}" class="card-img-top" alt="{{ item.title }}" style="height: 180px; object-fit: cover;">
+              <div class="card-body">
+                <h5 class="card-title" style="font-weight: 700;">{{ item.title }}</h5>
+                <p class="card-text text-muted" style="font-size: 0.9rem;">{{ item.subtitle }}</p>
+                <a href="{{ item.url | relative_url }}" class="btn btn-primary btn-sm" style="border-radius: 20px;">View in Marketplace</a>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  {% endif %}
 </div>
 
 {% include contact.html %}
