@@ -9,7 +9,7 @@ layout: default
     <div class="row">
       <div class="col-lg-12 text-center">
         <h2 class="section-heading text-uppercase">{{ marketplace_data.title | default: 'Marketplace' }}</h2>
-        <h3 class="section-subheading text-muted">{{ marketplace_data.text | default: 'Apps and Games for a Modern Education' }}</h3>
+        <p class="lead text-muted mb-5">{{ marketplace_data.text | default: 'Discover a world of interactive learning. Our curated marketplace features the highest quality apps and games to help you master the STEM skills of tomorrow.' }}</p>
       </div>
     </div>
     {% include marketplace_grid.html %}
