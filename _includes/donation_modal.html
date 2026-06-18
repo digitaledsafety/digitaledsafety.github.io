@@ -81,7 +81,15 @@
   (function() {
     let pendingLaunchUrl = '';
 
+    function resetDonationModal() {
+      const prompt = document.getElementById('donation-prompt');
+      const thankYou = document.getElementById('thank-you-message');
+      if (prompt) prompt.style.display = 'block';
+      if (thankYou) thankYou.style.display = 'none';
+    }
+
     window.handleLaunch = function(url) {
+      resetDonationModal();
       if (localStorage.getItem('hasDonated')) {
         window.open(url, '_blank');
       } else {
@@ -152,13 +160,12 @@
       }
     });
 
-    // Reset modal state when closed using Vanilla JS
-    const donationModal = document.getElementById('donationModal');
-    if (donationModal) {
-      donationModal.addEventListener('hidden.bs.modal', function () {
-        document.getElementById('donation-prompt').style.display = 'block';
-        document.getElementById('thank-you-message').style.display = 'none';
-      });
-    }
+    // Reset modal state when closed. We use a combination of reset-on-launch
+    // and a deferred jQuery listener to ensure state is always clean.
+    window.addEventListener('load', function() {
+      if (window.jQuery) {
+        $('#donationModal').on('hidden.bs.modal', resetDonationModal);
+      }
+    });
   })();
 </script>

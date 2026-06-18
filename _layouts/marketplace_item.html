@@ -1,7 +1,8 @@
 <!doctype html>
-<html lang="en">
+<html lang="{{ site.locale | slice: 0,2 | default: "en" }}">
   {% include head.html %}
   <body class="text-center">
+    {% assign ui_data = site.data.sitetext[site.locale].marketplace_ui %}
     {% include embed/paypal_sdk.html %}
     {% include donation_modal.html %}
 
@@ -22,11 +23,11 @@
         <p class="lead">{{ page.subtitle }}</p>
         <p class="lead">
           {% if page.platform == 'android' %}
-            <a href="{{ page.link }}" target="_blank" class="btn btn-lg btn-primary">Download APK</a>
+            <a href="{{ page.link }}" target="_blank" class="btn btn-lg btn-primary">{{ ui_data.download_btn | default: "Download" }}</a>
           {% elsif page.platform == 'github' %}
-            <a href="{{ page.link }}" target="_blank" class="btn btn-lg btn-primary">Build on GitHub</a>
+            <a href="{{ page.link }}" target="_blank" class="btn btn-lg btn-primary">{{ ui_data.build_btn | default: "Build" }}</a>
           {% else %}
-            <a href="javascript:void(0)" onclick="handleLaunch('{{ page.link }}')" class="btn btn-lg btn-primary launch-trigger" data-link="{{ page.link }}">Launch Web App</a>
+            <a href="javascript:void(0)" onclick="handleLaunch('{{ page.link }}')" class="btn btn-lg btn-primary launch-trigger" data-link="{{ page.link }}">{{ ui_data.launch_btn | default: "Launch" }} {{ ui_data.webapp | default: "Web App" }}</a>
           {% endif %}
         </p>
       </main>
