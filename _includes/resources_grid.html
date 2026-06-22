@@ -6,60 +6,20 @@
     window.defaultFilter = 'all';
 
     function renderGrid(data, container) {
-        container.innerHTML = '';
-        const fragment = document.createDocumentFragment();
-
-        data.forEach(cardObj => {
-            const wrapper = document.createElement('div');
-            wrapper.classList.add('col-md-4', 'mb-4');
-
-            const card = document.createElement('div');
-            card.classList.add('card', 'h-100', 'shadow-sm', 'border-0', 'grid-card-hover');
-            card.style.borderRadius = '15px';
-            card.style.overflow = 'hidden';
-
-            const img = document.createElement('img');
-            img.classList.add('card-img-top', 'img-fluid');
-            img.src = cardObj.image;
-            img.alt = cardObj.title;
-            img.style.height = '180px';
-            img.style.objectFit = 'cover';
-            card.appendChild(img);
-
-            const body = document.createElement('div');
-            body.classList.add('card-body', 'd-flex', 'flex-column');
-
-            const title = document.createElement('h5');
-            title.classList.add('card-title', 'font-weight-bold');
-            title.textContent = cardObj.title;
-            body.appendChild(title);
-
-            const text = document.createElement('p');
-            text.classList.add('card-text', 'small', 'text-muted');
-            text.textContent = cardObj.subtitle;
-            body.appendChild(text);
-
-            const footer = document.createElement('div');
-            footer.classList.add('mt-auto');
-
-            const viewBtn = document.createElement('a');
-            viewBtn.href = cardObj.link;
-            viewBtn.target = '_blank';
-            viewBtn.rel = 'noopener noreferrer';
-            viewBtn.classList.add('btn', 'btn-primary', 'btn-sm', 'btn-block', 'stretched-link');
-            viewBtn.style.borderRadius = '20px';
-            viewBtn.textContent = {{ site.data.sitetext[site.locale].collection_ui.view_details | default: "View Details" | jsonify }};
-            footer.appendChild(viewBtn);
-
-            body.appendChild(footer);
-            card.appendChild(body);
-            wrapper.appendChild(card);
-            fragment.appendChild(wrapper);
+        renderGridShared(data, container, {
+            border: false,
+            externalLinks: true,
+            stretchedLink: true,
+            getImageUrl: (item) => item.image,
+            getLinkUrl: (item) => item.link,
+            getDescription: (item) => item.subtitle,
+            mutedDescription: true,
+            viewDetailsText: {{ site.data.sitetext[site.locale].collection_ui.view_details | default: "View Details" | jsonify }}
         });
-
-        container.appendChild(fragment);
     }
 </script>
+
+{% include render_grid_script.html %}
 
 {% assign all_tags = "" | split: "," %}
 {% for post in posts %}
