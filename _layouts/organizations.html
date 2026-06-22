@@ -76,85 +76,38 @@ document.getElementById("page-top").className="bg-light";
         {% endfor %}];
 
         function renderGrid(data, container) {
-            container.innerHTML = '';
-            const fragment = document.createDocumentFragment();
+            renderGridShared(data, container, {
+                border: false,
+                getImageUrl: (item) => (item.caption && item.caption.thumbnail) ? item.caption.thumbnail : '',
+                getLinkUrl: (item) => item.url,
+                getSubtitle: (item) => Array.isArray(item.tags) ? item.tags.join(', ') : (item.tags ? item.tags.split(',').join(', ') : ''),
+                getDescription: (item) => item.description || '',
+                renderFooter: (item, footer) => {
+                    footer.classList.add('d-flex', 'justify-content-between', 'gap-2');
 
-            data.forEach(cardObj => {
-                const tags = Array.isArray(cardObj.tags) ? cardObj.tags : (cardObj.tags ? cardObj.tags.split(',') : []);
-                const tagsString = tags.join(', ');
-                const thumbnail = (cardObj.caption && cardObj.caption.thumbnail) ? cardObj.caption.thumbnail : '';
+                    const viewBtn = document.createElement('a');
+                    viewBtn.href = item.url;
+                    viewBtn.classList.add('btn', 'btn-outline-primary', 'btn-sm', 'flex-grow-1', 'mr-1');
+                    viewBtn.style.borderRadius = '20px';
+                    viewBtn.textContent = {{ ui_coll.view_details | default: "View Details" | jsonify }};
+                    footer.appendChild(viewBtn);
 
-                const wrapper = document.createElement('div');
-                wrapper.classList.add('col-md-4', 'mb-4');
-
-                const card = document.createElement('div');
-                card.classList.add('card', 'h-100', 'shadow-sm', 'border-0', 'grid-card-hover');
-                card.style.borderRadius = '15px';
-                card.style.overflow = 'hidden';
-
-                const link = document.createElement('a');
-                link.href = cardObj.url;
-
-                const img = document.createElement('img');
-                img.classList.add('card-img-top', 'img-fluid');
-                img.src = thumbnail;
-                img.alt = cardObj.title;
-                img.style.height = '180px';
-                img.style.objectFit = 'cover';
-                link.appendChild(img);
-                card.appendChild(link);
-
-                const body = document.createElement('div');
-                body.classList.add('card-body', 'd-flex', 'flex-column');
-
-                const title = document.createElement('h5');
-                title.classList.add('card-title', 'font-weight-bold');
-                const titleLink = document.createElement('a');
-                titleLink.href = cardObj.url;
-                titleLink.textContent = cardObj.title;
-                title.appendChild(titleLink);
-                body.appendChild(title);
-
-                const subtitle = document.createElement('p');
-                subtitle.classList.add('card-subtitle', 'mb-2', 'text-muted', 'small');
-                subtitle.textContent = tagsString;
-                body.appendChild(subtitle);
-
-                const text = document.createElement('p');
-                text.classList.add('card-text', 'small');
-                text.textContent = cardObj.description || '';
-                body.appendChild(text);
-
-                const footer = document.createElement('div');
-                footer.classList.add('mt-auto', 'd-flex', 'justify-content-between', 'gap-2');
-
-                const viewBtn = document.createElement('a');
-                viewBtn.href = cardObj.url;
-                viewBtn.classList.add('btn', 'btn-outline-primary', 'btn-sm', 'flex-grow-1', 'mr-1');
-                viewBtn.style.borderRadius = '20px';
-                viewBtn.textContent = {{ ui_coll.view_details | default: "View Details" | jsonify }};
-                footer.appendChild(viewBtn);
-
-                if (cardObj.contribute) {
-                    const donateBtn = document.createElement('a');
-                    donateBtn.href = cardObj.contribute;
-                    donateBtn.target = '_blank';
-                    donateBtn.rel = 'noopener noreferrer';
-                    donateBtn.classList.add('btn', 'btn-primary', 'btn-sm', 'flex-grow-1');
-                    donateBtn.style.borderRadius = '20px';
-                    donateBtn.textContent = {{ ui_coll.donate | default: "Donate" | jsonify }};
-                    footer.appendChild(donateBtn);
+                    if (item.contribute) {
+                        const donateBtn = document.createElement('a');
+                        donateBtn.href = item.contribute;
+                        donateBtn.target = '_blank';
+                        donateBtn.rel = 'noopener noreferrer';
+                        donateBtn.classList.add('btn', 'btn-primary', 'btn-sm', 'flex-grow-1');
+                        donateBtn.style.borderRadius = '20px';
+                        donateBtn.textContent = {{ ui_coll.donate | default: "Donate" | jsonify }};
+                        footer.appendChild(donateBtn);
+                    }
                 }
-
-                body.appendChild(footer);
-                card.appendChild(body);
-                wrapper.appendChild(card);
-                fragment.appendChild(wrapper);
             });
-
-            container.appendChild(fragment);
         }
       </script>
+
+      {% include render_grid_script.html %}
 
       {% assign all_tags = "" | split: "," %}
       {% for post in posts %}
