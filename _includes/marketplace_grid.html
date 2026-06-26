@@ -119,60 +119,16 @@
 {% include embed/paypal_sdk.html %}
 {% include donation_modal.html %}
 
-<div class="row mb-4">
-  <div class="col-md-6 mt-3">
-    <div class="input-group">
-      <div class="input-group-prepend">
-        <span class="input-group-text"><i class="fas fa-search" aria-hidden="true"></i></span>
-      </div>
-      <input type="text" id="marketplace-search" class="form-control" placeholder="{{ ui_data.search_placeholder | default: "Search..." }}" aria-label="{{ ui_data.search_placeholder | default: "Search marketplace items" }}">
-    </div>
-  </div>
-  <div class="col-md-3 mt-3">
-    <select id="service-filter" class="form-control" aria-label="{{ ui_data.service_label | default: "Filter by service" }}">
-      <option value="all">{{ ui_data.all_services | default: "All Services" }}</option>
-      {% for service in site.services %}
-      <option value="{{ service.title }}">{{ service.title }}</option>
-      {% endfor %}
-    </select>
-  </div>
-  <div class="col-md-3 mt-3">
-    <select id="sort-by" class="form-control" aria-label="{{ ui_data.sort_label | default: "Sort marketplace items" }}">
-      <option value="recent">{{ ui_data.sort_recent | default: "Recently Added" }}</option>
-      <option value="alpha">{{ ui_data.sort_alpha | default: "Alphabetical" }}</option>
-    </select>
-  </div>
-</div>
-
-<div class="row mb-4">
-  <div class="col-12 text-right">
-    <button id="clear-filters" class="btn btn-sm btn-outline-secondary" style="border-radius: 20px; font-size: 0.75rem;" aria-label="{{ ui_data.clear_filters_aria | default: 'Clear all search and filter criteria' }}">
-      <i class="fas fa-times-circle mr-1"></i> {{ ui_data.clear_filters | default: 'Clear Filters' }}
-    </button>
-  </div>
-</div>
-
-<div id="no-results-message" role="status" style="display: none;">
-  <p class="text-muted">{{ ui_data.no_results | default: "No results found matching your search." }}</p>
-</div>
+{% assign all_services = site.services | map: "title" | sort %}
+{% include grid_controls.html id="marketplace" filter_options=all_services %}
 
 <div class="row" id="marketplace-container" role="list">
   <!-- Marketplace items will be injected here -->
 </div>
 
-<script>
-  function debounce(func, wait) {
-    let timeout;
-    return function executedFunction(...args) {
-      const later = () => {
-        clearTimeout(timeout);
-        func(...args);
-      };
-      clearTimeout(timeout);
-      timeout = setTimeout(later, wait);
-    };
-  }
+{% include render_grid_script.html %}
 
+<script>
   const uiStrings = {
     platform: {{ ui_data.platform_label | default: "Platform:" | jsonify }},
     category: {{ ui_data.category_label | default: "Category:" | jsonify }},
@@ -183,16 +139,19 @@
     webapp: {{ ui_data.webapp | default: "Web App" | jsonify }},
     fallback: {{ ui_data.fallback | default: "N/A" | jsonify }}
   };
+
   const serviceIcons = {
     {% for service in site.services %}
     {{ service.title | jsonify }}: {{ service.icon | jsonify }}{% unless forloop.last %},{% endunless %}
     {% endfor %}
   };
-  const marketplaceData = [
+
+  window.marketplaceData = [
     {% for item in site.marketplace %}
     {
       "title": {{ item.title | jsonify }},
       "subtitle": {{ item.subtitle | jsonify }},
+      "description": {{ item.subtitle | jsonify }},
       "image": {{ item.image | jsonify }},
       "link": {{ item.link | jsonify }},
       "platform": {{ item.platform | default: "pwa" | jsonify }},
@@ -228,159 +187,74 @@
     return item;
   }
 
-  function renderMarketplace(data) {
-    const container = document.getElementById('marketplace-container');
-    container.innerHTML = '';
-    const fragment = document.createDocumentFragment();
+  function renderGrid(data, container) {
+    renderGridShared(data, container, {
+        getImageUrl: (item) => item.image,
+        getLinkUrl: (item) => item.link,
+        getSubtitle: (item) => item.subtitle,
+        getDescription: null, // We'll render custom meta in the footer
+        renderFooter: (item, footer) => {
+            let btnText = uiStrings.launch;
+            let platformIcon = 'fas fa-globe';
+            let platformDisplay = item.platform || uiStrings.fallback;
 
-    data.forEach(item => {
-      let btnText = uiStrings.launch;
-      let platformIcon = 'fas fa-globe';
-      let platformDisplay = item.platform || uiStrings.fallback;
+            if (item.platform && (item.platform.toLowerCase() === 'pwa' || item.platform.toLowerCase() === 'web app')) {
+                platformDisplay = uiStrings.webapp;
+                platformIcon = 'fas fa-globe';
+                btnText = uiStrings.launch;
+            } else if (item.platform === 'android') {
+                btnText = uiStrings.download;
+                platformIcon = 'fab fa-android';
+            } else if (item.platform === 'github') {
+                btnText = uiStrings.build;
+                platformIcon = 'fab fa-github';
+            }
 
-      if (item.platform && (item.platform.toLowerCase() === 'pwa' || item.platform.toLowerCase() === 'web app')) {
-        platformDisplay = uiStrings.webapp;
-        platformIcon = 'fas fa-globe';
-        btnText = uiStrings.launch;
-      } else if (item.platform === 'android') {
-        btnText = uiStrings.download;
-        platformIcon = 'fab fa-android';
-      } else if (item.platform === 'github') {
-        btnText = uiStrings.build;
-        platformIcon = 'fab fa-github';
-      }
+            const serviceIcon = serviceIcons[item.service] || 'fas fa-shopping-cart';
+            const displayService = item.service || uiStrings.fallback;
+            const displayCategories = Array.isArray(item.categories) ? item.categories.join(", ") : (item.categories || uiStrings.fallback);
 
-      const serviceIcon = serviceIcons[item.service] || 'fas fa-shopping-cart';
-      const displayService = item.service || uiStrings.fallback;
-      const displayCategories = Array.isArray(item.categories) ? item.categories.join(", ") : (item.categories || uiStrings.fallback);
+            const meta = document.createElement('div');
+            meta.classList.add('marketplace-meta');
+            meta.appendChild(createMetaItem(platformIcon, uiStrings.platform, platformDisplay));
+            meta.appendChild(createMetaItem('fas fa-tag', uiStrings.category, displayCategories));
+            meta.appendChild(createMetaItem(serviceIcon, uiStrings.service, displayService.toLowerCase()));
+            footer.appendChild(meta);
 
-      const wrapper = document.createElement('div');
-      wrapper.classList.add('col-lg-4', 'col-md-6', 'mb-4', 'marketplace-item-wrapper');
-      wrapper.setAttribute('role', 'listitem');
+            const footerFlex = document.createElement('div');
+            footerFlex.classList.add('marketplace-footer');
 
-      const card = document.createElement('div');
-      card.classList.add('card', 'marketplace-card', 'grid-card-hover');
-      wrapper.appendChild(card);
+            const actionBtn = document.createElement('a');
+            actionBtn.classList.add('btn', 'btn-primary', 'btn-install');
+            actionBtn.textContent = btnText;
+            actionBtn.setAttribute('aria-label', `${btnText} ${item.title}`);
 
-      const imgContainer = document.createElement('div');
-      imgContainer.classList.add('marketplace-img-container');
-      card.appendChild(imgContainer);
+            if (!item.platform || item.platform.toLowerCase() === 'pwa' || item.platform.toLowerCase() === 'web app') {
+                actionBtn.href = 'javascript:void(0)';
+                actionBtn.classList.add('launch-trigger');
+                actionBtn.setAttribute('data-link', item.link);
+            } else {
+                actionBtn.href = item.link;
+                actionBtn.target = '_blank';
+                actionBtn.rel = 'noopener noreferrer';
+            }
+            footerFlex.appendChild(actionBtn);
 
-      const img = document.createElement('img');
-      img.src = item.image;
-      img.alt = item.title;
-      imgContainer.appendChild(img);
+            const sBadge = document.createElement('span');
+            sBadge.classList.add('service-badge');
+            sBadge.textContent = displayService;
+            footerFlex.appendChild(sBadge);
 
-      const body = document.createElement('div');
-      body.classList.add('marketplace-body');
-      card.appendChild(body);
-
-      const header = document.createElement('div');
-      header.classList.add('d-flex', 'justify-content-between', 'align-items-start');
-      body.appendChild(header);
-
-      const title = document.createElement('h5');
-      title.classList.add('marketplace-title', 'mr-2');
-      title.textContent = item.title;
-      header.appendChild(title);
-
-      const badgeContainer = document.createElement('div');
-      badgeContainer.classList.add('d-flex', 'flex-column', 'align-items-end', 'flex-shrink-0');
-      header.appendChild(badgeContainer);
-
-      const sBadge = document.createElement('span');
-      sBadge.classList.add('service-badge');
-      sBadge.textContent = displayService;
-      badgeContainer.appendChild(sBadge);
-
-      const subtitle = document.createElement('p');
-      subtitle.classList.add('marketplace-subtitle');
-      subtitle.textContent = item.subtitle;
-      body.appendChild(subtitle);
-
-      const meta = document.createElement('div');
-      meta.classList.add('marketplace-meta');
-      body.appendChild(meta);
-
-      meta.appendChild(createMetaItem(platformIcon, uiStrings.platform, platformDisplay));
-      meta.appendChild(createMetaItem('fas fa-tag', uiStrings.category, displayCategories));
-      meta.appendChild(createMetaItem(serviceIcon, uiStrings.service, displayService.toLowerCase()));
-
-      const footer = document.createElement('div');
-      footer.classList.add('marketplace-footer');
-      body.appendChild(footer);
-
-      const actionBtn = document.createElement('a');
-      actionBtn.classList.add('btn', 'btn-primary', 'btn-install');
-      actionBtn.textContent = btnText;
-      actionBtn.setAttribute('aria-label', `${btnText} ${item.title}`);
-
-      if (!item.platform || item.platform.toLowerCase() === 'pwa' || item.platform.toLowerCase() === 'web app') {
-        actionBtn.href = 'javascript:void(0)';
-        actionBtn.classList.add('launch-trigger');
-        actionBtn.setAttribute('data-link', item.link);
-      } else {
-        actionBtn.href = item.link;
-        actionBtn.target = '_blank';
-        actionBtn.rel = 'noopener noreferrer';
-      }
-      footer.appendChild(actionBtn);
-
-      fragment.appendChild(wrapper);
+            footer.appendChild(footerFlex);
+        }
     });
-    container.appendChild(fragment);
   }
-
-  function filterAndSort() {
-    const searchTerm = document.getElementById('marketplace-search').value.toLowerCase();
-    const service = document.getElementById('service-filter').value;
-    const sortBy = document.getElementById('sort-by').value;
-
-    let filtered = marketplaceData.filter(item => {
-      const matchesSearch = (item.title && item.title.toLowerCase().includes(searchTerm)) ||
-                           (item.subtitle && item.subtitle.toLowerCase().includes(searchTerm)) ||
-                           (item.platform && item.platform.toLowerCase().includes(searchTerm)) ||
-                           (item.service && item.service.toLowerCase().includes(searchTerm)) ||
-                           (item.programTitle && item.programTitle.toLowerCase().includes(searchTerm)) ||
-                           (Array.isArray(item.categories) ? item.categories.some(c => c && c.toLowerCase().includes(searchTerm)) : (item.categories && item.categories.toLowerCase().includes(searchTerm))) ||
-                           (Array.isArray(item.tags) ? item.tags.some(t => t && t.toLowerCase().includes(searchTerm)) : (item.tags && item.tags.toLowerCase().includes(searchTerm)));
-      const matchesService = service === 'all' || item.service === service;
-      return matchesSearch && matchesService;
-    });
-
-    if (sortBy === 'alpha') {
-      filtered.sort((a, b) => a.title.localeCompare(b.title));
-    } else {
-      filtered.sort((a, b) => new Date(b.date) - new Date(a.date));
-    }
-
-    const noResultsMsg = document.getElementById('no-results-message');
-    if (filtered.length === 0) {
-      noResultsMsg.style.display = 'block';
-    } else {
-      noResultsMsg.style.display = 'none';
-    }
-
-    renderMarketplace(filtered);
-  }
-
-  document.getElementById('marketplace-search').addEventListener('input', debounce(filterAndSort, 300));
-  document.getElementById('service-filter').addEventListener('change', filterAndSort);
-  document.getElementById('sort-by').addEventListener('change', filterAndSort);
-
-  document.getElementById('clear-filters').addEventListener('click', function() {
-    document.getElementById('marketplace-search').value = '';
-    document.getElementById('service-filter').value = 'all';
-    document.getElementById('sort-by').value = 'recent';
-    filterAndSort();
-  });
 
   document.getElementById('marketplace-container').addEventListener('click', function(e) {
     if (e.target.classList.contains('launch-trigger')) {
       handleLaunch(e.target.getAttribute('data-link'));
     }
   });
-
-  // Initial render
-  filterAndSort();
 </script>
+
+{% include grid_script.html id="marketplace" data_var="marketplaceData" %}

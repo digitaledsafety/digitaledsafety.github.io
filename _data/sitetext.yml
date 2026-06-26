@@ -14,6 +14,41 @@ en: &DEFAULT_EN
     title: "Marketplace"
     text: "Apps and Games for a Modern Education"
     section: marketplace
+    heading: "Empower Your Learning Journey"
+    lead_text: "Welcome to the digital frontier of education. Explore our curated selection of tools, applications, and games designed to make STEM mastery engaging, accessible, and high-impact."
+
+  open_source:
+    title: "Open Source"
+    heading: "Collaborate with Industry Leaders through Open Source"
+    text: "Open source is the heartbeat of modern technological innovation. By participating in these projects, you're not just writing code—you're joining a global community dedicated to solving real-world challenges through transparency and collaboration."
+    feature1_title: "Hands-on Mastery"
+    feature1_text: "Dive deep into complex systems. Explore production-grade source code to master programming languages, sophisticated algorithms, and scalable software architectures."
+    feature2_title: "Collaborative Growth"
+    feature2_text: "Hone your critical thinking and project management skills. Work alongside experienced mentors to troubleshoot issues and deliver creative, high-impact solutions."
+    feature3_title: "Future-Ready Skills"
+    feature3_text: "Gain exposure to cutting-edge fields like Artificial Intelligence, Cybersecurity, and Data Science, preparing you for the interdisciplinary demands of tomorrow's STEM careers."
+    footer_text: "Explore our curated selection of industry-leading open source projects below. Click <strong>Contribute</strong> to find guided pathways and best practices for making your first impact."
+
+  organizations_page:
+    title: "Organizations"
+    heading: "Partnering for a Brighter STEM Future"
+    text: "We are proud to stand alongside world-class organizations dedicated to democratizing STEM education. Together, we are breaking down barriers, fostering innovation, and equipping the next generation with the tools they need to lead in a technology-driven world."
+    feature1_title: "Collaborative Impact"
+    feature1_text: "By uniting coding initiatives, robotics programs, and digital safety advocates, we create a robust ecosystem of support for learners everywhere."
+    feature2_title: "Standardizing Excellence"
+    feature2_text: "Our partners are at the forefront of establishing technology standards and safety protocols that ensure a secure and effective learning environment."
+    footer_text: "Explore our directory of partner organizations below. Visit their profiles to learn more about their unique missions and discover how you can contribute to their vital work through donation, advocacy, or volunteering."
+
+  glossary_page:
+    title: "Glossaries"
+    heading: "Master the Language of Innovation"
+    text: "Unlock the complexities of the modern tech landscape. Our curated glossaries and cheatsheets bridge the gap between technical jargon and practical understanding, empowering you to communicate effectively and master the latest STEM technologies."
+    feature1_title: "Industry Jargon"
+    feature1_text: "Navigate specialized vocabularies used by professionals in coding, AI, and engineering."
+    feature2_title: "Clear Concepts"
+    feature2_text: "Break down intricate processes into easy-to-understand definitions and summaries."
+    feature3_title: "Fluent Collaboration"
+    feature3_text: "Build the confidence to contribute to technical discussions and professional teams."
 
   marketplace_ui:
     search_placeholder: "Search..."
@@ -131,6 +166,9 @@ en: &DEFAULT_EN
     title: "Contact Us"
     text: "<a href='mailto:hello@digitaleducationsafety.org'>Email</a> or call <a href='tel:+18336925477'>+1-833-692-5477</a>"
     section: contact
+    nav_home: "Home"
+    nav_marketplace: "Marketplace"
+    provided_by: "Provided by"
     name: "Name*"
     name-validation: "Please enter your name."
     email: "Email*"
@@ -169,6 +207,41 @@ es: &DEFAULT_ES
     title: "Mercado"
     text: "Aplicaciones y Juegos para una Educación Moderna"
     section: mercado
+    heading: "Potencie su Viaje de Aprendizaje"
+    lead_text: "Bienvenido a la frontera digital de la educación. Explore nuestra selección curada de herramientas, aplicaciones y juegos diseñados para hacer que el dominio de STEM sea atractivo, accesible y de alto impacto."
+
+  open_source:
+    title: "Código Abierto"
+    heading: "Colabore con Líderes de la Industria a través del Código Abierto"
+    text: "El código abierto es el latido del corazón de la innovación tecnológica moderna. Al participar en estos proyectos, no solo está escribiendo código, se está uniendo a una comunidad global dedicada a resolver desafíos del mundo real a través de la transparencia y la colaboración."
+    feature1_title: "Maestría Práctica"
+    feature1_text: "Sumérjase en sistemas complejos. Explore el código fuente de grado de producción para dominar lenguajes de programación, algoritmos sofisticados y arquitecturas de software escalables."
+    feature2_title: "Crecimiento Colaborativo"
+    feature2_text: "Perfeccione su pensamiento crítico y sus habilidades de gestión de proyectos. Trabaje junto a mentores experimentados para solucionar problemas y ofrecer soluciones creativas y de alto impacto."
+    feature3_title: "Habilidades Listas para el Futuro"
+    feature3_text: "Obtenga exposición a campos de vanguardia como Inteligencia Artificial, Ciberseguridad y Ciencia de Datos, preparándose para las demandas interdisciplinarias de las carreras STEM del mañana."
+    footer_text: "Explore nuestra selección curada de proyectos de código abierto líderes en la industria a continuación. Haga clic en <strong>Contribuir</strong> para encontrar caminos guiados y mejores prácticas para lograr su primer impacto."
+
+  organizations_page:
+    title: "Organizaciones"
+    heading: "Asociándonos para un Futuro STEM más Brillante"
+    text: "Estamos orgullosos de estar junto a organizaciones de clase mundial dedicadas a democratizar la educación STEM. Juntos, estamos rompiendo barreras, fomentando la innovación y equipando a la próxima generación con las herramientas que necesitan para liderar en un mundo impulsado por la tecnología."
+    feature1_title: "Impacto Colaborativo"
+    feature1_text: "Al unir iniciativas de codificación, programas de robótica y defensores de la seguridad digital, creamos un ecosistema robusto de apoyo para los estudiantes en todas partes."
+    feature2_title: "Estandarización de la Excelencia"
+    feature2_text: "Nuestros socios están a la vanguardia del establecimiento de estándares tecnológicos y protocolos de seguridad que garantizan un entorno de aprendizaje seguro y eficaz."
+    footer_text: "Explore nuestro directorio de organizaciones asociadas a continuación. Visite sus perfiles para obtener más información sobre sus misiones únicas y descubra cómo puede contribuir a su trabajo vital a través de donaciones, promoción o voluntariado."
+
+  glossary_page:
+    title: "Glosarios"
+    heading: "Domine el Lenguaje de la Innovación"
+    text: "Desbloquee las complejidades del panorama tecnológico moderno. Nuestros glosarios y hojas de trucos curados cierran la brecha entre la jerga técnica y la comprensión práctica, capacitándolo para comunicarse de manera efectiva y dominar las últimas tecnologías STEM."
+    feature1_title: "Jerga de la Industria"
+    feature1_text: "Navegue por vocabularios especializados utilizados por profesionales en codificación, IA e ingeniería."
+    feature2_title: "Conceptos Claros"
+    feature2_text: "Desglose procesos intrincados en definiciones y resúmenes fáciles de entender."
+    feature3_title: "Colaboración Fluida"
+    feature3_text: "Desarrolle la confianza para contribuir a discusiones técnicas y equipos profesionales."
 
   marketplace_ui:
     search_placeholder: "Buscar..."
@@ -280,6 +353,9 @@ es: &DEFAULT_ES
     title: "Contáctenos"
     text: "<a href='mailto:hello@digitaleducationsafety.org'>Correo electrónico</a> o llame al <a href='tel:+18336925477'>+1-833-692-5477</a>"
     section: contacto
+    nav_home: "Inicio"
+    nav_marketplace: "Mercado"
+    provided_by: "Proporcionado por"
     name: "Nombre*"
     name-validation: "Por favor, introduzca su nombre."
     email: "Correo electrónico*"
