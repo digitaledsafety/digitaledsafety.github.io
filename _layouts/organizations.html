@@ -7,10 +7,11 @@ layout: default
 
 {% include nav.html %}
 
-<header class="masthead" style="background-image: url('{{ page.image }}')">
+{% assign org_data = site.data.sitetext[site.locale].organizations_page %}
+<header class="masthead" style="background-image: url('{{ page.image | relative_url }}')">
     <div class="container">
       <div class="intro-text">
-      <h1 class="intro-heading">Organizations</h1>
+      <h1 class="intro-heading">{{ org_data.title }}</h1>
       </div>
     </div>
   </header>
@@ -26,10 +27,10 @@ document.getElementById("page-top").className="bg-light";
 
 <div class="container py-5" id="pagecontainer">
 
-    <h2 class="mb-4">Partnering for a Brighter STEM Future</h2>
+    <h2 class="mb-4">{{ org_data.heading }}</h2>
 
     <p class="lead mb-5">
-        We are proud to stand alongside world-class organizations dedicated to democratizing STEM education. Together, we are breaking down barriers, fostering innovation, and equipping the next generation with the tools they need to lead in a technology-driven world.
+        {{ org_data.text }}
     </p>
 
     <div class="row mb-5">
@@ -37,24 +38,24 @@ document.getElementById("page-top").className="bg-light";
             <div class="card h-100 border-0 shadow-sm p-4">
                 <div class="d-flex align-items-center mb-3">
                     <i class="fas fa-handshake fa-2x text-primary mr-3"></i>
-                    <h5 class="mb-0">Collaborative Impact</h5>
+                    <h5 class="mb-0">{{ org_data.feature1_title }}</h5>
                 </div>
-                <p class="text-muted">By uniting coding initiatives, robotics programs, and digital safety advocates, we create a robust ecosystem of support for learners everywhere.</p>
+                <p class="text-muted">{{ org_data.feature1_text }}</p>
             </div>
         </div>
         <div class="col-md-6">
             <div class="card h-100 border-0 shadow-sm p-4">
                 <div class="d-flex align-items-center mb-3">
                     <i class="fas fa-shield-alt fa-2x text-primary mr-3"></i>
-                    <h5 class="mb-0">Standardizing Excellence</h5>
+                    <h5 class="mb-0">{{ org_data.feature2_title }}</h5>
                 </div>
-                <p class="text-muted">Our partners are at the forefront of establishing technology standards and safety protocols that ensure a secure and effective learning environment.</p>
+                <p class="text-muted">{{ org_data.feature2_text }}</p>
             </div>
         </div>
     </div>
 
     <p class="text-center font-italic">
-        Explore our directory of partner organizations below. Visit their profiles to learn more about their unique missions and discover how you can contribute to their vital work through donation, advocacy, or volunteering.
+        {{ org_data.footer_text }}
     </p>
 
     {% assign ui_coll = site.data.sitetext[site.locale].collection_ui %}
