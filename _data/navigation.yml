@@ -15,8 +15,6 @@ en: &DEFAULT_EN
       url: "tel:+18336925477"
     - title: "Our Work"
       url: /#marketplace
-    - title: "Programs"
-      url: /#programs
     - title: "Contact"
       url: /#contact      
     - title: "Store"
@@ -38,8 +36,6 @@ es: &DEFAULT_ES
       url: "tel:+18336925477"  
     - title: "Nuestro Trabajo"
       url: /#marketplace
-    - title: "Programas"
-      url: /#programs
     - title: "Contáctenos"
       url: /#contacto
     - title: "Tienda"
