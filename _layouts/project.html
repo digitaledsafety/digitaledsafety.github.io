@@ -32,29 +32,129 @@ document.getElementById("page-top").className="bg-light";
     <div class="related-marketplace mt-5">
       <hr>
       <h3 class="mb-4">Related Marketplace Items</h3>
-      <div class="row">
-        {% for item in related_items %}
-          <div class="col-md-4 mb-4">
-            <div class="card h-100 shadow-sm border-0 grid-card-hover" style="border-radius: 15px; overflow: hidden;">
-              <img src="{{ item.image }}" class="card-img-top" alt="{{ item.title }}" style="height: 180px; object-fit: cover;">
-              <div class="card-body d-flex flex-column">
-                <h5 class="card-title" style="font-weight: 700;">{{ item.title }}</h5>
-                <p class="card-text text-muted" style="font-size: 0.9rem; flex-grow: 1;">{{ item.subtitle }}</p>
-                <div class="d-flex justify-content-between align-items-center mt-3">
-                  <a href="{{ item.url | relative_url }}" class="btn btn-outline-primary btn-sm" style="border-radius: 20px;">View Details</a>
-                  {% if item.platform == 'android' %}
-                    <a href="{{ item.link }}" target="_blank" class="btn btn-primary btn-sm" style="border-radius: 20px;">Download</a>
-                  {% elsif item.platform == 'github' %}
-                    <a href="{{ item.link }}" target="_blank" class="btn btn-primary btn-sm" style="border-radius: 20px;">Build</a>
-                  {% else %}
-                    <a href="javascript:void(0)" onclick="handleLaunch('{{ item.link }}')" class="btn btn-primary btn-sm launch-trigger" data-link="{{ item.link }}" style="border-radius: 20px;">Launch</a>
-                  {% endif %}
-                </div>
-              </div>
-            </div>
-          </div>
-        {% endfor %}
+
+      <div class="row" id="related-marketplace-container" role="list">
+        <!-- Related items will be injected here -->
       </div>
+
+      {% include render_grid_script.html %}
+      {% assign ui_data = site.data.sitetext[site.locale].marketplace_ui %}
+
+      <script>
+        const relatedMarketplaceData = [
+            {% for item in related_items %}
+            {
+                "title": {{ item.title | jsonify }},
+                "subtitle": {{ item.subtitle | jsonify }},
+                "image": {{ item.image | jsonify }},
+                "link": {{ item.link | jsonify }},
+                "url": {{ item.url | relative_url | jsonify }},
+                "platform": {{ item.platform | default: "pwa" | jsonify }}
+            }{% unless forloop.last %},{% endunless %}
+            {% endfor %}
+        ];
+
+        const relatedUiStrings = {
+            launch: {{ ui_data.launch_btn | default: "Launch" | jsonify }},
+            download: {{ ui_data.download_btn | default: "Download" | jsonify }},
+            build: {{ ui_data.build_btn | default: "Build" | jsonify }},
+            viewDetails: {{ site.data.sitetext[site.locale].collection_ui.view_details | default: "View Details" | jsonify }},
+            share: {{ site.data.sitetext[site.locale].collection_ui.share | default: "Share" | jsonify }},
+            copied: {{ site.data.sitetext[site.locale].collection_ui.copied | default: "Copied!" | jsonify }}
+        };
+
+        function renderRelatedGrid(data, container) {
+            renderGridShared(data, container, {
+                border: false,
+                getImageUrl: (item) => item.image,
+                getLinkUrl: (item) => item.url,
+                getSubtitle: (item) => item.subtitle,
+                renderFooter: (item, footer) => {
+                    let btnText = relatedUiStrings.launch;
+                    if (item.platform === 'android') {
+                        btnText = relatedUiStrings.download;
+                    } else if (item.platform === 'github') {
+                        btnText = relatedUiStrings.build;
+                    }
+
+                    const controls = document.createElement('div');
+                    controls.classList.add('d-flex', 'justify-content-between', 'align-items-center', 'mt-3');
+
+                    const detailsBtn = document.createElement('a');
+                    detailsBtn.href = item.url;
+                    detailsBtn.classList.add('btn', 'btn-outline-primary', 'btn-sm');
+                    detailsBtn.style.borderRadius = '20px';
+                    detailsBtn.textContent = relatedUiStrings.viewDetails;
+                    controls.appendChild(detailsBtn);
+
+                    const actionBtn = document.createElement('a');
+                    actionBtn.classList.add('btn', 'btn-primary', 'btn-sm');
+                    actionBtn.textContent = btnText;
+                    actionBtn.style.borderRadius = '20px';
+
+                    if (!item.platform || item.platform.toLowerCase() === 'pwa' || item.platform.toLowerCase() === 'web app') {
+                        actionBtn.href = 'javascript:void(0)';
+                        actionBtn.classList.add('launch-trigger');
+                        actionBtn.setAttribute('data-link', item.link);
+                    } else {
+                        actionBtn.href = item.link;
+                        actionBtn.target = '_blank';
+                        actionBtn.rel = 'noopener noreferrer';
+                    }
+                    controls.appendChild(actionBtn);
+                    footer.appendChild(controls);
+                },
+                renderShare: (item, body) => {
+                    const shareContainer = document.createElement('div');
+                    shareContainer.classList.add('mt-3', 'pt-3', 'border-top', 'd-flex', 'justify-content-center');
+
+                    const shareBtn = document.createElement('button');
+                    shareBtn.classList.add('btn', 'btn-link', 'btn-sm', 'text-muted', 'mx-2');
+                    shareBtn.innerHTML = '<i class="fas fa-share-alt mr-1"></i> ' + relatedUiStrings.share;
+                    shareBtn.setAttribute('aria-label', `Share ${item.title}`);
+                    shareBtn.addEventListener('click', () => {
+                        if (navigator.share) {
+                            navigator.share({
+                                title: item.title,
+                                text: item.subtitle,
+                                url: window.location.origin + item.url
+                            }).catch(console.error);
+                        } else {
+                            navigator.clipboard.writeText(window.location.origin + item.url).then(() => {
+                                const originalText = shareBtn.innerHTML;
+                                shareBtn.innerHTML = '<i class="fas fa-check mr-1"></i> ' + relatedUiStrings.copied;
+                                setTimeout(() => shareBtn.innerHTML = originalText, 2000);
+                            }).catch(console.error);
+                        }
+                    });
+                    shareContainer.appendChild(shareBtn);
+
+                    const copyBtn = document.createElement('button');
+                    copyBtn.classList.add('btn', 'btn-link', 'btn-sm', 'text-muted', 'mx-2');
+                    copyBtn.innerHTML = '<i class="fas fa-copy mr-1"></i>';
+                    copyBtn.setAttribute('aria-label', `Copy link to ${item.title}`);
+                    copyBtn.addEventListener('click', () => {
+                        navigator.clipboard.writeText(window.location.origin + item.url).then(() => {
+                            const originalText = copyBtn.innerHTML;
+                            copyBtn.innerHTML = '<i class="fas fa-check mr-1"></i>';
+                            setTimeout(() => copyBtn.innerHTML = originalText, 2000);
+                        });
+                    });
+                    shareContainer.appendChild(copyBtn);
+
+                    body.appendChild(shareContainer);
+                }
+            });
+        }
+
+        renderRelatedGrid(relatedMarketplaceData, document.getElementById('related-marketplace-container'));
+
+        document.getElementById('related-marketplace-container').addEventListener('click', function(e) {
+            if (e.target.classList.contains('launch-trigger')) {
+                handleLaunch(e.target.getAttribute('data-link'));
+            }
+        });
+      </script>
     </div>
   {% endif %}
 </div>

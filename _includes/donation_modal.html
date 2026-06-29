@@ -144,21 +144,27 @@
       }
     }
 
-    document.getElementById('launch-anyway-btn').addEventListener('click', function() {
-      $('#donationModal').modal('hide');
-      if (pendingLaunchUrl) {
-        window.open(pendingLaunchUrl, '_blank');
-        pendingLaunchUrl = '';
-      }
-    });
+    const launchAnywayBtn = document.getElementById('launch-anyway-btn');
+    if (launchAnywayBtn) {
+      launchAnywayBtn.addEventListener('click', function() {
+        $('#donationModal').modal('hide');
+        if (pendingLaunchUrl) {
+          window.open(pendingLaunchUrl, '_blank');
+          pendingLaunchUrl = '';
+        }
+      });
+    }
 
-    document.getElementById('continue-to-app-btn').addEventListener('click', function() {
-      $('#donationModal').modal('hide');
-      if (pendingLaunchUrl) {
-        window.open(pendingLaunchUrl, '_blank');
-        pendingLaunchUrl = '';
-      }
-    });
+    const continueBtn = document.getElementById('continue-to-app-btn');
+    if (continueBtn) {
+      continueBtn.addEventListener('click', function() {
+        $('#donationModal').modal('hide');
+        if (pendingLaunchUrl) {
+          window.open(pendingLaunchUrl, '_blank');
+          pendingLaunchUrl = '';
+        }
+      });
+    }
 
     // Reset modal state when closed. We use a combination of reset-on-launch
     // and a deferred jQuery listener to ensure state is always clean.
