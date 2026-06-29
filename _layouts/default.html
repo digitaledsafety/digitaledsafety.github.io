@@ -29,12 +29,9 @@
 	      });
 	    }
 	  });
-	  const paypalBtn = document.getElementById('paypalDonate');
-	  if (paypalBtn) {
-	    paypalBtn.addEventListener('click', function() {
-	      gtag('event', 'conversion', {'send_to': "{{ site.ads.google }}/oNtiCNf78sAaEJfMq48_"});
-	    });
-	  }
+	  document.getElementById('paypalDonate').addEventListener('click', function() {
+	    gtag('event', 'conversion', {'send_to': "{{ site.ads.google }}/oNtiCNf78sAaEJfMq48_"});
+	  });
 	  </script>
 
 	
