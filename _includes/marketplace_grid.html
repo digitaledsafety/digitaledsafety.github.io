@@ -1,46 +1,8 @@
 <style>
   .marketplace-card {
-    border: none;
-    border-radius: 20px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    overflow: hidden;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    background: #fff;
-  }
-  .marketplace-img-container {
-    position: relative;
-    width: 100%;
-    padding-top: 60%; /* 5:3 Aspect Ratio */
-    overflow: hidden;
-    background: #f8f9fa;
-  }
-  .marketplace-img-container img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  .marketplace-body {
-    padding: 1.5rem;
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-  }
-  .marketplace-title {
-    font-weight: 700;
-    font-size: 1.25rem;
-    margin-bottom: 0.5rem;
-    color: #333;
-  }
-  .marketplace-subtitle {
-    font-size: 0.9rem;
-    color: #666;
-    margin-bottom: 1rem;
-    flex-grow: 1;
+    border: none !important;
+    border-radius: 20px !important;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1) !important;
   }
   .marketplace-meta {
     background: #f8f9fa;
@@ -69,12 +31,6 @@
     margin-right: 4px;
     color: #333;
   }
-  .marketplace-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: auto;
-  }
   .btn-install {
     border-radius: 50px;
     padding: 0.5rem 1.5rem;
@@ -82,15 +38,6 @@
     text-transform: uppercase;
     font-size: 0.8rem;
     transition: all 0.2s;
-  }
-  .platform-badge {
-    font-size: 0.7rem;
-    padding: 0.3rem 0.6rem;
-    border-radius: 10px;
-    background: #e9ecef;
-    color: #495057;
-    font-weight: 600;
-    text-transform: uppercase;
   }
   .service-badge {
     font-size: 0.7rem;
@@ -160,17 +107,21 @@
   <!-- Marketplace items will be injected here -->
 </div>
 
+{% include render_grid_script.html %}
+
 <script>
-  function debounce(func, wait) {
-    let timeout;
-    return function executedFunction(...args) {
-      const later = () => {
+  if (typeof debounce !== 'function') {
+    function debounce(func, wait) {
+      let timeout;
+      return function executedFunction(...args) {
+        const later = () => {
+          clearTimeout(timeout);
+          func(...args);
+        };
         clearTimeout(timeout);
-        func(...args);
+        timeout = setTimeout(later, wait);
       };
-      clearTimeout(timeout);
-      timeout = setTimeout(later, wait);
-    };
+    }
   }
 
   const uiStrings = {
@@ -181,7 +132,10 @@
     download: {{ ui_data.download_btn | default: "Download" | jsonify }},
     build: {{ ui_data.build_btn | default: "Build" | jsonify }},
     webapp: {{ ui_data.webapp | default: "Web App" | jsonify }},
-    fallback: {{ ui_data.fallback | default: "N/A" | jsonify }}
+    fallback: {{ ui_data.fallback | default: "N/A" | jsonify }},
+    viewDetails: {{ site.data.sitetext[site.locale].collection_ui.view_details | default: "View Details" | jsonify }},
+    share: {{ site.data.sitetext[site.locale].collection_ui.share | default: "Share" | jsonify }},
+    copied: {{ site.data.sitetext[site.locale].collection_ui.copied | default: "Copied!" | jsonify }}
   };
   const serviceIcons = {
     {% for service in site.services %}
@@ -195,6 +149,7 @@
       "subtitle": {{ item.subtitle | jsonify }},
       "image": {{ item.image | jsonify }},
       "link": {{ item.link | jsonify }},
+      "url": {{ item.url | relative_url | jsonify }},
       "platform": {{ item.platform | default: "pwa" | jsonify }},
       "categories": {{ item.categories | jsonify }},
       "program": {{ item.program | jsonify }},
@@ -228,107 +183,114 @@
     return item;
   }
 
-  function renderMarketplace(data) {
-    const container = document.getElementById('marketplace-container');
-    container.innerHTML = '';
-    const fragment = document.createDocumentFragment();
+  function renderGrid(data, container) {
+    renderGridShared(data, container, {
+        wrapperClass: 'col-lg-4 col-md-6 mb-4 marketplace-item-wrapper',
+        cardClass: 'marketplace-card',
+        getImageUrl: (item) => item.image,
+        getLinkUrl: (item) => item.url,
+        getSubtitle: (item) => item.subtitle,
+        renderTitleExtra: (item, titleContainer) => {
+            const sBadge = document.createElement('span');
+            sBadge.classList.add('service-badge');
+            sBadge.textContent = item.service || uiStrings.fallback;
+            titleContainer.appendChild(sBadge);
+        },
+        renderFooter: (item, footer) => {
+            let btnText = uiStrings.launch;
+            let platformIcon = 'fas fa-globe';
+            let platformDisplay = item.platform || uiStrings.fallback;
 
-    data.forEach(item => {
-      let btnText = uiStrings.launch;
-      let platformIcon = 'fas fa-globe';
-      let platformDisplay = item.platform || uiStrings.fallback;
+            if (item.platform && (item.platform.toLowerCase() === 'pwa' || item.platform.toLowerCase() === 'web app')) {
+                platformDisplay = uiStrings.webapp;
+                platformIcon = 'fas fa-globe';
+                btnText = uiStrings.launch;
+            } else if (item.platform === 'android') {
+                btnText = uiStrings.download;
+                platformIcon = 'fab fa-android';
+            } else if (item.platform === 'github') {
+                btnText = uiStrings.build;
+                platformIcon = 'fab fa-github';
+            }
 
-      if (item.platform && (item.platform.toLowerCase() === 'pwa' || item.platform.toLowerCase() === 'web app')) {
-        platformDisplay = uiStrings.webapp;
-        platformIcon = 'fas fa-globe';
-        btnText = uiStrings.launch;
-      } else if (item.platform === 'android') {
-        btnText = uiStrings.download;
-        platformIcon = 'fab fa-android';
-      } else if (item.platform === 'github') {
-        btnText = uiStrings.build;
-        platformIcon = 'fab fa-github';
-      }
+            const serviceIcon = serviceIcons[item.service] || 'fas fa-shopping-cart';
+            const displayCategories = Array.isArray(item.categories) ? item.categories.join(", ") : (item.categories || uiStrings.fallback);
 
-      const serviceIcon = serviceIcons[item.service] || 'fas fa-shopping-cart';
-      const displayService = item.service || uiStrings.fallback;
-      const displayCategories = Array.isArray(item.categories) ? item.categories.join(", ") : (item.categories || uiStrings.fallback);
+            const meta = document.createElement('div');
+            meta.classList.add('marketplace-meta');
+            meta.appendChild(createMetaItem(platformIcon, uiStrings.platform, platformDisplay));
+            meta.appendChild(createMetaItem('fas fa-tag', uiStrings.category, displayCategories));
+            meta.appendChild(createMetaItem(serviceIcon, uiStrings.service, (item.service || uiStrings.fallback).toLowerCase()));
+            footer.appendChild(meta);
 
-      const wrapper = document.createElement('div');
-      wrapper.classList.add('col-lg-4', 'col-md-6', 'mb-4', 'marketplace-item-wrapper');
-      wrapper.setAttribute('role', 'listitem');
+            const controls = document.createElement('div');
+            controls.classList.add('d-flex', 'justify-content-between', 'align-items-center');
 
-      const card = document.createElement('div');
-      card.classList.add('card', 'marketplace-card', 'grid-card-hover');
-      wrapper.appendChild(card);
+            const detailsBtn = document.createElement('a');
+            detailsBtn.href = item.url;
+            detailsBtn.classList.add('btn', 'btn-outline-primary', 'btn-sm');
+            detailsBtn.style.borderRadius = '20px';
+            detailsBtn.textContent = uiStrings.viewDetails;
+            controls.appendChild(detailsBtn);
 
-      const imgContainer = document.createElement('div');
-      imgContainer.classList.add('marketplace-img-container');
-      card.appendChild(imgContainer);
+            const actionBtn = document.createElement('a');
+            actionBtn.classList.add('btn', 'btn-primary', 'btn-install');
+            actionBtn.textContent = btnText;
+            actionBtn.setAttribute('aria-label', `${btnText} ${item.title}`);
 
-      const img = document.createElement('img');
-      img.src = item.image;
-      img.alt = item.title;
-      imgContainer.appendChild(img);
+            if (!item.platform || item.platform.toLowerCase() === 'pwa' || item.platform.toLowerCase() === 'web app') {
+                actionBtn.href = 'javascript:void(0)';
+                actionBtn.classList.add('launch-trigger');
+                actionBtn.setAttribute('data-link', item.link);
+            } else {
+                actionBtn.href = item.link;
+                actionBtn.target = '_blank';
+                actionBtn.rel = 'noopener noreferrer';
+            }
+            controls.appendChild(actionBtn);
+            footer.appendChild(controls);
+        },
+        renderShare: (item, body) => {
+            const shareContainer = document.createElement('div');
+            shareContainer.classList.add('mt-3', 'pt-3', 'border-top', 'd-flex', 'justify-content-center');
 
-      const body = document.createElement('div');
-      body.classList.add('marketplace-body');
-      card.appendChild(body);
+            const shareBtn = document.createElement('button');
+            shareBtn.classList.add('btn', 'btn-link', 'btn-sm', 'text-muted', 'mx-2');
+            shareBtn.innerHTML = '<i class="fas fa-share-alt mr-1"></i> ' + uiStrings.share;
+            shareBtn.setAttribute('aria-label', `Share ${item.title}`);
+            shareBtn.addEventListener('click', () => {
+                if (navigator.share) {
+                    navigator.share({
+                        title: item.title,
+                        text: item.subtitle,
+                        url: window.location.origin + item.url
+                    }).catch(console.error);
+                } else {
+                    navigator.clipboard.writeText(window.location.origin + item.url).then(() => {
+                        const originalText = shareBtn.innerHTML;
+                        shareBtn.innerHTML = '<i class="fas fa-check mr-1"></i> ' + uiStrings.copied;
+                        setTimeout(() => shareBtn.innerHTML = originalText, 2000);
+                    }).catch(console.error);
+                }
+            });
+            shareContainer.appendChild(shareBtn);
 
-      const header = document.createElement('div');
-      header.classList.add('d-flex', 'justify-content-between', 'align-items-start');
-      body.appendChild(header);
+            const copyBtn = document.createElement('button');
+            copyBtn.classList.add('btn', 'btn-link', 'btn-sm', 'text-muted', 'mx-2');
+            copyBtn.innerHTML = '<i class="fas fa-copy mr-1"></i>';
+            copyBtn.setAttribute('aria-label', `Copy link to ${item.title}`);
+            copyBtn.addEventListener('click', () => {
+                navigator.clipboard.writeText(window.location.origin + item.url).then(() => {
+                    const originalText = copyBtn.innerHTML;
+                    copyBtn.innerHTML = '<i class="fas fa-check mr-1"></i>';
+                    setTimeout(() => copyBtn.innerHTML = originalText, 2000);
+                });
+            });
+            shareContainer.appendChild(copyBtn);
 
-      const title = document.createElement('h5');
-      title.classList.add('marketplace-title', 'mr-2');
-      title.textContent = item.title;
-      header.appendChild(title);
-
-      const badgeContainer = document.createElement('div');
-      badgeContainer.classList.add('d-flex', 'flex-column', 'align-items-end', 'flex-shrink-0');
-      header.appendChild(badgeContainer);
-
-      const sBadge = document.createElement('span');
-      sBadge.classList.add('service-badge');
-      sBadge.textContent = displayService;
-      badgeContainer.appendChild(sBadge);
-
-      const subtitle = document.createElement('p');
-      subtitle.classList.add('marketplace-subtitle');
-      subtitle.textContent = item.subtitle;
-      body.appendChild(subtitle);
-
-      const meta = document.createElement('div');
-      meta.classList.add('marketplace-meta');
-      body.appendChild(meta);
-
-      meta.appendChild(createMetaItem(platformIcon, uiStrings.platform, platformDisplay));
-      meta.appendChild(createMetaItem('fas fa-tag', uiStrings.category, displayCategories));
-      meta.appendChild(createMetaItem(serviceIcon, uiStrings.service, displayService.toLowerCase()));
-
-      const footer = document.createElement('div');
-      footer.classList.add('marketplace-footer');
-      body.appendChild(footer);
-
-      const actionBtn = document.createElement('a');
-      actionBtn.classList.add('btn', 'btn-primary', 'btn-install');
-      actionBtn.textContent = btnText;
-      actionBtn.setAttribute('aria-label', `${btnText} ${item.title}`);
-
-      if (!item.platform || item.platform.toLowerCase() === 'pwa' || item.platform.toLowerCase() === 'web app') {
-        actionBtn.href = 'javascript:void(0)';
-        actionBtn.classList.add('launch-trigger');
-        actionBtn.setAttribute('data-link', item.link);
-      } else {
-        actionBtn.href = item.link;
-        actionBtn.target = '_blank';
-        actionBtn.rel = 'noopener noreferrer';
-      }
-      footer.appendChild(actionBtn);
-
-      fragment.appendChild(wrapper);
+            body.appendChild(shareContainer);
+        }
     });
-    container.appendChild(fragment);
   }
 
   function filterAndSort() {
@@ -355,13 +317,14 @@
     }
 
     const noResultsMsg = document.getElementById('no-results-message');
+    const container = document.getElementById('marketplace-container');
     if (filtered.length === 0) {
       noResultsMsg.style.display = 'block';
+      container.innerHTML = '';
     } else {
       noResultsMsg.style.display = 'none';
+      renderGrid(filtered, container);
     }
-
-    renderMarketplace(filtered);
   }
 
   document.getElementById('marketplace-search').addEventListener('input', debounce(filterAndSort, 300));
@@ -381,6 +344,34 @@
     }
   });
 
+  // Handle initial filter from hash or window property
+  const hash = window.location.hash ? decodeURIComponent(window.location.hash.substring(1)) : null;
+  if (hash) {
+      const serviceFilter = document.getElementById('service-filter');
+      for (let i = 0; i < serviceFilter.options.length; i++) {
+          if (serviceFilter.options[i].value === hash) {
+              serviceFilter.value = hash;
+              break;
+          }
+      }
+  } else if (window.defaultFilter) {
+      document.getElementById('service-filter').value = window.defaultFilter;
+  }
+
   // Initial render
   filterAndSort();
+
+  window.addEventListener('hashchange', function() {
+      const newHash = decodeURIComponent(window.location.hash.substring(1));
+      if (newHash) {
+          const serviceFilter = document.getElementById('service-filter');
+          for (let i = 0; i < serviceFilter.options.length; i++) {
+              if (serviceFilter.options[i].value === newHash) {
+                  serviceFilter.value = newHash;
+                  filterAndSort();
+                  break;
+              }
+          }
+      }
+  });
 </script>
