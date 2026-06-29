@@ -70,15 +70,6 @@
             <a href="javascript:void(0)" onclick="handleLaunch('{{ page.link }}')" class="btn btn-lg btn-primary launch-trigger" data-link="{{ page.link }}">{{ ui_data.launch_btn | default: "Launch" }} {{ ui_data.webapp | default: "Web App" }}</a>
           {% endif %}
         </p>
-
-        <div class="mt-5 pt-4 border-top">
-          <button id="share-btn" class="btn btn-outline-secondary mx-2" aria-label="Share this item">
-            <i class="fas fa-share-alt mr-2"></i> {{ site.data.sitetext[site.locale].collection_ui.share | default: "Share" }}
-          </button>
-          <button id="copy-btn" class="btn btn-outline-secondary mx-2" aria-label="Copy link">
-            <i class="fas fa-copy mr-2"></i>
-          </button>
-        </div>
       </main>
 
       <footer class="mastfoot mt-auto">
@@ -91,40 +82,5 @@
     <!-- Bootstrap core JavaScript -->
     <script src="/assets/js/jquery.min.js"></script>
     <script src="/assets/js/bootstrap.bundle.min.js"></script>
-
-    <script>
-      (function() {
-        const shareBtn = document.getElementById('share-btn');
-        const copyBtn = document.getElementById('copy-btn');
-        const url = window.location.href;
-        const title = "{{ page.title }}";
-        const text = "{{ page.subtitle }}";
-        const copiedText = "{{ site.data.sitetext[site.locale].collection_ui.copied | default: 'Copied!' }}";
-
-        if (shareBtn) {
-          shareBtn.addEventListener('click', function() {
-            if (navigator.share) {
-              navigator.share({ title, text, url }).catch(console.error);
-            } else {
-              navigator.clipboard.writeText(url).then(() => {
-                const originalContent = shareBtn.innerHTML;
-                shareBtn.innerHTML = '<i class="fas fa-check mr-2"></i> ' + copiedText;
-                setTimeout(() => shareBtn.innerHTML = originalContent, 2000);
-              }).catch(console.error);
-            }
-          });
-        }
-
-        if (copyBtn) {
-          copyBtn.addEventListener('click', function() {
-            navigator.clipboard.writeText(url).then(() => {
-              const originalContent = copyBtn.innerHTML;
-              copyBtn.innerHTML = '<i class="fas fa-check"></i>';
-              setTimeout(() => copyBtn.innerHTML = originalContent, 2000);
-            });
-          });
-        }
-      })();
-    </script>
   </body>
 </html>

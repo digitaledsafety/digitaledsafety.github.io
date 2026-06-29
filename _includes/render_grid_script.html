@@ -11,18 +11,11 @@ function renderGridShared(data, container, options = {}) {
 
     data.forEach(item => {
         const wrapper = document.createElement('div');
-        if (options.wrapperClass) {
-            options.wrapperClass.split(' ').forEach(cls => wrapper.classList.add(cls));
-        } else {
-            wrapper.classList.add('col-md-4', 'mb-4');
-        }
+        wrapper.classList.add('col-md-4', 'mb-4');
         wrapper.setAttribute('role', 'listitem');
 
         const card = document.createElement('div');
         card.classList.add('card', 'h-100', 'shadow-sm', 'grid-card-hover');
-        if (options.cardClass) {
-            options.cardClass.split(' ').forEach(cls => card.classList.add(cls));
-        }
         if (options.border === false) {
             card.classList.add('border-0');
         }
@@ -54,11 +47,8 @@ function renderGridShared(data, container, options = {}) {
         body.classList.add('card-body', 'd-flex', 'flex-column');
 
         // Title
-        const titleContainer = document.createElement('div');
-        titleContainer.classList.add('d-flex', 'justify-content-between', 'align-items-start', 'mb-2');
-
         const title = document.createElement('h5');
-        title.classList.add('card-title', 'font-weight-bold', 'mb-0');
+        title.classList.add('card-title', 'font-weight-bold');
 
         const titleLink = document.createElement('a');
         titleLink.href = options.getLinkUrl ? options.getLinkUrl(item) : '#';
@@ -68,13 +58,7 @@ function renderGridShared(data, container, options = {}) {
         }
         titleLink.textContent = item.title;
         title.appendChild(titleLink);
-        titleContainer.appendChild(title);
-
-        if (options.renderTitleExtra) {
-            options.renderTitleExtra(item, titleContainer);
-        }
-
-        body.appendChild(titleContainer);
+        body.appendChild(title);
 
         // Subtitle
         const subtitleText = options.getSubtitle ? options.getSubtitle(item) : null;
@@ -121,12 +105,6 @@ function renderGridShared(data, container, options = {}) {
         }
 
         body.appendChild(footer);
-
-        // Share and Copy Link
-        if (options.renderShare) {
-            options.renderShare(item, body);
-        }
-
         card.appendChild(body);
         wrapper.appendChild(card);
         fragment.appendChild(wrapper);
