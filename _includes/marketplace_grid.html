@@ -188,8 +188,9 @@
     {{ service.title | jsonify }}: {{ service.icon | jsonify }}{% unless forloop.last %},{% endunless %}
     {% endfor %}
   };
+  {% assign visible_items = site.marketplace | where_exp: "item", "item.is_hidden != true" | where_exp: "item", "item.is_hidden != 'yes'" %}
   const marketplaceData = [
-    {% for item in site.marketplace %}
+    {% for item in visible_items %}
     {
       "title": {{ item.title | jsonify }},
       "subtitle": {{ item.subtitle | jsonify }},

@@ -22,6 +22,7 @@ document.getElementById("page-top").className="bg-light";
   {% assign current_id = page.id | split: "/" | last | plus: 0 %}
   {% assign related_items = "" | split: "" %}
   {% for item in site.marketplace %}
+    {% if item.is_hidden == true or item.is_hidden == "yes" %}{% continue %}{% endif %}
     {% assign item_program = item.program | plus: 0 %}
     {% if item_program == current_id and item_program != 0 %}
       {% assign related_items = related_items | push: item %}
