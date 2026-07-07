@@ -190,6 +190,7 @@
   };
   const marketplaceData = [
     {% for item in site.marketplace %}
+    {% if item.is_hidden == true or item.is_hidden == "yes" %}{% continue %}{% endif %}
     {
       "title": {{ item.title | jsonify }},
       "subtitle": {{ item.subtitle | jsonify }},

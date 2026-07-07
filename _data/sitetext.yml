@@ -29,6 +29,7 @@ en: &DEFAULT_EN
     webapp: "Web App"
     no_results: "No results found matching your search."
     fallback: "N/A"
+    related_title: "Related Marketplace Items"
 
   collection_ui:
     filter_by: "Filter by:"
@@ -186,6 +187,7 @@ es: &DEFAULT_ES
     webapp: "Aplicación Web"
     no_results: "No se encontraron resultados que coincidan con su búsqueda."
     fallback: "N/A"
+    related_title: "Artículos Relacionados del Mercado"
 
   collection_ui:
     filter_by: "Filtrar por:"
@@ -216,7 +218,7 @@ es: &DEFAULT_ES
   portfolio:
     title: "Programas"
     text: ""
-    section: programs
+    section: programas
     closebutton: "Cerrar Proyecto"
 
   resources:
