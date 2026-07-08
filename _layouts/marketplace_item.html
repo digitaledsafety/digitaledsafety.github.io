@@ -6,19 +6,20 @@
     {% include embed/paypal_sdk.html %}
     {% include donation_modal.html %}
 
+    {% assign contact_data = site.data.sitetext[site.locale].contact %}
     <div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
       <header class="masthead mb-auto">
         <div class="inner">
           <h3 class="masthead-brand">{{ page.title }}</h3>
           <nav class="nav nav-masthead justify-content-center">
-            <a class="nav-link active" href="{{ '/' | relative_url }}">Home</a>
-            <a class="nav-link" href="{{ '/marketplace' | relative_url }}">Marketplace</a>
+            <a class="nav-link active" href="{{ '/' | relative_url }}">{{ contact_data.nav_home }}</a>
+            <a class="nav-link" href="{{ '/marketplace' | relative_url }}">{{ contact_data.nav_marketplace }}</a>
           </nav>
         </div>
       </header>
 
       <main role="main" class="inner cover">
-        <img src="{{ page.image }}" class="img-fluid rounded mb-4" style="max-height: 300px;" alt="{{ page.title }}">
+        <img src="{{ page.image | relative_url }}" class="img-fluid rounded mb-4" style="max-height: 300px;" alt="{{ page.title }}">
         <h1 class="cover-heading">{{ page.title }}</h1>
 
         <div class="mb-4">
@@ -74,7 +75,7 @@
 
       <footer class="mastfoot mt-auto">
         <div class="inner">
-          <p>Provided by <a href="https://digitaleducationsafety.org">The Digital Education & Safety Foundation</a>.</p>
+          <p>{{ contact_data.provided_by }} <a href="https://digitaleducationsafety.org">{{ site.author.name | default: "The Digital Education & Safety Foundation" }}</a>.</p>
         </div>
       </footer>
     </div>

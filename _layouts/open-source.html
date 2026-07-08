@@ -7,10 +7,11 @@ layout: default
 
 {% include nav.html %}
 
-<header class="masthead" style="background-image: url('/assets/img/opensource/mast.jpg')">
+{% assign os_data = site.data.sitetext[site.locale].open_source %}
+<header class="masthead" style="background-image: url('{{ page.image | default: "/assets/img/opensource/mast.jpg" | relative_url }}')">
     <div class="container">
       <div class="intro-text">
-      <h1 class="intro-heading">Open Source</h1>
+      <h1 class="intro-heading">{{ os_data.title }}</h1>
       </div>
     </div>
   </header>
@@ -26,38 +27,38 @@ document.getElementById("page-top").className="bg-light";
 
 <div class="container py-5" id="pagecontainer">
 
-    <h2 class="mb-4">Collaborate with Industry Leaders through Open Source</h2>
+    <h2 class="mb-4">{{ os_data.heading }}</h2>
 
     <p class="lead">
-        Open source is the heartbeat of modern technological innovation. By participating in these projects, you're not just writing code—you're joining a global community dedicated to solving real-world challenges through transparency and collaboration.
+        {{ os_data.text }}
     </p>
 
     <div class="row mt-5">
         <div class="col-md-4">
             <div class="text-center mb-4">
                 <i class="fas fa-code fa-3x text-primary mb-3"></i>
-                <h5>Hands-on Mastery</h5>
-                <p class="text-muted">Dive deep into complex systems. Explore production-grade source code to master programming languages, sophisticated algorithms, and scalable software architectures.</p>
+                <h5>{{ os_data.feature1_title }}</h5>
+                <p class="text-muted">{{ os_data.feature1_text }}</p>
             </div>
         </div>
         <div class="col-md-4">
             <div class="text-center mb-4">
                 <i class="fas fa-users fa-3x text-primary mb-3"></i>
-                <h5>Collaborative Growth</h5>
-                <p class="text-muted">Hone your critical thinking and project management skills. Work alongside experienced mentors to troubleshoot issues and deliver creative, high-impact solutions.</p>
+                <h5>{{ os_data.feature2_title }}</h5>
+                <p class="text-muted">{{ os_data.feature2_text }}</p>
             </div>
         </div>
         <div class="col-md-4">
             <div class="text-center mb-4">
                 <i class="fas fa-rocket fa-3x text-primary mb-3"></i>
-                <h5>Future-Ready Skills</h5>
-                <p class="text-muted">Gain exposure to cutting-edge fields like Artificial Intelligence, Cybersecurity, and Data Science, preparing you for the interdisciplinary demands of tomorrow's STEM careers.</p>
+                <h5>{{ os_data.feature3_title }}</h5>
+                <p class="text-muted">{{ os_data.feature3_text }}</p>
             </div>
         </div>
     </div>
 
     <p class="mt-4 text-center font-italic">
-        Explore our curated selection of industry-leading open source projects below. Click <strong>Contribute</strong> to find guided pathways and best practices for making your first impact.
+        {{ os_data.footer_text }}
     </p>
 
     {% assign ui_coll = site.data.sitetext[site.locale].collection_ui %}

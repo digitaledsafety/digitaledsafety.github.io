@@ -4,21 +4,22 @@ layout: default
 
 {% include nav.html %}
 
-<header class="masthead" style="background-image: url('{{ page.image | default: "/assets/img/header-bg.jpg" }}')">
+{% assign marketplace_data = site.data.sitetext[site.locale].marketplace %}
+<header class="masthead" style="background-image: url('{{ page.image | default: "/assets/img/header-bg.jpg" | relative_url }}')">
     <div class="container">
       <div class="intro-text">
-        <div class="intro-heading text-uppercase">Marketplace</div>
-        <div class="intro-lead-in">Apps, Games, and Tools for a Modern Education</div>
+        <div class="intro-heading text-uppercase">{{ marketplace_data.title | default: 'Marketplace' }}</div>
+        <div class="intro-lead-in">{{ marketplace_data.text }}</div>
       </div>
     </div>
 </header>
 
-<section class="bg-light" id="marketplace">
+<section class="bg-light" id="{{ marketplace_data.section | default: 'marketplace' }}">
   <div class="container">
     <div class="row">
       <div class="col-lg-12 text-center">
-        <h2 class="section-heading text-uppercase">Empower Your Learning Journey</h2>
-        <p class="lead text-muted mb-5">Welcome to the digital frontier of education. Explore our curated selection of tools, applications, and games designed to make STEM mastery engaging, accessible, and high-impact.</p>
+        <h2 class="section-heading text-uppercase">{{ marketplace_data.heading }}</h2>
+        <p class="lead text-muted mb-5">{{ marketplace_data.lead_text }}</p>
       </div>
     </div>
 
