@@ -11,7 +11,7 @@ test('marketplace displays no results message when no items match', async ({ pag
   const searchInput = page.locator('#marketplace-search');
   await searchInput.fill('nonexistent-item-xyz-123');
 
-  const noResultsMessage = page.locator('#no-results-message');
+  const noResultsMessage = page.locator('#marketplace-no-results');
   await expect(noResultsMessage).toBeVisible();
   await expect(noResultsMessage).toHaveAttribute('role', 'status');
 });
@@ -34,11 +34,11 @@ test('marketplace clear filters button resets filters', async ({ page }) => {
   await page.goto('/');
 
   const searchInput = page.locator('#marketplace-search');
-  const clearFiltersBtn = page.locator('#clear-filters');
+  const clearFiltersBtn = page.locator('#marketplace-clear');
 
   // Fill search and verify no results message might appear if we use a specific term
   await searchInput.fill('nonexistent-item-xyz-123');
-  await expect(page.locator('#no-results-message')).toBeVisible();
+  await expect(page.locator('#marketplace-no-results')).toBeVisible();
 
   // Click clear filters
   await clearFiltersBtn.click();
@@ -47,7 +47,7 @@ test('marketplace clear filters button resets filters', async ({ page }) => {
   await expect(searchInput).toHaveValue('');
 
   // Verify no results message is hidden and items are back
-  await expect(page.locator('#no-results-message')).toBeHidden();
+  await expect(page.locator('#marketplace-no-results')).toBeHidden();
   const items = page.locator('.marketplace-item-wrapper');
   await expect(items.count()).resolves.toBeGreaterThan(0);
 });

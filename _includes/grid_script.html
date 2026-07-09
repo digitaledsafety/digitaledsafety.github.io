@@ -35,7 +35,11 @@
           (item.subtitle && item.subtitle.toLowerCase().includes(searchTerm)) ||
           (item.description && item.description.toLowerCase().includes(searchTerm)) ||
           (item.excerpt && item.excerpt.toLowerCase().includes(searchTerm)) ||
+          (item.platform && item.platform.toLowerCase().includes(searchTerm)) ||
+          (item.service && item.service.toLowerCase().includes(searchTerm)) ||
+          (item.programTitle && item.programTitle.toLowerCase().includes(searchTerm)) ||
           (Array.isArray(item.tags) ? item.tags.some(t => t && t.toLowerCase().includes(searchTerm)) : (item.tags && item.tags.toLowerCase().includes(searchTerm))) ||
+          (Array.isArray(item.categories) ? item.categories.some(c => c && c.toLowerCase().includes(searchTerm)) : (item.categories && item.categories.toLowerCase().includes(searchTerm))) ||
           (Array.isArray(item.abbreviations) ? item.abbreviations.some(a => a && a.toLowerCase().includes(searchTerm)) : (item.abbreviations && item.abbreviations.toLowerCase().includes(searchTerm)))
         );
 
