@@ -15,7 +15,7 @@ test('verify services and marketplace filters', async ({ page }) => {
   await expect(marketplaceItems.first()).toBeVisible();
 
   // Test filter: Engineering
-  await page.selectOption('#service-filter', 'Engineering');
+  await page.selectOption('#marketplace-filter', 'Engineering');
   // Wait for transition/render
   await page.waitForTimeout(500);
 
@@ -26,7 +26,7 @@ test('verify services and marketplace filters', async ({ page }) => {
   await page.screenshot({ path: 'screenshots/marketplace_engineering.png' });
 
   // Test filter: Digital Safety
-  await page.selectOption('#service-filter', 'Digital Safety');
+  await page.selectOption('#marketplace-filter', 'Digital Safety');
   await page.waitForTimeout(500);
 
   const safetyBadges = page.locator('.service-badge:has-text("Digital Safety")');

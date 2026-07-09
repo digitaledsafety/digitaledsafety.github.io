@@ -12,19 +12,29 @@ function renderGridShared(data, container, options = {}) {
     data.forEach(item => {
         const wrapper = document.createElement('div');
         wrapper.classList.add('col-md-4', 'mb-4');
+        if (options.wrapperClass) {
+            options.wrapperClass.split(' ').forEach(cls => wrapper.classList.add(cls));
+        }
         wrapper.setAttribute('role', 'listitem');
 
         const card = document.createElement('div');
         card.classList.add('card', 'h-100', 'shadow-sm', 'grid-card-hover');
+        if (options.cardClass) {
+            options.cardClass.split(' ').forEach(cls => card.classList.add(cls));
+        }
         if (options.border === false) {
             card.classList.add('border-0');
         }
         card.style.borderRadius = '15px';
         card.style.overflow = 'hidden';
 
+        if (options.renderHeader) {
+            options.renderHeader(item, card);
+        }
+
         // Image handling
         const imageUrl = options.getImageUrl ? options.getImageUrl(item) : null;
-        if (imageUrl) {
+        if (imageUrl && !options.renderHeader) {
             const imgLink = document.createElement('a');
             imgLink.href = options.getLinkUrl ? options.getLinkUrl(item) : '#';
             if (options.externalLinks) {
@@ -45,11 +55,15 @@ function renderGridShared(data, container, options = {}) {
 
         const body = document.createElement('div');
         body.classList.add('card-body', 'd-flex', 'flex-column');
+        if (options.bodyClass) {
+            options.bodyClass.split(' ').forEach(cls => body.classList.add(cls));
+        }
+
+        if (options.renderBodyTop) {
+            options.renderBodyTop(item, body);
+        }
 
         // Title
-        const title = document.createElement('h5');
-        title.classList.add('card-title', 'font-weight-bold');
-
         const titleLink = document.createElement('a');
         titleLink.href = options.getLinkUrl ? options.getLinkUrl(item) : '#';
         if (options.externalLinks) {
@@ -57,8 +71,13 @@ function renderGridShared(data, container, options = {}) {
             titleLink.rel = 'noopener noreferrer';
         }
         titleLink.textContent = item.title;
-        title.appendChild(titleLink);
-        body.appendChild(title);
+
+        if (!options.renderBodyTop) {
+            const title = document.createElement('h5');
+            title.classList.add('card-title', 'font-weight-bold');
+            title.appendChild(titleLink);
+            body.appendChild(title);
+        }
 
         // Subtitle
         const subtitleText = options.getSubtitle ? options.getSubtitle(item) : null;
@@ -79,6 +98,10 @@ function renderGridShared(data, container, options = {}) {
             }
             text.textContent = descText;
             body.appendChild(text);
+        }
+
+        if (options.renderBodyBottom) {
+            options.renderBodyBottom(item, body);
         }
 
         // Footer

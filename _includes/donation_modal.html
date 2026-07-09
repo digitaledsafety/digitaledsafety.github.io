@@ -88,10 +88,23 @@
       if (thankYou) thankYou.style.display = 'none';
     }
 
+    function isValidUrl(url) {
+      try {
+        const parsed = new URL(url, window.location.origin);
+        return parsed.protocol === 'http:' || parsed.protocol === 'https:';
+      } catch (e) {
+        return false;
+      }
+    }
+
     window.handleLaunch = function(url) {
+      if (!isValidUrl(url)) {
+        console.error('Blocked invalid launch URL:', url);
+        return;
+      }
       resetDonationModal();
       if (localStorage.getItem('hasDonated')) {
-        window.open(url, '_blank');
+        window.open(url, '_blank', 'noopener,noreferrer');
       } else {
         pendingLaunchUrl = url;
         $('#donationModal').modal('show');
@@ -147,7 +160,7 @@
     document.getElementById('launch-anyway-btn').addEventListener('click', function() {
       $('#donationModal').modal('hide');
       if (pendingLaunchUrl) {
-        window.open(pendingLaunchUrl, '_blank');
+        window.open(pendingLaunchUrl, '_blank', 'noopener,noreferrer');
         pendingLaunchUrl = '';
       }
     });
@@ -155,7 +168,7 @@
     document.getElementById('continue-to-app-btn').addEventListener('click', function() {
       $('#donationModal').modal('hide');
       if (pendingLaunchUrl) {
-        window.open(pendingLaunchUrl, '_blank');
+        window.open(pendingLaunchUrl, '_blank', 'noopener,noreferrer');
         pendingLaunchUrl = '';
       }
     });
