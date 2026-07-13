@@ -27,11 +27,11 @@
       {% for link in navigation_data %}
         <li class="nav-item">
           {%- if link.url -%}
-            <a class="nav-link js-scroll-trigger" href="{% if link.url contains '://' or link.url == '#' %}{{ link.url }}{% else %}{{ link.url | relative_url }}{% endif %}">{{ link.title }}</a>
+            <a class="nav-link js-scroll-trigger" href="{% if link.url contains '://' or link.url == '#' %}{{ link.url }}{% else %}{{ link.url | relative_url }}{% endif %}" aria-label="{{ link.title }}">{{ link.title }}</a>
           {%- elsif link.section -%}
-            <a class="nav-link js-scroll-trigger" href="{{ '/' | relative_url }}#{{ link.section }}">{{ link.title }}</a>
+            <a class="nav-link js-scroll-trigger" href="{{ '/' | relative_url }}#{{ link.section }}" aria-label="{{ link.title }}">{{ link.title }}</a>
           {%- else -%}
-            <a class="nav-link js-scroll-trigger" href="#">{{ link.title }}</a>
+            <a class="nav-link js-scroll-trigger" href="#" aria-label="{{ link.title }}">{{ link.title }}</a>
           {%- endif -%}
         </li>
       {% endfor %}

@@ -12,8 +12,8 @@
   </div>
 
   <div class="col-md-3 mt-3">
-    <select id="{{ grid_id }}-filter" class="form-control" aria-label="{{ ui_data.filter_label | default: "Filter" }}">
-      <option value="all">{{ ui_data.all_label | default: "All" }}</option>
+    <select id="{{ grid_id }}-filter" class="form-control" aria-label="{{ ui_data.filter_label | default: "Filter by Service" }}">
+      <option value="all">{{ ui_data.all_label | default: "All Services" }}</option>
       {% if include.filter_options %}
         {% for option in include.filter_options %}
           <option value="{{ option }}">{{ option }}</option>
