@@ -17,7 +17,8 @@ en: &DEFAULT_EN
 
   marketplace_ui:
     search_placeholder: "Search..."
-    all_services: "All Services"
+    all_label: "All Services"
+    filter_label: "Filter by Service"
     sort_recent: "Recently Added"
     sort_alpha: "Alphabetical"
     platform_label: "Platform:"
@@ -28,6 +29,8 @@ en: &DEFAULT_EN
     build_btn: "Build"
     webapp: "Web App"
     no_results: "No results found matching your search."
+    clear_filters: "Clear Filters"
+    clear_filters_aria: "Clear all search and filter criteria"
     fallback: "N/A"
     related_title: "Related Marketplace Items"
 
@@ -175,7 +178,8 @@ es: &DEFAULT_ES
 
   marketplace_ui:
     search_placeholder: "Buscar..."
-    all_services: "Todos los Servicios"
+    all_label: "Todos los Servicios"
+    filter_label: "Filtrar por servicio"
     sort_recent: "Recientemente Añadido"
     sort_alpha: "Alfabético"
     platform_label: "Plataforma:"
@@ -186,6 +190,8 @@ es: &DEFAULT_ES
     build_btn: "Construir"
     webapp: "Aplicación Web"
     no_results: "No se encontraron resultados que coincidan con su búsqueda."
+    clear_filters: "Limpiar filtros"
+    clear_filters_aria: "Limpiar todos los criterios de búsqueda y filtrado"
     fallback: "N/A"
     related_title: "Artículos Relacionados del Mercado"
 
