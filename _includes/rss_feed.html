@@ -17,6 +17,15 @@
     return doc.body.textContent || "";
   }
 
+  function isValidUrl(url) {
+    try {
+      const parsed = new URL(url, window.location.origin);
+      return parsed.protocol === 'http:' || parsed.protocol === 'https:';
+    } catch (e) {
+      return false;
+    }
+  }
+
   fetch(feedUrl)
     .then(response => {
       if (!response.ok) throw new Error('Network response was not ok');
@@ -123,7 +132,7 @@
         cardBody.appendChild(dateText);
         cardBody.appendChild(cardText);
 
-        if (link && link.trim() !== "") {
+        if (link && link.trim() !== "" && isValidUrl(link)) {
           const actionBtn = document.createElement('a');
           actionBtn.className = 'btn btn-outline-primary btn-sm mt-3 align-self-start';
           actionBtn.style.borderRadius = '20px';
