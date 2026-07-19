@@ -21,16 +21,13 @@
 
       <!-- Event snippet for Submit lead form conversion page --> 
       <script>
-	  ['sendMessageButtonFoot', 'sendMessageButtonMc'].forEach(function(id) {
+	  ['sendMessageButtonFoot', 'sendMessageButtonMc', 'paypalDonate'].forEach(function(id) {
 	    const btn = document.getElementById(id);
 	    if (btn) {
 	      btn.addEventListener('click', function() {
 	        gtag('event', 'conversion', {'send_to': "{{ site.ads.google }}/oNtiCNf78sAaEJfMq48_"});
 	      });
 	    }
-	  });
-	  document.getElementById('paypalDonate').addEventListener('click', function() {
-	    gtag('event', 'conversion', {'send_to': "{{ site.ads.google }}/oNtiCNf78sAaEJfMq48_"});
 	  });
 	  </script>
 

@@ -5,6 +5,7 @@ title: Tools
 subtitle: Learning Resources
 image: /assets/img/resources/zhenzhong-liu-02JRb0gOp30-unsplash.jpg
 alt:
+excerpt_separator: "<!--more-->"
 
 caption:
   title: Tools
